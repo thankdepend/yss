@@ -1,0 +1,321 @@
+{
+  "stats": {
+    "suites": 3,
+    "tests": 8,
+    "passes": 5,
+    "pending": 0,
+    "failures": 3,
+    "start": "2020-07-02T13:20:59.441Z",
+    "end": "2020-07-02T13:21:00.104Z",
+    "duration": 663,
+    "testsRegistered": 8,
+    "passPercent": 62.5,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "d93f310f-8126-447e-8a96-00cbf06d1248",
+      "title": "",
+      "fullFile": "",
+      "file": "",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "c95dbdda-8872-4172-a150-6fcef667363c",
+          "title": "视频考试",
+          "fullFile": "C:\\Users\\86132\\Desktop\\yss\\yss\\prob\\test\\videoTest\\onlineTest.js",
+          "file": "\\prob\\test\\videoTest\\onlineTest.js",
+          "beforeHooks": [
+            {
+              "title": "\"before all\" hook: 平台登录-志愿主管",
+              "fullTitle": "视频考试 \"before all\" hook: 平台登录-志愿主管",
+              "timedOut": false,
+              "duration": 98,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "platFromInfo = await yysLogin.platfrom({loginName:'mh01',password:'Csk001'});\nconsole.log('平台登录',platFromInfo);",
+              "err": {},
+              "uuid": "e039a4e3-f4d7-4421-9806-5cc07364a8fa",
+              "parentUUID": "c95dbdda-8872-4172-a150-6fcef667363c",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [],
+          "tests": [],
+          "suites": [
+            {
+              "uuid": "eafb8208-ba6b-4227-8e71-c3bddcd463bc",
+              "title": "报名",
+              "fullFile": "C:\\Users\\86132\\Desktop\\yss\\yss\\prob\\test\\videoTest\\onlineTest.js",
+              "file": "\\prob\\test\\videoTest\\onlineTest.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [],
+              "suites": [
+                {
+                  "uuid": "d3d1eaf1-0b0b-44d7-b302-b73c41f62f30",
+                  "title": "设置报名",
+                  "fullFile": "C:\\Users\\86132\\Desktop\\yss\\yss\\prob\\test\\videoTest\\onlineTest.js",
+                  "file": "\\prob\\test\\videoTest\\onlineTest.js",
+                  "beforeHooks": [
+                    {
+                      "title": "\"before all\" hook: 院校管理员登录",
+                      "fullTitle": "视频考试 报名 设置报名 \"before all\" hook: 院校管理员登录",
+                      "timedOut": false,
+                      "duration": 48,
+                      "state": null,
+                      "speed": null,
+                      "pass": false,
+                      "fail": false,
+                      "pending": false,
+                      "context": null,
+                      "code": "// let admin = {loginName:`${AddCollegeInfo.params.xueXiaoID}`,password:`Yss${AddCollegeInfo.params.xueXiaoID}`}\n// 指定用户\nlet admin = {\n    loginName: '48638', password: 'Yss48638' \n}\nconst res = await yysLogin.schoolAdmin(admin)\nconsole.log(res);",
+                      "err": {},
+                      "uuid": "f3baaa42-f791-4b49-a51c-d9618d5091a9",
+                      "parentUUID": "d3d1eaf1-0b0b-44d7-b302-b73c41f62f30",
+                      "isHook": true,
+                      "skipped": false
+                    }
+                  ],
+                  "afterHooks": [],
+                  "tests": [
+                    {
+                      "title": "院校常用专业库新增",
+                      "fullTitle": "视频考试 报名 设置报名 院校常用专业库新增",
+                      "timedOut": false,
+                      "duration": 236,
+                      "state": "passed",
+                      "speed": "slow",
+                      "pass": true,
+                      "fail": false,
+                      "pending": false,
+                      "context": null,
+                      "code": "// 取到总条数\nconst pageRes = await base.getprofessionInfoList({currentFlag:1,ticket: PLAT_TICKET}).then(res => res.result.datas);\nconst professionRes = await base.getprofessionInfoList({currentFlag:1,pageSize:pageRes.page.totalSize,ticket: PLAT_TICKET}).then(res => res.result.datas.professionList);\n// console.log('列表',professionRes);\nconst nRes = await base.getprofessionInfoList({currentFlag:1,ticket: PLAT_TICKET}).then(res => res.result);\n\nlet bhArr = [], max;\nprofessionRes.forEach(obj => bhArr.push(parseInt(obj.zhuanYeBH)));\n\n\n// 取列表最大值\nif(bhArr.length >= 1){\n    max = bhArr.reduce(function(a , b){\n        return b > a ? b : a;\n    });\n}else{\n    max = 0\n}\nlet profession = {\n    prof:[{\n        zhuanYeBH: common.add(max,1),\n        cengJiMC: `考试专业${common.getRandomStr(5)}`,\n        zhuanYeCJ: '1',\n        fuZhuanYe: 0,\n        // zhuanYeID: 1223423,\n        zhuanYeMC: `专业之名${common.getRandomStr(5)}`,\n    }],\n    ticket: PLAT_TICKET\n}\nconst res = await base.saveBacthProfession(profession)\nconsole.log('院校常用专业库新增',res);",
+                      "err": {},
+                      "uuid": "798b10ac-9d99-480c-bc7b-efbd602f6d1a",
+                      "parentUUID": "d3d1eaf1-0b0b-44d7-b302-b73c41f62f30",
+                      "isHook": false,
+                      "skipped": false
+                    },
+                    {
+                      "title": "查询院校常用专业库列表",
+                      "fullTitle": "视频考试 报名 设置报名 查询院校常用专业库列表",
+                      "timedOut": false,
+                      "duration": 39,
+                      "state": "passed",
+                      "speed": "medium",
+                      "pass": true,
+                      "fail": false,
+                      "pending": false,
+                      "context": null,
+                      "code": "const res= await base.getprofessionInfoList({ticket: PLAT_TICKET});\n// console.log('查询院校常用专业库列表',res.result.datas);",
+                      "err": {},
+                      "uuid": "b5797666-20a0-4637-9641-dfd575b3611a",
+                      "parentUUID": "d3d1eaf1-0b0b-44d7-b302-b73c41f62f30",
+                      "isHook": false,
+                      "skipped": false
+                    },
+                    {
+                      "title": "新增院校常用考点库",
+                      "fullTitle": "视频考试 报名 设置报名 新增院校常用考点库",
+                      "timedOut": false,
+                      "duration": 54,
+                      "state": "passed",
+                      "speed": "medium",
+                      "pass": true,
+                      "fail": false,
+                      "pending": false,
+                      "context": null,
+                      "code": "// // 查询考点列表\n// const siteInfo = await school.getsiteInfoList({ticket: PLAT_TICKET});\n// console.log('查询院校常用考点库列表',siteInfo);\nconst kdParam = {\n    kaoDianJC: `kd${common.getRandomStr(6)}`,\n    kaoDianQC: `考点${common.getRandomStr(6)}`,\n    kaoDianSZSFMC: '浙江省', // 写死\n    kaoDianSZSF: 330000, // 写死\n    kaoDianSZSMC: '杭州市', // 写死\n    kaoDianSZS: 330100, // 写死\n    kaoDianSZQMC: '余杭区', // 写死\n    kaoDianSZQ: 330110, // 写死\n    checkType: 1,\n    kaoDianDZ: '杭州市余杭区西溪堂-8号楼', // 写死\n    longitude: 119.998863, // 写死\n    latitude: 30.284084, // 写死\n    ticket: PLAT_TICKET \n}\nconst res = await school.saveSite(kdParam)\nconsole.log('新增院校常用考点库',res);",
+                      "err": {},
+                      "uuid": "776bd421-9bb1-4cd1-8fe5-db4903e66151",
+                      "parentUUID": "d3d1eaf1-0b0b-44d7-b302-b73c41f62f30",
+                      "isHook": false,
+                      "skipped": false
+                    },
+                    {
+                      "title": "查询院校常用考点库列表",
+                      "fullTitle": "视频考试 报名 设置报名 查询院校常用考点库列表",
+                      "timedOut": false,
+                      "duration": 55,
+                      "state": "passed",
+                      "speed": "medium",
+                      "pass": true,
+                      "fail": false,
+                      "pending": false,
+                      "context": null,
+                      "code": "const res = await school.getsiteInfoList({ticket: PLAT_TICKET});\nconsole.log('查询院校常用考点库列表',res);",
+                      "err": {},
+                      "uuid": "adb51daa-b499-460f-b99d-e312d44fb17a",
+                      "parentUUID": "d3d1eaf1-0b0b-44d7-b302-b73c41f62f30",
+                      "isHook": false,
+                      "skipped": false
+                    },
+                    {
+                      "title": "保存考试",
+                      "fullTitle": "视频考试 报名 设置报名 保存考试",
+                      "timedOut": false,
+                      "duration": 36,
+                      "state": "failed",
+                      "speed": null,
+                      "pass": false,
+                      "fail": true,
+                      "pending": false,
+                      "context": null,
+                      "code": "const monthArr = ['1-2月','3-4月','5-6月','7-8月','9-10月','11-12月']\nconst params = {\n    kaoShiMC: `${new Date().getFullYear()}年本科招生`,\n    kaoShiYF: `${monthArr[common.getRandomNum(1,monthArr.length)]}`,\n    kaoShiND: new Date().getFullYear()\n};\nconst res = await school.saveExam(Object.assign(\n    {\n        // kaoShiID: , //编辑要传\n        kaoShiMC: '2020年本科招生',\n        kaoShiND: 2020, //  考试年度\n        kaoShiYF: '1-2月', // 考试月份\n        xianKaoZYS: 0,\n        zhiYuanShu: 0,\n        kaiTongBZ: 1, // 1为开通\n        ticket: PLAT_TICKET\n    }\n,params));\nconsole.log('保存考试',res);",
+                      "err": {
+                        "message": "Error: 请求失败:\n\t opTime:2020-07-02 21:21:00\n\t url:http://base.51bm.net.cn/auth/school/exam/saveExam.htm\n\t data:{\"kaoShiMC\":\"2020年本科招生\",\"kaoShiND\":2020,\"kaoShiYF\":\"11-12月\",\"xianKaoZYS\":0,\"zhiYuanShu\":0,\"kaiTongBZ\":1,\"ticket\":\"fa7LIj1nmJ$1VFdwSlBRPT07TGlRaEp5NGxKQ0FoSmljPTsyMjIy\"}\n\t status: 404",
+                        "estack": "Error: 请求失败:\n\t opTime:2020-07-02 21:21:00\n\t url:http://base.51bm.net.cn/auth/school/exam/saveExam.htm\n\t data:{\"kaoShiMC\":\"2020年本科招生\",\"kaoShiND\":2020,\"kaoShiYF\":\"11-12月\",\"xianKaoZYS\":0,\"zhiYuanShu\":0,\"kaiTongBZ\":1,\"ticket\":\"fa7LIj1nmJ$1VFdwSlBRPT07TGlRaEp5NGxKQ0FoSmljPTsyMjIy\"}\n\t status: 404\n    at logReqErrMsg (lib\\httpRequest.js:325:8)\n    at C:\\Users\\86132\\Desktop\\yss\\yss\\lib\\httpRequest.js:138:4\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)\n    at async Object.httpRequest.sendPost (lib\\httpRequest.js:125:2)\n    at async Context.<anonymous> (prob\\test\\videoTest\\onlineTest.js:131:29)",
+                        "diff": null
+                      },
+                      "uuid": "dfe85e29-de44-4179-ad8a-a913b26acbd3",
+                      "parentUUID": "d3d1eaf1-0b0b-44d7-b302-b73c41f62f30",
+                      "isHook": false,
+                      "skipped": false
+                    },
+                    {
+                      "title": "查询考试列表",
+                      "fullTitle": "视频考试 报名 设置报名 查询考试列表",
+                      "timedOut": false,
+                      "duration": 17,
+                      "state": "failed",
+                      "speed": null,
+                      "pass": false,
+                      "fail": true,
+                      "pending": false,
+                      "context": null,
+                      "code": "const res = await school.getExamList({\n    kaoShiND: new Date().getFullYear(),\n    sortList: [],\n    ticket: PLAT_TICKET\n});\nconsole.log('查询考试列表',res);",
+                      "err": {
+                        "message": "Error: 请求失败:\n\t opTime:2020-07-02 21:21:00\n\t url:http://base.51bm.net.cn/auth/school/exam/examListData.htm\n\t data:{\"curPage\":1,\"pageSize\":15,\"kaoShiND\":2020,\"sortList\":\"[]\",\"ticket\":\"fa7LIj1nmJ$1VFdwSlBRPT07TGlRaEp5NGxKQ0FoSmljPTsyMjIy\"}\n\t status: 404",
+                        "estack": "Error: 请求失败:\n\t opTime:2020-07-02 21:21:00\n\t url:http://base.51bm.net.cn/auth/school/exam/examListData.htm\n\t data:{\"curPage\":1,\"pageSize\":15,\"kaoShiND\":2020,\"sortList\":\"[]\",\"ticket\":\"fa7LIj1nmJ$1VFdwSlBRPT07TGlRaEp5NGxKQ0FoSmljPTsyMjIy\"}\n\t status: 404\n    at logReqErrMsg (lib\\httpRequest.js:325:8)\n    at C:\\Users\\86132\\Desktop\\yss\\yss\\lib\\httpRequest.js:138:4\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)\n    at async Object.httpRequest.sendPost (lib\\httpRequest.js:125:2)\n    at async Context.<anonymous> (prob\\test\\videoTest\\onlineTest.js:146:29)",
+                        "diff": null
+                      },
+                      "uuid": "c82b414c-cc11-4dd1-a3e8-1a88d45c9edf",
+                      "parentUUID": "d3d1eaf1-0b0b-44d7-b302-b73c41f62f30",
+                      "isHook": false,
+                      "skipped": false
+                    },
+                    {
+                      "title": "保存考试专业",
+                      "fullTitle": "视频考试 报名 设置报名 保存考试专业",
+                      "timedOut": false,
+                      "duration": 34,
+                      "state": "passed",
+                      "speed": "fast",
+                      "pass": true,
+                      "fail": false,
+                      "pending": false,
+                      "context": null,
+                      "code": "const res = await school.saveExamProfAdd({\n    // kaoShiID: 12926, // 编辑要传\n    profType: 1,\n    profTypeId: 0,\n    zhuanYeID: 1223425,\n    ticket: PLAT_TICKET\n});\nconsole.log('保存考试专业',res);",
+                      "err": {},
+                      "uuid": "7c093c32-8d39-41e3-82c7-0c7306ce5d25",
+                      "parentUUID": "d3d1eaf1-0b0b-44d7-b302-b73c41f62f30",
+                      "isHook": false,
+                      "skipped": false
+                    },
+                    {
+                      "title": "考试专业列表",
+                      "fullTitle": "视频考试 报名 设置报名 考试专业列表",
+                      "timedOut": false,
+                      "duration": 17,
+                      "state": "failed",
+                      "speed": null,
+                      "pass": false,
+                      "fail": true,
+                      "pending": false,
+                      "context": null,
+                      "code": "await school.getExamProfList({\n    kaoShiID: 12926,\n    // zhuanYeID: ,\n    ticket: PLAT_TICKET\n});",
+                      "err": {
+                        "message": "Error: 请求失败:\n\t opTime:2020-07-02 21:21:00\n\t url:http://base.51bm.net.cn/auth/school/examProf/examProfListData.htm\n\t data:{\"curPage\":1,\"pageSize\":15,\"kaoShiID\":12926,\"ticket\":\"fa7LIj1nmJ$1VFdwSlBRPT07TGlRaEp5NGxKQ0FoSmljPTsyMjIy\"}\n\t status: 404",
+                        "estack": "Error: 请求失败:\n\t opTime:2020-07-02 21:21:00\n\t url:http://base.51bm.net.cn/auth/school/examProf/examProfListData.htm\n\t data:{\"curPage\":1,\"pageSize\":15,\"kaoShiID\":12926,\"ticket\":\"fa7LIj1nmJ$1VFdwSlBRPT07TGlRaEp5NGxKQ0FoSmljPTsyMjIy\"}\n\t status: 404\n    at logReqErrMsg (lib\\httpRequest.js:325:8)\n    at C:\\Users\\86132\\Desktop\\yss\\yss\\lib\\httpRequest.js:138:4\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)\n    at async Object.httpRequest.sendPost (lib\\httpRequest.js:125:2)\n    at async Context.<anonymous> (prob\\test\\videoTest\\onlineTest.js:164:17)",
+                        "diff": null
+                      },
+                      "uuid": "c47b3c34-e63a-44b5-867f-f3c24127d04f",
+                      "parentUUID": "d3d1eaf1-0b0b-44d7-b302-b73c41f62f30",
+                      "isHook": false,
+                      "skipped": false
+                    }
+                  ],
+                  "suites": [],
+                  "passes": [
+                    "798b10ac-9d99-480c-bc7b-efbd602f6d1a",
+                    "b5797666-20a0-4637-9641-dfd575b3611a",
+                    "776bd421-9bb1-4cd1-8fe5-db4903e66151",
+                    "adb51daa-b499-460f-b99d-e312d44fb17a",
+                    "7c093c32-8d39-41e3-82c7-0c7306ce5d25"
+                  ],
+                  "failures": [
+                    "dfe85e29-de44-4179-ad8a-a913b26acbd3",
+                    "c82b414c-cc11-4dd1-a3e8-1a88d45c9edf",
+                    "c47b3c34-e63a-44b5-867f-f3c24127d04f"
+                  ],
+                  "pending": [],
+                  "skipped": [],
+                  "duration": 488,
+                  "root": false,
+                  "rootEmpty": false,
+                  "_timeout": 90000
+                }
+              ],
+              "passes": [],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 0,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 90000
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 90000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "5.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false
+      },
+      "version": "4.1.0"
+    },
+    "marge": {
+      "options": null,
+      "version": "4.1.0"
+    }
+  }
+}

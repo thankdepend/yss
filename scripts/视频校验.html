@@ -1,0 +1,161 @@
+<!--
+ * @Description: 组件
+ * @Author: 小鱼
+ * @Date: 2020-07-09 20:31:41
+ * @LastEditors: 小鱼
+ * @LastEditTime: 2020-07-09 21:09:22
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频校验</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #app {
+            width: 1200px;
+            margin: 10px auto;
+            overflow: hidden;
+        }
+
+
+    </style>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/PapaParse/5.2.0/papaparse.min.js"></script>
+<body>
+
+    <div id="app" style="line-height: 30px">
+        <p>总用户：{{urlInfos.length}}, 总视频数：{{videoData.length}}，当前已校验{{index}}个其中有问题：{{errorUrls.length}}个</p>
+        <p>第一步：<input type="file" @change="handleSelectFile" ></p>
+        <p>第二步：<button @click="handleCheck">开始校验</button></p>
+        <p>第三步：<button @click="handleDownload">下载文件</button></p>
+
+        <h2>有问题的视频</h2>
+        <pre>
+            <p v-for="url in errorUrls">
+                <span>{{url}}</span>
+            </p>
+        </pre>
+        <div v-if="started" style="display: none;">
+            <video controls :src="videoUrl1.url" @error="onError(1)" @loadeddata="onLoadeddata(1)"></video>
+            <video controls :src="videoUrl2.url" @error="onError(2)" @loadeddata="onLoadeddata(2)"></video>
+            <video controls :src="videoUrl3.url" @error="onError(3)" @loadeddata="onLoadeddata(3)"></video>
+            <video controls :src="videoUrl4.url" @error="onError(4)" @loadeddata="onLoadeddata(4)"></video>
+            <video controls :src="videoUrl5.url" @error="onError(5)" @loadeddata="onLoadeddata(5)"></video>
+            <video controls :src="videoUrl6.url" @error="onError(6)" @loadeddata="onLoadeddata(6)"></video>
+            <video controls :src="videoUrl7.url" @error="onError(7)" @loadeddata="onLoadeddata(7)"></video>
+            <video controls :src="videoUrl8.url" @error="onError(8)" @loadeddata="onLoadeddata(8)"></video>
+            <video controls :src="videoUrl9.url" @error="onError(9)" @loadeddata="onLoadeddata(9)"></video>
+            <video controls :src="videoUrl10.url" @error="onError(10)" @loadeddata="onLoadeddata(10)"></video>
+        </div>
+
+    </div>
+</body>
+<script>
+    let videoUrlArr = [];
+
+    var app = new Vue({
+        el: '#app',
+        data() {
+            return {
+                started: false,
+
+                videoData: [],
+                errorUrls: [],
+                totalUrls: 0,
+                index: 0,
+                videoUrl1: '',
+                videoUrl2: '',
+                videoUrl3: '',
+                videoUrl4: '',
+                videoUrl5: '',
+                videoUrl6: '',
+                videoUrl7: '',
+                videoUrl8: '',
+                videoUrl9: '',
+                videoUrl10: '',
+
+                urlInfos: [],
+            }
+        },
+        methods: {
+            handleSelectFile(e) {
+                const _this = this;
+                const file = e.target.files[0];
+                Papa.parse(file, {
+                    header: true,
+                    complete: function (result) {
+                        const errorRows = result.errors.map(item => item.row);
+                        _this.urlInfos = result.data.filter((item,dx) => errorRows.indexOf(dx) < 0);
+
+                        _this.urlInfos.forEach(item => {
+                            item.errorUrls = '';
+                            const viderUrl = item.videoUrl;
+                            const arr = viderUrl.split(';');
+
+                            _this.videoData.push(...arr.map(url => {
+                                return {
+                                    url,
+                                    urlInfo: item
+                                }
+                            }));
+                        });
+                    }
+                });
+
+            },
+            next() {
+                this.index = this.index + 1;
+                return this.videoData[this.index]
+            },
+            handleCheck() {
+                this.videoUrl1 = this.videoData[this.index];
+                this.videoUrl2 = this.next();
+                this.videoUrl3 = this.next();
+                this.videoUrl4 = this.next();
+                this.videoUrl5 = this.next();
+                this.videoUrl6 = this.next();
+                this.videoUrl7 = this.next();
+                this.videoUrl8 = this.next();
+                this.videoUrl9 = this.next();
+                this.videoUrl10 = this.next();
+                this.started = true
+            },
+            onError(dx) {
+                this.errorUrls.push(this['videoUrl'+dx].url);
+                this['videoUrl'+dx].urlInfo.errorUrls += this['videoUrl'+dx].url + ';';
+                this['videoUrl'+dx] = this.next()
+            },
+            onLoadeddata(dx) {
+                this['videoUrl'+dx] = this.next()
+            },
+            handleDownload() {
+                console.log(this.urlInfos);
+                const csv = Papa.unparse(this.urlInfos);
+                console.log(csv);
+                this.download("result.csv", csv);
+            },
+            download(filename, text) {
+                var pom = document.createElement("a");
+                pom.setAttribute( "href", "data:text/plain;charset=utf-8," + encodeURIComponent(text));
+                pom.setAttribute("download", filename);
+                if (document.createEvent) {
+                    var event = document.createEvent("MouseEvents");
+                    event.initEvent("click", true, true);
+                    pom.dispatchEvent(event);
+                } else {
+                    pom.click();
+                }
+            }
+        },
+    })
+</script>
+
+</html>

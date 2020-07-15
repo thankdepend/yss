@@ -1,0 +1,19 @@
+{
+    "test": {
+        "school": [
+            "http://img.artstudent.cn/pr/2020-06-25/b726dc2024844825a2a9dcfede2b2de3.jpg",
+            "http://img.artstudent.cn/pr/2020-06-25/b0c7214eec9d48b5b345b3c17f61b1da.jpg",
+            "http://img.artstudent.cn/pr/2020-06-25/4c76086884304f99bf9e5e69ea5c6457.jpg",
+            "http://img.artstudent.cn/pr/2020-06-25/e2df9576f7bb4d8c82e2438aebfc9ecc.jpg",
+            "http://img.artstudent.cn/pr/2020-06-25/5b081a0cea37466bbc8bd38a5a810744.jpg"
+        ],
+        "peolpe": {
+            "shortUrl": [
+                "art-stu1/stu/2007/13/f1cd011301e94d848f4f009b6fa05132.JPEG"
+            ],
+            "longUrl": [
+                "http://img.artstudent.cn/pr/2020-07-13/43a2935393424c48b386442e6922c8d9.JPEG"
+            ]
+        }
+    }
+}
