@@ -31,5 +31,8 @@
 const {
     common
 } = require('../lib/index');
-let a = ['男', '女'][common.getRandomNum(0, ['男', '女'].length - 1)];
+const doc = require('../prob/data/doc.json');
+let a = doc.pre.peolpe.longUrl[common.getRandomNum(0, doc.pre.peolpe.longUrl.length - 1)]
 console.log(a);
+// let a = ['男', '女'][common.getRandomNum(0, ['男', '女'].length - 1)];
+// console.log(a);

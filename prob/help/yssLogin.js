@@ -7,10 +7,11 @@ const qs = require('qs');
 
 let yysLogin = module.exports = {};
 
+let argv = require('yargs').argv;
 // app登录
 yysLogin.clientLogin = async function (params = null) {
     // if (caps.envName) {
-    //     // console.log('测试环境', yssAccount[caps.name]);
+    //     console.log('测试环境', caps.envName);
     // }
     const userReq = yssAccount[caps.name].user;
 
@@ -23,7 +24,7 @@ yysLogin.clientLogin = async function (params = null) {
 
     const res = await base.userLogin(reqParams);
 
-    LOGINDATA = res.result
+    LOGINDATA = res.result.datas.user
     TICKET = res.result.ticket
     return res;
 };

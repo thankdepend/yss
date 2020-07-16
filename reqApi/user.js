@@ -38,10 +38,10 @@ user.saveStuinfo = async function (params = {}) {
 
 /**
  * 获取用户信息
- * @param {*} params 
+ * @param {Object} data 
  */
 user.getStuinfo = async function (params = {}) {
-    return httpRequest.post2(yssCaps.user + '/api/m/auth/user/get_stuinfo.htm', params);
+    return httpRequest.sendPost(yssCaps.user + '/api/m/auth/user/get_stuinfo.htm', params);
 };
 
 

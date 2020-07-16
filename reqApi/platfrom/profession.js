@@ -1,35 +1,19 @@
 const httpRequest = require('../../lib/httpRequest')
 const yssCaps = require('../../data/caps');
 
-const base = module.exports = {};
-
-/**
- * 添加院校
- * @param {*} params 
- */
-base.toAddCollege = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.base + '/auth/admin/college/toAddCollege.htm', params);
-};
-
-
-/**
- * 编辑院校
- */
-base.doEditCollege = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.base + '/auth/admin/college/doEditCollege.htm', params);
-};
+const profession = module.exports = {};
 
 /**
  * 获取院校专业列表
  */
-base.getGbProfClass = async function (params = {}) {
+profession.getGbProfClass = async function (params = {}) {
     return httpRequest.sendPost(yssCaps.base + '/auth/school/profession/getGbProfClass.htm', params);
 };
 
 /**
  * 获取志愿专业编号
  */
-base.getZhuanYeBH = async function (params = {}) {
+profession.getZhuanYeBH = async function (params = {}) {
     return httpRequest.sendPost(yssCaps.base + '/auth/school/profession/getZhuanYeBH.htm', params);
 };
 
@@ -44,7 +28,7 @@ base.getZhuanYeBH = async function (params = {}) {
  * @param {Number} guoBiaoDM_IN 国标
  */
 
-base.saveBacthProfession = async function (params = {}) {
+profession.saveBacthProfession = async function (params = {}) {
     return httpRequest.sendPost(yssCaps.base + '/auth/school/profession/saveBacthProfession.htm', params);
 };
 
@@ -56,6 +40,6 @@ base.saveBacthProfession = async function (params = {}) {
  * @param {Number} curPage 页数
  * @param {Number} pageSize  每页展示
  */
-base.getprofessionInfoList = async function (params = {}) {
+profession.getprofessionInfoList = async function (params = {}) {
     return httpRequest.sendPost(yssCaps.base + '/auth/school/profession/professionInfoData.htm', params);
 };

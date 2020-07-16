@@ -6,6 +6,7 @@ let caps = {
 	url: 'http://192.168.18.202:18000',
 	login_url: 'http://192.168.18.202:10100',
 	upload_url: '192.168.18.202:23000',
+	audit: 'http://audit.51bm.net.cn/',
 	user: 'http://user.51bm.net.cn',
 	prob: 'http://prob.51bm.net.cn',
 	base: 'http://base.51bm.net.cn',

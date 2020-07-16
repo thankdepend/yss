@@ -28,6 +28,10 @@ const account = {
             passWord: 'Ysk001',
             device: 'm'
         },
+        kf: {
+            loginName: 'kf01',
+            password: 'Ysk002'
+        }
     },
     online: {}
 };
