@@ -1,6 +1,8 @@
 const yysLogin = require('../../help/yssLogin');
 const wishFill = require('../../../reqApi/wishFill');
-const {common} = require('../../../lib/index');
+const {
+    common
+} = require('../../../lib/index');
 const basicData = require('../../../data/basicData');
 const calculate = require('../../../lib/calculate');
 const platfromProb = require('../../../reqApi/platfrom/prob');
@@ -8,11 +10,14 @@ const base = require('../../../reqApi/platfrom/base');
 const doc = require('../../data/doc.json');
 const school = require('../../../reqApi/platfrom/school');
 
-describe('视频考试', async function () {
+describe.skip('视频考试', async function () {
     this.timeout(TESTCASE.timeout);
     before('平台登录-志愿主管', async function () {
-        platFromInfo = await yysLogin.platfrom({loginName:'mh01',password:'Csk001'});
-        console.log('平台登录',platFromInfo);
+        platFromInfo = await yysLogin.platfrom({
+            loginName: 'mh01',
+            password: 'Csk001'
+        });
+        console.log('平台登录', platFromInfo);
     });
     describe('报名', async function () {
         let AddCollegeInfo;
@@ -53,33 +58,45 @@ describe('视频考试', async function () {
                 // let admin = {loginName:`${AddCollegeInfo.params.xueXiaoID}`,password:`Yss${AddCollegeInfo.params.xueXiaoID}`}
                 // 指定用户
                 let admin = {
-                    loginName: '48638', password: 'Yss48638' 
+                    loginName: '48638',
+                    password: 'Yss48638'
                 }
                 const res = await yysLogin.schoolAdmin(admin)
                 console.log(res);
             });
             it('院校常用专业库新增', async function () {
                 // 取到总条数
-                const pageRes = await base.getprofessionInfoList({currentFlag:1,ticket: PLAT_TICKET}).then(res => res.result.datas);
-                const professionRes = await base.getprofessionInfoList({currentFlag:1,pageSize:pageRes.page.totalSize,ticket: PLAT_TICKET}).then(res => res.result.datas.professionList);
+                const pageRes = await base.getprofessionInfoList({
+                    currentFlag: 1,
+                    ticket: PLAT_TICKET
+                }).then(res => res.result.datas);
+                const professionRes = await base.getprofessionInfoList({
+                    currentFlag: 1,
+                    pageSize: pageRes.page.totalSize,
+                    ticket: PLAT_TICKET
+                }).then(res => res.result.datas.professionList);
                 // console.log('列表',professionRes);
-                const nRes = await base.getprofessionInfoList({currentFlag:1,ticket: PLAT_TICKET}).then(res => res.result);
-                
-                let bhArr = [], max;
+                const nRes = await base.getprofessionInfoList({
+                    currentFlag: 1,
+                    ticket: PLAT_TICKET
+                }).then(res => res.result);
+
+                let bhArr = [],
+                    max;
                 professionRes.forEach(obj => bhArr.push(parseInt(obj.zhuanYeBH)));
-                
-                
+
+
                 // 取列表最大值
-                if(bhArr.length >= 1){
-                    max = bhArr.reduce(function(a , b){
+                if (bhArr.length >= 1) {
+                    max = bhArr.reduce(function (a, b) {
                         return b > a ? b : a;
                     });
-                }else{
+                } else {
                     max = 0
                 }
                 let profession = {
-                    prof:[{
-                        zhuanYeBH: common.add(max,1),
+                    prof: [{
+                        zhuanYeBH: common.add(max, 1),
                         cengJiMC: `考试专业${common.getRandomStr(5)}`,
                         zhuanYeCJ: '1',
                         fuZhuanYe: 0,
@@ -89,10 +106,12 @@ describe('视频考试', async function () {
                     ticket: PLAT_TICKET
                 }
                 const res = await base.saveBacthProfession(profession)
-                console.log('院校常用专业库新增',res);
+                console.log('院校常用专业库新增', res);
             });
             it('查询院校常用专业库列表', async function () {
-                const res= await base.getprofessionInfoList({ticket: PLAT_TICKET});
+                const res = await base.getprofessionInfoList({
+                    ticket: PLAT_TICKET
+                });
                 // console.log('查询院校常用专业库列表',res.result.datas);
             });
             it('新增院校常用考点库', async function () {
@@ -112,35 +131,35 @@ describe('视频考试', async function () {
                     kaoDianDZ: '杭州市余杭区西溪堂-8号楼', // 写死
                     longitude: 119.998863, // 写死
                     latitude: 30.284084, // 写死
-                    ticket: PLAT_TICKET 
+                    ticket: PLAT_TICKET
                 }
                 const res = await school.saveSite(kdParam)
-                console.log('新增院校常用考点库',res);
+                console.log('新增院校常用考点库', res);
             });
             it('查询院校常用考点库列表', async function () {
-                const res = await school.getsiteInfoList({ticket: PLAT_TICKET});
-                console.log('查询院校常用考点库列表',res);
+                const res = await school.getsiteInfoList({
+                    ticket: PLAT_TICKET
+                });
+                console.log('查询院校常用考点库列表', res);
             });
             it('保存考试', async function () {
-                const monthArr = ['1-2月','3-4月','5-6月','7-8月','9-10月','11-12月']
+                const monthArr = ['1-2月', '3-4月', '5-6月', '7-8月', '9-10月', '11-12月']
                 const params = {
                     kaoShiMC: `${new Date().getFullYear()}年本科招生`,
                     kaoShiYF: `${monthArr[common.getRandomNum(1,monthArr.length)]}`,
                     kaoShiND: new Date().getFullYear()
                 };
-                const res = await school.saveExam(Object.assign(
-                    {
-                        // kaoShiID: , //编辑要传
-                        kaoShiMC: '2020年本科招生',
-                        kaoShiND: 2020, //  考试年度
-                        kaoShiYF: '1-2月', // 考试月份
-                        xianKaoZYS: 0,
-                        zhiYuanShu: 0,
-                        kaiTongBZ: 1, // 1为开通
-                        ticket: PLAT_TICKET
-                    }
-                ,params));
-                console.log('保存考试',res);  
+                const res = await school.saveExam(Object.assign({
+                    // kaoShiID: , //编辑要传
+                    kaoShiMC: '2020年本科招生',
+                    kaoShiND: 2020, //  考试年度
+                    kaoShiYF: '1-2月', // 考试月份
+                    xianKaoZYS: 0,
+                    zhiYuanShu: 0,
+                    kaiTongBZ: 1, // 1为开通
+                    ticket: PLAT_TICKET
+                }, params));
+                console.log('保存考试', res);
             });
             it('查询考试列表', async function () {
                 const res = await school.getExamList({
@@ -148,7 +167,7 @@ describe('视频考试', async function () {
                     sortList: [],
                     ticket: PLAT_TICKET
                 });
-                console.log('查询考试列表',res);
+                console.log('查询考试列表', res);
             });
             it('保存考试专业', async function () {
                 const res = await school.saveExamProfAdd({
@@ -158,7 +177,7 @@ describe('视频考试', async function () {
                     zhuanYeID: 1223425,
                     ticket: PLAT_TICKET
                 });
-                console.log('保存考试专业',res);
+                console.log('保存考试专业', res);
             });
             it('考试专业列表', async function () {
                 await school.getExamProfList({
@@ -169,5 +188,5 @@ describe('视频考试', async function () {
             });
         });
     });
-    
+
 });

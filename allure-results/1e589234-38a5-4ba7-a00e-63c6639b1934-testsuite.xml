@@ -1,0 +1,15 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1594903454783' stop='1594903454912'>
+    <name>报名 新增考生 客服审核</name>
+    <title>报名 新增考生 客服审核</title>
+    <test-cases>
+        <test-case start='1594903454817' status='passed' stop='1594903454911'>
+            <name>审核通过</name>
+            <title>审核通过</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

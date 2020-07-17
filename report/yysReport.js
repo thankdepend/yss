@@ -3,12 +3,8 @@ const caps = require('../data/caps');
 const common = require('../lib/common');
 const mail = require('../lib/mail');
 const moment = require('moment');
-// const ssReq = require('../ss/help/ssReq');
-// const payRequestMock = require('../ecoolPlant/provide/payRequestMock');
 
 // const dingtalkRobot = require('../lib/dingtalkRobot');
-// 微商城服务监控群
-// const dingtalkAccessToken = 'e7fa21089cfbb092dd68c505f8728db6c5d9be6cbf072ff7c71231574bcd17cc';
 
 const Mochawesome = require('./mochawesome');
 
@@ -19,7 +15,7 @@ class HtmlReport extends Mochawesome {
         /** 环境名称 */
         this.envName = {
             'test': '测试',
-        }[caps.name];
+        } [caps.name];
         if (!this.envName) throw new Error(`环境变量'${caps.name}'错误,请检查`);
         const isOnline = this.envName == '线上';
 
@@ -36,7 +32,10 @@ class HtmlReport extends Mochawesome {
         });
     }
 
-    doneFin({ output, exit }) {
+    doneFin({
+        output,
+        exit
+    }) {
         const stats = output.stats;
         /** 邮件主题 */
         const subject = `【艺术升app${common.getCurrentDate()}${this.envName}环境】自动化用例报告`;

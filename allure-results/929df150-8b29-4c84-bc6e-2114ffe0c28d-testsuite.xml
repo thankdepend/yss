@@ -1,0 +1,103 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1594903432694' stop='1594903432695'>
+    <name>视频考试 报名 设置报名</name>
+    <title>视频考试 报名 设置报名</title>
+    <test-cases>
+        <test-case start='1594903432694' status='pending' stop='1594903432694'>
+            <name>院校常用专业库新增</name>
+            <title>院校常用专业库新增</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>Test ignored</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1594903432694' status='pending' stop='1594903432694'>
+            <name>查询院校常用专业库列表</name>
+            <title>查询院校常用专业库列表</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>Test ignored</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1594903432694' status='pending' stop='1594903432694'>
+            <name>新增院校常用考点库</name>
+            <title>新增院校常用考点库</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>Test ignored</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1594903432694' status='pending' stop='1594903432694'>
+            <name>查询院校常用考点库列表</name>
+            <title>查询院校常用考点库列表</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>Test ignored</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1594903432695' status='pending' stop='1594903432695'>
+            <name>保存考试</name>
+            <title>保存考试</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>Test ignored</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1594903432695' status='pending' stop='1594903432695'>
+            <name>查询考试列表</name>
+            <title>查询考试列表</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>Test ignored</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1594903432695' status='pending' stop='1594903432695'>
+            <name>保存考试专业</name>
+            <title>保存考试专业</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>Test ignored</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1594903432695' status='pending' stop='1594903432695'>
+            <name>考试专业列表</name>
+            <title>考试专业列表</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>Test ignored</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

@@ -9,11 +9,14 @@ const base = require('../../../reqApi/platfrom/base');
 const doc = require('../../data/doc.json');
 const school = require('../../../reqApi/platfrom/school');
 
-describe('视频考试', async function () {
+describe.skip('视频考试', async function () {
     this.timeout(TESTCASE.timeout);
     before('平台登录-志愿主管', async function () {
-        platFromInfo = await yysLogin.platfrom({loginName:'mh01',password:'Csk001'});
-        console.log('平台登录',platFromInfo);
+        platFromInfo = await yysLogin.platfrom({
+            loginName: 'mh01',
+            password: 'Csk001'
+        });
+        console.log('平台登录', platFromInfo);
     });
     describe('报名', async function () {
         let AddCollegeInfo;
@@ -50,5 +53,5 @@ describe('视频考试', async function () {
         //     console.log('保存信息',AddCollegeInfo);
         // });
     });
-    
+
 });

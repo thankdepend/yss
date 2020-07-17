@@ -16,14 +16,16 @@
 // console.log(a + 0.45);
 
 
-let bhArr = [3,5,7,1]
+let bhArr = [3, 5, 7, 1]
 
-let max = bhArr.reduce(function(a , b){
+let max = bhArr.reduce(function (a, b) {
     return b > a ? b : a;
 });
 console.log(max);
 
-const {common} = require('../lib/index');
+const {
+    common
+} = require('../lib/index');
 
 console.log(common);
 
@@ -38,4 +40,4 @@ console.log(common);
 // console.log(`${new Date().getFullYear()}`);
 
 
-
+let ddd = "mocha prob/test/videoTest --env=pre --report mocha-allure-reporter -s 500 --recursive --reporter ./lib/myReporter"

@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1594903432181' stop='1594903432507'>
+    <name>报名 新增考生 图片上传</name>
+    <title>报名 新增考生 图片上传</title>
+    <test-cases>
+        <test-case start='1594903432181' status='passed' stop='1594903432222'>
+            <name>上传考生照片</name>
+            <title>上传考生照片</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1594903432222' status='passed' stop='1594903432263'>
+            <name>上传身份证</name>
+            <title>上传身份证</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1594903432263' status='passed' stop='1594903432300'>
+            <name>上传在籍证明</name>
+            <title>上传在籍证明</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1594903432300' status='passed' stop='1594903432345'>
+            <name>上传录制考试视频</name>
+            <title>上传录制考试视频</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1594903432346' status='passed' stop='1594903432395'>
+            <name>确认提交</name>
+            <title>确认提交</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1594903432395' status='passed' stop='1594903432506'>
+            <name>提交查询</name>
+            <title>提交查询</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

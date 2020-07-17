@@ -1,0 +1,31 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1594903432699' stop='1594903432699'>
+    <name>学生报名</name>
+    <title>学生报名</title>
+    <test-cases>
+        <test-case start='1594903432699' status='pending' stop='1594903432699'>
+            <name>获取考试个人信息</name>
+            <title>获取考试个人信息</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>Test ignored</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1594903432699' status='pending' stop='1594903432699'>
+            <name>保存考生个人信息</name>
+            <title>保存考生个人信息</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>Test ignored</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>
