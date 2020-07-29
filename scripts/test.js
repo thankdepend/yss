@@ -16,18 +16,18 @@
 // console.log(a + 0.45);
 
 
-let bhArr = [3, 5, 7, 1]
+// let bhArr = [3, 5, 7, 1]
 
-let max = bhArr.reduce(function (a, b) {
-    return b > a ? b : a;
-});
-console.log(max);
+// let max = bhArr.reduce(function (a, b) {
+//     return b > a ? b : a;
+// });
+// console.log(max);
 
-const {
-    common
-} = require('../lib/index');
+// const {
+//     common
+// } = require('../lib/index');
 
-console.log(common);
+// console.log(common);
 
 // const a = common.getRandomStr(5)
 // console.log(a);
@@ -40,4 +40,34 @@ console.log(common);
 // console.log(`${new Date().getFullYear()}`);
 
 
-let ddd = "mocha prob/test/videoTest --env=pre --report mocha-allure-reporter -s 500 --recursive --reporter ./lib/myReporter"
+// let ddd = "mocha prob/test/videoTest --env=pre --report mocha-allure-reporter -s 500 --recursive --reporter ./lib/myReporter"
+// const doc = require('../prob/data/doc.json');
+// const account = require('../prob/data/account')
+// const caps = require('../data/caps');
+
+// let a = doc[caps.name].school[1]
+// console.log(a);
+// let b = {
+//     '荣耀play3': 'd0:05:e4:6d:80:c7',
+//     'iphone6p': '60:F8:1D:43:68:30',
+//     'vivoU3x': '6c:d9:4c:3a:b8:15',
+//     'vivoZ5': '3c:86:d1:0b:ad:63',
+//     '蜜獾自用-iphonex': '1C:36:BB:AE:B2:FB',
+//     '猪猪自用1': '44:59:E3:9A:88:2B',
+//     '猪猪自用2': '90:F0:52:58:26:47',
+// }
+
+let a = new Map();
+a.set(123, {
+    hh: 1,
+    jj: 2
+})
+a.set(456, {
+    gg: 3,
+    kk: 4
+})
+console.log(a);
+for (let i of a.keys()) {
+    console.log(i);
+}
+console.log(a.keys());

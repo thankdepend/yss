@@ -15,6 +15,14 @@ const account = {
             loginName: '330340',
             passWord: 'Csk001',
             device: 'm'
+        },
+        kf: {
+            loginName: 'kf01',
+            password: 'Csk001'
+        },
+        ptzg: {
+            loginName: 'mh01',
+            password: 'Csk001'
         }
     },
     pre: {
@@ -30,6 +38,10 @@ const account = {
         },
         kf: {
             loginName: 'kf01',
+            password: 'Ysk002'
+        },
+        ptzg: {
+            loginName: 'mh01',
             password: 'Ysk002'
         }
     },

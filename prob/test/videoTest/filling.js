@@ -2,49 +2,50 @@ const {
     common
 } = require('../../../lib/index');
 const yysLogin = require('../../help/yssLogin');
-const applyManage = require('../../help/applyManage');
+const fillManage = require('../../help/fillManage');
 const caps = require('../../../data/caps');
 const account = require('../../data/account');
 const audit = require('../../../reqApi/platfrom/audit')
 
-describe('报名', async function () {
+describe('填写报考资料', async function () {
     this.timeout(TESTCASE.timeout);
-    const apply = applyManage.setupApply();
+    const fill = fillManage.setupFill();
     before('登录', async function () {
         let userInfo = {
-            loginName: 'xyf33',
-            password: 'Ysk002',
+            loginName: 'dingding001',
+            password: 'Ysk001',
             device: 'm'
         }
         loginInfo = await yysLogin.clientLogin(userInfo).then(res => res.result.datas.user);
         // console.log('登录信息', loginInfo);
+        console.log(LOGINDATA);
     });
     describe('新增考生', async function () {
         before('新增考生信息', async function () {
-            const examineeJson = applyManage.mockExamineeJson();
-            await apply.saveStuinfo(examineeJson);
+            const examineeJson = fillManage.mockExamineeJson();
+            await fill.saveStuinfo(examineeJson);
         });
         it('查询考生信息', async function () {
-            await apply.stuinfoAssert();
+            await fill.stuinfoAssert();
         });
         describe('图片上传', async function () {
             it('上传考生照片', async function () {
-                await apply.uploadAuth()
+                await fill.uploadAuth()
             });
             it('上传身份证', async function () {
-                await apply.uploadShenFen();
+                await fill.uploadShenFen();
             });
             it('上传在籍证明', async function () {
-                await apply.uploadProve()
+                await fill.uploadProve()
             });
             it('上传录制考试视频', async function () {
-                await apply.uploadVideo();
+                await fill.uploadVideo();
             });
             it('确认提交', async function () {
-                await apply.uploadAuthCommit();
+                await fill.uploadAuthCommit();
             });
             it('提交查询', async function () {
-                await apply.queryUpload();
+                await fill.queryUpload();
             });
         });
         describe('客服审核', async function () {
@@ -59,6 +60,7 @@ describe('报名', async function () {
                     idcardNo: LOGINDATA.loginName,
                     ticket: PLAT_TICKET
                 }).then(res => res.result.datas.page.dataList[0]);
+                console.log('审核信息', userAudit);
                 // 审核通过
                 const res = await audit.auditAction({
                     psId: userAudit.psId,

@@ -77,3 +77,13 @@ user.saveStuStepInfoNewr = async function (params = {}) {
 user.getStuInfo = async function (params = {}) {
     return httpRequest.sendPost(yssCaps.user + '/auth/student/stuInfo.htm', params);
 };
+
+/**
+ * 检查用户是否完善分数线
+ * @param {Object} data
+ * @param {String} data.m 
+ * @param {Object} data.p
+ */
+user.checkNeedFillScore = async function (params = {}) {
+    return httpRequest.sendPost(yssCaps.user + '/api/m/auth/unite/checkNeedFillScore.htm', params);
+};
