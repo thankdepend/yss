@@ -8,18 +8,25 @@ const {
 const collegeManage = require('../../help/collegeManage');
 const applyManage = require('../../help/applyManage');
 const caps = require('../../../data/caps');
+const {
+    stu
+} = require('../../../data/caps');
+const {
+    random
+} = require('lodash');
 
 
 describe('考生报名', async function () {
     this.timeout(TESTCASE.timeout);
-    let college = collegeManage.setupCollege();
-    let apply = applyManage.setupApply();
+    let college = collegeManage.setupCollege(),
+        apply = applyManage.setupApply(),
+        getAsCollege;
     before('平台登录-志愿主管', async function () {
         platFromInfo = await yysLogin.platfrom(account[caps.name].ptzg);
         console.log('平台登录', platFromInfo);
     });
     describe('报名', async function () {
-        let getAsCollege;
+
         // 不要频繁刷学校，不然会有人来找你的...
         it.skip('新增院校', async function () {
             const collegeParams = collegeManage.collegeMockJson()
@@ -38,25 +45,44 @@ describe('考生报名', async function () {
             await getAsCollege.searchCollegeAssert()
         });
         // 报名开始
-        it('报名考试提交', async function () {
-            let riChengArr = [];
-            for (let riCheng of getAsCollege.collegeMap.keys()) {
-                riChengArr.push(riCheng);
-            };
-            console.log('日程数组', riChengArr);
-            const profParams = {
-                data: {
-                    m: "",
-                    p: {
-                        riChengID: riChengArr[common.getRandomNum(riChengArr.length - 1)]
-                    }
-                },
-                ticket: TICKET
-            }
-            const res = await apply.saveProf(profParams)
-            console.log('打印响应', res);
-
+        describe('报名开始', async function () {
+            let riChengArr = [],
+                ranValue = '',
+                riChengID = '';
+            it('报名考试提交', async function () {
+                for (let riCheng of getAsCollege.collegeMap.keys()) {
+                    riChengArr.push(riCheng);
+                };
+                ranValue = common.getRandomNum(0, riChengArr.length - 1);
+                const profParams = {
+                    data: {
+                        m: "",
+                        p: {
+                            riChengID: riChengArr[ranValue]
+                        }
+                    },
+                    ticket: TICKET
+                }
+                riChengID = profParams.data.p.riChengID;
+                await apply.saveProf(profParams)
+            });
+            it('创建报名订单', async function () {
+                const baoKaoID = getAsCollege.collegeMap.get(riChengID).baoKaoID;
+                let billParams = {
+                    data: {
+                        "m": "",
+                        "p": {
+                            "xueXiaoID": getAsCollege.collegeMain.xueXiaoID,
+                            "baoKaoIDs": [baoKaoID],
+                            "sIds": ""
+                        }
+                    },
+                    ticket: TICKET
+                }
+                await apply.addProfOrder(billParams);
+            });
         });
+
     });
 
 });

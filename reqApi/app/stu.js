@@ -47,6 +47,18 @@ stu.saveProf = async function (params = {}) {
     return httpRequest.post(yssCaps.stu + '/api/m/auth/apply/save_prof.htm', params);
 };
 
+/**
+ * 创建报名订单
+ * @param {Object} data
+ * @param {Object} data.m
+ * @param {Object} data.p
+ * @param {Number} data.p.xueXiaoID
+ * @param {Array} data.p.baoKaoIDs
+ * @param {Object} data.p.sIds
+ */
+stu.addProfOrder = async function (params = {}) {
+    return httpRequest.post(yssCaps.stu + '/api/m/auth/apply/add_prof_order.htm', params)
+}
 
 /**
  * 查询考试（考生用）

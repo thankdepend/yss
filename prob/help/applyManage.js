@@ -17,11 +17,16 @@ class Apply {
     /** 保存报名 */
     async saveProf(params) {
         const res = await stu.saveProf(params);
-
-        if (res.result.message == 'riChengID is invalid') {
-            throw new Error(`日程id失效:${res.result.message}`)
-        }
+        // if (res.result.message == 'riChengID is invalid') {
+        //     throw new Error(`日程id失效:${res.result.message}`)
+        // }
         console.log('保存报名', res);
+    }
+
+    /** 新增报名订单 */
+    async addProfOrder(params) {
+        const res = await stu.addProfOrder(params);
+        console.log(res);
     }
 
     /** 查询专业 */
