@@ -8,12 +8,12 @@ const account = {
     test: {
         user1: {
             loginName: '330325',
-            passWord: 'Csk001',
+            password: 'Csk001',
             device: 'm'
         },
         user2: {
             loginName: '330340',
-            passWord: 'Csk001',
+            password: 'Csk001',
             device: 'm'
         },
         kf: {
@@ -23,17 +23,21 @@ const account = {
         ptzg: {
             loginName: 'mh01',
             password: 'Csk001'
+        },
+        yyzg: {
+            loginName: 'yyzg',
+            password: 'Csk001'
         }
     },
     pre: {
         user: {
             loginName: 'dingding001',
-            passWord: 'Ysk001',
+            password: 'Ysk001',
             device: 'm'
         },
         user2: {
             loginName: 'dingding002',
-            passWord: 'Ysk001',
+            password: 'Ysk001',
             device: 'm'
         },
         kf: {
@@ -42,6 +46,10 @@ const account = {
         },
         ptzg: {
             loginName: 'mh01',
+            password: 'Ysk002'
+        },
+        yyzg: {
+            loginName: 'yyzg',
             password: 'Ysk002'
         }
     },

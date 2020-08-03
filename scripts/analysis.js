@@ -1,5 +1,7 @@
 // 粘贴json到h里
-const h = {}
+const h = {
+
+}
 let s = ``
 Object.keys(h).forEach((key) => {
     s += `/** ${key} */ \n this.${key}=''; \n`

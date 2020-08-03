@@ -31,15 +31,28 @@ yysLogin.clientLogin = async function (params = null) {
 
 // 后台登录
 yysLogin.platfrom = async function (params = {}) {
-    const userReq = yssAccount[caps.name].ptzg;
+    let userType;
+    if (params.hasOwnProperty(userType)) {
+        userType = params.userType;
+        if (userType == '') {
+            userType == 'ptzg';
+            delete params.userType;
+        }
+        delete params.userType;
+    } else {
+        userType == 'ptzg';
+        delete params.userType;
+    }
+
+    const userReq = yssAccount[caps.name][userType];
     let reqParams = Object.assign({
         loginName: 'zyzg001',
         password: 'Csk001',
     }, params || userReq);
     // reqParams =  qs.stringify(reqParams);
-
     const res = await base.platfromLogin(reqParams);
-    PLAT_TICKET = res.result.ticket
+    PLAT_TICKET = res.result.ticket;
+    PLAT_LOGINDATA = res.result;
     return res;
 };
 

@@ -57,17 +57,54 @@
 //     '猪猪自用2': '90:F0:52:58:26:47',
 // }
 
-let a = new Map();
-a.set(123, {
-    hh: 1,
-    jj: 2
-})
-a.set(456, {
-    gg: 3,
-    kk: 4
-})
-console.log(a);
-for (let i of a.keys()) {
-    console.log(i);
-}
-console.log(a.keys());
+// let a = new Map();
+// a.set(123, {
+//     hh: 1,
+//     jj: 2
+// })
+// a.set(456, {
+//     gg: 3,
+//     kk: 4
+// })
+// console.log(a);
+// for (let i of a.keys()) {
+//     console.log(i);
+// }
+// console.log(a.keys());
+const {
+    common
+} = require('../lib/index')
+const yysLogin = require('../prob/help/yssLogin')
+const fs = require('fs');
+const yssCaps = require('../data/caps');
+var path = require('path');
+
+const upl = module.exports = {}
+
+upl.queryUpload = async function (params = {}) {
+    return common.sendPost(yssCaps.fileCenter + '/api/m/auth/file/upload.ws', params);
+};
+
+// let url = 'http://filecenter.51bm.net.cn/api/m/auth/file/upload.ws'
+
+describe('测试图片上传', async function () {
+    this.timeout(TESTCASE.timeout);
+    const readerStream = fs.createWriteStream(path.join(__dirname, 'art.jpg'));
+    it('上传', async function () {
+        loginAccount = {
+            loginName: 'dingding061',
+            password: 'Ysk001',
+            device: 'm'
+        }
+        loginInfo = await yysLogin.clientLogin(loginAccount).then(res => res.result.datas.user);
+        console.log('登录', loginInfo);
+        const res = await upl.queryUpload({
+            ticket: TICKET,
+            idCard: 'dingding061',
+            file: readerStream
+        })
+        console.log(readerStream);
+        console.log(res);
+
+    });
+});

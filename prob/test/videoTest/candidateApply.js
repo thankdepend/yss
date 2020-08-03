@@ -7,6 +7,7 @@ const {
 } = require('../../../lib/index');
 const collegeManage = require('../../help/collegeManage');
 const applyManage = require('../../help/applyManage');
+const orderManage = require('../../help/orderManage');
 const caps = require('../../../data/caps');
 const {
     stu
@@ -20,6 +21,7 @@ describe('考生报名', async function () {
     this.timeout(TESTCASE.timeout);
     let college = collegeManage.setupCollege(),
         apply = applyManage.setupApply(),
+        order = orderManage.setupOrder(),
         getAsCollege;
     before('平台登录-志愿主管', async function () {
         platFromInfo = await yysLogin.platfrom(account[caps.name].ptzg);
@@ -81,6 +83,9 @@ describe('考生报名', async function () {
                 }
                 await apply.addProfOrder(billParams);
             });
+            // it('查询订单', async function () {
+            //     await order.orderProcessCenter()
+            // });
         });
 
     });
