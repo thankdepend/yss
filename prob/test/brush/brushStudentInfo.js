@@ -1,7 +1,7 @@
 const {
     common
 } = require("../../../lib/index");
-const user = require("../../../reqApi/user");
+const user = require("../../../reqApi/app/user");
 const service = require("../../../reqApi/app/service");
 const account = require("../../data/account");
 const yysLogin = require("../../help/yssLogin");

@@ -1,7 +1,9 @@
-const common = require('../lib/common');
+const {
+    common
+} = require('../../lib/index');
 // const format = require('../../../data/format');
-const yssCaps = require('../data/caps');
-const httpRequest = require('../lib/httpRequest')
+const yssCaps = require('../../data/caps');
+const httpRequest = require('../../lib/httpRequest')
 const user = module.exports = {};
 
 
@@ -31,7 +33,6 @@ const user = module.exports = {};
  * @param {String} data.p.yingWangJie 应往届（中文）
  * @param {String} data.p.wenLiKe 文理科（中文）
  */
-
 user.saveStuinfo = async function (params = {}) {
     return httpRequest.sendPost(yssCaps.user + '/api/m/auth/user/save_stuinfo.htm', params);
 };
@@ -42,40 +43,6 @@ user.saveStuinfo = async function (params = {}) {
  */
 user.getStuinfo = async function (params = {}) {
     return httpRequest.sendPost(yssCaps.user + '/api/m/auth/user/get_stuinfo.htm', params);
-};
-
-
-/**
- * 保存用户
- * @param {*} params 
- * @param {*} yongHuID: 
- * @param {*} xueXiaoID: 
- * @param {*} kaoDianID: 
- * @param {*} userKaoShiID: 
- * @param {String} yongHuMing: xyf400
- * @param {String} yongHuKL: Csk001
- * @param {String} agginYongHuKL: Csk001
- * @param {*} yongHuLB: 100
- * @param {*} kaoShiMC: 
- * @param {*} shouJiHao: 
- */
-user.saveUser = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.user + '/auth/admin/user/saveUser.htm', params);
-};
-
-/**
- * 完善用户信息
- * @param {*} params 
- */
-user.saveStuStepInfoNewr = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.user + '/auth/student/saveStuStepInfoNew.htm', params);
-};
-
-/**
- * 获取用户信息
- */
-user.getStuInfo = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.user + '/auth/student/stuInfo.htm', params);
 };
 
 /**

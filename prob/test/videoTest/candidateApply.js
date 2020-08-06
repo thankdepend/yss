@@ -28,7 +28,6 @@ describe('考生报名', async function () {
         console.log('平台登录', platFromInfo);
     });
     describe('报名', async function () {
-
         // 不要频繁刷学校，不然会有人来找你的...
         it.skip('新增院校', async function () {
             const collegeParams = collegeManage.collegeMockJson()

@@ -1,4 +1,4 @@
-const user = require('../../reqApi/user');
+const user = require('../../reqApi/app/user');
 const service = require('../../reqApi/app/service');
 const {
     common
@@ -6,7 +6,9 @@ const {
 const doc = require('../data/doc.json');
 const caps = require('../../data/caps');
 
-
+/**
+ * 填充信息
+ */
 class Fill {
     constructor() {
         /** 用户id */

@@ -5,13 +5,13 @@ const notice = module.exports = {};
 
 /**
  * 推送消息列表（平台端）
- * @param businessId  
- * @param queryType
- * @param pushType
- * @param beginSendDate
- * @param endSendDate
- * @param senderName
- * @param msgContent
+ * @param businessId   
+ * @param queryType 
+ * @param pushType 推送类型
+ * @param beginSendDate 开始时间
+ * @param endSendDate 结束时间
+ * @param senderName 发送人姓名
+ * @param msgContent 消息文本
  * @param curPage
  * @param pageSize 
  */

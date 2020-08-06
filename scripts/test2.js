@@ -17,12 +17,15 @@
 
 // module.exports = account[name];
 
-const buf1 = Buffer.alloc(10);
-console.log('手动创建buffer', buf1);
-console.log(buf1.toJSON());
+// const buf1 = Buffer.alloc(10);
+// console.log('手动创建buffer', buf1);
+// console.log(buf1.toJSON());
 
-buf1.write("Buffer really rocks!");
-console.log('buf1', buf1.toString());
+// buf1.write("Buffer really rocks!");
+// console.log('buf1', buf1.toString());
 
-const buf2 = Buffer.from('hello buffer');
-console.log('往buffer填充字符', buf2);
+// const buf2 = Buffer.from('hello buffer');
+// console.log('往buffer填充字符', buf2);
+
+const a = new Date('2020-08-06 15:49:32').getTime()
+console.log(a);

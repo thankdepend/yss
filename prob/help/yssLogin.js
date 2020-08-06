@@ -14,16 +14,15 @@ yysLogin.clientLogin = async function (params = null) {
     //     console.log('测试环境', caps.envName);
     // }
     const userReq = yssAccount[caps.name].user;
-    const reqParams = Object.assign({
-        loginName: '330325',
-        password: 'Csk001',
-        device: 'm'
-    }, params || userReq);
-
+    // const reqParams = Object.assign({
+    //     loginName: '330325',
+    //     password: 'Csk001',
+    //     device: 'm'
+    // }, params || userReq);
+    const reqParams = Object.assign(userReq, params);
 
 
     const res = await base.userLogin(reqParams);
-    console.log(res);
     LOGINDATA = res.result.datas.user
     TICKET = res.result.ticket
     return res;
@@ -46,8 +45,8 @@ yysLogin.platfrom = async function (params = {}) {
 
     const userReq = yssAccount[caps.name][userType];
     let reqParams = Object.assign({
-        loginName: 'zyzg001',
-        password: 'Csk001',
+        loginName: 'mh01',
+        password: 'Ysk002',
     }, params || userReq);
     // reqParams =  qs.stringify(reqParams);
     const res = await base.platfromLogin(reqParams);

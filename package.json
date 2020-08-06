@@ -1,50 +1,50 @@
 {
-  "name": "yss",
-  "version": "1.0.0",
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.js": "eslint"
-  },
-  "scripts": {
-    "test": "mocha --recursive prob/test/videoTest/*.js --reporter mochawesome --env=pre"
-  },
-  "dependencies": {
-    "async": "^3.1.0",
-    "chai": "^4.2.0",
-    "diff": "^3.5.0",
-    "elasticsearch": "^15.5.0",
-    "formidable": "^1.2.2",
-    "glob": "^7.1.6",
-    "js-yaml": "^3.13.1",
-    "lodash": "^4.17.15",
-    "mocha-allure-reporter": "^1.4.0",
-    "moment": "^2.24.0",
-    "mysql2": "^1.7.0",
-    "nodemailer": "^6.4.2",
-    "nodemailer-smtp-transport": "^2.7.4",
-    "number-precision": "^1.3.2",
-    "pinyin4js": "^1.3.18",
-    "qrcode-reader": "^1.0.4",
-    "react": "^16.12.0",
-    "redis": "^2.8.0",
-    "superagent": "^5.2.1",
-    "supports-color": "^5.5.0",
-    "xml-js": "^1.6.9",
-    "yargs": "^11.1.1"
-  },
-  "devDependencies": {
-    "dirty-chai": "^2.0.1",
-    "eslint": "^6.8.0",
-    "eslint-plugin-react": "^7.17.0",
-    "husky": "^3.1.0",
-    "jsdoc": "^3.6.3",
-    "lint-staged": "^9.5.0",
-    "mocha": "^5.2.0",
-    "mochawesome": "^4.1.0"
-  },
-  "main": "index.js"
+    "name": "yss",
+    "version": "1.0.0",
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*.js": "eslint"
+    },
+    "scripts": {
+        "pre": "mocha --recursive prob/test --reporter mochawesome --env=pre"
+    },
+    "dependencies": {
+        "async": "^3.1.0",
+        "chai": "^4.2.0",
+        "diff": "^3.5.0",
+        "elasticsearch": "^15.5.0",
+        "formidable": "^1.2.2",
+        "glob": "^7.1.6",
+        "js-yaml": "^3.13.1",
+        "lodash": "^4.17.15",
+        "mocha-allure-reporter": "^1.4.0",
+        "moment": "^2.24.0",
+        "mysql2": "^1.7.0",
+        "nodemailer": "^6.4.2",
+        "nodemailer-smtp-transport": "^2.7.4",
+        "number-precision": "^1.3.2",
+        "pinyin4js": "^1.3.18",
+        "qrcode-reader": "^1.0.4",
+        "react": "^16.12.0",
+        "redis": "^2.8.0",
+        "superagent": "^5.2.1",
+        "supports-color": "^5.5.0",
+        "xml-js": "^1.6.9",
+        "yargs": "^11.1.1"
+    },
+    "devDependencies": {
+        "dirty-chai": "^2.0.1",
+        "eslint": "^6.8.0",
+        "eslint-plugin-react": "^7.17.0",
+        "husky": "^3.1.0",
+        "jsdoc": "^3.6.3",
+        "lint-staged": "^9.5.0",
+        "mocha": "^5.2.0",
+        "mochawesome": "^4.1.0"
+    },
+    "main": "index.js"
 }

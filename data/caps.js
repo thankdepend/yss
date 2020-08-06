@@ -19,6 +19,11 @@ let caps = {
     fileCenter: 'http://fileCenter.51bm.net.cn',
     fillCenterOnline: 'https://filecenter.artstudent.cn/',
     pay: 'http://pay.51bm.net.cn/',
+    index: 'http://index.51bm.net.cn',
+    hulaquan: 'http://hulaquan.51bm.net.cn',
+    info: 'http://info.51bm.net.cn',
+    public: 'http://public.51bm.net.cn',
+    wish: 'http://wish.51bm.net.cn',
 
     name: 'test',
 };
@@ -82,7 +87,6 @@ caps.updateEnvByName = params => {
 caps.email = {
     service: 'qq', // 'smtp.163.com', smtp.qq.com
     user: '1204825668@qq.com',
-    // pass: 'amnmxdwhhmiibigh',
 };
 
 module.exports = caps;

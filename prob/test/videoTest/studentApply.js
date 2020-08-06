@@ -2,10 +2,12 @@ const yysLogin = require('../../help/yssLogin');
 const {
     common
 } = require('../../../lib/index');
-const user = require('../../../reqApi/user');
+const user = require('../../../reqApi/app/user');
 const stu = require('../../../reqApi/app/stu');
 const service = require('../../../reqApi/app/service');
 
+
+// 旧的报名脚本
 describe.skip('学生报名', async function () {
     let loginInfo, loginAccount, time = Date.now();
     before('考生登录', async function () {

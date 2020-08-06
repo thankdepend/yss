@@ -1,13 +1,13 @@
 const {
     common
 } = require('../../../lib/index');
-const user = require('../../../reqApi/user');
+const user = require('../../../reqApi/app/user');
 const account = require('../../data/account');
 const yysLogin = require('../../help/yssLogin');
 const request = require('superagent');
 const stu = require('../../../reqApi/app/stu');
 
-describe('刷用户账号', async function () {
+describe.skip('刷用户账号', async function () {
     before('平台登录', async function () {
         platFromInfo = await yysLogin.platfrom({
             loginName: 'mh01',
