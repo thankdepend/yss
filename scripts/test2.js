@@ -27,5 +27,7 @@
 // const buf2 = Buffer.from('hello buffer');
 // console.log('往buffer填充字符', buf2);
 
-const a = new Date('2020-08-06 15:49:32').getTime()
-console.log(a);
+// const a = new Date().getTime()
+// console.log(a);
+
+expect(undefine).to.be.undefined;

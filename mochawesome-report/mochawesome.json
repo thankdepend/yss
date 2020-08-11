@@ -2,14 +2,14 @@
   "stats": {
     "suites": 19,
     "tests": 27,
-    "passes": 21,
+    "passes": 20,
     "pending": 6,
-    "failures": 0,
-    "start": "2020-08-06T08:32:19.870Z",
-    "end": "2020-08-06T08:32:27.149Z",
-    "duration": 7279,
+    "failures": 1,
+    "start": "2020-08-07T01:21:43.581Z",
+    "end": "2020-08-07T01:21:49.884Z",
+    "duration": 6303,
     "testsRegistered": 27,
-    "passPercent": 100,
+    "passPercent": 95.23809523809523,
     "pendingPercent": 22.22222222222222,
     "other": 0,
     "hasOther": false,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "8c4e6daf-5164-4ee7-b820-0422dca71fdc",
+      "uuid": "e156508e-ed79-426d-b494-926917492690",
       "title": "",
       "fullFile": "",
       "file": "",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "ac1b9f65-6953-4835-bbcc-22ac6e6b53de",
+          "uuid": "584a2782-1584-48ba-b9e6-7be6c00a61e5",
           "title": "刷用户账号",
           "fullFile": "C:\\Users\\86132\\Documents\\yss\\prob\\test\\brush\\brushAccount.js",
           "file": "\\prob\\test\\brush\\brushAccount.js",
@@ -47,8 +47,8 @@
               "context": null,
               "code": "",
               "err": {},
-              "uuid": "d303ec1b-fe6f-4bfd-b744-905bb0cc6294",
-              "parentUUID": "ac1b9f65-6953-4835-bbcc-22ac6e6b53de",
+              "uuid": "af6b1596-7364-45c9-a725-ff875c0f829a",
+              "parentUUID": "584a2782-1584-48ba-b9e6-7be6c00a61e5",
               "isHook": false,
               "skipped": false
             },
@@ -65,8 +65,8 @@
               "context": null,
               "code": "",
               "err": {},
-              "uuid": "13f25854-0929-47ef-ac4b-85a496d51f0b",
-              "parentUUID": "ac1b9f65-6953-4835-bbcc-22ac6e6b53de",
+              "uuid": "f8a03076-14d1-4d6f-92a9-c4ad74d75943",
+              "parentUUID": "584a2782-1584-48ba-b9e6-7be6c00a61e5",
               "isHook": false,
               "skipped": false
             }
@@ -75,8 +75,8 @@
           "passes": [],
           "failures": [],
           "pending": [
-            "d303ec1b-fe6f-4bfd-b744-905bb0cc6294",
-            "13f25854-0929-47ef-ac4b-85a496d51f0b"
+            "af6b1596-7364-45c9-a725-ff875c0f829a",
+            "f8a03076-14d1-4d6f-92a9-c4ad74d75943"
           ],
           "skipped": [],
           "duration": 0,
@@ -85,7 +85,7 @@
           "_timeout": 2000
         },
         {
-          "uuid": "b7dd8f65-70cf-4b2e-8ef1-d6d3e7de598e",
+          "uuid": "11d235c6-cfc4-4878-9145-c770c9c5120c",
           "title": "直播",
           "fullFile": "C:\\Users\\86132\\Documents\\yss\\prob\\test\\live\\live.js",
           "file": "\\prob\\test\\live\\live.js",
@@ -94,7 +94,7 @@
               "title": "\"before all\" hook: 登录-运营主管",
               "fullTitle": "直播 \"before all\" hook: 登录-运营主管",
               "timedOut": false,
-              "duration": 130,
+              "duration": 184,
               "state": null,
               "speed": null,
               "pass": false,
@@ -103,8 +103,8 @@
               "context": null,
               "code": "await yssLogin.platfrom(\n    account[caps.name].ptzg\n)\n// 关闭所有进行中的直播\nconst IDs = await live.getliveSuperviseIdArr();\nfor (let id of IDs) {\n    await live.closeVcloud(id)\n};",
               "err": {},
-              "uuid": "f12e7901-c8ff-4e62-919d-aa8dafd1db61",
-              "parentUUID": "b7dd8f65-70cf-4b2e-8ef1-d6d3e7de598e",
+              "uuid": "9ecf5053-4dd1-45da-8c4c-9ad5fdc5ad53",
+              "parentUUID": "11d235c6-cfc4-4878-9145-c770c9c5120c",
               "isHook": true,
               "skipped": false
             }
@@ -114,7 +114,7 @@
               "title": "\"after all\" hook: 关闭直播间",
               "fullTitle": "直播 \"after all\" hook: 关闭直播间",
               "timedOut": false,
-              "duration": 86,
+              "duration": 97,
               "state": null,
               "speed": null,
               "pass": false,
@@ -123,8 +123,8 @@
               "context": null,
               "code": "await live.closeVcloud()",
               "err": {},
-              "uuid": "f398403a-99cc-4369-add4-894e43a49b51",
-              "parentUUID": "b7dd8f65-70cf-4b2e-8ef1-d6d3e7de598e",
+              "uuid": "e79a5cf7-60f2-4664-bd51-0c3ffd4b4eba",
+              "parentUUID": "11d235c6-cfc4-4878-9145-c770c9c5120c",
               "isHook": true,
               "skipped": false
             }
@@ -132,7 +132,7 @@
           "tests": [],
           "suites": [
             {
-              "uuid": "fc50fdad-618f-4c5a-b8bc-b8980d251937",
+              "uuid": "8abd4e95-d400-491c-b3c5-d386fbaf0676",
               "title": "平台端新增直播",
               "fullFile": "C:\\Users\\86132\\Documents\\yss\\prob\\test\\live\\live.js",
               "file": "\\prob\\test\\live\\live.js",
@@ -141,7 +141,7 @@
                   "title": "\"before all\" hook: 新增直播",
                   "fullTitle": "直播 平台端新增直播 \"before all\" hook: 新增直播",
                   "timedOut": false,
-                  "duration": 1686,
+                  "duration": 2957,
                   "state": null,
                   "speed": null,
                   "pass": false,
@@ -150,8 +150,8 @@
                   "context": null,
                   "code": "const json = await liveManage.liveMockJson();\nawait live.saveLive(json)",
                   "err": {},
-                  "uuid": "5375c7e7-c802-4438-aedd-7bd22d5030c8",
-                  "parentUUID": "fc50fdad-618f-4c5a-b8bc-b8980d251937",
+                  "uuid": "656b8ea1-eeb0-4bb2-b891-99aa37868df4",
+                  "parentUUID": "8abd4e95-d400-491c-b3c5-d386fbaf0676",
                   "isHook": true,
                   "skipped": false
                 }
@@ -162,24 +162,24 @@
                   "title": "查询直播间列表",
                   "fullTitle": "直播 平台端新增直播 查询直播间列表",
                   "timedOut": false,
-                  "duration": 29,
+                  "duration": 53,
                   "state": "passed",
-                  "speed": "fast",
+                  "speed": "medium",
                   "pass": true,
                   "fail": false,
                   "pending": false,
                   "context": null,
                   "code": "await live.liveRoomListAssert();",
                   "err": {},
-                  "uuid": "5d9e260e-051f-47fb-94eb-fbf60fad5554",
-                  "parentUUID": "fc50fdad-618f-4c5a-b8bc-b8980d251937",
+                  "uuid": "a04ca00c-29a7-448a-b6a2-b4c15bb06c7e",
+                  "parentUUID": "8abd4e95-d400-491c-b3c5-d386fbaf0676",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [
                 {
-                  "uuid": "7ba04ad4-9834-47d0-becb-a811d1052f40",
+                  "uuid": "7ffeb5c0-257a-44ca-9dc8-e53b98f8332c",
                   "title": "客户端查看直播",
                   "fullFile": "C:\\Users\\86132\\Documents\\yss\\prob\\test\\live\\live.js",
                   "file": "\\prob\\test\\live\\live.js",
@@ -188,7 +188,7 @@
                       "title": "\"before all\" hook: 用户登录",
                       "fullTitle": "直播 平台端新增直播 客户端查看直播 \"before all\" hook: 用户登录",
                       "timedOut": false,
-                      "duration": 27,
+                      "duration": 39,
                       "state": null,
                       "speed": null,
                       "pass": false,
@@ -197,8 +197,8 @@
                       "context": null,
                       "code": "const res = await yssLogin.clientLogin({\n    loginName: 'dingding002',\n    password: 'Ysk001',\n    device: 'm'\n})",
                       "err": {},
-                      "uuid": "5b5c1d0d-75a3-4b73-9f75-159c570cd9b8",
-                      "parentUUID": "7ba04ad4-9834-47d0-becb-a811d1052f40",
+                      "uuid": "a178ba69-df46-4136-9753-deb58d77bd98",
+                      "parentUUID": "7ffeb5c0-257a-44ca-9dc8-e53b98f8332c",
                       "isHook": true,
                       "skipped": false
                     }
@@ -209,17 +209,21 @@
                       "title": "客户端查看直播列表",
                       "fullTitle": "直播 平台端新增直播 客户端查看直播 客户端查看直播列表",
                       "timedOut": false,
-                      "duration": 28,
-                      "state": "passed",
-                      "speed": "fast",
-                      "pass": true,
-                      "fail": false,
+                      "duration": 54,
+                      "state": "failed",
+                      "speed": null,
+                      "pass": false,
+                      "fail": true,
                       "pending": false,
                       "context": null,
                       "code": "await live.queryRoomListBycltAssert()",
-                      "err": {},
-                      "uuid": "b777279f-2329-41dc-9d58-f635727183e2",
-                      "parentUUID": "7ba04ad4-9834-47d0-becb-a811d1052f40",
+                      "err": {
+                        "message": "Error: 直播间id在列表没找到:\n\tkey=vCouldstatus, expected('2') != actual('3')",
+                        "estack": "Error: 直播间id在列表没找到:\n\tkey=vCouldstatus, expected('2') != actual('3')\n    at Object.check.isApproximatelyEqualAssert (lib\\assert.js:38:9)\n    at Live.queryRoomListBycltAssert (prob\\help\\liveManage.js:152:16)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)\n    at async Context.<anonymous> (prob\\test\\live\\live.js:43:17)",
+                        "diff": null
+                      },
+                      "uuid": "b206f284-42f7-4317-b267-3bf4e6df14cc",
+                      "parentUUID": "7ffeb5c0-257a-44ca-9dc8-e53b98f8332c",
                       "isHook": false,
                       "skipped": false
                     },
@@ -227,7 +231,7 @@
                       "title": "初始化直播间",
                       "fullTitle": "直播 平台端新增直播 客户端查看直播 初始化直播间",
                       "timedOut": false,
-                      "duration": 258,
+                      "duration": 256,
                       "state": "passed",
                       "speed": "slow",
                       "pass": true,
@@ -236,8 +240,8 @@
                       "context": null,
                       "code": "await live.initChartRoom()",
                       "err": {},
-                      "uuid": "0b1c344f-082b-4cc4-88f5-c82e2c8658ea",
-                      "parentUUID": "7ba04ad4-9834-47d0-becb-a811d1052f40",
+                      "uuid": "5b8beb30-eeec-4edf-9776-50b3b5626696",
+                      "parentUUID": "7ffeb5c0-257a-44ca-9dc8-e53b98f8332c",
                       "isHook": false,
                       "skipped": false
                     },
@@ -245,17 +249,17 @@
                       "title": "查看在线人数",
                       "fullTitle": "直播 平台端新增直播 客户端查看直播 查看在线人数",
                       "timedOut": false,
-                      "duration": 3064,
+                      "duration": 56,
                       "state": "passed",
-                      "speed": "slow",
+                      "speed": "medium",
                       "pass": true,
                       "fail": false,
                       "pending": false,
                       "context": null,
                       "code": "await live.playbackOrMaxLook()",
                       "err": {},
-                      "uuid": "183b637f-145a-48ec-9c5b-6798a26eb25c",
-                      "parentUUID": "7ba04ad4-9834-47d0-becb-a811d1052f40",
+                      "uuid": "d67c3ba2-9b57-4a7f-be5d-4dc1e796c763",
+                      "parentUUID": "7ffeb5c0-257a-44ca-9dc8-e53b98f8332c",
                       "isHook": false,
                       "skipped": false
                     },
@@ -263,44 +267,45 @@
                       "title": "统计数据",
                       "fullTitle": "直播 平台端新增直播 客户端查看直播 统计数据",
                       "timedOut": false,
-                      "duration": 48,
+                      "duration": 78,
                       "state": "passed",
-                      "speed": "medium",
+                      "speed": "slow",
                       "pass": true,
                       "fail": false,
                       "pending": false,
                       "context": null,
                       "code": "await live.getStatisticData();",
                       "err": {},
-                      "uuid": "b6084c6d-44a0-4e94-82d0-ffa2ffaed288",
-                      "parentUUID": "7ba04ad4-9834-47d0-becb-a811d1052f40",
+                      "uuid": "ca8e1c9e-5d57-455c-b230-8fc0c4dee5e9",
+                      "parentUUID": "7ffeb5c0-257a-44ca-9dc8-e53b98f8332c",
                       "isHook": false,
                       "skipped": false
                     }
                   ],
                   "suites": [],
                   "passes": [
-                    "b777279f-2329-41dc-9d58-f635727183e2",
-                    "0b1c344f-082b-4cc4-88f5-c82e2c8658ea",
-                    "183b637f-145a-48ec-9c5b-6798a26eb25c",
-                    "b6084c6d-44a0-4e94-82d0-ffa2ffaed288"
+                    "5b8beb30-eeec-4edf-9776-50b3b5626696",
+                    "d67c3ba2-9b57-4a7f-be5d-4dc1e796c763",
+                    "ca8e1c9e-5d57-455c-b230-8fc0c4dee5e9"
                   ],
-                  "failures": [],
+                  "failures": [
+                    "b206f284-42f7-4317-b267-3bf4e6df14cc"
+                  ],
                   "pending": [],
                   "skipped": [],
-                  "duration": 3398,
+                  "duration": 444,
                   "root": false,
                   "rootEmpty": false,
                   "_timeout": 90000
                 }
               ],
               "passes": [
-                "5d9e260e-051f-47fb-94eb-fbf60fad5554"
+                "a04ca00c-29a7-448a-b6a2-b4c15bb06c7e"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 29,
+              "duration": 53,
               "root": false,
               "rootEmpty": false,
               "_timeout": 90000
@@ -316,7 +321,7 @@
           "_timeout": 90000
         },
         {
-          "uuid": "15337f7d-c512-47ff-9ec6-19001cf44303",
+          "uuid": "56cfc0a3-5e95-48bf-b68d-e742b2b96404",
           "title": "完善信息",
           "fullFile": "C:\\Users\\86132\\Documents\\yss\\prob\\test\\prob\\fillScoreInfo.js",
           "file": "\\prob\\test\\prob\\fillScoreInfo.js",
@@ -325,7 +330,7 @@
               "title": "\"before all\" hook: 登录",
               "fullTitle": "完善信息 \"before all\" hook: 登录",
               "timedOut": false,
-              "duration": 70,
+              "duration": 113,
               "state": null,
               "speed": null,
               "pass": false,
@@ -334,8 +339,8 @@
               "context": null,
               "code": "// 需要登录的用户，默认有用户，可以不传\nloginAccount = {\n    loginName: 'dingding001',\n    password: 'Ysk001',\n    device: 'm'\n}\nloginInfo = await yysLogin.clientLogin(loginAccount).then(res => res.result.datas.user);\n// 获取修改次数\nconst gteUserInfo = await prob.getUser({\n    data: {\n        \"p\": {},\n        \"m\": \"\"\n    },\n    ts: time,\n    ticket: TICKET\n}).then(res => res.result.datas.obj);\nModifyNum = {\n    canModifyJointScoreNum: gteUserInfo.canModifyJointScoreNum,\n    canModifyCollEntrNum: gteUserInfo.canModifyCollEntrNum,\n    probabilityCanModProvNum: gteUserInfo.probabilityCanModProvNum,\n    englishModifyNum: gteUserInfo.englishModifyNum,\n    englishLeftNum: gteUserInfo.englishLeftNum,\n    chineseModifyNum: gteUserInfo.chineseModifyNum,\n    chineseLeftNum: gteUserInfo.chineseLeftNum,\n}",
               "err": {},
-              "uuid": "5a98234e-278d-4443-8cd3-b681db512545",
-              "parentUUID": "15337f7d-c512-47ff-9ec6-19001cf44303",
+              "uuid": "126cc837-d36a-49ab-aa26-edaa1882354a",
+              "parentUUID": "56cfc0a3-5e95-48bf-b68d-e742b2b96404",
               "isHook": true,
               "skipped": false
             }
@@ -346,7 +351,7 @@
               "title": "保存用户-新接口",
               "fullTitle": "完善信息 保存用户-新接口",
               "timedOut": false,
-              "duration": 99,
+              "duration": 127,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -355,15 +360,15 @@
               "context": null,
               "code": "const scoreLineInfo = await provinceScoreLine.getAosAndProfTypeList({\n    data: {\n        p: {\n            provinceId: basicData.province['湖北'],\n        },\n        m: ''\n    },\n    ticket: TICKET,\n    ts: time\n}).then(res => res.result.datas.list[0].jointCategoryList[0]);\nconsole.log('详细', scoreLineInfo)\n// 定制参数\nlet params = {}\nlet saveReq = Object.assign({\n    data: {\n        p: {\n            \"profTypeStatus\": scoreLineInfo.profTypeStatus,\n            \"jointExamScore\": common.getRandomNum(1, scoreLineInfo.q), // 统考分数\n            \"englishScore\": common.getRandomNum(1, scoreLineInfo.englishFullScore),\n            \"jointProfTypeName\": scoreLineInfo.jointCategoryName, // 统考类别\n            \"userTryUse\": false,\n            \"artsOrSciences\": scoreLineInfo.aos, // 文理科类型\n            \"collEntrExamScore\": common.getRandomNum(1, scoreLineInfo.w), // 文化分数\n            \"chineseScore\": common.getRandomNum(1, scoreLineInfo.chineseFullScore), // 语文成绩\n            \"provinceName\": scoreLineInfo.provinceName, // 省份名称\n            \"reduceNumAvailable\": true,\n            \"provinceID\": scoreLineInfo.provinceId, // 省份id\n            \"jointProfTypeID\": scoreLineInfo.jointCategoryId\n        },\n        m: \"\"\n    },\n    ts: time,\n    ticket: TICKET\n}, params)\nconst res = await prob.saveUser(saveReq)\n// console.log(params.data);\nconst savePamas = res.params.data.p;\n// console.log('保存响应',res.params.data.p);\nconst probUserInfo = await prob.getUser({\n    data: {\n        \"p\": {},\n        \"m\": \"\"\n    },\n    ts: time,\n    ticket: TICKET\n}).then(res => res.result.datas.obj);\n// console.log('概率用户信息- 实际值',probUserInfo);\nuserInfoExp = {\n    userID: loginInfo.userId,\n    profTypeStatus: savePamas.profTypeStatus,\n    jointExamScore: savePamas.jointExamScore,\n    collEntrExamScore: savePamas.collEntrExamScore,\n    canModifyJointScoreNum: common.sub(ModifyNum.canModifyJointScoreNum, 1),\n    canModifyCollEntrNum: common.sub(ModifyNum.canModifyCollEntrNum, 1),\n    probabilityCanModProvNum: common.sub(ModifyNum.probabilityCanModProvNum, 1),\n    englishModifyNum: common.sub(ModifyNum.englishModifyNum, 1),\n    englishLeftNum: common.sub(ModifyNum.englishLeftNum, 1),\n    chineseModifyNum: common.sub(ModifyNum.chineseModifyNum, 1),\n    chineseLeftNum: common.sub(ModifyNum.chineseLeftNum, 1),\n    provinceID: savePamas.provinceID,\n    provinceName: savePamas.provinceName,\n    artsOrSciences: savePamas.artsOrSciences,\n    jointProfTypeID: savePamas.jointProfTypeID,\n    jointProfTypeName: savePamas.jointProfTypeName,\n    englishScore: savePamas.englishScore,\n    chineseScore: savePamas.chineseScore,\n    artsOrSciencesStr: scoreLineInfo.aos == savePamas.artsOrSciences ? scoreLineInfo.aosName : '文科',\n    profTypeStatusStr: scoreLineInfo.profTypeStatus == savePamas.profTypeStatus ? scoreLineInfo.profTypeStatusName : '统考和校考',\n    simpleProvinceName: savePamas.provinceName\n}\nconsole.log('期望值', userInfoExp);\n// 断言\ncommon.isApproximatelyEqual(userInfoExp, probUserInfo)",
               "err": {},
-              "uuid": "ee1c1742-068c-47f0-a36d-ef62dacd249b",
-              "parentUUID": "15337f7d-c512-47ff-9ec6-19001cf44303",
+              "uuid": "9d37b9ea-4d3d-4d51-ac7d-ac5a95dde19e",
+              "parentUUID": "56cfc0a3-5e95-48bf-b68d-e742b2b96404",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [
             {
-              "uuid": "80d10623-f288-4746-ba29-c67c13bb904c",
+              "uuid": "89456f8b-2371-4d60-94b8-cf2fe166fac3",
               "title": "设置修改次数",
               "fullFile": "C:\\Users\\86132\\Documents\\yss\\prob\\test\\prob\\fillScoreInfo.js",
               "file": "\\prob\\test\\prob\\fillScoreInfo.js",
@@ -372,7 +377,7 @@
                   "title": "\"before all\" hook: 平台登录",
                   "fullTitle": "完善信息 设置修改次数 \"before all\" hook: 平台登录",
                   "timedOut": false,
-                  "duration": 33,
+                  "duration": 78,
                   "state": null,
                   "speed": null,
                   "pass": false,
@@ -381,8 +386,8 @@
                   "context": null,
                   "code": "platFromInfo = await yysLogin.platfrom({\n    loginName: 'cbyy',\n    password: 'Ysk002'\n});\nconsole.log('平台登录', platFromInfo);",
                   "err": {},
-                  "uuid": "8f7ece9f-937e-47c8-a381-5033e344288c",
-                  "parentUUID": "80d10623-f288-4746-ba29-c67c13bb904c",
+                  "uuid": "ffa46a80-1b36-4fed-bd36-4827ffc37719",
+                  "parentUUID": "89456f8b-2371-4d60-94b8-cf2fe166fac3",
                   "isHook": true,
                   "skipped": false
                 }
@@ -393,17 +398,17 @@
                   "title": "查看概率用户",
                   "fullTitle": "完善信息 设置修改次数 查看概率用户",
                   "timedOut": false,
-                  "duration": 45,
+                  "duration": 25,
                   "state": "passed",
-                  "speed": "medium",
+                  "speed": "fast",
                   "pass": true,
                   "fail": false,
                   "pending": false,
                   "context": null,
                   "code": "probUserNumDetail = await platfromProb.getProbUser({\n    userName: loginAccount.loginName,\n    ticket: PLAT_TICKET\n}).then(res => res.result.datas.page.dataList[0])\n// console.log('概率用户',probUserNumDetail);",
                   "err": {},
-                  "uuid": "b80d3be4-ab35-4039-849a-36cb362d5f2c",
-                  "parentUUID": "80d10623-f288-4746-ba29-c67c13bb904c",
+                  "uuid": "3885fdd0-3a73-4199-8d4a-61648a578927",
+                  "parentUUID": "89456f8b-2371-4d60-94b8-cf2fe166fac3",
                   "isHook": false,
                   "skipped": false
                 },
@@ -411,48 +416,48 @@
                   "title": "修改用户次数",
                   "fullTitle": "完善信息 设置修改次数 修改用户次数",
                   "timedOut": false,
-                  "duration": 43,
+                  "duration": 30,
                   "state": "passed",
-                  "speed": "medium",
+                  "speed": "fast",
                   "pass": true,
                   "fail": false,
                   "pending": false,
                   "context": null,
                   "code": "const res = await platfromProb.saveModifyNumEdit({\n    userID: probUserNumDetail.userID,\n    userName: probUserNumDetail.userName,\n    provinceName: probUserNumDetail.provinceName,\n    jointProfTypeName: probUserNumDetail.jointProfTypeName,\n    artsOrSciencesStr: probUserNumDetail.artsOrSciencesStr,\n    collEntrExamScore: probUserNumDetail.collEntrExamScore,\n    jointExamScore: probUserNumDetail.jointExamScore,\n    probabilityModProvNum: probUserNumDetail.probabilityModProvNum,\n    modifyNum: probUserNumDetail.modifyNum,\n    modifyJointScoreNum: probUserNumDetail.modifyJointScoreNum,\n    englishModifyNum: probUserNumDetail.englishModifyNum,\n    chineseModifyNum: probUserNumDetail.chineseModifyNum,\n    probabilityCanModProvNum: num,\n    canModifyCollEntrNum: num,\n    canModifyJointScoreNum: num,\n    chineseLeftNum: num,\n    englishLeftNum: num,\n    remark: null,\n    ticket: PLAT_TICKET\n})",
                   "err": {},
-                  "uuid": "638e81e3-6621-417f-885d-cc91603ba662",
-                  "parentUUID": "80d10623-f288-4746-ba29-c67c13bb904c",
+                  "uuid": "a05700aa-81b1-4d39-9da7-e1ea7ded9b8c",
+                  "parentUUID": "89456f8b-2371-4d60-94b8-cf2fe166fac3",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "b80d3be4-ab35-4039-849a-36cb362d5f2c",
-                "638e81e3-6621-417f-885d-cc91603ba662"
+                "3885fdd0-3a73-4199-8d4a-61648a578927",
+                "a05700aa-81b1-4d39-9da7-e1ea7ded9b8c"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 88,
+              "duration": 55,
               "root": false,
               "rootEmpty": false,
               "_timeout": 90000
             }
           ],
           "passes": [
-            "ee1c1742-068c-47f0-a36d-ef62dacd249b"
+            "9d37b9ea-4d3d-4d51-ac7d-ac5a95dde19e"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 99,
+          "duration": 127,
           "root": false,
           "rootEmpty": false,
           "_timeout": 90000
         },
         {
-          "uuid": "fc3588c3-650f-459b-899b-5fe9cf399e5b",
+          "uuid": "0a34dc28-cd5b-4a02-a645-13567745c626",
           "title": "消息推送",
           "fullFile": "C:\\Users\\86132\\Documents\\yss\\prob\\test\\prob\\msgPush.js",
           "file": "\\prob\\test\\prob\\msgPush.js",
@@ -461,7 +466,7 @@
               "title": "\"before all\" hook: 用户登录",
               "fullTitle": "消息推送 \"before all\" hook: 用户登录",
               "timedOut": false,
-              "duration": 36,
+              "duration": 24,
               "state": null,
               "speed": null,
               "pass": false,
@@ -470,8 +475,8 @@
               "context": null,
               "code": "// 获取用户id\nconst res = await yssLogin.clientLogin({\n    loginName: 'dingding002',\n    password: 'Ysk001',\n    device: 'm'\n})",
               "err": {},
-              "uuid": "f695c630-a007-41bd-97c1-53e0e4606b5e",
-              "parentUUID": "fc3588c3-650f-459b-899b-5fe9cf399e5b",
+              "uuid": "0b526e85-34ea-4e43-aefd-c49a9e1181e5",
+              "parentUUID": "0a34dc28-cd5b-4a02-a645-13567745c626",
               "isHook": true,
               "skipped": false
             }
@@ -480,7 +485,7 @@
           "tests": [],
           "suites": [
             {
-              "uuid": "ca0d3b09-f32c-4a36-8084-97ed79777354",
+              "uuid": "be03bc9c-3bdb-4f95-858c-a4fa33603287",
               "title": "消息推送",
               "fullFile": "C:\\Users\\86132\\Documents\\yss\\prob\\test\\prob\\msgPush.js",
               "file": "\\prob\\test\\prob\\msgPush.js",
@@ -489,7 +494,7 @@
                   "title": "\"before all\" hook: 运营主管登录",
                   "fullTitle": "消息推送 消息推送 \"before all\" hook: 运营主管登录",
                   "timedOut": false,
-                  "duration": 62,
+                  "duration": 31,
                   "state": null,
                   "speed": null,
                   "pass": false,
@@ -498,8 +503,8 @@
                   "context": null,
                   "code": "platFromInfo = await yssLogin.platfrom({\n    loginName: 'yyzg',\n    password: 'Ysk002',\n    userType: 'yyzg'\n});\nconsole.log('平台登录', platFromInfo);",
                   "err": {},
-                  "uuid": "faabbb05-e2b7-4aaa-b673-2c3aa49efa19",
-                  "parentUUID": "ca0d3b09-f32c-4a36-8084-97ed79777354",
+                  "uuid": "3cf3836f-f9db-4ef7-972a-682c3f7046c1",
+                  "parentUUID": "be03bc9c-3bdb-4f95-858c-a4fa33603287",
                   "isHook": true,
                   "skipped": false
                 }
@@ -508,7 +513,7 @@
               "tests": [],
               "suites": [
                 {
-                  "uuid": "176e578a-804f-4e8d-8c60-111b9a3869b7",
+                  "uuid": "b8c84fce-550c-44c2-b9af-33f070f21540",
                   "title": "id推送单人",
                   "fullFile": "C:\\Users\\86132\\Documents\\yss\\prob\\test\\prob\\msgPush.js",
                   "file": "\\prob\\test\\prob\\msgPush.js",
@@ -517,7 +522,7 @@
                       "title": "\"before all\" hook: 开始推送-id",
                       "fullTitle": "消息推送 消息推送 id推送单人 \"before all\" hook: 开始推送-id",
                       "timedOut": false,
-                      "duration": 103,
+                      "duration": 132,
                       "state": null,
                       "speed": null,
                       "pass": false,
@@ -526,8 +531,8 @@
                       "context": null,
                       "code": "// 只是为了校验businessId\nfirstQuery = await notice.loadPushData({\n    ticket: PLAT_TICKET,\n    // queryType: 2,\n    // pushType: 1,\n}).then(res => res.result);\npushMsg = await notice.pushMessageSend({\n    queryType: 2,\n    receiverIdJson: LOGINDATA.userId,\n    msgContent: context,\n    pop: 2,\n    ticket: PLAT_TICKET\n});",
                       "err": {},
-                      "uuid": "fdb2d03c-69fd-4050-8c06-d65a4d447afa",
-                      "parentUUID": "176e578a-804f-4e8d-8c60-111b9a3869b7",
+                      "uuid": "8909d393-4164-4b36-9711-1fc43123c798",
+                      "parentUUID": "b8c84fce-550c-44c2-b9af-33f070f21540",
                       "isHook": true,
                       "skipped": false
                     }
@@ -538,29 +543,29 @@
                       "title": "平台端查看推送消息列表",
                       "fullTitle": "消息推送 消息推送 id推送单人 平台端查看推送消息列表",
                       "timedOut": false,
-                      "duration": 79,
+                      "duration": 52,
                       "state": "passed",
-                      "speed": "slow",
+                      "speed": "medium",
                       "pass": true,
                       "fail": false,
                       "pending": false,
                       "context": null,
                       "code": "const loadPushDataList = await notice.loadPushData({\n    ticket: PLAT_TICKET\n}).then(res => res.result.datas.page.dataList);\nconst res = loadPushDataList.find(obj =>\n    obj.receiverIdJson == LOGINDATA.userId.toString() && obj.msgContent == context\n)\nconsole.log('平台端推送消息列表', res);\nconsole.log('平台login信息', PLAT_LOGINDATA);\nconst exp = {\n    businessId: common.add(firstQuery.datas.page.totalSize, 1),\n    senderId: PLAT_LOGINDATA.datas.user.userId,\n    queryType: pushMsg.params.queryType,\n    senderName: PLAT_LOGINDATA.datas.user.loginName,\n    msgContent: context,\n    pop: pushMsg.params.pop,\n    queryTypeStr: '用户Id推送', // 这里为什么写死，是因为我们的测试点就是测id推送\n    pushStatusStr: '已推送', // 状态也写死，如果状态不对，抛异常\n    pushTypeStr: '立即推送',\n    url: pushMsg.params.url ? params.url : null\n}\nconsole.log('断言', exp);\ncommon.isApproximatelyEqualAssert(exp, res);",
                       "err": {},
-                      "uuid": "a75c0d72-01b1-4d4e-bf47-6f6d1b3f9cfa",
-                      "parentUUID": "176e578a-804f-4e8d-8c60-111b9a3869b7",
+                      "uuid": "b9ea176d-4777-4bbb-9191-5f27f7b784de",
+                      "parentUUID": "b8c84fce-550c-44c2-b9af-33f070f21540",
                       "isHook": false,
                       "skipped": false
                     }
                   ],
                   "suites": [],
                   "passes": [
-                    "a75c0d72-01b1-4d4e-bf47-6f6d1b3f9cfa"
+                    "b9ea176d-4777-4bbb-9191-5f27f7b784de"
                   ],
                   "failures": [],
                   "pending": [],
                   "skipped": [],
-                  "duration": 79,
+                  "duration": 52,
                   "root": false,
                   "rootEmpty": false,
                   "_timeout": 90000
@@ -586,7 +591,7 @@
           "_timeout": 90000
         },
         {
-          "uuid": "e43c9eed-c7f5-46ae-acda-89f4f79b299b",
+          "uuid": "ec1ecb16-4864-4646-bc0f-1a375ef1bebb",
           "title": "录取概率首页",
           "fullFile": "C:\\Users\\86132\\Documents\\yss\\prob\\test\\prob\\probIndex.js",
           "file": "\\prob\\test\\prob\\probIndex.js",
@@ -595,7 +600,7 @@
               "title": "\"before all\" hook: 登录",
               "fullTitle": "录取概率首页 \"before all\" hook: 登录",
               "timedOut": false,
-              "duration": 48,
+              "duration": 51,
               "state": null,
               "speed": null,
               "pass": false,
@@ -604,8 +609,8 @@
               "context": null,
               "code": "// 需要登录的用户，默认有用户，可以不传\nconst loginAccount = {\n    // loginName: 'xyf177',\n    // password: 'Csk001', \n    // device: 'm'\n}\nloginInfo = await yysLogin.clientLogin(loginAccount).then(res => res.result.datas.user);",
               "err": {},
-              "uuid": "22271dfb-7504-4970-ae64-83ed11c1973f",
-              "parentUUID": "e43c9eed-c7f5-46ae-acda-89f4f79b299b",
+              "uuid": "9b4a9081-6b06-4655-b8d2-9d2462c853cd",
+              "parentUUID": "ec1ecb16-4864-4646-bc0f-1a375ef1bebb",
               "isHook": true,
               "skipped": false
             }
@@ -616,35 +621,35 @@
               "title": "首页公告",
               "fullTitle": "录取概率首页 首页公告",
               "timedOut": false,
-              "duration": 44,
+              "duration": 256,
               "state": "passed",
-              "speed": "medium",
+              "speed": "slow",
               "pass": true,
               "fail": false,
               "pending": false,
               "context": null,
               "code": "const res = await wishFill.getBulletinList({\n    data: {\n        \"p\": {},\n        \"m\": \"\"\n    },\n    ts: 1591060573972,\n    ticket: TICKET\n})",
               "err": {},
-              "uuid": "f63d3826-fb49-464a-b1de-6cfdd2e0922b",
-              "parentUUID": "e43c9eed-c7f5-46ae-acda-89f4f79b299b",
+              "uuid": "4ea7c1fc-951c-485d-b71f-eceab7dce7f1",
+              "parentUUID": "ec1ecb16-4864-4646-bc0f-1a375ef1bebb",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "f63d3826-fb49-464a-b1de-6cfdd2e0922b"
+            "4ea7c1fc-951c-485d-b71f-eceab7dce7f1"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 44,
+          "duration": 256,
           "root": false,
           "rootEmpty": false,
           "_timeout": 90000
         },
         {
-          "uuid": "5cbf2de0-717c-44fe-acb4-82bf20ab6d12",
+          "uuid": "16d44392-b584-43bc-9ce1-d76517e7198b",
           "title": "考生报名",
           "fullFile": "C:\\Users\\86132\\Documents\\yss\\prob\\test\\videoTest\\candidateApply.js",
           "file": "\\prob\\test\\videoTest\\candidateApply.js",
@@ -653,7 +658,7 @@
               "title": "\"before all\" hook: 平台登录-志愿主管",
               "fullTitle": "考生报名 \"before all\" hook: 平台登录-志愿主管",
               "timedOut": false,
-              "duration": 53,
+              "duration": 30,
               "state": null,
               "speed": null,
               "pass": false,
@@ -662,8 +667,8 @@
               "context": null,
               "code": "platFromInfo = await yysLogin.platfrom(account[caps.name].ptzg);\nconsole.log('平台登录', platFromInfo);",
               "err": {},
-              "uuid": "2b9036ee-9350-4272-9f0e-80173fb55c59",
-              "parentUUID": "5cbf2de0-717c-44fe-acb4-82bf20ab6d12",
+              "uuid": "0b2c2bae-014a-484e-b0ef-1fa05c47686a",
+              "parentUUID": "16d44392-b584-43bc-9ce1-d76517e7198b",
               "isHook": true,
               "skipped": false
             }
@@ -672,7 +677,7 @@
           "tests": [],
           "suites": [
             {
-              "uuid": "f1fd359f-78b7-4e12-8c23-e7b94ef628d9",
+              "uuid": "ad63dd27-317e-44fc-9d9e-771604b91c30",
               "title": "报名",
               "fullFile": "C:\\Users\\86132\\Documents\\yss\\prob\\test\\videoTest\\candidateApply.js",
               "file": "\\prob\\test\\videoTest\\candidateApply.js",
@@ -681,7 +686,7 @@
                   "title": "\"before all\" hook: 获取学校",
                   "fullTitle": "考生报名 报名 \"before all\" hook: 获取学校",
                   "timedOut": false,
-                  "duration": 370,
+                  "duration": 478,
                   "state": null,
                   "speed": null,
                   "pass": false,
@@ -690,8 +695,8 @@
                   "context": null,
                   "code": "await yysLogin.clientLogin({\n    loginName: 'dingding001',\n    password: 'Ysk001',\n    device: 'm'\n});\ngetAsCollege = await collegeManage.returnCollege();\n// console.log(getAsCollege);",
                   "err": {},
-                  "uuid": "1a4a7c94-942d-4087-8e64-069e553abd65",
-                  "parentUUID": "f1fd359f-78b7-4e12-8c23-e7b94ef628d9",
+                  "uuid": "6fae1acc-d350-4c02-9197-8524858d91bd",
+                  "parentUUID": "ad63dd27-317e-44fc-9d9e-771604b91c30",
                   "isHook": true,
                   "skipped": false
                 }
@@ -711,8 +716,8 @@
                   "context": null,
                   "code": "",
                   "err": {},
-                  "uuid": "8efcae0c-f06a-424a-a18a-572fe2c1476a",
-                  "parentUUID": "f1fd359f-78b7-4e12-8c23-e7b94ef628d9",
+                  "uuid": "40c4719c-c3de-40d8-a477-0d011ca935d2",
+                  "parentUUID": "ad63dd27-317e-44fc-9d9e-771604b91c30",
                   "isHook": false,
                   "skipped": false
                 },
@@ -720,24 +725,24 @@
                   "title": "搜索院校",
                   "fullTitle": "考生报名 报名 搜索院校",
                   "timedOut": false,
-                  "duration": 28,
+                  "duration": 42,
                   "state": "passed",
-                  "speed": "fast",
+                  "speed": "medium",
                   "pass": true,
                   "fail": false,
                   "pending": false,
                   "context": null,
                   "code": "await getAsCollege.searchCollegeAssert()",
                   "err": {},
-                  "uuid": "18a0462f-dea2-4fad-be4b-7306c8df2d24",
-                  "parentUUID": "f1fd359f-78b7-4e12-8c23-e7b94ef628d9",
+                  "uuid": "25b175b2-c595-4edf-976f-ee5858d9b21c",
+                  "parentUUID": "ad63dd27-317e-44fc-9d9e-771604b91c30",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [
                 {
-                  "uuid": "0daa78cb-15fa-429e-b738-20fcff1f1d3c",
+                  "uuid": "82af7aa1-d3c9-4990-97e9-5677b601bd66",
                   "title": "报名开始",
                   "fullFile": "C:\\Users\\86132\\Documents\\yss\\prob\\test\\videoTest\\candidateApply.js",
                   "file": "\\prob\\test\\videoTest\\candidateApply.js",
@@ -748,7 +753,7 @@
                       "title": "报名考试提交",
                       "fullTitle": "考生报名 报名 报名开始 报名考试提交",
                       "timedOut": false,
-                      "duration": 38,
+                      "duration": 65,
                       "state": "passed",
                       "speed": "medium",
                       "pass": true,
@@ -757,8 +762,8 @@
                       "context": null,
                       "code": "for (let riCheng of getAsCollege.collegeMap.keys()) {\n    riChengArr.push(riCheng);\n};\nranValue = common.getRandomNum(0, riChengArr.length - 1);\nconst profParams = {\n    data: {\n        m: \"\",\n        p: {\n            riChengID: riChengArr[ranValue]\n        }\n    },\n    ticket: TICKET\n}\nriChengID = profParams.data.p.riChengID;\nawait apply.saveProf(profParams)",
                       "err": {},
-                      "uuid": "d99da98a-1452-4b8b-acbc-3b4a228cbba2",
-                      "parentUUID": "0daa78cb-15fa-429e-b738-20fcff1f1d3c",
+                      "uuid": "152a3294-c190-47f3-a74f-1dcf4d010716",
+                      "parentUUID": "82af7aa1-d3c9-4990-97e9-5677b601bd66",
                       "isHook": false,
                       "skipped": false
                     },
@@ -766,7 +771,7 @@
                       "title": "创建报名订单",
                       "fullTitle": "考生报名 报名 报名开始 创建报名订单",
                       "timedOut": false,
-                      "duration": 47,
+                      "duration": 41,
                       "state": "passed",
                       "speed": "medium",
                       "pass": true,
@@ -775,35 +780,35 @@
                       "context": null,
                       "code": "const baoKaoID = getAsCollege.collegeMap.get(riChengID).baoKaoID;\nlet billParams = {\n    data: {\n        \"m\": \"\",\n        \"p\": {\n            \"xueXiaoID\": getAsCollege.collegeMain.xueXiaoID,\n            \"baoKaoIDs\": [baoKaoID],\n            \"sIds\": \"\"\n        }\n    },\n    ticket: TICKET\n}\nawait apply.addProfOrder(billParams);",
                       "err": {},
-                      "uuid": "567a429a-2df3-49e4-9225-608996ea2c20",
-                      "parentUUID": "0daa78cb-15fa-429e-b738-20fcff1f1d3c",
+                      "uuid": "f7dda790-a397-4302-a442-f4b87395b49f",
+                      "parentUUID": "82af7aa1-d3c9-4990-97e9-5677b601bd66",
                       "isHook": false,
                       "skipped": false
                     }
                   ],
                   "suites": [],
                   "passes": [
-                    "d99da98a-1452-4b8b-acbc-3b4a228cbba2",
-                    "567a429a-2df3-49e4-9225-608996ea2c20"
+                    "152a3294-c190-47f3-a74f-1dcf4d010716",
+                    "f7dda790-a397-4302-a442-f4b87395b49f"
                   ],
                   "failures": [],
                   "pending": [],
                   "skipped": [],
-                  "duration": 85,
+                  "duration": 106,
                   "root": false,
                   "rootEmpty": false,
                   "_timeout": 90000
                 }
               ],
               "passes": [
-                "18a0462f-dea2-4fad-be4b-7306c8df2d24"
+                "25b175b2-c595-4edf-976f-ee5858d9b21c"
               ],
               "failures": [],
               "pending": [
-                "8efcae0c-f06a-424a-a18a-572fe2c1476a"
+                "40c4719c-c3de-40d8-a477-0d011ca935d2"
               ],
               "skipped": [],
-              "duration": 28,
+              "duration": 42,
               "root": false,
               "rootEmpty": false,
               "_timeout": 90000
@@ -819,7 +824,7 @@
           "_timeout": 90000
         },
         {
-          "uuid": "de883896-b411-4e90-a06c-2d7ee8662cb2",
+          "uuid": "9f4079f1-393e-4cde-bb4f-2b35a84e98cf",
           "title": "视频上传",
           "fullFile": "C:\\Users\\86132\\Documents\\yss\\prob\\test\\videoTest\\fillCenter.js",
           "file": "\\prob\\test\\videoTest\\fillCenter.js",
@@ -839,8 +844,8 @@
               "context": null,
               "code": "",
               "err": {},
-              "uuid": "a2c55ae7-d903-4eb9-9d72-7306ba3be1fc",
-              "parentUUID": "de883896-b411-4e90-a06c-2d7ee8662cb2",
+              "uuid": "8e557014-da90-4250-b585-a1a27de8c23f",
+              "parentUUID": "9f4079f1-393e-4cde-bb4f-2b35a84e98cf",
               "isHook": false,
               "skipped": false
             }
@@ -849,7 +854,7 @@
           "passes": [],
           "failures": [],
           "pending": [
-            "a2c55ae7-d903-4eb9-9d72-7306ba3be1fc"
+            "8e557014-da90-4250-b585-a1a27de8c23f"
           ],
           "skipped": [],
           "duration": 0,
@@ -858,7 +863,7 @@
           "_timeout": 2000
         },
         {
-          "uuid": "c67a67a9-6212-49bd-8464-2a07ee8eb29f",
+          "uuid": "3f77b460-7bcf-4137-aad3-5775c1b4df98",
           "title": "填写报考资料",
           "fullFile": "C:\\Users\\86132\\Documents\\yss\\prob\\test\\videoTest\\filling.js",
           "file": "\\prob\\test\\videoTest\\filling.js",
@@ -867,7 +872,7 @@
               "title": "\"before all\" hook: 登录",
               "fullTitle": "填写报考资料 \"before all\" hook: 登录",
               "timedOut": false,
-              "duration": 40,
+              "duration": 37,
               "state": null,
               "speed": null,
               "pass": false,
@@ -876,8 +881,8 @@
               "context": null,
               "code": "let userInfo = {\n    loginName: 'dingding001',\n    password: 'Ysk001',\n    device: 'm'\n}\nloginInfo = await yysLogin.clientLogin(userInfo).then(res => res.result.datas.user);\n// console.log('登录信息', loginInfo);\nconsole.log(LOGINDATA);",
               "err": {},
-              "uuid": "09a6870f-324c-4876-9cc6-9c8fcbf7cc40",
-              "parentUUID": "c67a67a9-6212-49bd-8464-2a07ee8eb29f",
+              "uuid": "da9270b3-db52-4a97-bda1-0b2c682799f2",
+              "parentUUID": "3f77b460-7bcf-4137-aad3-5775c1b4df98",
               "isHook": true,
               "skipped": false
             }
@@ -886,7 +891,7 @@
           "tests": [],
           "suites": [
             {
-              "uuid": "6c883a98-f24b-4dcf-877e-9813493e2714",
+              "uuid": "7bb594ff-59c5-4969-acaa-2366e924e4a6",
               "title": "新增考生",
               "fullFile": "C:\\Users\\86132\\Documents\\yss\\prob\\test\\videoTest\\filling.js",
               "file": "\\prob\\test\\videoTest\\filling.js",
@@ -895,7 +900,7 @@
                   "title": "\"before all\" hook: 新增考生信息",
                   "fullTitle": "填写报考资料 新增考生 \"before all\" hook: 新增考生信息",
                   "timedOut": false,
-                  "duration": 56,
+                  "duration": 68,
                   "state": null,
                   "speed": null,
                   "pass": false,
@@ -904,8 +909,8 @@
                   "context": null,
                   "code": "const examineeJson = fillManage.mockExamineeJson();\nawait fill.saveStuinfo(examineeJson);",
                   "err": {},
-                  "uuid": "6fa2a831-8e0d-4c19-93f0-aca357cf78fe",
-                  "parentUUID": "6c883a98-f24b-4dcf-877e-9813493e2714",
+                  "uuid": "bda3d5e6-0584-41cf-96ff-2709d57e65f0",
+                  "parentUUID": "7bb594ff-59c5-4969-acaa-2366e924e4a6",
                   "isHook": true,
                   "skipped": false
                 }
@@ -916,7 +921,7 @@
                   "title": "查询考生信息",
                   "fullTitle": "填写报考资料 新增考生 查询考生信息",
                   "timedOut": false,
-                  "duration": 52,
+                  "duration": 59,
                   "state": "passed",
                   "speed": "medium",
                   "pass": true,
@@ -925,15 +930,15 @@
                   "context": null,
                   "code": "await fill.stuinfoAssert();",
                   "err": {},
-                  "uuid": "7ec7130e-d1cc-4897-93fa-01fb015e5ef5",
-                  "parentUUID": "6c883a98-f24b-4dcf-877e-9813493e2714",
+                  "uuid": "7729944f-4077-4f18-aa81-665e0572bf8a",
+                  "parentUUID": "7bb594ff-59c5-4969-acaa-2366e924e4a6",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [
                 {
-                  "uuid": "deb9574d-cbd6-4f2f-9474-d8ad07ca04b3",
+                  "uuid": "f62599b7-b529-457b-9c80-5383d87804b3",
                   "title": "图片上传",
                   "fullFile": "C:\\Users\\86132\\Documents\\yss\\prob\\test\\videoTest\\filling.js",
                   "file": "\\prob\\test\\videoTest\\filling.js",
@@ -944,17 +949,17 @@
                       "title": "上传考生照片",
                       "fullTitle": "填写报考资料 新增考生 图片上传 上传考生照片",
                       "timedOut": false,
-                      "duration": 77,
+                      "duration": 65,
                       "state": "passed",
-                      "speed": "slow",
+                      "speed": "medium",
                       "pass": true,
                       "fail": false,
                       "pending": false,
                       "context": null,
                       "code": "await fill.uploadAuth()",
                       "err": {},
-                      "uuid": "c9dd38e4-afcf-4dac-9024-34b1bfd8b3ff",
-                      "parentUUID": "deb9574d-cbd6-4f2f-9474-d8ad07ca04b3",
+                      "uuid": "9fc5cf95-5ffa-46ac-859a-4f9437e255b3",
+                      "parentUUID": "f62599b7-b529-457b-9c80-5383d87804b3",
                       "isHook": false,
                       "skipped": false
                     },
@@ -962,7 +967,7 @@
                       "title": "上传身份证",
                       "fullTitle": "填写报考资料 新增考生 图片上传 上传身份证",
                       "timedOut": false,
-                      "duration": 39,
+                      "duration": 51,
                       "state": "passed",
                       "speed": "medium",
                       "pass": true,
@@ -971,8 +976,8 @@
                       "context": null,
                       "code": "await fill.uploadShenFen();",
                       "err": {},
-                      "uuid": "14a3e2f8-afe9-4d58-9377-66808d117812",
-                      "parentUUID": "deb9574d-cbd6-4f2f-9474-d8ad07ca04b3",
+                      "uuid": "74c61d42-3b88-4c0c-9c40-aa4502bded6b",
+                      "parentUUID": "f62599b7-b529-457b-9c80-5383d87804b3",
                       "isHook": false,
                       "skipped": false
                     },
@@ -980,17 +985,17 @@
                       "title": "上传在籍证明",
                       "fullTitle": "填写报考资料 新增考生 图片上传 上传在籍证明",
                       "timedOut": false,
-                      "duration": 54,
+                      "duration": 36,
                       "state": "passed",
-                      "speed": "medium",
+                      "speed": "fast",
                       "pass": true,
                       "fail": false,
                       "pending": false,
                       "context": null,
                       "code": "await fill.uploadProve()",
                       "err": {},
-                      "uuid": "eb06adf6-239b-4598-a0cf-06dcbca00e52",
-                      "parentUUID": "deb9574d-cbd6-4f2f-9474-d8ad07ca04b3",
+                      "uuid": "6aaec62d-f802-4c88-9790-7054ce8f81c5",
+                      "parentUUID": "f62599b7-b529-457b-9c80-5383d87804b3",
                       "isHook": false,
                       "skipped": false
                     },
@@ -998,7 +1003,7 @@
                       "title": "上传录制考试视频",
                       "fullTitle": "填写报考资料 新增考生 图片上传 上传录制考试视频",
                       "timedOut": false,
-                      "duration": 40,
+                      "duration": 55,
                       "state": "passed",
                       "speed": "medium",
                       "pass": true,
@@ -1007,8 +1012,8 @@
                       "context": null,
                       "code": "await fill.uploadVideo();",
                       "err": {},
-                      "uuid": "c67223d2-dd99-4995-8a09-241dbf5b9f90",
-                      "parentUUID": "deb9574d-cbd6-4f2f-9474-d8ad07ca04b3",
+                      "uuid": "f215bffa-4d19-4412-952e-17b4adb6f0c8",
+                      "parentUUID": "f62599b7-b529-457b-9c80-5383d87804b3",
                       "isHook": false,
                       "skipped": false
                     },
@@ -1016,17 +1021,17 @@
                       "title": "确认提交",
                       "fullTitle": "填写报考资料 新增考生 图片上传 确认提交",
                       "timedOut": false,
-                      "duration": 54,
+                      "duration": 103,
                       "state": "passed",
-                      "speed": "medium",
+                      "speed": "slow",
                       "pass": true,
                       "fail": false,
                       "pending": false,
                       "context": null,
                       "code": "await fill.uploadAuthCommit();",
                       "err": {},
-                      "uuid": "82578375-7cbb-43ad-bfd1-63d30329d819",
-                      "parentUUID": "deb9574d-cbd6-4f2f-9474-d8ad07ca04b3",
+                      "uuid": "c1817f6f-4dc6-4f68-a665-ba54e0292848",
+                      "parentUUID": "f62599b7-b529-457b-9c80-5383d87804b3",
                       "isHook": false,
                       "skipped": false
                     },
@@ -1034,40 +1039,40 @@
                       "title": "提交查询",
                       "fullTitle": "填写报考资料 新增考生 图片上传 提交查询",
                       "timedOut": false,
-                      "duration": 54,
+                      "duration": 94,
                       "state": "passed",
-                      "speed": "medium",
+                      "speed": "slow",
                       "pass": true,
                       "fail": false,
                       "pending": false,
                       "context": null,
                       "code": "await fill.queryUpload();",
                       "err": {},
-                      "uuid": "ab1bf897-5a7b-4f3d-b743-a8b7777e5edf",
-                      "parentUUID": "deb9574d-cbd6-4f2f-9474-d8ad07ca04b3",
+                      "uuid": "14540401-f0fe-4230-85ad-b4896b1fbbde",
+                      "parentUUID": "f62599b7-b529-457b-9c80-5383d87804b3",
                       "isHook": false,
                       "skipped": false
                     }
                   ],
                   "suites": [],
                   "passes": [
-                    "c9dd38e4-afcf-4dac-9024-34b1bfd8b3ff",
-                    "14a3e2f8-afe9-4d58-9377-66808d117812",
-                    "eb06adf6-239b-4598-a0cf-06dcbca00e52",
-                    "c67223d2-dd99-4995-8a09-241dbf5b9f90",
-                    "82578375-7cbb-43ad-bfd1-63d30329d819",
-                    "ab1bf897-5a7b-4f3d-b743-a8b7777e5edf"
+                    "9fc5cf95-5ffa-46ac-859a-4f9437e255b3",
+                    "74c61d42-3b88-4c0c-9c40-aa4502bded6b",
+                    "6aaec62d-f802-4c88-9790-7054ce8f81c5",
+                    "f215bffa-4d19-4412-952e-17b4adb6f0c8",
+                    "c1817f6f-4dc6-4f68-a665-ba54e0292848",
+                    "14540401-f0fe-4230-85ad-b4896b1fbbde"
                   ],
                   "failures": [],
                   "pending": [],
                   "skipped": [],
-                  "duration": 318,
+                  "duration": 404,
                   "root": false,
                   "rootEmpty": false,
                   "_timeout": 90000
                 },
                 {
-                  "uuid": "ccbd7ff9-9522-4843-a1f9-f3f6d8b2c3f3",
+                  "uuid": "54890c58-922c-4a0e-b3ea-f7b70b9d7087",
                   "title": "客服审核",
                   "fullFile": "C:\\Users\\86132\\Documents\\yss\\prob\\test\\videoTest\\filling.js",
                   "file": "\\prob\\test\\videoTest\\filling.js",
@@ -1076,7 +1081,7 @@
                       "title": "\"before all\" hook: 客服主管登录",
                       "fullTitle": "填写报考资料 新增考生 客服审核 \"before all\" hook: 客服主管登录",
                       "timedOut": false,
-                      "duration": 32,
+                      "duration": 49,
                       "state": null,
                       "speed": null,
                       "pass": false,
@@ -1085,8 +1090,8 @@
                       "context": null,
                       "code": "platFromInfo = await yysLogin.platfrom(account[caps.name].kf);\nconsole.log('平台登录', platFromInfo);",
                       "err": {},
-                      "uuid": "ea5e0835-9701-4519-bfcd-9341b4a041b2",
-                      "parentUUID": "ccbd7ff9-9522-4843-a1f9-f3f6d8b2c3f3",
+                      "uuid": "de03d8b0-80e9-4461-9acb-4b3082faf17a",
+                      "parentUUID": "54890c58-922c-4a0e-b3ea-f7b70b9d7087",
                       "isHook": true,
                       "skipped": false
                     }
@@ -1097,7 +1102,7 @@
                       "title": "审核通过",
                       "fullTitle": "填写报考资料 新增考生 客服审核 审核通过",
                       "timedOut": false,
-                      "duration": 141,
+                      "duration": 171,
                       "state": "passed",
                       "speed": "slow",
                       "pass": true,
@@ -1106,32 +1111,32 @@
                       "context": null,
                       "code": "// 获取psid\nuserAudit = await audit.getAuditList({\n    idcardNo: LOGINDATA.loginName,\n    ticket: PLAT_TICKET\n}).then(res => res.result.datas.page.dataList[0]);\nconsole.log('审核信息', userAudit);\n// 审核通过\nconst res = await audit.auditAction({\n    psId: userAudit.psId,\n    auditFlag: userAudit.auditFlag,\n    applyTicket: userAudit.applyTicket,\n    ticket: PLAT_TICKET\n})\nconsole.log('审核通过', res);",
                       "err": {},
-                      "uuid": "314b6865-9637-439c-b7ae-ac1e709ee779",
-                      "parentUUID": "ccbd7ff9-9522-4843-a1f9-f3f6d8b2c3f3",
+                      "uuid": "787d1f08-8266-427d-b7f2-a1e76ca4ecd7",
+                      "parentUUID": "54890c58-922c-4a0e-b3ea-f7b70b9d7087",
                       "isHook": false,
                       "skipped": false
                     }
                   ],
                   "suites": [],
                   "passes": [
-                    "314b6865-9637-439c-b7ae-ac1e709ee779"
+                    "787d1f08-8266-427d-b7f2-a1e76ca4ecd7"
                   ],
                   "failures": [],
                   "pending": [],
                   "skipped": [],
-                  "duration": 141,
+                  "duration": 171,
                   "root": false,
                   "rootEmpty": false,
                   "_timeout": 90000
                 }
               ],
               "passes": [
-                "7ec7130e-d1cc-4897-93fa-01fb015e5ef5"
+                "7729944f-4077-4f18-aa81-665e0572bf8a"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 52,
+              "duration": 59,
               "root": false,
               "rootEmpty": false,
               "_timeout": 90000
@@ -1147,7 +1152,7 @@
           "_timeout": 90000
         },
         {
-          "uuid": "9790d9d3-ea90-4cf8-8dad-f025b291fe68",
+          "uuid": "61cc3c2a-1140-44b0-a287-05423241f8b0",
           "title": "学生报名",
           "fullFile": "C:\\Users\\86132\\Documents\\yss\\prob\\test\\videoTest\\studentApply.js",
           "file": "\\prob\\test\\videoTest\\studentApply.js",
@@ -1167,8 +1172,8 @@
               "context": null,
               "code": "",
               "err": {},
-              "uuid": "fb4c0d1a-e5f9-4f1a-a688-281c174d74ee",
-              "parentUUID": "9790d9d3-ea90-4cf8-8dad-f025b291fe68",
+              "uuid": "b8090b85-2f7c-4c43-942c-d4507ce5119f",
+              "parentUUID": "61cc3c2a-1140-44b0-a287-05423241f8b0",
               "isHook": false,
               "skipped": false
             },
@@ -1185,8 +1190,8 @@
               "context": null,
               "code": "",
               "err": {},
-              "uuid": "097f0199-57cf-4c36-a892-0bfbf4429ecf",
-              "parentUUID": "9790d9d3-ea90-4cf8-8dad-f025b291fe68",
+              "uuid": "ed8c3bb2-f978-478c-b822-ce405968f9c4",
+              "parentUUID": "61cc3c2a-1140-44b0-a287-05423241f8b0",
               "isHook": false,
               "skipped": false
             }
@@ -1195,8 +1200,8 @@
           "passes": [],
           "failures": [],
           "pending": [
-            "fb4c0d1a-e5f9-4f1a-a688-281c174d74ee",
-            "097f0199-57cf-4c36-a892-0bfbf4429ecf"
+            "b8090b85-2f7c-4c43-942c-d4507ce5119f",
+            "ed8c3bb2-f978-478c-b822-ce405968f9c4"
           ],
           "skipped": [],
           "duration": 0,

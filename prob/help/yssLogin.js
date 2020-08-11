@@ -8,22 +8,24 @@ const qs = require('qs');
 let yysLogin = module.exports = {};
 
 let argv = require('yargs').argv;
+
 // app登录
 yysLogin.clientLogin = async function (params = null) {
     // if (caps.envName) {
     //     console.log('测试环境', caps.envName);
     // }
-    const userReq = yssAccount[caps.name].user;
+    const userReq = yssAccount[caps.name].user1;
     // const reqParams = Object.assign({
     //     loginName: '330325',
     //     password: 'Csk001',
     //     device: 'm'
     // }, params || userReq);
-    const reqParams = Object.assign(userReq, params);
+    const reqParams = Object.assign(userReq || {}, params);
 
 
     const res = await base.userLogin(reqParams);
     LOGINDATA = res.result.datas.user
+    // console.log(LOGINDATA);
     TICKET = res.result.ticket
     return res;
 };

@@ -12,14 +12,14 @@ describe('填写报考资料', async function () {
     const fill = fillManage.setupFill();
     before('登录', async function () {
         let userInfo = {
-            loginName: 'dingding001',
-            password: 'Ysk001',
+            loginName: 'xyf12',
+            password: 'ysk002',
             device: 'm'
         }
         loginInfo = await yysLogin.clientLogin(userInfo).then(res => res.result.datas.user);
         // console.log('登录信息', loginInfo);
-        console.log(LOGINDATA);
     });
+
     describe('新增考生', async function () {
         before('新增考生信息', async function () {
             const examineeJson = fillManage.mockExamineeJson();

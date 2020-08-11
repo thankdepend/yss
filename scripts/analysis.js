@@ -3,19 +3,28 @@
 // this.id = ''
 
 const h = {
-    ticket: 'QY5ITC731q$2VFhwQlBRPT07S2lrdUx5b21LUzB1TEM4PTszMDMw',
-    roomName: '钱雨建の直播间',
-    categoryName: '直播分类名称',
-    categoryID: 2,
-    startTime: '2020-08-06 09:52:26',
-    anchorName: '主播mONaL',
-    anchorId: 1200565,
-    maxNum: 87,
-    orderNum: 114,
-    infoFlag: 1,
-    commentFlag: 1,
-    playBackFlag: 1,
-    noticeContent: '直播公告：o6Dwk'
+    infoID: '',
+    content: '',
+    infoState: 2,
+    topFlag: 2,
+    infoCategoryName: '头条',
+    infoCategoryID: 8,
+    infoTitle: '蜜獾自动化资讯KNugU',
+    infoSubTitle: '',
+    showListFlag: 1,
+    timingFlag: 2,
+    timingPushDate: '',
+    commentFlag: 2,
+    provinceCode: 0,
+    needPay: 0,
+    needPayInfoType: '',
+    orderNum: 113,
+    belongOrg: 1,
+    author: '蜜獾',
+    pictureURL: 'http://img.artstudent.cn/pr/2020-08-10/3b697be5a37b4f68b3a557343fc737b3.png',
+    publishDate: '',
+    infoPreview: '',
+    infoContentUrl: ''
 }
 let s = ``
 Object.keys(h).forEach((key) => {

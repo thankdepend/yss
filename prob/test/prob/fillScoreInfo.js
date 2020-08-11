@@ -1,4 +1,4 @@
-const yysLogin = require('../../help/yssLogin');
+const yssLogin = require('../../help/yssLogin');
 const wishFill = require('../../../reqApi/app/wishFill');
 const wish = require('../../../reqApi/app/wish');
 const prob = require('../../../reqApi/app/prob');
@@ -21,7 +21,7 @@ describe('完善信息', function () {
             password: 'Ysk001',
             device: 'm'
         }
-        loginInfo = await yysLogin.clientLogin(loginAccount).then(res => res.result.datas.user);
+        loginInfo = await yssLogin.clientLogin(loginAccount).then(res => res.result.datas.user);
 
         // 获取修改次数
         const gteUserInfo = await prob.getUser({
@@ -45,7 +45,7 @@ describe('完善信息', function () {
     describe('设置修改次数', async function () {
         let probUserNumDetail;
         before('平台登录', async function () {
-            platFromInfo = await yysLogin.platfrom({
+            platFromInfo = await yssLogin.platfrom({
                 loginName: 'cbyy',
                 password: 'Ysk002'
             });

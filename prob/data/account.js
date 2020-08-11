@@ -26,11 +26,11 @@ const account = {
         },
         yyzg: {
             loginName: 'yyzg',
-            password: 'Csk001'
+            password: 'csk001'
         }
     },
     pre: {
-        user: {
+        user1: {
             loginName: 'dingding001',
             password: 'Ysk001',
             device: 'm'

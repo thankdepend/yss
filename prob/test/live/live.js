@@ -34,9 +34,9 @@ describe('直播', async function () {
         describe('客户端查看直播', async function () {
             before('用户登录', async function () {
                 const res = await yssLogin.clientLogin({
-                    loginName: 'dingding002',
-                    password: 'Ysk001',
-                    device: 'm'
+                    // loginName: 'dingding002',
+                    // password: 'Ysk001',
+                    // device: 'm'
                 })
             });
             it('客户端查看直播列表', async function () {
