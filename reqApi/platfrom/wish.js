@@ -83,7 +83,7 @@ wish.abroadSchoolList = async function (params = {}) {
 };
 
 /**
- * 保存院校类别
+ * 保存留学院校类别
  * @param {Number} typeFlag 类别标志
  * @param {Number} typeID 类别id
  * @param {String} typeName 院校类型名称
@@ -106,4 +106,15 @@ wish.doWishSchoolTypeList = async function (params = {}) {
         curPage: 1,
         pageSize: 15
     }, params));
+};
+
+/**
+ * 删除留学院校类别
+ * @param {Number} typeFlag 类别标志
+ * @param {Number} typeID 类别id
+ * @param {String} typeName 院校类型名称
+ * @param {Number} ord 排序id
+ */
+wish.deleteWishschooltype = async function (params = {}) {
+    return common.sendPost(yssCaps.wish + '/auth/wish/wishschooltype/doDelete.htm', params);
 };

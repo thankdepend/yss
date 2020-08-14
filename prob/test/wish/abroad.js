@@ -1,8 +1,10 @@
-const abroadManage = require('../../help/abroadManage');
+const abroadManage = require('../../help/abroad/abroadManage');
 const yssLogin = require('../../help/yssLogin')
+const schoolTypeManage = require('../../help/abroad/schoolTypeManage');
 
 describe('留学', async function () {
     const abroad = abroadManage.setupAbroad();
+    const schoolType = schoolTypeManage.setupSchoolType();
     before('登录', async function () {
         await yssLogin.platfrom({
             userType: 'lxyy'
@@ -28,8 +30,30 @@ describe('留学', async function () {
 
     });
     describe('留学院校类别', async function () {
-        it('新增类别', async function () {
-            await abroad.saveWishschooltype();
+        before('新增类别', async function () {
+            await yssLogin.platfrom({
+                userType: 'lxyy'
+            })
         });
+        describe('新增类别', async function () {
+            before('新增', async function () {
+                await schoolType.saveWishschooltype();
+            });
+            it('查询类别列表', async function () {
+                await schoolType.wishSchoolTypeListAssert();
+            });
+        });
+        describe('删除类别', async function () {
+            before('删除类别', async function () {
+                await schoolType.deleteWishschooltype();
+            });
+            it('查询类别列表', async function () {
+                await schoolType.wishSchoolTypeListAssert({
+                    del: true
+                });
+            });
+        });
+
+
     });
 });

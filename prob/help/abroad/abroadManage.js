@@ -1,14 +1,15 @@
-const wish = require('../../reqApi/platfrom/wish');
-const wishApp = require('../../reqApi/app/wish');
-const caps = require('../../data/caps');
-const doc = require("../data/doc.json");
+const wish = require('../../../reqApi/platfrom/wish');
+const wishApp = require('../../../reqApi/app/wish');
+const caps = require('../../../data/caps');
+const doc = require("../../data/doc.json");
 const {
     common
-} = require('../../lib/index');
+} = require('../../../lib/index');
 
 class Abroad {
     constructor() {
-
+        /** 类别id */
+        this.typeID = '';
     }
 
     /** 保存留学院校 */
@@ -25,27 +26,6 @@ class Abroad {
         console.log('打印列表', res);
     }
 
-    /** 保存院校类别 */
-    async saveWishschooltype(params) {
-        const totalPage = await wish.doWishSchoolTypeList({
-            ticket: PLAT_TICKET
-        }).then(res => res.result.datas.page.totalPage);
-        await wish.saveWishschooltype(Object.assign({
-            ticket: PLAT_TICKET,
-            typeFlag: common.getRandomNum(5, 7), // 服务端写死，只有5,6,7
-            // typeID: ,
-            typeName: `蜜獾${common.getRandomStr(5)}类型`,
-            ord: totalPage + 1,
-        }, params));
-    }
-
-    /** 院校类别列表 */
-    async wishSchoolTypeList() {
-        const res = await wish.doWishSchoolTypeList({
-            ticket: PLAT_TICKET
-        });
-        console.log('院校类别列表', res);
-    }
 
     /** 客户端查询留学院校列表 */
     async getStudySchoolList() {
