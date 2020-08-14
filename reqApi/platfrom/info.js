@@ -83,3 +83,19 @@ info.publish = async function (params = {}) {
 info.deleteInfo = async function (params = {}) {
     return common.sendPost(yssCaps.info + `/auth/info/info/deleteInfo.htm`, params)
 }
+
+/**
+ * 查询资讯分类类别
+ * @param {Number} infoCategoryID 分类id
+ * @param {Number} infoCategoryName 分类名
+ * @param {Number} orderNum 排序号
+ * @param {Number} remark 备注
+ * @param {Number} curPage
+ * @param {Number} pageSize
+ */
+info.loadInfoCategoryList = async function (params = {}) {
+    return common.sendPost(yssCaps.info + `/auth/info/infoCategory/loadInfoCategoryData.htm`, Object.assign({
+        curPage: 1,
+        pageSize: 15
+    }, params))
+}

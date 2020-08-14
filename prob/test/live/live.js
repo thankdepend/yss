@@ -10,9 +10,9 @@ describe('直播', async function () {
     const live = liveManage.setupLive();
 
     before('登录-运营主管', async function () {
-        await yssLogin.platfrom(
-            account[caps.name].ptzg
-        )
+        await yssLogin.platfrom({
+            userType: 'yyzg'
+        })
         // 关闭所有进行中的直播
         const IDs = await live.getliveSuperviseIdArr();
         for (let id of IDs) {
@@ -21,11 +21,29 @@ describe('直播', async function () {
 
     });
     after('关闭直播间', async function () {
+        await yssLogin.platfrom({
+            userType: 'yyzg'
+        })
         await live.closeVcloud()
     });
     describe('平台端新增直播', async function () {
         before('新增直播', async function () {
-            const json = await liveManage.liveMockJson();
+            let anchorID;
+            // 获取主播id
+            await yssLogin.platfrom();
+            if (caps.name == 'test') {
+                anchorID = await liveManage.getAnchorID();
+            } else {
+                // 演示环境有用户授权，无奈写死
+                anchorID = 1197792;
+            }
+            // mock
+            await yssLogin.platfrom({
+                userType: 'yyzg'
+            })
+            const json = await liveManage.liveMockJson({
+                anchorID: anchorID
+            });
             await live.saveLive(json)
         });
         it('查询直播间列表', async function () {
@@ -33,11 +51,7 @@ describe('直播', async function () {
         });
         describe('客户端查看直播', async function () {
             before('用户登录', async function () {
-                const res = await yssLogin.clientLogin({
-                    // loginName: 'dingding002',
-                    // password: 'Ysk001',
-                    // device: 'm'
-                })
+                const res = await yssLogin.clientLogin()
             });
             it('客户端查看直播列表', async function () {
                 await live.queryRoomListBycltAssert()

@@ -5,12 +5,12 @@ const wish = module.exports = {};
 
 
 /**
- * 获取用户留学院校列表
+ * 获取用户订阅列表
  * @param {Object} data
  * @param {String} data.m
  * @param {Object} data.p 
  */
-wish.getQueryUserSubAbroadSchool = async function (params = {}) {
+wish.queryUserSubAbroadSchool = async function (params = {}) {
     return httpRequest.sendPost(yssCaps.wish + '/api/m/auth/school/abroad/queryUserSubAbroadSchool.ws', params);
 };
 

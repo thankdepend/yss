@@ -12,16 +12,16 @@ describe('消息推送', async function () {
     before('用户登录', async function () {
         // 获取用户id
         const res = await yssLogin.clientLogin({
-            loginName: 'dingding002',
-            password: 'Ysk001',
-            device: 'm'
+            // loginName: 'dingding002',
+            // password: 'Ysk001',
+            // device: 'm'
         })
     });
     describe('消息推送', async function () {
         before('运营主管登录', async function () {
             platFromInfo = await yssLogin.platfrom({
-                loginName: 'yyzg',
-                password: 'Ysk002',
+                // loginName: 'yyzg',
+                // password: 'Ysk002',
                 userType: 'yyzg'
             });
             console.log('平台登录', platFromInfo);

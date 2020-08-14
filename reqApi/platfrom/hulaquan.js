@@ -20,17 +20,17 @@ hulaquan.getLiveCategoryList = async function (params = {}) {
 /**
  * 
  * 查询直播间列表
- * @param {*} roomId
- * @param {*} roomName
- * @param {*} beginRepDate
- * @param {*} endRepDate
- * @param {*} anchorId
- * @param {*} showFlag
- * @param {*} roomStatus
- * @param {*} categoryName
- * @param {*} categoryID
- * @param {*} curPage
- * @param {*} pageSize
+ * @param {Number} roomId 直播间id 
+ * @param {String} roomName 直播间名称
+ * @param {String} beginRepDate 开始录制时间
+ * @param {String} endRepDate 结束录制时间
+ * @param {Number} anchorId 主播id
+ * @param {Number} showFlag 展示标志
+ * @param {Number} roomStatus 房间状态
+ * @param {String} categoryName 分类名
+ * @param {Number} categoryID 分类id
+ * @param {Number} curPage
+ * @param {Number} pageSize
  */
 hulaquan.getLiveRoomList = async function (params = {}) {
     return httpRequest.sendPost(yssCaps.hulaquan + '/auth/hulaquan/vcloud/room/loadRoomData.htm', Object.assign({

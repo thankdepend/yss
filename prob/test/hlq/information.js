@@ -7,8 +7,8 @@ describe('资讯', async function () {
     const information = informationManage.setupInformation();
     before('运营主管登录', async function () {
         await yssLogin.platfrom({
-            loginName: 'yyzg',
-            password: 'csk001',
+            // loginName: 'yyzg',
+            // password: 'csk001',
             userType: 'yyzg'
         })
         // console.log(PLAT_LOGINDATA);
@@ -52,8 +52,19 @@ describe('资讯', async function () {
             await information.loadInfoDetailAssert();
         });
     });
+    describe('客户端查看资讯', async function () {
+        before('用户登录', async function () {
+            await yssLogin.clientLogin();
+        });
+        it('客户端查看资讯列表', async function () {
+            await information.quaryinformationList()
+        });
+    });
     describe('删除资讯', async function () {
         before('删除资讯', async function () {
+            await yssLogin.platfrom({
+                userType: 'yyzg'
+            })
             await information.deleteInfo();
         });
         it('查询资讯列表', async function () {
@@ -65,5 +76,6 @@ describe('资讯', async function () {
             await information.loadInfoDetailAssert();
         });
     });
+
 
 });

@@ -1,5 +1,8 @@
 const hulaquan = require('../../reqApi/platfrom/hulaquan');
 const hulaquanApp = require('../../reqApi/app/hulaquan');
+const caps = require('../../data/caps');
+const doc = require("../data/doc.json");
+const yssLogin = require('../help/yssLogin');
 const {
     common
 } = require('../../lib/index');
@@ -33,7 +36,20 @@ class Live {
         this.playBackFlag = '';
         /** 直播公告 */
         this.noticeContent = '';
-
+        /** 观看人数 */
+        this.statistics = {};
+        /** 房间状态 */
+        this.roomStatus = 0;
+        /** 展示标志 */
+        this.showFlag = 0;
+        /** 创建房间标志 */
+        this.createRoomFlag = 0;
+        /** 创建渠道标志 */
+        this.createChannelFlag = 0;
+        /** 预定标志 */
+        this.reserveStatus = 0;
+        /** vCould状态 */
+        this.vCouldstatus = 0;
     }
 
     /** 保存直播 */
@@ -42,7 +58,28 @@ class Live {
         console.log('保存直播', res);
         // 更新
         this.roomId = res.result.datas.roomId
+
         common.update(this, res.params)
+
+        // 初始化
+        this.roomStatus = 1;
+        this.showFlag = 1;
+        this.createRoomFlag = 1;
+        this.createChannelFlag = 1;
+        this.reserveStatus = 2;
+        this.vCouldstatus = 3;
+
+        this.statistics = {
+            reserveNum: 0,
+            maxlookNum: 0,
+            totalNum: 0,
+            reviewNum: 0,
+            playbackNum: 0,
+            totalNumBase: 0,
+            liveNumBase: 0,
+            totalTotalNum: 0,
+            totalReserveNum: 0
+        }
         if (res.result.message == '该主播拥有未关闭的直播间,请关闭后再添加!') {
             throw new Error('该主播直播没结束')
         }
@@ -65,14 +102,7 @@ class Live {
         });
         // console.log('直播间', roomLiveActual[0]);
         if (type == 1) {
-            exp = Object.assign(this, {
-                roomStatus: 1,
-                showFlag: 1,
-                createRoomFlag: 1,
-                createChannelFlag: 1,
-                reserveStatus: 2,
-                vCouldstatus: 2,
-            });
+            exp = this;
         }
         common.isApproximatelyEqualAssert(exp, roomLiveActual)
 
@@ -131,25 +161,8 @@ class Live {
 
         let exp = Object.assign(this, {
             startTime: new Date(actual.startTime).getTime(),
-            roomStatus: 1,
-            showFlag: 1,
-            createRoomFlag: 1,
-            createChannelFlag: 1,
-            reserveStatus: 2,
-            vCouldstatus: 2,
-            statistics: {
-                reserveNum: 0,
-                maxlookNum: 0,
-                totalNum: 0,
-                reviewNum: 0,
-                playbackNum: 0,
-                totalNumBase: 0,
-                liveNumBase: 0,
-                totalTotalNum: 0,
-                totalReserveNum: 0
-            }
         });
-        common.isApproximatelyEqualAssert(exp, res, [], '直播间id在列表没找到');
+        common.isApproximatelyEqualAssert(exp, res, [], '参数校验不通过！');
     }
 
 
@@ -204,17 +217,41 @@ liveManage.setupLive = function () {
     return new Live();
 }
 
-liveManage.liveMockJson = async function (params) {
+/** 随机取主播id */
+liveManage.getAnchorID = async function (params) {
     // 找播主
-    // const res = await user.getUserList({ yongHuLB: 319,xueXiaoID: 0,zhengJianLX: 0,useFlag: 1,ticket: PLAT_TICKET});
+    const anchorNum = await user.getUserList({
+        yongHuLB: 319,
+        xueXiaoID: 0,
+        zhengJianLX: 0,
+        useFlag: 1,
+        ticket: PLAT_TICKET
+    }).then(res => res.result.datas.page.totalSize);
+    console.log(anchorNum);
+    // 找第一遍是为了获取播主个数
+    const res = await user.getUserList({
+        yongHuLB: 319,
+        xueXiaoID: 0,
+        zhengJianLX: 0,
+        useFlag: 1,
+        ticket: PLAT_TICKET,
+        curPage: 1,
+        pageSize: anchorNum,
+    }).then(res => res.result.datas.page.dataList);
+    const anchorIdArr = res.map(anchor => anchor.yongHuID);
+    console.log(anchorIdArr);
+    const anchorID = anchorIdArr[common.getRandomNum(0, anchorIdArr.length - 1)];
+    return anchorID;
+}
 
+/** 生成新增直播json */
+liveManage.liveMockJson = async function (params) {
     // 取分类id
     const cateGory = await hulaquan.getLiveCategoryList({
         stauts: 1,
         ticket: PLAT_TICKET
     }).then(res => res.result.datas.page.dataList);
     let categoryIdList = cateGory.map(obj => obj.categoryID);
-
     // 编号总数
     const orderNumTotal = await hulaquan.getLiveRoomList({
         ticket: PLAT_TICKET
@@ -225,19 +262,20 @@ liveManage.liveMockJson = async function (params) {
         pageSize: orderNumTotal
     }).then(res => res.result.datas.page.dataList);
     const orderMax = Math.max(...orderNumList.map(obj => obj.orderNum))
-
+    const randomImg = doc[caps.name].school[common.getRandomNum(0, doc.test.school.length)];
     let json = Object.assign({
         roomName: `${common.getRandomChineseStr(3)}の直播间`,
         categoryName: '直播分类名称',
+        picUrl: randomImg,
         categoryID: categoryIdList[common.getRandomNum(0, categoryIdList.length - 1)],
-        startTime: common.getCurrentTime(),
+        startTime: common.getCurrentTimeAfter(0.5),
         anchorName: `主播${common.getRandomStr(5)}`,
-        anchorId: 1200565, // 主播id写死
+        anchorId: params.anchorID,
         maxNum: common.getRandomNum(30, 100),
         orderNum: common.add(orderMax, 1),
-        infoFlag: 1,
+        infoFlag: 2, // 文稿标志，2为关闭
         // infoId,
-        commentFlag: 1,
+        commentFlag: 1, // 评论标志
         playBackFlag: 1, // 回放标志
         noticeContent: `直播公告：${common.getRandomStr(5)}`
     }, params)
