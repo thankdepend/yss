@@ -27,6 +27,10 @@ const account = {
         yyzg: {
             loginName: 'yyzg',
             password: 'csk001'
+        },
+        lxyy: {
+            loginName: 'lxyy',
+            password: 'Csk001'
         }
     },
     pre: {
@@ -45,11 +49,15 @@ const account = {
             password: 'Ysk002'
         },
         ptzg: {
-            loginName: 'mh01',
+            loginName: 'mh02',
             password: 'Ysk002'
         },
         yyzg: {
             loginName: 'yyzg',
+            password: 'Ysk002'
+        },
+        lxyy: {
+            loginName: 'lxyy01',
             password: 'Ysk002'
         }
     },

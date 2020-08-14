@@ -10,7 +10,8 @@
         "*.js": "eslint"
     },
     "scripts": {
-        "pre": "mocha --recursive prob/test --reporter mochawesome --env=pre"
+        "pre": "mocha --recursive prob/test --reporter mochawesome --env=pre",
+        "test": "mocha --recursive prob/test --reporter mochawesome --env=test"
     },
     "dependencies": {
         "async": "^3.1.0",

@@ -30,4 +30,10 @@
 // const a = new Date().getTime()
 // console.log(a);
 
-expect(undefine).to.be.undefined;
+// expect(undefine).to.be.undefined;
+
+function add(x, y) {
+    return x + y
+}
+
+module.exports = add;

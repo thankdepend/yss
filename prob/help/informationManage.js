@@ -1,4 +1,6 @@
 const info = require('../../reqApi/platfrom/info');
+const hulaquanApp = require('../../reqApi/app/hulaquan');
+const index = require('../../reqApi/app/index');
 const {
     common
 } = require('../../lib/index');
@@ -192,6 +194,36 @@ class Information {
         console.log('删除', res);
     }
 
+    /** 客户端查看资讯列表 */
+    async quaryinformationList() {
+        const categoryList = await index.queryIndex({
+            data: {
+                p: {},
+                m: ''
+            },
+            ticket: TICKET
+        }).then(res => res.result.datas.obj.infoCategoryList);
+        // console.log(categoryList);
+        const id1 = this.infoCategoryID
+        if (categoryList.find(obj => obj.infoCategoryID == id1) != undefined) {
+            const res = await hulaquanApp.getPostQuery({
+                data: {
+                    m: '',
+                    p: {
+                        curPage: 1,
+                        infoCategoryID: id1
+                    }
+                },
+                ticket: TICKET,
+
+            }).then(res => res.result.datas)
+            console.log(res);
+        } else {
+            return new Error('没有找分类id')
+        }
+
+    }
+
 }
 
 
@@ -204,13 +236,27 @@ informationManage.setupInformation = function () {
 
 /** 保存资讯mock参数 */
 informationManage.informationMockJson = async function (params) {
+    const infoCategoryList = await info.loadInfoCategoryList({
+        ticket: PLAT_TICKET
+    }).then(res => res.result.datas.page.dataList);
+    const categoryIdArr = infoCategoryList.map(category => {
+        return {
+            'id': category.infoCategoryID,
+            'name': category.infoCategoryName,
+        }
+    });
+    const radVal = common.getRandomNum(0, categoryIdArr.length - 1)
+    const infoCategoryID = categoryIdArr[radVal].id;
+    const infoCategoryName = categoryIdArr[radVal].name;
+    // console.log('打印分类id', infoCategoryID);
+    // console.log('打印分类名', infoCategoryName);
     let json = Object.assign({
         infoID: '',
         content: '',
         infoState: 2,
         topFlag: 2,
-        infoCategoryName: '头条',
-        infoCategoryID: 8,
+        infoCategoryName: infoCategoryName,
+        infoCategoryID: infoCategoryID,
         infoTitle: `蜜獾自动化资讯${common.getRandomStr(5)}`,
         infoSubTitle: '',
         showListFlag: 1,
@@ -220,7 +266,7 @@ informationManage.informationMockJson = async function (params) {
         provinceCode: 000000,
         needPay: 0,
         needPayInfoType: '',
-        orderNum: 113,
+        orderNum: common.getRandomNum(0, 1000),
         belongOrg: 1,
         author: '蜜獾',
         pictureURL: 'http://img.artstudent.cn/pr/2020-08-10/3b697be5a37b4f68b3a557343fc737b3.png',

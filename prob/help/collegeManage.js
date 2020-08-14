@@ -246,8 +246,7 @@ collegeManage.returnCollege = async function (params) {
 collegeManage.collegeMockJson = function (params = {}) {
     const randomStr = common.getRandomStr(6),
         randomNum = common.getRandomNum(12000, 99999),
-        randomImage =
-        doc[caps.name].school[common.getRandomNum(0, doc.test.school.length)];
+        randomImage = doc[caps.name].school[common.getRandomNum(0, doc.test.school.length)];
 
     let collegeJson = Object.assign({
             preSchoolType: 1,

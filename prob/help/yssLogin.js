@@ -11,21 +11,11 @@ let argv = require('yargs').argv;
 
 // app登录
 yysLogin.clientLogin = async function (params = null) {
-    // if (caps.envName) {
-    //     console.log('测试环境', caps.envName);
-    // }
     const userReq = yssAccount[caps.name].user1;
-    // const reqParams = Object.assign({
-    //     loginName: '330325',
-    //     password: 'Csk001',
-    //     device: 'm'
-    // }, params || userReq);
     const reqParams = Object.assign(userReq || {}, params);
-
 
     const res = await base.userLogin(reqParams);
     LOGINDATA = res.result.datas.user
-    // console.log(LOGINDATA);
     TICKET = res.result.ticket
     return res;
 };
@@ -33,27 +23,23 @@ yysLogin.clientLogin = async function (params = null) {
 // 后台登录
 yysLogin.platfrom = async function (params = {}) {
     let userType;
-    if (params.hasOwnProperty(userType)) {
+    if (params.userType) {
         userType = params.userType;
-        if (userType == '') {
-            userType == 'ptzg';
-            delete params.userType;
-        }
         delete params.userType;
     } else {
-        userType == 'ptzg';
+        userType = 'ptzg';
         delete params.userType;
     }
 
     const userReq = yssAccount[caps.name][userType];
-    let reqParams = Object.assign({
-        loginName: 'mh01',
-        password: 'Ysk002',
-    }, params || userReq);
+    let reqParams = Object.assign(
+        params, userReq);
     // reqParams =  qs.stringify(reqParams);
     const res = await base.platfromLogin(reqParams);
+    console.log(res);
     PLAT_TICKET = res.result.ticket;
     PLAT_LOGINDATA = res.result;
+
     return res;
 };
 
