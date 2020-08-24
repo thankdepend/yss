@@ -29,7 +29,7 @@ describe('留学', async function () {
         });
 
     });
-    describe('留学院校类别', async function () {
+    describe.skip('留学院校类别', async function () {
         before('新增类别', async function () {
             await yssLogin.platfrom({
                 userType: 'lxyy'

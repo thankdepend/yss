@@ -14,6 +14,7 @@ let caps = {
     college: 'http://college.51bm.net.cn',
     school: 'http://school.51bm.net.cn',
     stu: 'http://stu.51bm.net.cn',
+    guide: 'http://guide.51bm.net.cn',
     notice: 'http://notice.51bm.net.cn',
     fillCenter: 'http://fillCenter.51bm.net.cn',
     fileCenter: 'http://fileCenter.51bm.net.cn',

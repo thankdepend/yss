@@ -1,9 +1,9 @@
-const info = require('../../reqApi/platfrom/info');
-const hulaquanApp = require('../../reqApi/app/hulaquan');
-const index = require('../../reqApi/app/index');
+const info = require('../../../reqApi/platfrom/info');
+const hulaquanApp = require('../../../reqApi/app/hulaquan');
+const index = require('../../../reqApi/app/index');
 const {
     common
-} = require('../../lib/index');
+} = require('../../../lib/index');
 const {
     assert,
     expect

@@ -7,6 +7,7 @@ const {
     expect
 } = require('chai');
 
+/** 留学院校类别id */
 class SchoolType {
     constructor() {
         /** 类别id */

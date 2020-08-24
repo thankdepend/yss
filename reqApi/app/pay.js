@@ -1,13 +1,12 @@
 const httpRequest = require('../../lib/httpRequest')
 const yssCaps = require('../../data/caps');
 
-const service = module.exports = {};
-const caps = require('../../data/caps');
+const pay = module.exports = {};
 
 
 /**
  * 查询报名订单
  */
-service.queryOrder = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.pay + '/api/m/auth/pay/query_order.ws/api/m/auth/pay/query_order.ws', params);
+pay.queryOrder = async function (params = {}) {
+    return httpRequest.sendPost(yssCaps.pay + '/api/m/auth/pay/query_order.ws', params);
 };

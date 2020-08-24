@@ -169,5 +169,13 @@ const {
 //     console.log('打印返回值', add(1, 2));
 // });
 
-const res = common.getCurrentTimeAfter(0.5)
-console.log(res);
+// const res = common.getCurrentTimeAfter(0.5)
+// console.log(res);
+
+// const arr = [1197792, 1197775, 1197777, 1197790]
+// anchorID = arr[common.getRandomNum(0, arr.length - 1)];
+// console.log(anchorID);
+
+
+// word.replace(/^\s*|\s*$/g, '');
+common.getRandomWord();

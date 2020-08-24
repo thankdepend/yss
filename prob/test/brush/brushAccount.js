@@ -1,13 +1,13 @@
 const {
     common
 } = require('../../../lib/index');
-const user = require('../../../reqApi/app/user');
+const user = require('../../../reqApi/platfrom/user');
 const account = require('../../data/account');
 const yysLogin = require('../../help/yssLogin');
 const request = require('superagent');
 const stu = require('../../../reqApi/app/stu');
 
-describe.skip('刷用户账号', async function () {
+describe('刷用户账号', async function () {
     before('平台登录', async function () {
         platFromInfo = await yysLogin.platfrom({
             loginName: 'mh01',
@@ -16,9 +16,9 @@ describe.skip('刷用户账号', async function () {
         console.log('平台登录', platFromInfo);
     });
     it('创建考生号', async function () {
-        for (let a = 1; a <= 5; a++) {
+        for (let a = 50; a <= 100; a++) {
             let params = {
-                yongHuMing: `itsme${a}`,
+                yongHuMing: `dingding${a}`,
                 yongHuKL: 'Ysk001',
                 agginYongHuKL: 'Ysk001',
                 yongHuLB: 100,

@@ -140,3 +140,112 @@ hulaquan.getLiveReserveList = async function (params = {}) {
 hulaquan.closeVcloud = async function (params = {}) {
     return httpRequest.sendPost(yssCaps.hulaquan + '/auth/hulaquan/vcloud/web/closeVcloud.htm', params);
 };
+
+/**
+ * 保存圈子类型
+ * @param {Number} typeID 类型id
+ * @param {Number} businessType 业务类型 2
+ * @param {Number} typeLevel 类型等级 1
+ * @param {Number} typeName 类型名
+ * @param {Number} typeFlag 类型标志 1,2,3服务端写死
+ * @param {Number} typeOrder 类型编号
+ * @param {Number} icon 图
+ * @param {Number} typeDescribe 描述信息
+ */
+hulaquan.saveType = async function (params = {}) {
+    return httpRequest.sendPost(yssCaps.hulaquan + '/auth/hulaquan/groups/groupsType/saveType.htm', params);
+};
+
+/** 
+ * 查询圈子类型列表 
+ * @param {String} typeName 类型名称
+ * @param {Number} businessType 业务类型 2
+ * @param {Number} curPage 
+ * @param {Number} pageSize 
+ */
+hulaquan.getgroupsTypeList = async function (params = {}) {
+    return httpRequest.sendPost(yssCaps.hulaquan + '/auth/hulaquan/groups/groupsType/loadData.htm', params);
+};
+
+/** 
+ * 删除圈子类型 
+ * @param {Number} typeID 类型id
+ */
+hulaquan.delType = async function (params = {}) {
+    return httpRequest.sendPost(yssCaps.hulaquan + '/auth/hulaquan/groups/groupsType/deleteType.htm?', params);
+};
+
+/**
+ * 新增圈子
+ * @param {Number} groupID 圈子id
+ * @param {String} schoolName  学校名称
+ * @param {String} groupName  圈子名称
+ * @param {Number} typeFlag  圈子类型标志
+ * @param {Number} typeID  圈子类型id
+ * @param {Number} verifyFlag  验证标记 3允许任何人
+ * @param {Number} isHot  是否热门 1为是，0为否
+ * @param {Number} stopFlag  停用标记 1为启用，0为停用
+ * @param {String} iconURL  icon图   
+ * @param {Number} schoolID   学校id
+ * @param {String} provCityName 省份城市名 写死的北京市 东城区
+ * @param {Number} proviceCode 省份编码 110000
+ * @param {Number} cityCode 城市编码 110101
+ * @param {String} remark  备注
+ */
+hulaquan.saveGroup = async function (params = {}) {
+    return httpRequest.sendPost(yssCaps.hulaquan + '/auth/hulaquan/groups/group/saveGroup.htm', params);
+};
+
+/** 
+ * 查询圈子列表
+ * @param {Number} groupID 圈子id
+ * @param {Number} typeID 圈子类型id
+ * @param {String} groupName 圈子名称
+ * @param {Number} typeFlag 圈子类型标志
+ * @param {Number} verifyFlag 验证标记，3表示所有人
+ * @param {Number} isHot 是否热门 1为是，0为否
+ * @param {Number} stopFlag 停用标记 1为启用，0为停用
+ * @param {Number} dissolveFlag 解散标记 未解散1，已解散2
+ * @param {Number} auditFlag 审核标记 1表示已审核
+ * @param {Number} curPage: 1
+ * @param {Number} pageSize: 15
+ */
+hulaquan.getGroupList = async function (params = {}) {
+    return httpRequest.sendPost(yssCaps.hulaquan + '/auth/hulaquan/groups/group/loadData.htm', Object.assign({
+        curPage: 1,
+        pageSize: 15
+    }, params));
+};
+
+/** 
+ * 圈子成员
+ * @param {Number} userID 用户id
+ * @param {Number} groupID 圈子id
+ * @param {Number} celebrity 是否是达成 1为是
+ * @param {Number} curPage 1
+ * @param {Number} pageSize 15
+ */
+hulaquan.groupUserList = async function (params = {}) {
+    return httpRequest.sendPost(yssCaps.hulaquan + '/auth/hulaquan/groups/groupUser/loadData.htm', Object.assign({
+        curPage: 1,
+        pageSize: 15
+    }, params));
+};
+
+/** 
+ * 解散圈子
+ * @param {Number} typeID 类型id
+ * @param {Number} groupID 圈子id
+ * @param {Number} groupName 圈子名称
+ */
+hulaquan.dissolveGroup = async function (params = {}) {
+    return httpRequest.sendPost(yssCaps.hulaquan + '/auth/hulaquan/groups/group/dissolveGroup.htm?', params);
+};
+
+/** 
+ * 删除圈子 
+ * @param {Number} groupID 类型id
+ */
+hulaquan.deleteGroup = async function (params = {}) {
+    return httpRequest.sendPost(yssCaps.hulaquan + '/auth/hulaquan/groups/group/deleteGroup.htm?', params);
+};

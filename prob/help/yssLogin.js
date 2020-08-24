@@ -9,7 +9,12 @@ let yysLogin = module.exports = {};
 
 let argv = require('yargs').argv;
 
-// app登录
+/**
+ * app登录
+ * @param {String} loginName 账号
+ * @param {String} password 密码
+ * @param {String} device 设备'm'
+ */
 yysLogin.clientLogin = async function (params = null) {
     const userReq = yssAccount[caps.name].user1;
     const reqParams = Object.assign(userReq || {}, params);
@@ -36,9 +41,9 @@ yysLogin.platfrom = async function (params = {}) {
         params, userReq);
     // reqParams =  qs.stringify(reqParams);
     const res = await base.platfromLogin(reqParams);
-    console.log(res);
+    // console.log(res.result.datas);
     PLAT_TICKET = res.result.ticket;
-    PLAT_LOGINDATA = res.result;
+    PLAT_LOGINDATA = res.result.datas.user;
 
     return res;
 };

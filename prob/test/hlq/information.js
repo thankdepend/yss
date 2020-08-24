@@ -1,4 +1,4 @@
-const informationManage = require('../../help/informationManage');
+const informationManage = require('../../help/hlq/informationManage');
 const yssLogin = require('../../help/yssLogin');
 const common = require('../../../lib/common');
 

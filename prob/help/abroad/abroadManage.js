@@ -6,6 +6,7 @@ const {
     common
 } = require('../../../lib/index');
 
+/** 留学院校 */
 class Abroad {
     constructor() {
         /** 类别id */

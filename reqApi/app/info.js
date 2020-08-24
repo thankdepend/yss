@@ -41,3 +41,14 @@ info.getInfoList = async function (params = {}) {
 info.getInfoDetail = async function (params = {}) {
     return httpRequest.sendPost(yssCaps.info + '/api/m/v3/info/v190910/getInfoDetail.ws', params);
 };
+
+/**
+ * 查询院校资讯列表
+ * @param {Object} data
+ * @param {String} data.m
+ * @param {Object} data.p
+ * @param {Array} data.p.infoIdList 资讯id列表
+ */
+info.queryInfoListForCollege = async function (params = {}) {
+    return httpRequest.sendPost(yssCaps.info + '/api/m/v1/info/queryInfoListForCollege.htm', params);
+};

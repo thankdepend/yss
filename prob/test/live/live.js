@@ -3,7 +3,8 @@ const yssLogin = require('../../help/yssLogin');
 const caps = require('../../../data/caps');
 const account = require('../../data/account');
 const user = require('../../../reqApi/platfrom/user');
-const hulaquanApp = require('../../../reqApi/app/hulaquan')
+const hulaquanApp = require('../../../reqApi/app/hulaquan');
+const common = require('../../../lib/common');
 
 describe('直播', async function () {
     this.timeout(TESTCASE.timeout);
@@ -14,10 +15,10 @@ describe('直播', async function () {
             userType: 'yyzg'
         })
         // 关闭所有进行中的直播
-        const IDs = await live.getliveSuperviseIdArr();
-        for (let id of IDs) {
-            await live.closeVcloud(id)
-        };
+        // const IDs = await live.getliveSuperviseIdArr();
+        // for (let id of IDs) {
+        //     await live.closeVcloud(id)
+        // };
 
     });
     after('关闭直播间', async function () {
@@ -35,7 +36,8 @@ describe('直播', async function () {
                 anchorID = await liveManage.getAnchorID();
             } else {
                 // 演示环境有用户授权，无奈写死
-                anchorID = 1197792;
+                const arr = [1197792, 1197775, 1197777, 1197790]
+                anchorID = arr[common.getRandomNum(0, arr.length - 1)];
             }
             // mock
             await yssLogin.platfrom({

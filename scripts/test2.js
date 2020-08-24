@@ -1,5 +1,12 @@
 // const name = require('../../data/caps').name;
 
+const {
+    reject
+} = require("lodash");
+const {
+    resolveContent
+} = require("nodemailer/lib/shared");
+
 // const account = {
 //     yss_test: {
 //         prob_user1: {
@@ -32,8 +39,29 @@
 
 // expect(undefine).to.be.undefined;
 
-function add(x, y) {
-    return x + y
+// function add(x, y) {
+//     return x + y
+// }
+
+// module.exports = add;
+
+// var p1 = Promise.resolve(3);
+// var p2 = 1337;
+// var p3 = new Promise((resolve, reject) => {
+//     setTimeout(resolve, 100, 'foo');
+// });
+
+// Promise.all([p1, p2, p3]).then(values => {
+//     console.log(values);
+// });
+
+function timeout(ms) {
+    return new Promise((resolve, reject) => {
+        setTimeout(resolve, ms, 'done');
+        setTimeout(reject, ms, 'undefined');
+    });
 }
 
-module.exports = add;
+timeout(100).then((value) => {
+    console.log(value);
+});

@@ -157,7 +157,7 @@ hulaquan.getRecommendGroup = async function (params = {}) {
 };
 
 /**
- * 获取圈子类型
+ * 获取圈子类型列表
  * @param {Object} data
  * @param {String} data.m 
  * @param {Object} data.p
@@ -244,4 +244,26 @@ hulaquan.getVisitQuery = async function (params = {}) {
  */
 hulaquan.getVisitQuery = async function (params = {}) {
     return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/auth/my/drawschedule/v3/query.ws', params);
+};
+
+/** 
+ * 加入圈子-客户端
+ * @param {Object} data
+ * @param {String} data.m 
+ * @param {Object} data.p
+ * @param {Number} data.p.groupID 组id
+ */
+hulaquan.addFaction = async function (params = {}) {
+    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/auth/groups/group/v3/add.ws', params);
+};
+
+/** 
+ * 查询圈子组列表
+ * @param {Object} data
+ * @param {String} data.m 
+ * @param {Object} data.p.groupType 分组类型
+ * @param {Number} data.p.curPage 当前页
+ */
+hulaquan.queryGroupsList = async function (params = {}) {
+    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/groups/v4/queryGroups.ws', params);
 };
