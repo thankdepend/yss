@@ -156,27 +156,6 @@ class College {
         const res = await base.getprofessionInfoList();
         return res;
     }
-
-    /**
-     *
-     */
-
-    /**
-     * 库存更新（查询更新,调拨使用)
-     */
-    updateInvByQuery(params) {
-        // console.log('库存更新', params);
-        for (let i = 0; i < params.length; i++) {
-            // 设置出库门店的skuMap
-            let colorSize = `${params[i].colorid}_${params[i].sizeid}_${params[i].invid}`;
-            const sku = this.skuMap.has(colorSize) ?
-                this.skuMap.get(colorSize) :
-                new DresSkuMap();
-            common.update(sku, params[i]);
-            this.skuMap.set(colorSize, sku);
-        }
-        console.log(this.skuMap);
-    }
 }
 
 const collegeManage = module.exports = {};

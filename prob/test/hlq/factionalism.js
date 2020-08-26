@@ -3,6 +3,8 @@ const yssLogin = require('../../help/yssLogin');
 const {
     saveType
 } = require('../../../reqApi/platfrom/hulaquan');
+const common = require('../../../lib/common');
+const baseInfo = require('../../help/getBaseInfo');
 
 describe('圈子', async function () {
     this.timeout(TESTCASE.timeout);
@@ -32,6 +34,52 @@ describe('圈子', async function () {
         it('圈子成员列表', async function () {
             await faction.groupUserListAssert()
         });
+        it('圈子统计数据', async function () {
+            await faction.singlenGroupDataAssert();
+        });
+    });
+    describe('编辑圈子', async function () {
+        before('编辑', async function () {
+            await faction.saveGroup({
+                remark: common.getRandomStr(2)
+            });
+        });
+        it('查询圈子列表', async function () {
+            await faction.groupListAssert();
+        });
+        it('圈子成员列表', async function () {
+            await faction.groupUserListAssert()
+        });
+        it('圈子统计数据', async function () {
+            await faction.singlenGroupDataAssert();
+        });
+    });
+    describe('客户端发帖', async function () {
+        before('登录', async function () {
+            await yssLogin.clientLogin({
+                loginName: 'xyf3',
+                password: 'ysk002',
+            })
+            await baseInfo.getHlqUserInfo();
+        });
+        describe('加入圈子', async function () {
+            before('加入', async function () {
+                await faction.addFaction()
+            });
+            it('客户端查询圈子列表', async function () {
+                faction.queryGroupsList();
+            });
+        });
+        describe('保存贴子', async function () {
+            before('保存', async function () {
+                await faction.saveBrief();
+            });
+            it('客户端贴子列表', async function () {
+                await faction.waterfallListAssert();
+            });
+        });
+
+
     });
     describe('解散圈子', async function () {
         before('解散', async function () {
@@ -42,6 +90,9 @@ describe('圈子', async function () {
         });
         it('圈子成员列表', async function () {
             await faction.groupUserListAssert()
+        });
+        it('圈子统计数据', async function () {
+            await faction.singlenGroupDataAssert();
         });
     });
     describe('删除圈子', async function () {
@@ -56,6 +107,9 @@ describe('圈子', async function () {
         it('圈子成员列表', async function () {
             await faction.groupUserListAssert()
         });
+        it('圈子统计数据', async function () {
+            await faction.singlenGroupDataAssert();
+        });
     });
 
     describe('删除圈子类型', async function () {
@@ -67,12 +121,5 @@ describe('圈子', async function () {
                 del: true
             });
         });
-    });
-    it.skip('发帖', async function () {
-        await yssLogin.clientLogin({
-            loginName: 'xyf3',
-            password: 'ysk002',
-        })
-        await faction.saveBrief();
     });
 });

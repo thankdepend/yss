@@ -4,7 +4,16 @@ const common = require('../../lib/common');
 
 const hulaquan = module.exports = {};
 
-
+/**
+ * 呼啦圈-用户个人中心
+ * @param {Object} data
+ * @param {Object} data.p 
+ * @param {String} data.p.userID
+ * @param {String} data.m 
+ */
+hulaquan.getUserInfo = async function (params = {}) {
+    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/my/info/info/v3/get.ws', params);
+};
 
 /**
  * 初始化直播间
@@ -135,13 +144,13 @@ hulaquan.getGroupQuery = async function (params = {}) {
 };
 
 /**
- * 获取帖子流
+ * 获取帖子列表
  * @param {Object} data
  * @param {String} data.m 
  * @param {Object} data.p
  * @param {Number} data.p.curPage 当前页
  */
-hulaquan.getWaterfallQuery = async function (params = {}) {
+hulaquan.getWaterfallList = async function (params = {}) {
     return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/groups/post/v3/waterfall_query.ws', params);
 };
 

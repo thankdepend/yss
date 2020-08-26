@@ -19,6 +19,8 @@ class Faction {
         this.groupMain = new GroupMain();
         /** 圈子类型主要信息 */
         this.groupTypeMain = new GroupTypeMain()
+        /** 贴子主要信息 */
+        this.postMain = new PostMain();
         /** 圈子id */
         this.groupID = '';
         /** 圈子名称 */
@@ -27,6 +29,8 @@ class Faction {
         this.typeID = '';
         /** 圈子类型名字 */
         this.typeName = '';
+        /** 贴子id */
+        this.postID = '';
     }
 
     /** 保存圈子类型 */
@@ -37,12 +41,12 @@ class Faction {
             typeLevel: 1,
             typeName: common.getRandomWord(),
             typeFlag: 2, // 服务端写死1、2、3
-            typeOrder: 3,
+            typeOrder: common.getRandomNum(0, 100),
             icon: 'http://img.artstudent.cn/pr/2020-08-18/9e1dec47e5cc426295e2cbf695d01aba.png',
             typeDescribe: `这是描述${common.getRandomStr(4)}`,
             ticket: PLAT_TICKET,
         }, params));
-        console.log('保存圈子类型', res);
+        // console.log('保存圈子类型', res);
         await this.updateType(res.params);
     }
 
@@ -60,32 +64,34 @@ class Faction {
         this.groupTypeMain.typeID = res.typeID;
         this.typeID = res.typeID;
         this.typeName = res.typeName;
+        // console.log('typeID', res.typeID);
     }
 
     /** 查询圈子类型列表 */
-    async getgroupsTypeList() {
-        const res = await hulaquan.getgroupsTypeList({
-            typeName: '',
-            businessType: 2,
+    async getgroupsTypeList(params) {
+        const res = await hulaquan.getgroupsTypeList(Object.assign({
+            // typeName: '',
+            businessType: 2, // 业务类型
             curPage: 1,
             pageSize: 15,
             ticket: PLAT_TICKET,
-        });
+        }, params));
         // console.log('查询圈子类型列表', res);
         return res;
     }
 
     /** 圈子类型列表断言 */
     async groupsTypeListAssert(del) {
-        let res, actual;
+        let typeList, actual;
+        // 删除圈子类型断言
         if (del) {
             const resA = await this.getgroupsTypeList().then(res => res.result.datas.page.dataList);
             const actualA = resA.find(obj => obj.typeID == this.typeID);
             // console.log('actualA', actualA);
             expect(actualA).to.be.undefined();
         } else {
-            res = await this.getgroupsTypeList().then(res => res.result.datas.page.dataList);
-            actual = res.find(obj => obj.typeID == this.typeID);
+            typeList = await this.getgroupsTypeList().then(res => res.result.datas.page.dataList);
+            actual = typeList.find(obj => obj.typeID == this.typeID);
             let exp = {
                 typeID: this.groupTypeMain.typeID,
                 typeName: this.groupTypeMain.typeName,
@@ -98,8 +104,8 @@ class Faction {
                 businessTypeStr: '',
                 showFlagStr: '',
             }
-            console.log('期望', exp);
-            console.log('断言', actual);
+            // console.log('期望', exp);
+            // console.log('断言', actual);
             common.isApproximatelyEqualAssert(exp, actual)
         }
 
@@ -113,15 +119,17 @@ class Faction {
         });
     }
 
-    /** 保存圈子 */
-    async saveGroup() {
-        const typeID = this.typeID;
+    /** 
+     * 保存圈子
+     * @param {Object} params 编辑要传  
+     */
+    async saveGroup(params) {
         let json = {
             groupID: '',
             schoolName: '',
             groupName: `${common.getRandomWord()}圈`,
-            typeFlag: 1,
-            typeID: typeID,
+            typeFlag: this.groupTypeMain.typeFlag,
+            typeID: this.typeID,
             verifyFlag: 3,
             isHot: 1,
             stopFlag: 1,
@@ -133,24 +141,49 @@ class Faction {
             remark: `备注${common.getRandomStr(5)}`,
             ticket: PLAT_TICKET
         }
-        const res = await hulaquan.saveGroup(json);
-        // console.log('保存圈子', res);
-        await this.updateGroup(res.params)
+        let edit = Object.assign({
+            groupID: this.groupMain.groupID,
+            schoolName: this.groupMain.schoolName,
+            typeFlag: this.groupMain.typeFlag,
+            typeID: this.groupMain.typeID,
+            verifyFlag: this.groupMain.verifyFlag,
+            isHot: this.groupMain.isHot,
+            stopFlag: this.groupMain.stopFlag,
+            iconURL: this.groupMain.iconURL,
+            schoolID: this.groupMain.schoolID == null ? '' : '',
+            provCityName: this.groupMain.provCityName,
+            proviceCode: this.groupMain.proviceCode,
+            cityCode: this.groupMain.cityCode,
+            remark: this.groupMain.remark,
+            ticket: PLAT_TICKET
+        }, params);
 
+        if (params) {
+            // 编辑
+            const addData = await hulaquan.saveGroup(edit);
+            // console.log('编辑', addData);
+            await this.updateGroup(addData.params)
+        } else {
+            // 新增
+            const editData = await hulaquan.saveGroup(json);
+            // console.log('保存圈子', editData);
+            await this.updateGroup(editData.params)
+        }
     }
 
     /** 更新圈子信息 */
     async updateGroup(params) {
-        const updateRes = await hulaquan.getGroupList({
-            groupName: params.groupName,
-            ticket: PLAT_TICKET
+        const updateRes = await this.getGroupList({
+            groupName: params.groupName || this.groupMain.groupName,
         }).then(res => res.result.datas.page.dataList[0]);
+
         // console.log('更新圈子信息', updateRes);
         common.update(this.groupMain, params)
         this.groupMain.groupID = updateRes.groupID;
+        this.groupMain.groupName = updateRes.groupName;
         this.groupMain.createdOnStr = common.getCurrentDate();
         this.groupID = updateRes.groupID;
-        this.groupName = params.groupName;
+        this.groupName = params.groupName ? params.groupName : updateRes.groupName;
         this.groupMain.dissolveFlag = 1;
     }
 
@@ -159,6 +192,7 @@ class Faction {
         const res = await hulaquan.getGroupList(Object.assign({
             ticket: PLAT_TICKET
         }, params));
+        // console.log('列表请求', res);
         return res;
     }
 
@@ -175,6 +209,7 @@ class Faction {
             const groupList = await this.getGroupList({
                 pageSize: totalSize
             }).then(res => res.result.datas.page.dataList);
+            // console.log('圈子列表', groupList);
             const findRes = groupList.find(group => group.groupID == this.groupID);
             const redundancy = {
                 order: null,
@@ -191,6 +226,7 @@ class Faction {
                 join: false,
             }
             const groupMain = this.groupMain;
+            // console.log('groupMain', groupMain);
             let exp = Object.assign(groupMain, redundancy, {
                 typeName: this.typeName,
                 belongedUser: PLAT_LOGINDATA.userId,
@@ -202,9 +238,9 @@ class Faction {
                 verifyFlagStr: groupMain.verifyFlag == 3 ? '允许任何人' : '',
             }, )
 
-            console.log('期望值', exp);
-            console.log('实际值', findRes);
-            common.isApproximatelyEqualAssert(exp, findRes)
+            // console.log('圈子列表期望值', exp);
+            // console.log('圈子列表实际值', findRes);
+            common.isApproximatelyEqualAssert(exp, findRes, ['belongedUser'])
         }
     }
 
@@ -220,9 +256,27 @@ class Faction {
     /** 圈子成员断言 */
     async groupUserListAssert() {
         const userList = await this.groupUserList();
-        console.log(userList);
-        const actual = userList.result.datas.page.dataList;
-        expect(actual.length).to.be.equal(0);
+        expect(0).to.be.equal(userList.result.datas.page.dataList.length);
+    }
+
+    /** 统计圈子数据 */
+    async singlenGroupData(params) {
+        const res = await hulaquan.singlenGroupData(Object.assign({
+            ticket: PLAT_TICKET
+        }, params));
+        return res;
+    }
+
+    /** 统计圈子数据断言 */
+    async singlenGroupDataAssert() {
+        const params = {
+            groupID: this.groupID,
+            beginRepDate: common.getCurrentBefore(192),
+            endRepDate: common.getCurrentBefore(24),
+            saveFlag: 1,
+        };
+        const groupData = await this.singlenGroupData(params);
+        expect(0).to.be.equal(groupData.result.datas.page.dataList.length);
     }
 
     /** 解散圈子 */
@@ -233,7 +287,7 @@ class Faction {
             ticket: PLAT_TICKET
         });
         this.groupMain.dissolveFlag = 2;
-        console.log('解散圈子', res);
+        // console.log('解散圈子', res);
     }
 
     /** 删除圈子 */
@@ -242,7 +296,7 @@ class Faction {
             groupID: this.groupID,
             ticket: PLAT_TICKET
         });
-        console.log('删除圈子', res);
+        // console.log('删除圈子', res);
     }
 
     /** 加入圈子-客户端 */
@@ -250,13 +304,13 @@ class Faction {
         const res = await hulaquanApp.addFaction({
             data: {
                 "p": {
-                    "groupID": 1
+                    "groupID": this.groupID
                 },
                 "m": ""
             },
             ticket: TICKET
         })
-        console.log('加入圈子', res);
+        // console.log('加入圈子', res);
     }
 
     /** 查询圈子类型列表-客户端 */
@@ -268,7 +322,7 @@ class Faction {
             },
             ticket: TICKET
         });
-        console.log('圈子类型列表', res);
+        // console.log('圈子类型列表', res);
     }
 
     /** 查询圈子列表-客户端 */
@@ -276,19 +330,19 @@ class Faction {
         const res = await hulaquanApp.queryGroupsList({
             data: {
                 "p": {
-                    "groupType": 2,
+                    "groupType": this.typeID,
                     "curPage": 1
                 },
                 "m": ""
             },
             ticket: TICKET
         });
-        console.log('查询圈子列表', res);
+        // console.log('查询圈子列表', res);
     }
 
     /** 保存贴子-客户端 */
     async saveBrief() {
-        const topList = await hulaquanApp.getWaterfallQuery({
+        const topList = await hulaquanApp.getWaterfallList({
             data: {
                 p: {
                     curPage: 1
@@ -301,13 +355,13 @@ class Faction {
         const groupIDList = topList.map(obj => obj.groupID)
         const randomGroupID = groupIDList[common.getRandomNum(0, groupIDList.length - 1)];
 
-        let randomImage = doc[caps.name].other[common.getRandomNum(0, doc[caps.name].other.length)];
+        let randomImage = doc[caps.name].other[common.getRandomNum(0, doc[caps.name].other.length - 1)];
 
         const res = await hulaquanApp.getPostAdd({
             data: {
                 "p": {
                     "postType": 1,
-                    "groupID": randomGroupID,
+                    "groupID": this.groupID,
                     "attachmentJSON": randomImage,
                     "location": "",
                     "content": common.getRandomContent(6)
@@ -316,12 +370,62 @@ class Faction {
             },
             ticket: TICKET
         });
-        console.log('打印响应', res);
+        await this.updateWaterFall(res.params.data.p);
+    }
+
+    /** 更新贴子信息 */
+    async updateWaterFall(params) {
+        const res = await this.waterfallList();
+        // const findData = res.list.find(obj =>
+        //     obj.content == params.content
+        // );
+        const findData = res.list[0];
+        // console.log('findData', findData);
+        this.postMain.postID = findData.postID;
+        this.postID = findData.postID;
+        this.postMain = {
+            groupName: this.groupMain.groupName,
+            topFlag: 2,
+            fineFlag: 2,
+            createdUser: LOGINDATA.userId,
+            userExtendInfo: {
+                userID: HLQ_USERINFO.userID,
+                sex: HLQ_USERINFO.sex,
+                nickName: HLQ_USERINFO.nickName,
+                userFlag: HLQ_USERINFO.userFlag,
+                identifyFlag: HLQ_USERINFO.identifyFlag,
+                credentialsNum: HLQ_USERINFO.credentialsNum,
+                yearNum: HLQ_USERINFO.yearNum,
+                userStatus: HLQ_USERINFO.userStatus,
+                // "authFlag": 2,
+                // "simpleName": "浙江大学",
+                // "yearNumStr": "24级",
+                desUserId: HLQ_USERINFO.desUserId,
+                artTypeStr: HLQ_USERINFO.artTypeStr,
+            },
+            postStatisticalDO: {
+                praiseNum: 0,
+                browseNum: 0,
+                reviewNum: 0,
+                shareNum: 0,
+                collectNum: 0
+            },
+            colletion: false,
+            praise: false,
+            isDel: false,
+            showBrowseNumCache: 0,
+            fineFlagStr: '否'
+        }
+        common.update(this.postMain, params)
+        // 更新圈子
+        this.groupMain.postNum = 1;
+        this.groupMain.userNum = 1;
+
     }
 
     /** 查询贴子列表-客户端 */
-    async waterfallQuery() {
-        const res = await hulaquanApp.getWaterfallQuery({
+    async waterfallList() {
+        const res = await hulaquanApp.getWaterfallList({
             data: {
                 p: {
                     curPage: 1
@@ -331,7 +435,17 @@ class Faction {
             ticket: TICKET,
 
         }).then(res => res.result.datas);
-        console.log('查询贴子列表', res);
+        // console.log('查询贴子列表', res);
+        return res;
+    }
+
+    /** 查询贴子列表-客户端断言 */
+    async waterfallListAssert() {
+        const waterFall = await this.waterfallList();
+        const actual = waterFall.list.find(obj => obj.postID == this.postID)
+        // console.log(this.postMain);
+        // 跳过认证标志、大学名、大学等级
+        common.isApproximatelyEqualAssert(this.postMain, actual, ['authFlag', 'simpleName', 'yearNumStr'])
     }
 }
 
@@ -439,5 +553,42 @@ class GroupMain {
         // this.verifyFlagStr = '';
         // /** join */
         // this.join = '';
+    }
+}
+
+class PostMain {
+    constructor() {
+        /** 贴子id */
+        this.postID = '';
+        /** 圈子id */
+        this.groupID = '';
+        /** 圈子名 */
+        this.groupName = '';
+        /** 贴子内容 */
+        this.content = '';
+        /** 停用标志 */
+        this.topFlag = '';
+        /** 加精标志 */
+        this.fineFlag = '';
+        /** 创建人 */
+        this.createdUser = '';
+        /** 贴子类型 */
+        this.postType = '';
+        /** 地址 */
+        this.location = '';
+        /** 用户拓展信息 */
+        this.userExtendInfo = '';
+        /** 贴子统计数据 */
+        this.postStatisticalDO = '';
+        /** 是否收藏 */
+        this.colletion = '';
+        /** 是否点赞 */
+        this.praise = '';
+        /** 是否删除 */
+        this.isDel = '';
+        /** 浏览人数 */
+        this.showBrowseNumCache = '';
+        /** 是否收藏（字符串） */
+        this.fineFlagStr = '';
     }
 }

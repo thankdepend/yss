@@ -147,7 +147,7 @@ hulaquan.closeVcloud = async function (params = {}) {
  * @param {Number} businessType 业务类型 2
  * @param {Number} typeLevel 类型等级 1
  * @param {Number} typeName 类型名
- * @param {Number} typeFlag 类型标志 1,2,3服务端写死
+ * @param {Number} typeFlag 类型标志 1,2,3服务端写死，1为平台，2为普通，3为院校
  * @param {Number} typeOrder 类型编号
  * @param {Number} icon 图
  * @param {Number} typeDescribe 描述信息
@@ -233,10 +233,26 @@ hulaquan.groupUserList = async function (params = {}) {
 };
 
 /** 
+ * 统计圈子数据
+ * @param {Number} groupID 圈子id
+ * @param {Number} beginRepDate 开始时间 当前日期-8
+ * @param {Number} endRepDate 结束时间 当前日期-1
+ * @param {Number} saveFlag 保存标志 1为是
+ * @param {Number} curPage 1
+ * @param {Number} pageSize 10
+ */
+hulaquan.singlenGroupData = async function (params = {}) {
+    return httpRequest.sendPost(yssCaps.hulaquan + '/auth/hulaquan/report/repoutGroup/loadSinglenGroupData.htm', Object.assign({
+        curPage: 1,
+        pageSize: 10
+    }, params))
+};
+
+/** 
  * 解散圈子
  * @param {Number} typeID 类型id
  * @param {Number} groupID 圈子id
- * @param {Number} groupName 圈子名称
+ * @param {String} groupName 圈子名称
  */
 hulaquan.dissolveGroup = async function (params = {}) {
     return httpRequest.sendPost(yssCaps.hulaquan + '/auth/hulaquan/groups/group/dissolveGroup.htm?', params);

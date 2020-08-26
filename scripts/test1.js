@@ -178,4 +178,5 @@ const {
 
 
 // word.replace(/^\s*|\s*$/g, '');
-common.getRandomWord();
+const a = common.getCurrentBefore(24);
+console.log(a);
