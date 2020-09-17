@@ -199,13 +199,13 @@ collegeManage.setupCollegeByList = async function (params) {
 };
 
 /** 返回1个学校实例-列表查询结果 */
-collegeManage.returnCollege = async function (params) {
+collegeManage.returnCollege = async function (schoolID) {
     let argv = require('yargs').argv,
         college;
     if (argv.envName == 'pre') {
         // 写死
         college = await base.getCollegeList({
-                xueXiaoMH: 45600,
+                xueXiaoMH: schoolID ? schoolID : 45600,
                 ticket: PLAT_TICKET,
             })
             .then((res) => res.result.datas.page);

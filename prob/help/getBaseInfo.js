@@ -3,6 +3,7 @@ const yssAccount = require('../data/account');
 const caps = require('../../data/caps');
 const base = require('../../reqApi/baseLogin')
 const hulaquanApp = require('../../reqApi/app/hulaquan')
+const crm = require('../../reqApi/platfrom/crm');
 
 let baseInfo = module.exports = {};
 
@@ -21,4 +22,14 @@ baseInfo.getHlqUserInfo = async function () {
     })
     HLQ_USERINFO = res.result.datas.obj
 
+};
+
+/**
+ * 获取crm登录ticket
+ */
+baseInfo.getCrmTicket = async function (params) {
+    // 不设默认值
+    const res = await crm.getUserCanLogin(params)
+    // CRM_TICKET = res.result.ticket;
+    return res.result.datas.canLogin;
 };

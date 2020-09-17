@@ -7,20 +7,24 @@ const yysLogin = require('../../help/yssLogin');
 const request = require('superagent');
 const stu = require('../../../reqApi/app/stu');
 
-describe('刷用户账号', async function () {
+const argv = require('yargs').argv;
+
+describe.skip('刷用户账号', async function () {
+    this.timeout(TESTCASE.timeout);
     before('平台登录', async function () {
         platFromInfo = await yysLogin.platfrom({
-            loginName: 'mh01',
-            password: 'Ysk002'
+            // loginName: 'mh01',
+            // password: 'Ysk002'
+            userType: 'ptzg'
         });
         console.log('平台登录', platFromInfo);
     });
     it('创建考生号', async function () {
-        for (let a = 50; a <= 100; a++) {
+        for (let a = 0; a <= 10; a++) {
             let params = {
-                yongHuMing: `dingding${a}`,
-                yongHuKL: 'Ysk001',
-                agginYongHuKL: 'Ysk001',
+                yongHuMing: `shuilai-c${a}`,
+                yongHuKL: argv.env == 'test' ? 'Csk001' : argv.env == 'pre' ? 'Ysk002' : 123456,
+                agginYongHuKL: argv.env == 'test' ? 'Csk001' : argv.env == 'pre' ? 'Ysk002' : 123456,
                 yongHuLB: 100,
                 XinXiYT: 1,
                 // xueXiaoID: 66777,

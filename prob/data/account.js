@@ -31,7 +31,18 @@ const account = {
         lxyy: {
             loginName: 'lxyy',
             password: 'Csk001'
+        },
+        // 系统管理员
+        crm: {
+            loginName: 'zyzg001',
+            password: 'Csk001'
+        },
+        // “留学”机构管理员
+        crm2: {
+            loginName: 'zyzg-mh3',
+            password: 'Csk001'
         }
+
     },
     pre: {
         user1: {
@@ -57,6 +68,10 @@ const account = {
             password: 'Ysk002'
         },
         lxyy: {
+            loginName: 'lxyy01',
+            password: 'Ysk002'
+        },
+        crm2: {
             loginName: 'lxyy01',
             password: 'Ysk002'
         }

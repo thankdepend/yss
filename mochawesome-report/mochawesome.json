@@ -1,16 +1,16 @@
 {
   "stats": {
-    "suites": 1,
-    "tests": 2,
+    "suites": 3,
+    "tests": 1,
     "passes": 0,
-    "pending": 1,
+    "pending": 0,
     "failures": 1,
-    "start": "2020-08-21T07:36:57.157Z",
-    "end": "2020-08-21T07:36:57.344Z",
-    "duration": 187,
-    "testsRegistered": 2,
+    "start": "2020-09-16T04:28:06.225Z",
+    "end": "2020-09-16T04:28:06.555Z",
+    "duration": 330,
+    "testsRegistered": 1,
     "passPercent": 0,
-    "pendingPercent": 50,
+    "pendingPercent": 0,
     "other": 0,
     "hasOther": false,
     "skipped": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "2b95708f-26b9-47e0-b095-91e4882529a6",
+      "uuid": "1d36cbd0-1f7b-44fe-989e-b10837272d2b",
       "title": "",
       "fullFile": "",
       "file": "",
@@ -27,86 +27,142 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "ac51604c-50dd-4f27-a4ff-eb86dd366df3",
-          "title": "刷用户账号",
-          "fullFile": "C:\\Users\\86132\\Documents\\yss\\prob\\test\\brush\\brushAccount.js",
-          "file": "\\prob\\test\\brush\\brushAccount.js",
+          "uuid": "87413ddd-955c-4d31-a271-742652faba08",
+          "title": "留学部客户系统管理",
+          "fullFile": "C:\\Users\\86132\\Documents\\yss\\prob\\test\\crm\\crm.js",
+          "file": "\\prob\\test\\crm\\crm.js",
           "beforeHooks": [
             {
-              "title": "\"before all\" hook: 平台登录",
-              "fullTitle": "刷用户账号 \"before all\" hook: 平台登录",
+              "title": "\"before all\" hook: crm登录ticket获取",
+              "fullTitle": "留学部客户系统管理 \"before all\" hook: crm登录ticket获取",
               "timedOut": false,
-              "duration": 136,
+              "duration": 162,
               "state": null,
               "speed": null,
               "pass": false,
               "fail": false,
               "pending": false,
               "context": null,
-              "code": "platFromInfo = await yysLogin.platfrom({\n    loginName: 'mh01',\n    password: 'Ysk002'\n});\nconsole.log('平台登录', platFromInfo);",
+              "code": "const res = await baseInfo.getCrmTicket({\n    loginName: account[argv.env].crm2\n});\nconsole.log(res);\nif (argv.env == 'pre') {\n    const a = await yssLogin.platfrom({\n        // loginName: 'zyzg-lx',\n        // password: 'Csk001'\n        userType: 'crm2'\n    })\n    console.log('平台登录', a);\n} else {\n    if (res == true) {\n        const a = await yssLogin.platfrom({\n            // loginName: 'zyzg-lx',\n            // password: 'Csk001'\n            userType: 'crm2'\n        })\n        console.log('平台登录', a);\n    }\n}",
               "err": {},
-              "uuid": "b6826862-34e8-4a36-ad5d-9b12576fd9d5",
-              "parentUUID": "ac51604c-50dd-4f27-a4ff-eb86dd366df3",
+              "uuid": "7fede509-94e7-4da2-a2cb-e13c697a5db9",
+              "parentUUID": "87413ddd-955c-4d31-a271-742652faba08",
               "isHook": true,
               "skipped": false
             }
           ],
           "afterHooks": [],
-          "tests": [
+          "tests": [],
+          "suites": [
             {
-              "title": "创建考生号",
-              "fullTitle": "刷用户账号 创建考生号",
-              "timedOut": false,
-              "duration": 33,
-              "state": "failed",
-              "speed": null,
-              "pass": false,
-              "fail": true,
-              "pending": false,
-              "context": null,
-              "code": "for (let a = 50; a <= 100; a++) {\n    let params = {\n        yongHuMing: `dingding${a}`,\n        yongHuKL: 'Ysk001',\n        agginYongHuKL: 'Ysk001',\n        yongHuLB: 100,\n        XinXiYT: 1,\n        // xueXiaoID: 66777,\n        // kaoDianID: 644,\n        ticket: PLAT_TICKET\n    }\n    // platFromInfo = await yysLogin.platfrom({loginName:'mh01',password:'Csk001'});\n    // await common.delay(500);\n    const res = await user.saveUser(params)\n    console.log('保存用户请求', res);\n}",
-              "err": {
-                "message": "Error: 请求失败:\n\t opTime:2020-08-21 15:36:57\n\t url:http://user.51bm.net.cn/auth/admin/user/saveUser.htm\n\t data:{\"yongHuMing\":\"dingding50\",\"yongHuKL\":\"Ysk001\",\"agginYongHuKL\":\"Ysk001\",\"yongHuLB\":100,\"XinXiYT\":1,\"ticket\":\"2H382a36zg$2VDBFOVBRPT07T0RnNFB6czRQRGc0T0RnLzs4OA==\"}\n\t status: 401",
-                "estack": "Error: 请求失败:\n\t opTime:2020-08-21 15:36:57\n\t url:http://user.51bm.net.cn/auth/admin/user/saveUser.htm\n\t data:{\"yongHuMing\":\"dingding50\",\"yongHuKL\":\"Ysk001\",\"agginYongHuKL\":\"Ysk001\",\"yongHuLB\":100,\"XinXiYT\":1,\"ticket\":\"2H382a36zg$2VDBFOVBRPT07T0RnNFB6czRQRGc0T0RnLzs4OA==\"}\n\t status: 401\n    at logReqErrMsg (lib\\httpRequest.js:338:11)\n    at C:\\Users\\86132\\Documents\\yss\\lib\\httpRequest.js:94:13\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)\n    at async Object.httpRequest.sendPost (lib\\httpRequest.js:77:5)\n    at async Context.<anonymous> (prob\\test\\brush\\brushAccount.js:32:25)",
-                "diff": null
-              },
-              "uuid": "a6533fa7-6227-4b99-adf0-f5fccfa8fc25",
-              "parentUUID": "ac51604c-50dd-4f27-a4ff-eb86dd366df3",
-              "isHook": false,
-              "skipped": false
-            },
-            {
-              "title": "报名",
-              "fullTitle": "刷用户账号 报名",
-              "timedOut": false,
+              "uuid": "26b57ff7-a8ab-4c16-b0af-203a5c90b83f",
+              "title": "添加公海信息",
+              "fullFile": "C:\\Users\\86132\\Documents\\yss\\prob\\test\\crm\\crm.js",
+              "file": "\\prob\\test\\crm\\crm.js",
+              "beforeHooks": [
+                {
+                  "title": "\"before all\" hook: 用户登录",
+                  "fullTitle": "留学部客户系统管理 添加公海信息 \"before all\" hook: 用户登录",
+                  "timedOut": false,
+                  "duration": 44,
+                  "state": null,
+                  "speed": null,
+                  "pass": false,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "await yssLogin.clientLogin({\n    loginName: 'dingding002',\n    password: 'Ysk001'\n});",
+                  "err": {},
+                  "uuid": "7de14363-8085-45b4-aad5-e2009985d804",
+                  "parentUUID": "26b57ff7-a8ab-4c16-b0af-203a5c90b83f",
+                  "isHook": true,
+                  "skipped": false
+                }
+              ],
+              "afterHooks": [],
+              "tests": [],
+              "suites": [
+                {
+                  "uuid": "8c081e45-ffd9-406d-a2f6-aa648193b0af",
+                  "title": "留学私信咨询发送CRM",
+                  "fullFile": "C:\\Users\\86132\\Documents\\yss\\prob\\test\\crm\\crm.js",
+                  "file": "\\prob\\test\\crm\\crm.js",
+                  "beforeHooks": [
+                    {
+                      "title": "\"before all\" hook: 新增留学私信咨询发送CRM",
+                      "fullTitle": "留学部客户系统管理 添加公海信息 留学私信咨询发送CRM \"before all\" hook: 新增留学私信咨询发送CRM",
+                      "timedOut": false,
+                      "duration": 78,
+                      "state": null,
+                      "speed": null,
+                      "pass": false,
+                      "fail": false,
+                      "pending": false,
+                      "context": null,
+                      "code": "wishPrivatechatData = await info.wishPrivatechat({\n    data: {\n        m: \"\",\n        p: {\n            customerUserId: \"70000145\",\n            customerMobile: common.getRandomMobile(),\n            customerNickName: `mh-${common.getRandomStr(4)}`,\n            customerIdCard: `${common.getRandomNum(100000000,9999999999)}`,\n            extendsJson: JSON.stringify({\n                countryName: willCountryList[common.getRandomNum(0, willCountryList.length - 1)],\n                profName: '室内设计'\n            })\n        }\n    },\n    ticket: TICKET\n})\nconsole.log(wishPrivatechatData);\nconsole.log(wishPrivatechatData.params.data);",
+                      "err": {},
+                      "uuid": "b5930ca7-b65b-4dc0-8f1d-1b897d4c982a",
+                      "parentUUID": "8c081e45-ffd9-406d-a2f6-aa648193b0af",
+                      "isHook": true,
+                      "skipped": false
+                    }
+                  ],
+                  "afterHooks": [],
+                  "tests": [
+                    {
+                      "title": "查询公海线索列表",
+                      "fullTitle": "留学部客户系统管理 添加公海信息 留学私信咨询发送CRM 查询公海线索列表",
+                      "timedOut": false,
+                      "duration": 37,
+                      "state": "failed",
+                      "speed": null,
+                      "pass": false,
+                      "fail": true,
+                      "pending": false,
+                      "context": null,
+                      "code": "const res = await crm.publicListCustomer({\n    curPage: 1,\n    pageSize: 10,\n    customerType: 1,\n    receiveStatus: 2,\n    queryStartTime: 0,\n    queryEndTime: 0,\n    sortFiledStr: 'createdOn',\n    ticket: PLAT_TICKET\n}).then(res => res.result.datas)\nconst r = res.page.dataList.find(obj => obj.customerMobile == wishPrivatechatData.params.data.p.customerMobile)\n// console.log('1', wishPrivatechatData.params.data.p.customerMobile);\n// console.log('2', res.page.dataList[0].customerMobile);\n// console.log(r);",
+                      "err": {
+                        "message": "TypeError: Cannot read property 'dataList' of undefined",
+                        "estack": "TypeError: Cannot read property 'dataList' of undefined\n    at Context.<anonymous> (prob\\test\\crm\\crm.js:184:36)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)",
+                        "diff": null
+                      },
+                      "uuid": "26da188f-7672-4a00-92c3-d4d58ac93d0d",
+                      "parentUUID": "8c081e45-ffd9-406d-a2f6-aa648193b0af",
+                      "isHook": false,
+                      "skipped": false
+                    }
+                  ],
+                  "suites": [],
+                  "passes": [],
+                  "failures": [
+                    "26da188f-7672-4a00-92c3-d4d58ac93d0d"
+                  ],
+                  "pending": [],
+                  "skipped": [],
+                  "duration": 37,
+                  "root": false,
+                  "rootEmpty": false,
+                  "_timeout": 90000
+                }
+              ],
+              "passes": [],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
               "duration": 0,
-              "state": "pending",
-              "speed": null,
-              "pass": false,
-              "fail": false,
-              "pending": true,
-              "context": null,
-              "code": "",
-              "err": {},
-              "uuid": "2f2c5ae0-765a-44b0-af0f-08eb9d359075",
-              "parentUUID": "ac51604c-50dd-4f27-a4ff-eb86dd366df3",
-              "isHook": false,
-              "skipped": false
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 90000
             }
           ],
-          "suites": [],
           "passes": [],
-          "failures": [
-            "a6533fa7-6227-4b99-adf0-f5fccfa8fc25"
-          ],
-          "pending": [
-            "2f2c5ae0-765a-44b0-af0f-08eb9d359075"
-          ],
+          "failures": [],
+          "pending": [],
           "skipped": [],
-          "duration": 33,
+          "duration": 0,
           "root": false,
           "rootEmpty": false,
-          "_timeout": 2000
+          "_timeout": 90000
         }
       ],
       "passes": [],
@@ -135,7 +191,7 @@
       "version": "4.1.0"
     },
     "marge": {
-      "options": null,
+      "options": {},
       "version": "4.1.0"
     }
   }

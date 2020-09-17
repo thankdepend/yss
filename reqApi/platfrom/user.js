@@ -55,3 +55,10 @@ user.getUserList = async function (params = {}) {
         pageSize: 15
     }, params));
 };
+
+/**
+ * 保存用户参数
+ */
+user.saveUserSetup = async function (params = {}) {
+    return common.sendPost(yssCaps.user + '/auth/admin/userSetup/saveUserSetup.htm', params);
+};

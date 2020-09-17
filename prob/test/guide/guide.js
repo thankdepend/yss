@@ -9,8 +9,8 @@ describe('报考指南', async function () {
     const guide = guideManage.setupGuide();
     it('运营主管登录', async function () {
         await yssLogin.clientLogin({
-            loginName: 'xyf12',
-            password: 'ysk002',
+            // loginName: 'xyf12',
+            // password: 'ysk002',
         })
     });
     it('保存指南用户', async function () {

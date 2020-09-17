@@ -276,3 +276,14 @@ hulaquan.addFaction = async function (params = {}) {
 hulaquan.queryGroupsList = async function (params = {}) {
     return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/groups/v4/queryGroups.ws', params);
 };
+
+/** 
+ * 删除帖子
+ * @param {Object} data
+ * @param {String} data.m 
+ * @param {Object} data.p
+ * @param {Number} data.p.postID 帖子ID
+ */
+hulaquan.deletePost = async function (params = {}) {
+    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/auth/groups/post/v3/delete.ws', params);
+};

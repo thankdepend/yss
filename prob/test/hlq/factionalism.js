@@ -1,4 +1,5 @@
-const factionalismManage = require('../../help/hlq/factionalismManage')
+// const factionalismManage = require('../../help/hlq/factionalismManage')
+const Faction = require('../../help/hlq/factionalismManage')
 const yssLogin = require('../../help/yssLogin');
 const {
     saveType
@@ -8,7 +9,8 @@ const baseInfo = require('../../help/getBaseInfo');
 
 describe('圈子', async function () {
     this.timeout(TESTCASE.timeout);
-    const faction = factionalismManage.setupFactionalism();
+    const faction = new Faction();
+    // const faction = factionalismManage.setupFactionalism();
     before('运营主管登录', async function () {
         await yssLogin.platfrom({
             userType: 'yyzg'
@@ -56,10 +58,8 @@ describe('圈子', async function () {
     });
     describe('客户端发帖', async function () {
         before('登录', async function () {
-            await yssLogin.clientLogin({
-                loginName: 'xyf3',
-                password: 'ysk002',
-            })
+            await yssLogin.clientLogin()
+            // 获取呼啦圈用户信息
             await baseInfo.getHlqUserInfo();
         });
         describe('加入圈子', async function () {
@@ -76,6 +76,16 @@ describe('圈子', async function () {
             });
             it('客户端贴子列表', async function () {
                 await faction.waterfallListAssert();
+            });
+        });
+        describe('删除帖子', async function () {
+            before('', async function () {
+                await faction.deletePost();
+            });
+            it('客户端贴子列表', async function () {
+                await faction.waterfallListAssert({
+                    del: true
+                });
             });
         });
 

@@ -73,7 +73,7 @@ class Faction {
             // typeName: '',
             businessType: 2, // 业务类型
             curPage: 1,
-            pageSize: 15,
+            // pageSize: 15,
             ticket: PLAT_TICKET,
         }, params));
         // console.log('查询圈子类型列表', res);
@@ -90,7 +90,9 @@ class Faction {
             // console.log('actualA', actualA);
             expect(actualA).to.be.undefined();
         } else {
-            typeList = await this.getgroupsTypeList().then(res => res.result.datas.page.dataList);
+            typeList = await this.getgroupsTypeList({
+                typeName: this.groupTypeMain.typeName
+            }).then(res => res.result.datas.page.dataList);
             actual = typeList.find(obj => obj.typeID == this.typeID);
             let exp = {
                 typeID: this.groupTypeMain.typeID,
@@ -207,7 +209,8 @@ class Faction {
             expect(findRes1).to.be.undefined();
         } else {
             const groupList = await this.getGroupList({
-                pageSize: totalSize
+                pageSize: totalSize,
+                groupID: this.groupID
             }).then(res => res.result.datas.page.dataList);
             // console.log('圈子列表', groupList);
             const findRes = groupList.find(group => group.groupID == this.groupID);
@@ -373,8 +376,27 @@ class Faction {
         await this.updateWaterFall(res.params.data.p);
     }
 
+    /** 删除帖子 */
+    async deletePost() {
+        const delRes = await hulaquanApp.deletePost({
+            data: {
+                p: {
+                    postID: this.postID,
+                },
+                m: '',
+            },
+            ticket: TICKET,
+        });
+        await this.updateWaterFall();
+        // console.log('删除帖子', delRes);
+    }
+
     /** 更新贴子信息 */
     async updateWaterFall(params) {
+        if (!!!params) {
+            this.groupMain.postNum = 0;
+            return;
+        }
         const res = await this.waterfallList();
         // const findData = res.list.find(obj =>
         //     obj.content == params.content
@@ -420,7 +442,6 @@ class Faction {
         // 更新圈子
         this.groupMain.postNum = 1;
         this.groupMain.userNum = 1;
-
     }
 
     /** 查询贴子列表-客户端 */
@@ -440,21 +461,34 @@ class Faction {
     }
 
     /** 查询贴子列表-客户端断言 */
-    async waterfallListAssert() {
-        const waterFall = await this.waterfallList();
-        const actual = waterFall.list.find(obj => obj.postID == this.postID)
-        // console.log(this.postMain);
-        // 跳过认证标志、大学名、大学等级
-        common.isApproximatelyEqualAssert(this.postMain, actual, ['authFlag', 'simpleName', 'yearNumStr'])
+    async waterfallListAssert(del) {
+        if (del) {
+            const del = await this.waterfallList();
+            const delFind = del.list.find(obj => obj.postID == this.postID)
+            expect(delFind).to.be.undefined();
+        } else {
+            const waterFall = await this.waterfallList();
+            const actual = waterFall.list.find(obj => obj.postID == this.postID)
+            // console.log(this.postMain);
+            // 跳过认证标志、大学名、大学等级
+            common.isApproximatelyEqualAssert(this.postMain, actual, ['authFlag', 'simpleName', 'yearNumStr'])
+        }
+    }
+
+    /** 随机圈子id */
+    async _getRandomGroup() {
+        const groupList = await this.getGroupList().then(res => res.result.datas.page.dataList);
+        const groupIDList = groupList.map(obj => obj.groupID);
+
+        return groupIDList[common.getRandomNum(0, groupIDList.length - 1)];
     }
 }
 
-const factionalismManage = module.exports = {};
-
-factionalismManage.setupFactionalism = function () {
-    return new Faction();
-}
-
+// const factionalismManage = module.exports = {};
+module.exports = Faction;
+// factionalismManage.setupFactionalism = function () {
+//     return new Faction();
+// }
 
 class GroupTypeMain {
     constructor() {

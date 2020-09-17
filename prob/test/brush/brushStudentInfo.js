@@ -81,12 +81,6 @@ for (let a = 1; a <= argv.n; a++) {
             });
             console.log("用户登录", platFromInfo);
 
-            // console.log('平台登录',platFromInfo);
-            // const a = await user.getStuInfo({
-            //     ticket:PLAT_TICKET,
-            // });
-            // console.log(a);
-
             let params = {
                 tk: PLAT_TICKET,
                 firstSaveFlag: "firstSaveFlag",

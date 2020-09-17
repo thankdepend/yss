@@ -9,6 +9,9 @@ const {
     expect
 } = require('chai');
 
+/**
+ * 资讯
+ */
 class Information {
     constructor() {
         /** 资讯id */

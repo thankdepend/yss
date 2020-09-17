@@ -45,12 +45,18 @@ class HtmlReport extends Mochawesome {
         let reportPath;
         switch (this.envName) {
             case '测试':
-                reportPath = 'auto_yys';
+                reportPath = 'auto_yys_test';
+                break;
+            case '演示':
+                reportPath = 'auto_yys_pre';
                 break;
             default:
                 break;
         }
-        // Promise.all([mail.sendMail(addressee.join(','), { subject: subject, html: `<table border=0 cellspacing=10><tr><th>总用例数</th><th>通过</th><th>失败</th></tr><tr><td>${stats.passes + stats.failures}</td><td>${stats.passes}</td><td>${stats.failures}</td></tr></table><a href="http://192.168.0.23:8081/jenkins/job/autotest/job/${reportPath}/result">日志链接</a>` })]);
+        Promise.all([mail.sendMail(addressee.join(','), {
+            subject: subject,
+            html: `<table border=0 cellspacing=10><tr><th>总用例数</th><th>通过</th><th>失败</th></tr><tr><td>${stats.passes + stats.failures}</td><td>${stats.passes}</td><td>${stats.failures}</td></tr></table><a href="http://192.168.0.23:8081/jenkins/job/autotest/job/${reportPath}/result">日志链接</a>`
+        })]);
         console.log(`\n测试结束 ${moment().format('YYYY-MM-DD HH:mm:ss:SSS')} \n   total=${stats.passes + stats.failures}, passes=${stats.passes}, failures=${stats.failures}, warns=${0}`);
         console.log(`执行完成`);
         exit && exit(0);

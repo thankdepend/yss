@@ -25,6 +25,7 @@ let caps = {
     info: 'http://info.51bm.net.cn',
     public: 'http://public.51bm.net.cn',
     wish: 'http://wish.51bm.net.cn',
+    crm: 'http://crm.51bm.net.cn',
 
     name: 'test',
 };
@@ -86,8 +87,12 @@ caps.updateEnvByName = params => {
 };
 
 caps.email = {
-    service: 'qq', // 'smtp.163.com', smtp.qq.com
+    // service: 'smtp.163.com', // 'smtp.163.com', smtp.qq.com
+    // user: 'thank_depend@163.com',
+    // password: 'OAFEESVMKDCDSGEX',
+    service: 'smtp.qq.com',
     user: '1204825668@qq.com',
+    password: 'dpvxbrwcsaxoiggh',
 };
 
 module.exports = caps;

@@ -268,6 +268,7 @@ liveManage.liveMockJson = async function (params) {
         categoryName: '直播分类名称',
         picUrl: randomImg,
         categoryID: categoryIdList[common.getRandomNum(0, categoryIdList.length - 1)],
+        // startTime: common.getCurrentTime(), // 不等半小时
         startTime: common.getCurrentTimeAfter(0.5),
         anchorName: `主播${common.getRandomStr(5)}`,
         anchorId: params.anchorID,

@@ -7,17 +7,18 @@ const caps = require('../../../data/caps');
 const account = require('../../data/account');
 const audit = require('../../../reqApi/platfrom/audit')
 
+// 完善信息-审核一条龙
 describe('填写报考资料', async function () {
     this.timeout(TESTCASE.timeout);
     const fill = fillManage.setupFill();
     before('登录', async function () {
         let userInfo = {
-            loginName: 'xyf12',
-            password: 'ysk002',
+            loginName: '330342',
+            password: 'Csk001',
             device: 'm'
         }
-        loginInfo = await yysLogin.clientLogin(userInfo).then(res => res.result.datas.user);
-        // console.log('登录信息', loginInfo);
+        await yysLogin.clientLogin(userInfo);
+        // console.log('登录信息', LOGINDATA);
     });
 
     describe('新增考生', async function () {
@@ -57,6 +58,7 @@ describe('填写报考资料', async function () {
             it('审核通过', async function () {
                 // 获取psid
                 userAudit = await audit.getAuditList({
+                    auditFlag: -1,
                     idcardNo: LOGINDATA.loginName,
                     ticket: PLAT_TICKET
                 }).then(res => res.result.datas.page.dataList[0]);
@@ -64,8 +66,10 @@ describe('填写报考资料', async function () {
                 // 审核通过
                 const res = await audit.auditAction({
                     psId: userAudit.psId,
-                    auditFlag: userAudit.auditFlag,
-                    applyTicket: userAudit.applyTicket,
+                    // auditFlag: userAudit.auditFlag,
+                    // applyTicket: userAudit.applyTicket,
+                    auditFlag: 1,
+                    applyTicket: 1,
                     ticket: PLAT_TICKET
                 })
                 console.log('审核通过', res);

@@ -15,10 +15,10 @@ describe('直播', async function () {
             userType: 'yyzg'
         })
         // 关闭所有进行中的直播
-        // const IDs = await live.getliveSuperviseIdArr();
-        // for (let id of IDs) {
-        //     await live.closeVcloud(id)
-        // };
+        const IDs = await live.getliveSuperviseIdArr();
+        for (let id of IDs) {
+            await live.closeVcloud(id)
+        };
 
     });
     after('关闭直播间', async function () {

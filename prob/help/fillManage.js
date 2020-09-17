@@ -261,5 +261,6 @@ fillManage.mockExamineeJson = function (params) {
         },
         ticket: TICKET,
     }, params)
+    console.log('examineeJson', examineeJson);
     return examineeJson;
 }

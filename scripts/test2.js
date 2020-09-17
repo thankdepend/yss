@@ -1,28 +1,17 @@
-// const name = require('../../data/caps').name;
+// const {
+//     resolveContent
+// } = require("nodemailer/lib/shared");
+// const isEqual = require('lodash.isequal');
+// // console.log(_.concat([1], [3, 4]));
+// console.log(_.last([1, 2, 3]));
 
-const {
-    reject
-} = require("lodash");
-const {
-    resolveContent
-} = require("nodemailer/lib/shared");
 
-// const account = {
-//     yss_test: {
-//         prob_user1: {
-//             loginName: '330325',
-//             passWord: 'Csk001',
-//             device: 'm'
-//         },
-//         prob_user2: {
-//             loginName: '330340',
-//             passWord: 'Csk001',
-//             device: 'm'
-//         }
-//     },
-// }
-
-// module.exports = account[name];
+let obj = {
+    a: 1,
+    b: 2
+}
+obj.c = 3
+console.log(obj);
 
 // const buf1 = Buffer.alloc(10);
 // console.log('手动创建buffer', buf1);
@@ -55,13 +44,13 @@ const {
 //     console.log(values);
 // });
 
-function timeout(ms) {
-    return new Promise((resolve, reject) => {
-        setTimeout(resolve, ms, 'done');
-        setTimeout(reject, ms, 'undefined');
-    });
-}
+// function timeout(ms) {
+//     return new Promise((resolve, reject) => {
+//         setTimeout(resolve, ms, 'done');
+//         setTimeout(reject, ms, 'undefined');
+//     });
+// }
 
-timeout(100).then((value) => {
-    console.log(value);
-});
+// timeout(100).then((value) => {
+//     console.log(value);
+// });

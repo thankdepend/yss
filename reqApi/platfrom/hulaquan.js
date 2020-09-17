@@ -213,7 +213,7 @@ hulaquan.saveGroup = async function (params = {}) {
 hulaquan.getGroupList = async function (params = {}) {
     return httpRequest.sendPost(yssCaps.hulaquan + '/auth/hulaquan/groups/group/loadData.htm', Object.assign({
         curPage: 1,
-        pageSize: 15
+        // pageSize: 15
     }, params));
 };
 
@@ -247,6 +247,17 @@ hulaquan.singlenGroupData = async function (params = {}) {
         pageSize: 10
     }, params))
 };
+
+/**
+ * 删除帖子
+ * @param {Number} postID 帖子id
+ * @param {String} delPostReason 删除原因
+ * ['该帖子涉及广告信息，已被管理员删除','该帖子涉及不文明信息，已被管理员删除','该帖子涉及二维码信息，已被管理员删除','其他原因'] 
+ */
+hulaquan.deletePost = async function (params = {}) {
+    return httpRequest.sendPost(yssCaps.hulaquan + '/auth/hulaquan/groups/post/deletePost.htm?', params);
+};
+
 
 /** 
  * 解散圈子
