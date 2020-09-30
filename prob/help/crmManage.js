@@ -45,7 +45,7 @@ class Crm {
             ticket: TICKET
         });
         res.params.customerSource = 1
-        await this.updateThreaded(res.params);
+        // await this.updateThreaded(res.params);
         console.log(res);
     }
 
@@ -66,7 +66,7 @@ class Crm {
             },
             ticket: TICKET
         }).then(res => res.result.datas.page.dataList)
-        console.log('studyAbroadList', studyAbroadList);
+        // console.log('studyAbroadList', studyAbroadList);
         // studyAbroadList[common.getRandomNum(0, studyAbroadList.length - 1)].
 
         // app首页 -> 留学资讯
@@ -77,6 +77,8 @@ class Crm {
                 "m": "",
                 "p": {
                     infoID: '26655',
+                    "infoCategoryID": "6",
+                    'infoCategoryName': '留学',
                     // "infoID": studyAbroadList[common.getRandomNum(0, studyAbroadList.length - 1)].infoID,
                     // "infoTitle": studyAbroadList[common.getRandomNum(0, studyAbroadList.length - 1)].infoTitle,
                     infoTitle: '留学？？测试标题',
@@ -86,13 +88,14 @@ class Crm {
             ticket: TICKET
         }
         const addCommentRes = await info.addInfoComment(addData);
+        console.log(addCommentRes);
     }
 
     /** 
      * 新增留学私信咨询发送CRM
      */
     async wishPrivatechat() {
-        wishPrivatechatData = await info.wishPrivatechat({
+        const wishPrivatechatData = await info.wishPrivatechat({
             data: {
                 m: "",
                 p: {
@@ -101,7 +104,7 @@ class Crm {
                     customerNickName: `mh-${common.getRandomStr(4)}`,
                     customerIdCard: `${common.getRandomNum(100000000,9999999999)}`,
                     extendsJson: JSON.stringify({
-                        countryName: this.willCountryList[common.getRandomNum(0, willCountryList.length - 1)],
+                        countryName: this.willCountryList[common.getRandomNum(0, this.willCountryList.length - 1)],
                         profName: '室内设计'
                     })
                 }
@@ -117,7 +120,8 @@ class Crm {
      */
     async updateThreaded(params) {
         await this.publicListCustomer(params);
-        console.log(params);
+        console.log('更新');
+        // console.log(params);
     }
 
     /**
@@ -134,7 +138,9 @@ class Crm {
             sortFiledStr: 'createdOn',
             customerSource: params.customerSource,
             ticket: PLAT_TICKET
-        }, params)).then(res => res.result.datas)
+        }, params))
+        // .then(res => res.result.datas)
+        console.log('hh', res.params);
         console.log('www', res);
         // const r = res.page.dataList.find(obj => obj.customerRealName == proFessReq.data.p.userName)
         // console.log(r);
@@ -143,8 +149,8 @@ class Crm {
     /** 
      * 公海-线索列表 断言
      */
-    async publicListCustomerAssert() {
-        await this.publicListCustomer()
+    async publicListCustomerAssert(params) {
+        await this.publicListCustomer(params)
     }
 }
 

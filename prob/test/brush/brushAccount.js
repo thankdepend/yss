@@ -9,7 +9,7 @@ const stu = require('../../../reqApi/app/stu');
 
 const argv = require('yargs').argv;
 
-describe.skip('刷用户账号', async function () {
+describe('刷用户账号', async function () {
     this.timeout(TESTCASE.timeout);
     before('平台登录', async function () {
         platFromInfo = await yysLogin.platfrom({
@@ -20,9 +20,9 @@ describe.skip('刷用户账号', async function () {
         console.log('平台登录', platFromInfo);
     });
     it('创建考生号', async function () {
-        for (let a = 0; a <= 10; a++) {
+        for (let a = 7; a <= 8; a++) {
             let params = {
-                yongHuMing: `shuilai-c${a}`,
+                yongHuMing: `lisi${a}`,
                 yongHuKL: argv.env == 'test' ? 'Csk001' : argv.env == 'pre' ? 'Ysk002' : 123456,
                 agginYongHuKL: argv.env == 'test' ? 'Csk001' : argv.env == 'pre' ? 'Ysk002' : 123456,
                 yongHuLB: 100,

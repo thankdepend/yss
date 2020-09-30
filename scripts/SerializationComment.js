@@ -1,3 +1,9 @@
+/**
+ *
+ * =>>>>>> 粘贴json到h   生成这样的格式  * @param {*} id
+ * 
+ */
+
 const h = {
     groupID: '',
     schoolName: '',

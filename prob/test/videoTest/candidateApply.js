@@ -35,11 +35,12 @@ describe('考生报名', async function () {
         });
         before('获取学校', async function () {
             await yysLogin.clientLogin({
-                loginName: 'dingding001',
-                password: 'Ysk001',
+                loginName: 'dingding10',
+                password: 'Csk001',
                 device: 'm'
             });
-            getAsCollege = await collegeManage.returnCollege();
+            // 获取
+            getAsCollege = await collegeManage.returnCollege(18157);
             // console.log(getAsCollege);
         });
         it('搜索院校', async function () {
@@ -51,23 +52,22 @@ describe('考生报名', async function () {
                 ranValue = '',
                 riChengID = '';
             it('报名考试提交', async function () {
+                // 随机一个日程
                 for (let riCheng of getAsCollege.collegeMap.keys()) {
                     riChengArr.push(riCheng);
                 };
                 ranValue = common.getRandomNum(0, riChengArr.length - 1);
-                const profParams = {
-                    data: {
-                        m: "",
-                        p: {
-                            riChengID: riChengArr[ranValue]
-                        }
-                    },
-                    ticket: TICKET
-                }
+                console.log('riChengArr', riChengArr);
+                const profParams = common.yssAppJson({
+                    riChengID: riChengArr[ranValue]
+                });
                 riChengID = profParams.data.p.riChengID;
                 await apply.saveProf(profParams)
             });
             it('创建报名订单', async function () {
+                // 从随机的日程id找报考id
+
+                console.log('日程', getAsCollege.collegeMap.get(riChengID));
                 const baoKaoID = getAsCollege.collegeMap.get(riChengID).baoKaoID;
                 let billParams = {
                     data: {
@@ -81,10 +81,17 @@ describe('考生报名', async function () {
                     ticket: TICKET
                 }
                 await apply.addProfOrder(billParams);
+
+
             });
             // it('查询订单', async function () {
             //     await order.orderProcessCenter()
             // });
+        });
+        describe('确认考试', async function () {
+            it('在线确认', async function () {
+                await apply.getAffirmList();
+            });
         });
 
     });

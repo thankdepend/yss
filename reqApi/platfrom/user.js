@@ -50,6 +50,7 @@ user.getStuInfo = async function (params = {}) {
  * @param {Number} pageSize
  */
 user.getUserList = async function (params = {}) {
+    // 非常不幸，这个接口只能测试环境使用
     return common.sendPost(yssCaps.user + '/auth/admin/user/userListData.htm', Object.assign({
         curPage: 1,
         pageSize: 15

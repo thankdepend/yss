@@ -13,7 +13,10 @@ class CounSelor {
         this.counSelorMain = new CounSelorMain()
     }
 
-    /** 保存平台顾问用户 */
+    /** 
+     * 保存平台顾问用户
+     * @alias 为了不乱刷顾问，不做这一步
+     */
     async saveCounSelor() {
         let json = {
             yongHuMing: `ptgw-${common.getRandomStr(5)}`,

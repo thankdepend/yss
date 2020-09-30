@@ -166,9 +166,17 @@ collegeManage.setupCollege = function () {
 
 /** 初始化学校-列表已有数据 */
 collegeManage.setupCollegeByList = async function (params) {
+    console.log('学校信息', params);
     let setupCollege = new College();
     let riChengMap = new Map();
+    // 为初始化学校添加学校信息
+    Object.assign(setupCollege.collegeMain, params)
+    // 获取考点
+    // const examSiteList = await stu.getExamSite(common.yssAppJson({
+    //     xueXiaoID: setupCollege.collegeMain.xueXiaoID,
+    // })).then(res => res.result.datas.list);
 
+    // 获取日程
     const profList = await stu.getProf({
         data: {
             "p": {
@@ -179,9 +187,12 @@ collegeManage.setupCollegeByList = async function (params) {
         },
         ticket: TICKET,
     });
+
+    // console.log('日程请求头', profList.params);
     // console.log('日程列表', profList);
     // console.log('日程列表响应', profList.result.datas.list);
 
+    // 将日程存储起来（因为日程存在多个，所以用map存储）
     profList.result.datas.list.forEach(obj => {
         let riChengID = obj.riChengID;
         let riCheng = riChengMap.has(riChengID) ? riChengMap.get(riChengID) : new CollegeMap();
@@ -189,7 +200,7 @@ collegeManage.setupCollegeByList = async function (params) {
         riChengMap.set(riChengID, riCheng)
     })
     console.log(riChengMap);
-    Object.assign(setupCollege.collegeMain, params);
+
     // 合并map
     let merged = new Map([...setupCollege.collegeMap, ...riChengMap]);
     // console.log('合并map', merged);
@@ -198,18 +209,28 @@ collegeManage.setupCollegeByList = async function (params) {
     return setupCollege;
 };
 
-/** 返回1个学校实例-列表查询结果 */
+/** 
+ * 返回1个学校实例-列表查询结果
+ * @param schoolID 学校id
+ */
 collegeManage.returnCollege = async function (schoolID) {
     let argv = require('yargs').argv,
         college;
+    // 写死
     if (argv.envName == 'pre') {
-        // 写死
         college = await base.getCollegeList({
                 xueXiaoMH: schoolID ? schoolID : 45600,
                 ticket: PLAT_TICKET,
             })
             .then((res) => res.result.datas.page);
+    } else if (argv.envName == 'test') {
+        college = await base.getCollegeList({
+                xueXiaoMH: schoolID ? schoolID : 13166,
+                ticket: PLAT_TICKET,
+            })
+            .then((res) => res.result.datas.page);
     }
+
     // const num = common.getRandomNum(0, college.dataList.length - 1);
     // const newCollege = college.dataList[num];
     const newCollege = college.dataList[0];

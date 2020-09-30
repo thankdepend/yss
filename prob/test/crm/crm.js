@@ -8,18 +8,17 @@ const {
 } = require('../../../lib/index');
 const info = require('../../../reqApi/app/info');
 const argv = require('yargs').argv;
-console.log(argv);
 
 describe('留学部客户系统管理', async function () {
     this.timeout(TESTCASE.timeout);
     let willCountryList = ['英国', '韩国', '俄罗斯', '意大利', '德国', '日本', '美国', '澳大利亚', '其他'];
     before('crm登录ticket获取', async function () {
         const res = await baseInfo.getCrmTicket({
-            loginName: account[argv.env].crm2
+            loginName: account[argv.env].crm2.loginName
         });
-        console.log(res);
+        // console.log(res);
         if (argv.env == 'pre') {
-            const a = await yssLogin.platfrom({
+            const a = await yssLogin.crmLogin({
                 // loginName: 'zyzg-lx',
                 // password: 'Csk001'
                 userType: 'crm2'
@@ -37,7 +36,7 @@ describe('留学部客户系统管理', async function () {
         }
 
     });
-    describe('添加公海信息', async function () {
+    describe.skip('添加公海信息', async function () {
         // 5种场景
         before('用户登录', async function () {
             await yssLogin.clientLogin({
@@ -191,5 +190,29 @@ describe('留学部客户系统管理', async function () {
 
     });
 
+    describe('添加消息列表信息', async function () {
+        before('机构管理员登录', async function () {
+            await yssLogin.platfrom({
+                loginName: 'zyzg-mh2',
+                password: 'Csk001'
+            })
+        });
+        it('分配用户', async function () {
+            // 公海捞数据
+            const publicSea = await crm.publicListCustomer({
+                curPage: 1,
+                pageSize: 10,
+                customerType: 1,
+                receiveStatus: 2,
+                queryStartTime: 0,
+                queryEndTime: 0,
+                sortFiledStr: 'createdOn',
+                ticket: PLAT_TICKET
+            }).then(res => res)
+            console.log(publicSea);
+            // const res = await crm.distributeCustomer();
+            // console.log(res);
+        });
+    });
 
 });

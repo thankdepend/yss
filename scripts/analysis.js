@@ -1,6 +1,9 @@
-// 粘贴json到h里，格式化成
-/** id */
-// this.id = ''
+/**
+ *
+ * =>>>>>>>> 粘贴json到h里，格式化成
+ *          this.id = ''     
+ * 
+ */
 
 const h = {
     createdOn: 1598497576000,
@@ -10,61 +13,6 @@ const h = {
     shenFenZH: 'CHENADVISER',
     yongHuKL: 'vtWEsCmPkQCt2v5J59g64g==',
     yongHuMing: '艺术升212828',
-    yongHuLB: 620,
-    xueXiaoID: null,
-    kaoShiID: null,
-    kaoDianID: null,
-    zhuCeFS: null,
-    zhuCeLY: null,
-    shouJiHao: '',
-    qQ: null,
-    email: null,
-    weiXinHao: null,
-    zhuCeSJ: 1598497576000,
-    wenTi: null,
-    daAn: null,
-    xinXiYT: null,
-    kaoShengXM: null,
-    gaoKaoSF: null,
-    shouJi: null,
-    kaoShengHao: null,
-    freezeFlag: 2,
-    mobileAuthFlag: null,
-    fingerPasswd: null,
-    useFlag: 1,
-    enableFlag: 1,
-    noAuthmobileNo: null,
-    artCardFlag: null,
-    extStr: null,
-    postAuth: null,
-    idCardNoAuthFlag: null,
-    tipPhone: null,
-    kaoShiMC: '',
-    kaoDianMC: null,
-    xueXiaoMC: null,
-    sid: null,
-    authCode: null,
-    smsCode: null,
-    updateXinXiYTToNull: false,
-    notifyMobile: null,
-    idCardRegister: false,
-    passportOrGangAoRegister: true,
-    studnet: false,
-    selected: false,
-    yongHuLBStr: '平台顾问',
-    zhuCeLYDesc: '',
-    zhengJianLXDesc: '护照',
-    zhuCeSJStr: '2020-08-27 11:06:16',
-    schoolAdmin: false,
-    schoolSiteAdmin: false,
-    admin: false,
-    canEdit: true,
-    enableFlagStr: '注销',
-    useFlagStr: '禁用',
-    freezeFlagStr: '冻结',
-    shouJiHaoStr: '',
-    createdOnStr: '2020-08-27 11:06:16',
-    modifiedOnStr: '2020-08-27 11:06:16'
 }
 let s = ``
 Object.keys(h).forEach((key) => {

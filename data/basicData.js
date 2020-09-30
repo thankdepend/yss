@@ -12,6 +12,10 @@ let abroadFlagType = {
     '7': '中国区选拔考试服务类型',
 }
 
+let sysParmas = {
+    '平台顾问数据': 'USER_ADVISER_LIST'
+}
+
 basicData = module.exports = {
     province,
     abroadFlagType,

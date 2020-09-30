@@ -1,4 +1,11 @@
-const stu = require('../../reqApi/app/stu')
+const stu = require('../../reqApi/app/stu');
+const print = require('../../reqApi/app/print');
+const {
+    common
+} = require('../../lib/index');
+const {
+    object
+} = require('underscore');
 
 class Apply {
     constructor() {
@@ -33,6 +40,18 @@ class Apply {
     async getProf(params) {
         const res = await stu.getProf(params);
         console.log('专业', res);
+    }
+
+    /**
+     * 在线确认列表
+     * @param baoKaoBZ 报考标志 1未提交 2已提交 3已生效 4已关闭 5作废
+     */
+    async getAffirmList(params = {}) {
+        let queryData = Object.assign(common.yssAppJson({
+            baoKaoBZ: 3
+        }), params)
+        const res = await print.getAffirmList(queryData);
+        console.log(res);
     }
 }
 

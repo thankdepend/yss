@@ -1,5 +1,8 @@
 const httpRequest = require('../../lib/httpRequest')
 const yssCaps = require('../../data/caps');
+const {
+    common
+} = require('../../lib/index');
 
 const stu = module.exports = {};
 
@@ -14,7 +17,7 @@ const stu = module.exports = {};
  * @param {Object} data.p.pageSize
  */
 stu.seekCollege = async function (params = {}) {
-    return httpRequest.post(yssCaps.stu + '/api/m/auth/college/v4/seekCollege.htm', Object.assign({
+    return common.post(yssCaps.stu + '/api/m/auth/college/v4/seekCollege.htm', Object.assign({
         data: {
             m: "",
             p: {
@@ -34,17 +37,17 @@ stu.seekCollege = async function (params = {}) {
  * @param {Array} data.p.baoKaoBZList 报考标志，1、2、3
  */
 stu.getProf = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.stu + '/api/m/auth/apply/query_prof.htm', params);
+    return common.sendPost(yssCaps.stu + '/api/m/auth/apply/query_prof.htm', params);
 };
 
 /**
  * 报名
  * @param data
  * @param data.m 
- * @param data.p.riChengID 学校id
+ * @param data.p.riChengID 日程id
  */
 stu.saveProf = async function (params = {}) {
-    return httpRequest.post(yssCaps.stu + '/api/m/auth/apply/save_prof.htm', params);
+    return common.post(yssCaps.stu + '/api/m/auth/apply/save_prof.htm', params);
 };
 
 /**
@@ -57,7 +60,7 @@ stu.saveProf = async function (params = {}) {
  * @param {Object} data.p.sIds
  */
 stu.addProfOrder = async function (params = {}) {
-    return httpRequest.post(yssCaps.stu + '/api/m/auth/apply/add_prof_order.htm', params)
+    return common.post(yssCaps.stu + '/api/m/auth/apply/add_prof_order.htm', params)
 }
 
 /**
@@ -67,12 +70,24 @@ stu.addProfOrder = async function (params = {}) {
  * @param data.p.xueXiaoID 学校id
  */
 stu.getExamSite = async function () {
-    return httpRequest.sendPost(yssCaps.stu + '/api/m/auth/apply/query_exam_site.htm', params);
+    return common.sendPost(yssCaps.stu + '/api/m/auth/apply/query_exam_site.htm', params);
 }
 
 /**
  * 查询考点（考生用）
  */
 stu.getSchoolSite = async function () {
-    return httpRequest.sendPost(yssCaps.stu + '/api/m/auth/site/schoolSite/query.htm', params);
+    return common.sendPost(yssCaps.stu + '/api/m/auth/site/schoolSite/query.htm', params);
+}
+
+
+
+/**
+ * 在线确认
+ * @param data
+ * @param data.m 
+ * @param data.p.xueXiaoID 学校id
+ */
+stu.onlineAffirm = async function () {
+    return common.sendPost(yssCaps.stu + '/api/m/auth/apply/query_other_platform_applydata.htm', params);
 }

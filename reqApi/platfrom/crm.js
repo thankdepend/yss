@@ -35,5 +35,14 @@ crm.login = async function (params = {}) {
  * @param {String} customerSource 线索来源[1,2,3,4,5]
  */
 crm.publicListCustomer = async function (params = {}) {
-    return common.sendPost(yssCaps.crm + '/auth/org/orgCustomer/listCustomer.htm?', params);
+    return common.crmPost(yssCaps.crm + '/auth/org/orgCustomer/listCustomer.htm', params);
+};
+
+/**
+ * 分配客户
+ * @param {String} idListStr 客户id
+ * @param {String} receivedUserId 机构用户id
+ */
+crm.distributeCustomer = async function (params = {}) {
+    return common.sendPost(yssCaps.crm + '/auth/org/orgCustomer/distributeCustomer.htm', params);
 };

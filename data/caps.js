@@ -26,6 +26,9 @@ let caps = {
     public: 'http://public.51bm.net.cn',
     wish: 'http://wish.51bm.net.cn',
     crm: 'http://crm.51bm.net.cn',
+    xyk: 'http://xyk.51bm.net.cn',
+    print: 'http://print.51bm.net.cn',
+    eval: 'eval.51bm.net.cn',
 
     name: 'test',
 };

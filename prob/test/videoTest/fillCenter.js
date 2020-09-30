@@ -4,7 +4,8 @@ const {
     common
 } = require('../../../lib/index');
 
-describe.skip('视频上传', async function () {
+describe('视频上传', async function () {
+    this.timeout(TESTCASE.timeout);
     before('用户登录', async function () {
         loginAccount = {
             loginName: 'ceshiqzy',
@@ -16,17 +17,12 @@ describe.skip('视频上传', async function () {
 
     });
     it('测试上传', async function () {
-        let ossData = {
+        await fillCenter.ossUploadInfo({
             data: {
                 "m": "",
                 "p": {
                     "provinceNo": 510000
                 }
-            }
-        };
-        await fillCenter.ossUploadInfo({
-            data: {
-                ...(ossData.data)
             },
             ticket: TICKET,
         });

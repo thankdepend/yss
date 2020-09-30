@@ -31,3 +31,12 @@ base.platfromLogin = async function (params = {}) {
 base.schoolAdminLogin = async function (params = {}) {
     return httpRequest.sendPost(yssCaps.college + '/login', params);
 };
+
+/**
+ * 平台登录
+ * @param loginName 用户名
+ * @param password 密码
+ */
+base.crmAgentLogin = async function (params = {}) {
+    return httpRequest.crmPost(yssCaps.user + '/login', params);
+};
