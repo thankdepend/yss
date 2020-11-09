@@ -24,6 +24,14 @@ const account = {
             loginName: 'mh01',
             password: 'Csk001'
         },
+        zyzg:{
+            loginName: 'zyzg001',
+            password: 'Csk001'
+        },
+        cbyy: {
+            loginName: 'cbyy01',
+            password: 'Csk001'
+        },
         yyzg: {
             loginName: 'yyzg',
             password: 'csk001'
@@ -61,6 +69,14 @@ const account = {
         },
         ptzg: {
             loginName: 'mh02',
+            password: 'Ysk002'
+        },
+        zyzg:{
+            loginName: 'zyzg',
+            password: 'Ysk002'
+        },
+        cbyy:{
+            loginName: 'cbyy001',
             password: 'Ysk002'
         },
         yyzg: {

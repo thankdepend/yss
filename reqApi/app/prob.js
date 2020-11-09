@@ -23,9 +23,7 @@ prob.saveUser = async function (params = {}) {
  * @param {Number} data.p
  */
 prob.getUser = async function (params = {}) {
-    return common.post(yssCaps.prob + '/api/m/auth/wish/user/v200630/getUser.htm', {
-        ...params
-    });
+    return common.sendPost(yssCaps.prob + '/api/m/auth/wish/user/v200630/getUser.htm', params);
 };
 
 /**
@@ -119,3 +117,47 @@ prob.dynamicPriceBuy = async function (params = {}) {
         ...params
     });
 };
+
+/**
+ * 志愿商品价格页
+ * @param {Object} data
+ * @param {String} data.m
+ * @param {Object} data.p
+ * @param {Number} data.p.goodsID [6为志愿咨询，13为大礼包]
+ * @param {Number} data.p.dingDanLX [19为志愿咨询,27为大礼包]
+ */
+prob.probGoodsPrice = async function (params = {}) {
+    return common.sendPost(yssCaps.prob + '/api/m/auth/wish/goods/v200915/price.htm', params);
+};
+
+/**
+ * 志愿商品下单
+ * @param {Object} data
+ * @param {String} data.m
+ * @param {Object} data.p
+ * @param {Number} data.p.goodsID [6为志愿咨询，13为大礼包]
+ */
+prob.probGoodsPlaceOrder = async function (params = {}) {
+    return common.sendPost(yssCaps.prob + '/api/m/auth/wish/goods/v200915/buy.htm', params);
+};
+
+/**
+ * 用户各服务购买状态以及到期时间
+ * @param {Object} data
+ * @param {String} data.m
+ * @param {Object} data.p
+ */
+prob.userBuyed = async function (params = {}) {
+    return common.sendPost(yssCaps.prob + '/api/m/auth/userBuyed/v200929/userBuyed.htm', params);
+};
+
+/**
+ * 获取概率用户信息
+ * @param {Object} data
+ * @param {String} data.m
+ * @param {Object} data.p
+ */
+prob.userBuyed = async function (params = {}) {
+    return common.sendPost(yssCaps.prob + '/api/m/auth/wish/user/v200630/getUser.ws', params);
+};
+

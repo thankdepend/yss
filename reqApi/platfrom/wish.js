@@ -118,3 +118,14 @@ wish.doWishSchoolTypeList = async function (params = {}) {
 wish.deleteWishschooltype = async function (params = {}) {
     return common.sendPost(yssCaps.wish + '/auth/wish/wishschooltype/doDelete.htm', params);
 };
+
+/**
+ * 研究生留学国家列表
+ * @param {Number} countryId 国家id
+ * @param {String} countryName 国家名称
+ * @param {Number} curPage 1
+ * @param {Number} pageSize 15
+ */
+wish.loadAbroadCountryData = async function (params = {}) {
+    return common.sendPost(yssCaps.wish + '/auth/wish/abroad/abroadCountry/loadAbroadCountryData.htm', params);
+};

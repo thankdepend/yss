@@ -28,7 +28,7 @@ class College {
      * 保存院校（新增/修改）
      * @param {*} params
      */
-    async saveCollege(params) {
+    async saveCollege (params) {
         const saveCollegeInfo = await base.toAddCollege(params);
         let collParams = saveCollegeInfo.params;
 
@@ -38,12 +38,12 @@ class College {
     }
 
     /** 更新学校信息 */
-    updateCollege(params) {
+    updateCollege (params) {
         common.update(this.schoolMain, params);
     }
 
     /** 查询院校列表 */
-    async getCollegeList(params) {
+    async getCollegeList (params) {
         const res = await base.getCollegeList(params);
         console.log(res);
         return res;
@@ -52,7 +52,7 @@ class College {
     /**
      * 搜索院校（考生）
      */
-    async searchCollege(params = {}) {
+    async searchCollege (params = {}) {
         const searchContext = params.keyword || this.collegeMain.xueXiaoMC;
         const res = await stu.seekCollege({
             data: {
@@ -71,7 +71,7 @@ class College {
     /**
      * 搜索院校断言
      */
-    async searchCollegeAssert() {
+    async searchCollegeAssert () {
         const searshRes = await this.searchCollege();
 
         const searchExp = {
@@ -87,9 +87,16 @@ class College {
     }
 
     /**
+     * 保存院校专业
+     */
+    async saveBacthProfession () {
+        await base.saveBacthProfession();
+    }
+
+    /**
      * 查询院校专业列表（考生用）
      */
-    async getProfList(params) {
+    async getProfList (params) {
         const queryParams = Object.assign({
             data: {
                 "m": "",
@@ -108,7 +115,7 @@ class College {
     /**
      * 查询考试（考生用）
      */
-    async getProfList(params) {
+    async getProfList (params) {
         const queryExamSiteParams = Object.assign({
             data: {
                 "m": "",
@@ -126,7 +133,7 @@ class College {
     /**
      * 查询考点（考生用）
      */
-    async getSchoolSite(params) {
+    async getSchoolSite (params) {
         const schoolSiteParams = Object.assign({
             data: {
                 "m": "",
@@ -144,7 +151,7 @@ class College {
     /**
      * 院校常用专业库新增
      */
-    async saveProfession() {
+    async saveProfession () {
         const res = await base.saveBacthProfession();
         console.log(res);
     }
@@ -152,7 +159,7 @@ class College {
     /**
      * 查询院校常用专业库列表
      */
-    async getprofessionInfoList() {
+    async getprofessionInfoList () {
         const res = await base.getprofessionInfoList();
         return res;
     }
@@ -219,15 +226,16 @@ collegeManage.returnCollege = async function (schoolID) {
     // 写死
     if (argv.envName == 'pre') {
         college = await base.getCollegeList({
-                xueXiaoMH: schoolID ? schoolID : 45600,
-                ticket: PLAT_TICKET,
-            })
+            xueXiaoMH: schoolID ? schoolID : 45600,
+            ticket: PLAT_TICKET,
+        })
             .then((res) => res.result.datas.page);
     } else if (argv.envName == 'test') {
+        // 查院校列表
         college = await base.getCollegeList({
-                xueXiaoMH: schoolID ? schoolID : 13166,
-                ticket: PLAT_TICKET,
-            })
+            xueXiaoMH: schoolID ? schoolID : 13166,
+            ticket: PLAT_TICKET,
+        })
             .then((res) => res.result.datas.page);
     }
 
@@ -249,38 +257,38 @@ collegeManage.collegeMockJson = function (params = {}) {
         randomImage = doc[caps.name].school[common.getRandomNum(0, doc.test.school.length)];
 
     let collegeJson = Object.assign({
-            preSchoolType: 1,
-            xueXiaoMH: randomNum, // 代号
-            xueXiaoID: randomNum,
-            xueXiaoMC: `中国美术学院-${randomStr}`,
-            schoolType: 1, // 是否签约：1为签约，2为未签约
-            hotFlag: 2, // 热门标签: 1为
-            typeIds: 26,
-            provChName: "浙江省",
-            prov: 330000,
-            cityChName: "杭州市",
-            city: 330100,
-            areaChName: "下城区",
-            area: 330103,
-            classId: 5,
-            studentType: "1,2,3,4,5", // 学生类型
-            initUser: "on", // 初始化用户，on为是
-            // addr: ,
-            // applyUrl: ,
-            logo: `${randomImage}`,
-            // subSystem: ,
-            // sub: ,
-            // orderNo: ,
-            // mobileOrderNo: ,
-            // siteConfirmType: ,
-            ticket: PLAT_TICKET,
-        },
+        preSchoolType: 1,
+        xueXiaoMH: randomNum, // 代号
+        xueXiaoID: randomNum,
+        xueXiaoMC: `中国美术学院-${randomStr}`,
+        schoolType: 1, // 是否签约：1为签约，2为未签约
+        hotFlag: 2, // 热门标签: 1为
+        typeIds: 26,
+        provChName: "浙江省",
+        prov: 330000,
+        cityChName: "杭州市",
+        city: 330100,
+        areaChName: "下城区",
+        area: 330103,
+        classId: 5,
+        studentType: "1,2,3,4,5", // 学生类型
+        initUser: "on", // 初始化用户，on为是
+        // addr: ,
+        // applyUrl: ,
+        logo: `${randomImage}`,
+        // subSystem: ,
+        // sub: ,
+        // orderNo: ,
+        // mobileOrderNo: ,
+        // siteConfirmType: ,
+        ticket: PLAT_TICKET,
+    },
         params
     );
     return collegeJson;
 };
 
-function CollegeMap() {
+function CollegeMap () {
     /** 报考id */
     this.baoKaoID = '';
     /** yongHuID */

@@ -8,48 +8,51 @@ const eval = module.exports = {};
 
 
 /**
- * 获取老师信息
+ * 保存评画老师
+ * @param {Number} teacherId 老师id
+ * @param {String} teacherName 老师名称
+ * @param {String} className 类别名称
+ * @param {Number} classId 类别id
+ * @param {String} profTag 专业标签
+ * @param {String} profIds 专业id
+ * @param {Number} baseModifyTimes 修改次数(预设值)
+ * @param {Number} identityAuthFlag 认证标志
+ * @param {Number} orderNo 排序字段
+ * @param {String} introduction 老师简介
+ * @param {String} detail 老师介绍
  */
-eval.getTeacherInfo = async function (params = {}) {
-    return common.sendPost(yssCaps.eval + '/api/m/auth/teacherEvaluation/v200929/get_teacher_info.ws', params);
+eval.saveTeacher = async function (params = {}) {
+    return common.evalPost(yssCaps.eval + '/auth/user/teacher/saveTeacher.htm', params);
 };
 
 /**
- * 获取评画列表
+ * 获取评画老师类别列表
+ * @param {Number} classId 类别id 
+ * @param {String} className 类别名称
+ * @param {Number} curPage 1
+ * @param {Number} pageSize 15
  */
-eval.getEvaluationList = async function (params = {}) {
-    return common.evalPost(yssCaps.eval + '/api/m/auth/teacherEvaluation/v200929/query_evaluation.ws', params);
+eval.getClassList = async function (params = {}) {
+    return common.sendPost(yssCaps.eval + '/auth/base/profClass/loadProfClassData.htm', Object.assign({
+        curPage: 1,
+        pageSize: 15,
+    }, params));
 };
 
 /**
- * 获取打分项列表
+ * 获取评画老师列表
+ * @param {Number} teacherId 老师id
+ * @param {Number} teacherName 老师姓名
+ * @param {Number} userId 用户id 
  * @param {Number} classId 类别id
  * @param {Number} profId 专业id
+ * @param {Number} identityAuthFlag 认证标志
+ * @param {Number} curPage
+ * @param {Number} pageSize
  */
-eval.getScoreItemList = async function (params = {}) {
-    return common.evalPost(yssCaps.eval + '/api/m/auth/teacherEvaluation/v200929/query_score_item.ws', params);
-};
-
-/**
- * 提交批改
- * @param {Number} evaluationId 评画id
- * @param {String} modifyPaintUrl 评画url
- * @param {Number} score 分数
- * @param {Object} evaluationDetail 评画详情
- * @param {Object} teacherAssess 文字评论
- * @param {Object} voiceAssess 语音评论
- * @param {Array} scoreDetailList 打分列表
- * @param {Number} scoreDetailList[].itemId 打分项id
- * @param {Number} scoreDetailList[].itemName 打分项名
- * @param {Number} scoreDetailList[].score 分数
- */
-eval.submitEvaluation = async function (params = {}) {
-    return common.evalPost(yssCaps.eval + '/api/m/auth/teacherEvaluation/v200929/submit_evaluation.ws', params);
-};
-
-/**
- * 获取banner信息
- */
-eval.getEvalBanner = async function (params = {}) {
-    return common.sendPost(yssCaps.eval + '/api/m/auth/paint/v200929/get_evaluation_banner.ws', params);
+eval.getTeacherList = async function (params = {}) {
+    return common.sendPost(yssCaps.eval + '/auth/user/teacher/loadTeacherData.htm', Object.assign({
+        curPage: 1,
+        pageSize: 15,
+    }, params));
 };

@@ -99,3 +99,30 @@ guide.getJointSchoolList = async function (params = {}) {
         curPage: 1
     }, params));
 }
+
+/**
+ * 保存指南用户(新)
+ * @param {Object} data
+ * @param {String} data.m
+ * @param {Object} data.p.provinceName 省份名称
+ * @param {Object} data.p.provinceID 省份名称
+ * @param {Object} data.p.examStuType 考生类型 1为美术生、2为非美术生
+ * @param {Object} data.p.artsOrSciences 文理科id，1为文，2为理
+ */
+guide.saveGuideUserNew = async function (params = {}) {
+    return common.sendPost(yssCaps.guide + '/api/m/auth/guide/user/v201020/save.ws', params);
+}
+
+/**
+ * 校考院校列表查询
+ * @param {Object} data
+ * @param {String} data.m
+ * @param {Number} data.p.curPage 页数
+ * @param {Number} data.p.provinceId 省份id
+ * @param {Number} data.p.examStuType 考生类型 1为美术生、2为非美术生
+ * @param {Number} data.p.artsOrSciences 文理科id，1为文，2为理
+ * @param {Number} data.p.examType 考试类型 1为统考 2为校考 3为部分专业校考
+ */
+guide.querySchoolExamList = async function (params = {}) {
+    return common.sendPost(yssCaps.guide + '/api/m/auth/school/guide/v201020/query.ws', params);
+}

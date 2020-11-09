@@ -22,8 +22,8 @@ describe('考生报名', async function () {
     let college = collegeManage.setupCollege(),
         apply = applyManage.setupApply(),
         order = orderManage.setupOrder(),
-        getAsCollege;
-    before('平台登录-志愿主管', async function () {
+        getAsCollege, baoKaoID;
+    before('平台登录-平台主管', async function () {
         platFromInfo = await yysLogin.platfrom(account[caps.name].ptzg);
         console.log('平台登录', platFromInfo);
     });
@@ -35,12 +35,12 @@ describe('考生报名', async function () {
         });
         before('获取学校', async function () {
             await yysLogin.clientLogin({
-                loginName: 'dingding10',
+                loginName: 'xiongli1',
                 password: 'Csk001',
                 device: 'm'
             });
             // 获取
-            getAsCollege = await collegeManage.returnCollege(18157);
+            getAsCollege = await collegeManage.returnCollege(13166);
             // console.log(getAsCollege);
         });
         it('搜索院校', async function () {
@@ -52,23 +52,28 @@ describe('考生报名', async function () {
                 ranValue = '',
                 riChengID = '';
             it('报名考试提交', async function () {
+                // 指定日程id
+                // let appointRiChengID = 11107843;
                 // 随机一个日程
                 for (let riCheng of getAsCollege.collegeMap.keys()) {
                     riChengArr.push(riCheng);
                 };
                 ranValue = common.getRandomNum(0, riChengArr.length - 1);
                 console.log('riChengArr', riChengArr);
+
                 const profParams = common.yssAppJson({
-                    riChengID: riChengArr[ranValue]
+                    riChengID: appointRiChengID == 0 ? riChengArr[ranValue] : appointRiChengID,
+                    // riChengID: riChengArr[ranValue],
                 });
                 riChengID = profParams.data.p.riChengID;
+                // console.log('日程id',riChengID);
                 await apply.saveProf(profParams)
             });
             it('创建报名订单', async function () {
                 // 从随机的日程id找报考id
 
                 console.log('日程', getAsCollege.collegeMap.get(riChengID));
-                const baoKaoID = getAsCollege.collegeMap.get(riChengID).baoKaoID;
+                baoKaoID = getAsCollege.collegeMap.get(riChengID).baoKaoID;
                 let billParams = {
                     data: {
                         "m": "",
@@ -89,8 +94,21 @@ describe('考生报名', async function () {
             // });
         });
         describe('确认考试', async function () {
-            it('在线确认', async function () {
+            it('在线确认列表', async function () {
                 await apply.getAffirmList();
+            });
+
+            it('在线确认', async function () {
+                const res = await apply.saveAffirm({
+                    data: {
+                        m: "",
+                        p: {
+                            baoKaoIDs: [baoKaoID],
+                            xueXiaoID: getAsCollege.collegeMain.xueXiaoID,
+                        }
+                    }
+                })
+                console.log(res);
             });
         });
 

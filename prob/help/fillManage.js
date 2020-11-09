@@ -79,14 +79,14 @@ class Fill {
     }
 
     /** 完善考生信息 */
-    async saveStuinfo(params) {
+    async saveStuinfo (params) {
         const res = await user.saveStuinfo(params);
         Object.assign(this, params.data.p);
         console.log('打印保存信息', res);
     };
 
     /** 查询考生信息 */
-    async _getStuinfo(params) {
+    async _getStuinfo (params) {
         const res = await user.getStuinfo(Object.assign({
             data: {
                 "m": "",
@@ -98,7 +98,7 @@ class Fill {
     };
 
     /** 考生信息断言 */
-    async stuinfoAssert() {
+    async stuinfoAssert () {
         const stuinfo = await this._getStuinfo();
         // console.log('期望值', this);
         console.log('实际值', stuinfo);
@@ -106,7 +106,7 @@ class Fill {
     }
 
     /** 上传图片 */
-    async uploadAuth(params) {
+    async uploadAuth (params) {
         let kaoSImg = doc[caps.name].peolpe.longUrl[common.getRandomNum(0, doc.pre.peolpe.longUrl.length - 1)];
         const uploadRes = await service.uploadAuth(Object.assign({
             data: {
@@ -125,8 +125,8 @@ class Fill {
     }
 
     /** 上传身份证 */
-    async uploadShenFen(params) {
-        let shenFenImg = doc[caps.name].peolpe.longUrl[common.getRandomNum(0, doc.pre.peolpe.longUrl.length - 1)];
+    async uploadShenFen (params) {
+        let shenFenImg = doc[caps.name].peolpe.longUrl[common.getRandomNum(0, doc.pre.peolpe.shenFenUrl.length - 1)];
         const res = await service.uploadAuth(Object.assign({
             data: {
                 "p": {
@@ -146,8 +146,8 @@ class Fill {
     };
 
     /** 上传在籍证明 */
-    async uploadProve(params) {
-        let proveImg = doc[caps.name].peolpe.longUrl[common.getRandomNum(0, doc.pre.peolpe.longUrl.length - 1)];
+    async uploadProve (params) {
+        let proveImg = doc[caps.name].peolpe.longUrl[common.getRandomNum(0, doc.pre.peolpe.absenteeUrl.length - 1)];
         const res = await service.uploadAuth(Object.assign({
             data: {
                 "p": {
@@ -165,7 +165,7 @@ class Fill {
     }
 
     /** 上传审核视频 */
-    async uploadVideo(params) {
+    async uploadVideo (params) {
         let video = doc[caps.name].peolpe.longUrl[common.getRandomNum(0, doc.pre.peolpe.longUrl.length - 1)];
         const res = await service.uploadAuth(Object.assign({
             data: {
@@ -185,7 +185,7 @@ class Fill {
     }
 
     /** 确认提交 */
-    async uploadAuthCommit(params) {
+    async uploadAuthCommit (params) {
         const res = await service.uploadAuthCommit(Object.assign({
             data: {
                 "p": {
@@ -199,7 +199,7 @@ class Fill {
     }
 
     /** 资料上传查询 */
-    async queryUpload(params) {
+    async queryUpload (params) {
         const res = await service.queryUpload(Object.assign({
             data: {
                 "p": {},
@@ -228,7 +228,7 @@ fillManage.mockExamineeJson = function (params) {
             p: {
                 'zhengJianLX': 3, // 证件类型
                 'shenFenZH': `${LOGINDATA.loginName}`,
-                'kaoShengXM': `XM-${common.getRandomChineseStr(3)}`,
+                'kaoShengXM': `${common.getRandomChineseStr(3)}`,
                 'xingBie': `${['男', '女'][common.getRandomNum(0, ['男', '女'].length - 1)]}`,
                 'chuShengRQ': `${common.getCurrentDate()}`,
                 "minZu": "汉族",

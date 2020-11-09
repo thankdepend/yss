@@ -17,8 +17,8 @@ describe('完善信息', function () {
     before('登录', async function () {
         // 需要登录的用户，默认有用户，可以不传
         loginAccount = {
-            loginName: 'dingding001',
-            password: 'Ysk001',
+            loginName: 'xyf1',
+            password: 'Csk001',
             device: 'm'
         }
         loginInfo = await yssLogin.clientLogin(loginAccount).then(res => res.result.datas.user);
@@ -46,8 +46,7 @@ describe('完善信息', function () {
         let probUserNumDetail;
         before('平台登录', async function () {
             platFromInfo = await yssLogin.platfrom({
-                loginName: 'cbyy',
-                password: 'Ysk002'
+                userType: 'cbyy',
             });
             console.log('平台登录', platFromInfo);
         });

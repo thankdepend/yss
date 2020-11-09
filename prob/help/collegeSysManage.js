@@ -7,7 +7,7 @@ const {
     object
 } = require('underscore');
 
-class Apply {
+class CollegeSys {
     constructor() {
         /** 学校id */
         this.xueXiaoID = 0;
@@ -62,8 +62,8 @@ class Apply {
     }
 }
 
-const applyManage = module.exports = {};
+const collegeSysManage = module.exports = {};
 
-applyManage.setupApply = function () {
-    return new Apply();
+collegeSysManage.setupCollegeSys = function () {
+    return new CollegeSys();
 }

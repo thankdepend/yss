@@ -11,6 +11,66 @@
 // let e = JSON.parse(d)
 // console.log(e);
 
+
+// const {
+//     resolveContent
+// } = require("nodemailer/lib/shared");
+// const isEqual = require('lodash.isequal');
+// // console.log(_.concat([1], [3, 4]));
+// console.log(_.last([1, 2, 3]));
+
+
+// let obj = {
+//     a: 1,
+//     b: 2
+// }
+// obj.c = 3
+// console.log(obj);
+// let a = JSON.stringify({"p":{"evaluationId":42,"score":20,"evaluationDetail":[{"commentStr":"垃圾桶太丑","coordinateX":472,"coordinateY":358,"pointX":0.437,"pointY":0.2486,"type":1,"voiceTime":0}],"scoreDetailList":[{"itemId":5,"itemName":"自由发挥","score":3,"type":1},{"itemId":6,"itemName":"临摹","score":5,"type":1}],"teacherAssess":"差","modifyPaintUrl":"http://img.artstudent.cn/pr/2020-09-30/872000ff7779451cbcc1a3fdbbc06e8b.jpg"},"m":""})
+// console.log(JSON.parse(a)); 
+
+// const buf1 = Buffer.alloc(10);
+// console.log('手动创建buffer', buf1);
+// console.log(buf1.toJSON());
+
+// buf1.write("Buffer really rocks!");
+// console.log('buf1', buf1.toString());
+
+// const buf2 = Buffer.from('hello buffer');
+// console.log('往buffer填充字符', buf2);
+
+// const a = new Date().getTime()
+// console.log(a);
+
+// expect(undefine).to.be.undefined;
+
+// function add(x, y) {
+//     return x + y
+// }
+
+// module.exports = add;
+
+// var p1 = Promise.resolve(3);
+// var p2 = 1337;
+// var p3 = new Promise((resolve, reject) => {
+//     setTimeout(resolve, 100, 'foo');
+// });
+
+// Promise.all([p1, p2, p3]).then(values => {
+//     console.log(values);
+// });
+
+// function timeout(ms) {
+//     return new Promise((resolve, reject) => {
+//         setTimeout(resolve, ms, 'done');
+//         setTimeout(reject, ms, 'undefined');
+//     });
+// }
+
+// timeout(100).then((value) => {
+//     console.log(value);
+// });
+
 // 校考计算p0 + p1
 // const a = -1*((100 - 30)/100)*5.1
 // console.log(a + 0.45);

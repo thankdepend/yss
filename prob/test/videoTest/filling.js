@@ -6,15 +6,16 @@ const fillManage = require('../../help/fillManage');
 const caps = require('../../../data/caps');
 const account = require('../../data/account');
 const audit = require('../../../reqApi/platfrom/audit')
+const argv = require('yargs').argv;
 
 // 完善信息-审核一条龙
-describe('填写报考资料', async function () {
+describe('完善信息与审核', async function () {
     this.timeout(TESTCASE.timeout);
     const fill = fillManage.setupFill();
     before('登录', async function () {
         let userInfo = {
-            loginName: 'dingding10',
-            password: 'Csk001',
+            loginName: 'xiongli23',
+            password: argv.env == 'test' ? 'Csk001' : argv.env == 'pre' ? 'Ysk002' : 123456,
             device: 'm'
         }
         await yysLogin.clientLogin(userInfo);

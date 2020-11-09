@@ -15,3 +15,15 @@ const print = module.exports = {};
 print.getAffirmList = async function (params = {}) {
     return common.sendPost(yssCaps.print + '/api/m/auth/apply/v4/query_online_confirm.htm', params);
 }
+
+/**
+ * 在线确认
+ * @param {Object} data
+ * @param {String} data.m 
+ * @param {Object} data.p
+ * @param {Array} data.p.baoKaoIDs
+ * @param {Number} data.p.xueXiaoID
+ */
+print.saveAffirm = async function (params = {}) {
+    return common.sendPost(yssCaps.print + '/api/m/auth/apply/commit_online_confirm.htm', params);
+}

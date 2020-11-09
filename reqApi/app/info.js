@@ -101,3 +101,14 @@ info.addInfoComment = async function (params = {}) {
 info.wishPrivatechat = async function (params = {}) {
     return common.sendPost(yssCaps.info + '/api/m/auth/crmDataSource/200915/wishPrivatechat.htm', params);
 };
+
+/**
+ * 根据省份查询资讯列表
+ * @param {Object} data
+ * @param {String} data.m
+ * @param {Object} data.p
+ * @param {Number} data.p.provinceCode 省份编码
+ */
+info.queryInfoListByProvinceCode = async function (params = {}) {
+    return common.sendPost(yssCaps.info + '/api/m/info/v201020/queryInfoListByProvinceCode.htm', params);
+};

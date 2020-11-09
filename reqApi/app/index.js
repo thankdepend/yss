@@ -23,5 +23,5 @@ index.getArtCourseRecommend = async function (params = {}) {
  * @param {Object} data.p
  */
 index.queryIndex = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.index + '/api/m/index/v190528/queryIndex.ws', params);
+    return httpRequest.sendPost(yssCaps.index + '/api/m/index/v201020/queryIndex.htm', params);
 };

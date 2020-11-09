@@ -13,7 +13,7 @@ describe('报考指南', async function () {
             // password: 'ysk002',
         })
     });
-    it('保存指南用户', async function () {
+    it.skip('保存指南用户', async function () {
         await guide.saveGuideUser();
     });
     it('指南首页公告列表', async function () {

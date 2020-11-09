@@ -13,18 +13,16 @@ describe('刷用户账号', async function () {
     this.timeout(TESTCASE.timeout);
     before('平台登录', async function () {
         platFromInfo = await yysLogin.platfrom({
-            // loginName: 'mh01',
-            // password: 'Ysk002'
             userType: 'ptzg'
         });
         console.log('平台登录', platFromInfo);
     });
     it('创建考生号', async function () {
-        for (let a = 7; a <= 8; a++) {
+        for (let a = 1; a <= 100; a++) {
             let params = {
-                yongHuMing: `lisi${a}`,
-                yongHuKL: argv.env == 'test' ? 'Csk001' : argv.env == 'pre' ? 'Ysk002' : 123456,
-                agginYongHuKL: argv.env == 'test' ? 'Csk001' : argv.env == 'pre' ? 'Ysk002' : 123456,
+                yongHuMing: `haitun${a}`,
+                yongHuKL: argv.env == 'test' ? 'Csk001' : argv.env == 'pre' ? 'Ysk002' : 'Kfk001',
+                agginYongHuKL: argv.env == 'test' ? 'Csk001' : argv.env == 'pre' ? 'Ysk002' : 'Kfk001',
                 yongHuLB: 100,
                 XinXiYT: 1,
                 // xueXiaoID: 66777,
