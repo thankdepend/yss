@@ -135,3 +135,15 @@ yssLogin.regisClient = async function () {
     console.log('保存用户请求', res);
     return res;
 }
+
+/**
+ * @alias 重庆考试院登录
+ */
+yssLogin.cqSchLogin = async function (params = {}) {
+    // reqParams =  qs.stringify(reqParams);
+    const res = await base.cqPlatfromLogin(params);
+    // PLAT_TICKET = res.result.ticket;
+    // PLAT_LOGINDATA = res.result.datas.user;
+
+    return res;
+};

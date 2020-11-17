@@ -40,3 +40,12 @@ base.schoolAdminLogin = async function (params = {}) {
 base.crmAgentLogin = async function (params = {}) {
     return httpRequest.crmPost(yssCaps.user + '/login', params);
 };
+
+/**
+ * 重庆考试院登录
+ * @param loginName 用户名
+ * @param password 密码
+ */
+base.cqPlatfromLogin = async function (params = {}) {
+    return httpRequest.sendPost(yssCaps.user + '/login/65001.htm', params);
+};

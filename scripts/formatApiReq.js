@@ -4,7 +4,23 @@
  * 
  */
 
-const h = { "xueXiaoID": 13166, "kaoShiID": 12937, "zhuanYeID": 1223677, "kaoDianID": 642, "baoKaoID": 2619549, "arrangeId": 10035, "slaveFlag": 2 }
+const h = {
+    schId: 65001,
+    errPhone: '',
+    errKaoShengHao: '',
+    err: '',
+    remark: '',
+    authCodeErr: '验证码错误',
+    partPhone: '',
+    zhengJianLX: 1,
+    shenFenZH: 500101197003075879,
+    kaoShengHao: 20500102011001,
+    shouJiHao: 13221197201,
+    yongHuKL: 'Csk001',
+    agginYongHuKL: 'Csk001',
+    authCode: 'wne35',
+    sid: 'c5f1c1d6344648a284f9f0c5079ea512',
+}
 
 
 Object.keys(h).map((key) => {

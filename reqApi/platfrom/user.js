@@ -63,3 +63,34 @@ user.getUserList = async function (params = {}) {
 user.saveUserSetup = async function (params = {}) {
     return common.sendPost(yssCaps.user + '/auth/admin/userSetup/saveUserSetup.htm', params);
 };
+
+
+/**
+ * 重庆资格考考生注册
+ * @param {Number} schId 学校id
+ * @param {*} errPhone  错误手机号   
+ * @param {*} errKaoShengHao
+ * @param {*} err
+ * @param {*} remark        
+ * @param {*} authCodeErr   
+ * @param {Number} partPhone     
+ * @param {Number} zhengJianLX 证件类型   
+ * @param {Number} shenFenZH 身份证号
+ * @param {Number} kaoShengHao 考生号  
+ * @param {Number} shouJiHao 手机号     
+ * @param {String} yongHuKL 用户密码     
+ * @param {String} agginYongHuKL 确认用户密码
+ * @param {String} authCode 验证码
+ * @param {String} sid sid
+ */
+user.cqRegister = async function (params = {}) {
+    return common.sendPost(yssCaps.user + '/signUp/cqRegister.htm', params);
+};
+
+/**
+ * 获取重庆资格考考生注册页
+ */
+user.idRegisterByCq = async function (params = {}) {
+    return common.sendPost(yssCaps.user + '/signUp/idRegister/65001.htm', params);
+};
+
