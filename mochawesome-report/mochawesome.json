@@ -5,9 +5,9 @@
     "passes": 1,
     "pending": 3,
     "failures": 0,
-    "start": "2020-11-09T04:28:11.069Z",
-    "end": "2020-11-09T04:28:11.301Z",
-    "duration": 232,
+    "start": "2020-11-16T06:42:43.830Z",
+    "end": "2020-11-16T06:42:43.974Z",
+    "duration": 144,
     "testsRegistered": 4,
     "passPercent": 100,
     "pendingPercent": 75,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "625be625-087c-4ad6-9d5b-f5d14bfcaa28",
+      "uuid": "64ee05f7-6734-4b65-a938-764fb5cbfce9",
       "title": "",
       "fullFile": "",
       "file": "",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "5993babb-d614-426c-ba4e-d40eaffe4af7",
+          "uuid": "4d94c0e8-e06c-44e8-b8f9-757ebd6bb9ec",
           "title": "平台部",
           "fullFile": "C:\\Users\\86132\\Documents\\yss\\prob\\test\\version\\v1020.js",
           "file": "\\prob\\test\\version\\v1020.js",
@@ -36,7 +36,7 @@
               "title": "\"before all\" hook: 用户登录",
               "fullTitle": "平台部 \"before all\" hook: 用户登录",
               "timedOut": false,
-              "duration": 131,
+              "duration": 84,
               "state": null,
               "speed": null,
               "pass": false,
@@ -45,8 +45,8 @@
               "context": null,
               "code": "await yssLogin.clientLogin();",
               "err": {},
-              "uuid": "f28799c6-8c74-4b01-9860-591674646415",
-              "parentUUID": "5993babb-d614-426c-ba4e-d40eaffe4af7",
+              "uuid": "0b4567aa-9fcc-4328-9742-432c7d263d6d",
+              "parentUUID": "4d94c0e8-e06c-44e8-b8f9-757ebd6bb9ec",
               "isHook": true,
               "skipped": false
             }
@@ -57,35 +57,35 @@
               "title": "根据省份查询资讯列表",
               "fullTitle": "平台部 根据省份查询资讯列表",
               "timedOut": false,
-              "duration": 95,
+              "duration": 52,
               "state": "passed",
-              "speed": "slow",
+              "speed": "medium",
               "pass": true,
               "fail": false,
               "pending": false,
               "context": null,
               "code": "const qInfo = await infoApp.queryInfoListByProvinceCode({\n    data:{\n        m:'',\n        p:{\n            provinceCode:230000  \n        }\n    }\n})\nconsole.log(qInfo);\nconsole.log(qInfo.result.datas.page);",
               "err": {},
-              "uuid": "d710e7b8-0c46-40c7-9ccf-91b38cd809b8",
-              "parentUUID": "5993babb-d614-426c-ba4e-d40eaffe4af7",
+              "uuid": "31ce0b04-5bb5-4458-91fb-4e9ad0fdc58f",
+              "parentUUID": "4d94c0e8-e06c-44e8-b8f9-757ebd6bb9ec",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "d710e7b8-0c46-40c7-9ccf-91b38cd809b8"
+            "31ce0b04-5bb5-4458-91fb-4e9ad0fdc58f"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 95,
+          "duration": 52,
           "root": false,
           "rootEmpty": false,
           "_timeout": 90000
         },
         {
-          "uuid": "4501af47-a23c-474f-a51f-b0ba768e1bcb",
+          "uuid": "0c2251b3-bdfb-4d2a-8b1b-6ed5225485ec",
           "title": "C部",
           "fullFile": "C:\\Users\\86132\\Documents\\yss\\prob\\test\\version\\v1020.js",
           "file": "\\prob\\test\\version\\v1020.js",
@@ -94,7 +94,7 @@
           "tests": [],
           "suites": [
             {
-              "uuid": "84a2557c-0566-4499-97ec-affed830df2e",
+              "uuid": "6daddfd4-2b74-46ef-bfef-217de0f653ec",
               "title": "指南",
               "fullFile": "C:\\Users\\86132\\Documents\\yss\\prob\\test\\version\\v1020.js",
               "file": "\\prob\\test\\version\\v1020.js",
@@ -114,8 +114,8 @@
                   "context": null,
                   "code": "",
                   "err": {},
-                  "uuid": "1dacd629-8352-4107-9cf5-1f502f5edb26",
-                  "parentUUID": "84a2557c-0566-4499-97ec-affed830df2e",
+                  "uuid": "90ef369b-1029-41ce-a012-51fb53426d48",
+                  "parentUUID": "6daddfd4-2b74-46ef-bfef-217de0f653ec",
                   "isHook": false,
                   "skipped": false
                 },
@@ -132,8 +132,8 @@
                   "context": null,
                   "code": "",
                   "err": {},
-                  "uuid": "3440aa04-0e5a-4f7e-b4d1-b4a7e0f30dd8",
-                  "parentUUID": "84a2557c-0566-4499-97ec-affed830df2e",
+                  "uuid": "fcf23c29-629c-4886-8974-ce338fc83f1f",
+                  "parentUUID": "6daddfd4-2b74-46ef-bfef-217de0f653ec",
                   "isHook": false,
                   "skipped": false
                 },
@@ -150,8 +150,8 @@
                   "context": null,
                   "code": "",
                   "err": {},
-                  "uuid": "3ffeb047-23c6-4337-9fdf-1be7a46f338a",
-                  "parentUUID": "84a2557c-0566-4499-97ec-affed830df2e",
+                  "uuid": "1be8dd78-21cf-4d08-9178-8bed584bcf4b",
+                  "parentUUID": "6daddfd4-2b74-46ef-bfef-217de0f653ec",
                   "isHook": false,
                   "skipped": false
                 }
@@ -160,9 +160,9 @@
               "passes": [],
               "failures": [],
               "pending": [
-                "1dacd629-8352-4107-9cf5-1f502f5edb26",
-                "3440aa04-0e5a-4f7e-b4d1-b4a7e0f30dd8",
-                "3ffeb047-23c6-4337-9fdf-1be7a46f338a"
+                "90ef369b-1029-41ce-a012-51fb53426d48",
+                "fcf23c29-629c-4886-8974-ce338fc83f1f",
+                "1be8dd78-21cf-4d08-9178-8bed584bcf4b"
               ],
               "skipped": [],
               "duration": 0,

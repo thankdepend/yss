@@ -10,11 +10,12 @@ const base = require('../../../reqApi/platfrom/base');
 const doc = require('../../data/doc.json');
 const school = require('../../../reqApi/platfrom/school');
 
-
-// 网络考试院校端
+/**
+ * @alias 网络考试院校端 
+ */
 describe.skip('视频考试', async function () {
     this.timeout(TESTCASE.timeout);
-    
+
     before('平台登录-志愿主管', async function () {
         platFromInfo = await yysLogin.platfrom({
             loginName: 'mh01',
@@ -76,7 +77,7 @@ describe.skip('视频考试', async function () {
                     currentFlag: 1,
                     ticket: PLAT_TICKET
                 }).then(res => res.result.datas);
-                
+
                 const professionRes = await base.getprofessionInfoList({
                     currentFlag: 1,
                     pageSize: pageRes.page.totalSize,
@@ -113,13 +114,13 @@ describe.skip('视频考试', async function () {
                     const res = await base.saveBacthProfession(profession)
                     console.log('院校常用专业库新增', res);
                 }
-                
+
             });
             it('查询院校常用专业库列表', async function () {
                 const res = await base.getprofessionInfoList({
                     ticket: PLAT_TICKET
                 });
-                console.log('查询院校常用专业库列表',res.result.datas);
+                console.log('查询院校常用专业库列表', res.result.datas);
             });
             it('新增院校常用考点库', async function () {
                 // // 查询考点列表
@@ -154,7 +155,7 @@ describe.skip('视频考试', async function () {
                 const monthArr = ['1-2月', '3-4月', '5-6月', '7-8月', '9-10月', '11-12月']
                 const params = {
                     kaoShiMC: `${new Date().getFullYear()}年本科招生`,
-                    kaoShiYF: `${monthArr[common.getRandomNum(1,monthArr.length)]}`,
+                    kaoShiYF: `${monthArr[common.getRandomNum(1, monthArr.length)]}`,
                     kaoShiND: new Date().getFullYear()
                 };
                 const res = await school.saveExam(Object.assign({

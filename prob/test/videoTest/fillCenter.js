@@ -4,6 +4,10 @@ const {
     common
 } = require('../../../lib/index');
 
+/**
+ * @alias 视频上传
+ */
+
 describe('视频上传', async function () {
     this.timeout(TESTCASE.timeout);
     before('用户登录', async function () {

@@ -18,9 +18,9 @@ describe('刷用户账号', async function () {
         console.log('平台登录', platFromInfo);
     });
     it('创建考生号', async function () {
-        for (let a = 1; a <= 100; a++) {
+        for (let a = 1; a <= 5; a++) {
             let params = {
-                yongHuMing: `haitun${a}`,
+                yongHuMing: `haima${a}`,
                 yongHuKL: argv.env == 'test' ? 'Csk001' : argv.env == 'pre' ? 'Ysk002' : 'Kfk001',
                 agginYongHuKL: argv.env == 'test' ? 'Csk001' : argv.env == 'pre' ? 'Ysk002' : 'Kfk001',
                 yongHuLB: 100,

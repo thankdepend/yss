@@ -15,3 +15,17 @@ const examVideo = module.exports = {};
 examVideo.queryBaoKaoStatus = async function (params = {}) {
     return common.sendPost(yssCaps.examvideo + '/api/m/auth/live/stuQueue/queryBaoKaoStatus.htm', params);
 };
+
+/**
+ * 直播抽考题
+ * @param {Number} xueXiaoID 学校id
+ * @param {Number} kaoShiID 考试id
+ * @param {Number} zhuanYeID 专业id
+ * @param {Number} kaoDianID
+ * @param {Number} baoKaoID
+ * @param {Number} arrangeId
+ * @param {Number} slaveFlag
+ */
+examVideo.getChannel = async function (params = {}) {
+    return common.sendPost(yssCaps.examvideo + '/api/m/auth/live/arrangement/getChannel.htm', params);
+};

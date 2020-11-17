@@ -186,11 +186,11 @@ collegeManage.setupCollegeByList = async function (params) {
     // 获取日程
     const profList = await stu.getProf({
         data: {
-            "p": {
-                "xueXiaoID": setupCollege.collegeMain.xueXiaoID,
-                "baoKaoBZList": [1, 2, 3],
+            p: {
+                xueXiaoID: setupCollege.collegeMain.xueXiaoID,
+                baoKaoBZList: [1, 2, 3],
             },
-            "m": ""
+            m: ""
         },
         ticket: TICKET,
     });

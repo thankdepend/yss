@@ -32,6 +32,7 @@ let caps = {
     advert: 'http://advert.51bm.net.cn',
     examvideo: 'http://examvideo.51bm.net.cn',
     sys: 'http://sys.51bm.net.cn',
+    examlog: 'http://examlog.51bm.net.cn',
 
     name: 'test',
 };
@@ -93,12 +94,12 @@ caps.updateEnvByName = params => {
 };
 
 caps.email = {
-    // service: 'smtp.163.com', // 'smtp.163.com', smtp.qq.com
-    // user: 'thank_depend@163.com',
-    // password: 'OAFEESVMKDCDSGEX',
-    service: 'smtp.qq.com',
-    user: '1204825668@qq.com',
-    password: 'dpvxbrwcsaxoiggh',
+    service: 'smtp.163.com',
+    user: 'thank_depend@163.com',
+    password: 'OAFEESVMKDCDSGEX',
+    // service: 'smtp.qq.com',
+    // user: '1204825668@qq.com',
+    // password: 'dpvxbrwcsaxoiggh',
 };
 
 module.exports = caps;

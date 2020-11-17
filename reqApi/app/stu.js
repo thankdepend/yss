@@ -69,14 +69,14 @@ stu.addProfOrder = async function (params = {}) {
  * @param data.m 
  * @param data.p.xueXiaoID 学校id
  */
-stu.getExamSite = async function () {
+stu.getExamSite = async function (params = {}) {
     return common.sendPost(yssCaps.stu + '/api/m/auth/apply/query_exam_site.htm', params);
 }
 
 /**
  * 查询院校考点(考生用)
  */
-stu.getSchoolSite = async function () {
+stu.getSchoolSite = async function (params = {}) {
     return common.sendPost(yssCaps.stu + '/api/m/auth/site/schoolSite/query.htm', params);
 }
 
@@ -88,7 +88,7 @@ stu.getSchoolSite = async function () {
  * @param data.m 
  * @param data.p.xueXiaoID 学校id
  */
-stu.onlineAffirm = async function () {
+stu.onlineAffirm = async function (params = {}) {
     return common.sendPost(yssCaps.stu + '/api/m/auth/apply/query_other_platform_applydata.htm', params);
 }
 
@@ -108,7 +108,7 @@ stu.onlineAffirm = async function () {
  * @param {String} data.p.videoUrl 视频地址
  * @param {Object} data.p.shootArea 录制视频所在地区
  */
-stu.commitVideo = async function () {
+stu.commitVideo = async function (params = {}) {
     return common.sendPost(yssCaps.stu + '/api/m/auth/video/commitVideo.ws', params);;
 }
 
@@ -118,7 +118,7 @@ stu.commitVideo = async function () {
  * @param {String} data.m 
  * @param {Object} data.p
  */
-stu.queryExamProf = async function () {
+stu.queryExamProf = async function (params = {}) {
     return common.sendPost(yssCaps.stu + '/api/m/auth/apply/query_exam_prof.htm', params);
 }
 
@@ -131,7 +131,7 @@ stu.queryExamProf = async function () {
  * @param {Object} data.p.examId 考试id
  * @param {Object} data.p.baoKaoID 报考id
  */
-stu.queryExamPromise = async function () {
+stu.queryExamPromise = async function (params = {}) {
     return common.sendPost(yssCaps.stu + '/api/m/auth/apply/query_exam_promise.htm', params);
 }
 
@@ -145,7 +145,7 @@ stu.queryExamPromise = async function () {
  * @param {Number} data.p.examPointId 考试得分id
  * @param {Number} data.p.profId 专业id
  */
-stu.queryExamNotice = async function () {
+stu.queryExamNotice = async function (params = {}) {
     return common.sendPost(yssCaps.stu + '/api/m/auth/apply/query_exam_notice.htm', params);
 }
 
@@ -159,12 +159,12 @@ stu.queryExamNotice = async function () {
  * @param {Number} data.p.baoKaoId 报考id
  * @param {Number} data.p.simulation 访真？
  */
-stu.querySubjectVideoInfo = async function () {
+stu.querySubjectVideoInfo = async function (params = {}) {
     return common.sendPost(yssCaps.stu + '/api/m/auth/video/querySubjectVideoInfo.htm', params);
 }
 
 /**
- * 保存考生考试状态
+ * 变更考生考试状态
  * @param {Object} data
  * @param {String} data.m 
  * @param {Object} data.p 
@@ -172,7 +172,7 @@ stu.querySubjectVideoInfo = async function () {
  * @param {Number} data.p.baoKaoId 报考id
  * @param {Number} data.p.examStatus 考试状态
  */
-stu.saveStudentExamStatus = async function () {
+stu.saveStudentExamStatus = async function (params = {}) {
     return common.sendPost(yssCaps.stu + '/api/m/auth/student/log/saveStudentExamStatus.htm', params);
 }
 
@@ -186,7 +186,7 @@ stu.saveStudentExamStatus = async function () {
  * @param {Number} data.p.riChengId 日程id
  * @param {Number} data.p.updateNum 更新数
  */
-stu.querySubjectVideoInfo = async function () {
+stu.querySubjectVideoInfo = async function (params = {}) {
     return common.sendPost(yssCaps.stu + '/api/m/auth/video/saveCount.htm', params);
 }
 
@@ -199,7 +199,7 @@ stu.querySubjectVideoInfo = async function () {
  * @param {Number} data.p.examId 考试id
  * @param {Number} data.p.examPointId 考点id
  */
-stu.queryApplyNotice = async function () {
+stu.queryApplyNotice = async function (params = {}) {
     return common.sendPost(yssCaps.stu + '/api/m/auth/apply/query_apply_notice.htm', params);
 }
 
@@ -213,7 +213,7 @@ stu.queryApplyNotice = async function () {
  * @param {Number} data.p.kaoShiID 考点id
  * @param {Number} data.p.xueXiaoID 学校id
  */
-stu.queryExamSchedule = async function () {
+stu.queryExamSchedule = async function (params = {}) {
     return common.sendPost(yssCaps.stu + '/api/m/auth/apply/query_exam_schedule.htm', params);
 }
 
@@ -227,7 +227,7 @@ stu.queryExamSchedule = async function () {
  * @param {Number} data.p.kaoShiID 考点id
  * @param {Number} data.p.xueXiaoID 学校id
  */
-stu.queryOtherPlatformApplyData = async function () {
+stu.queryOtherPlatformApplyData = async function (params = {}) {
     return common.sendPost(yssCaps.stu + '/api/m/auth/apply/query_other_platform_applydata.htm', params);
 }
 
@@ -250,7 +250,7 @@ stu.queryOtherPlatformApplyData = async function () {
  * @param {*} subjectCode
  * @param {*} subjectName
  */
-stu.attestPhoto = async function () {
+stu.attestPhoto = async function (params = {}) {
     return common.sendPost(yssCaps.stu + '/api/m/auth/video/attestPhoto.ws', params);
 }
 
@@ -279,7 +279,7 @@ stu.attestPhoto = async function () {
  * @param {*} subjectCode
  * @param {*} subjectName
  */
-stu.commitVideo = async function () {
+stu.commitVideo = async function (params = {}) {
     return common.sendPost(yssCaps.stu + '/api/m/auth/video/commitVideo.ws', params);
 }
 
@@ -290,7 +290,7 @@ stu.commitVideo = async function () {
  * @param {Number} riChengId 日程id
  * @param {Number} esId 科目id
  */
-stu.checkAllowToExam = async function () {
+stu.checkAllowToExam = async function (params = {}) {
     return common.sendPost(yssCaps.stu + '/api/m/auth/video/check_allow_to_exam.htm', params);
 }
 
@@ -300,8 +300,41 @@ stu.checkAllowToExam = async function () {
  * @param {String} data.p
  * @param {Object} data.m 
  */
-stu.queryExamProf = async function () {
+stu.queryExamProf = async function (params = {}) {
     return common.sendPost(yssCaps.stu + '/api/m/auth/apply/query_exam_prof.ws', params);
+}
+
+/**
+ * 允许选择科目列表（选考模式使用）
+ * @param {Object} data
+ * @param {String} data.p
+ * @param {Object} data.m 
+ * @param {Number} riChengID 日程id
+ */
+stu.allowChooseSubject = async function (params = {}) {
+    return common.sendPost(yssCaps.stu + '/api/m/auth/video/allow_choose_subject.htm', params);
+}
+
+/**
+ * 保存选择科目
+ * @param {Object} data
+ * @param {String} data.p
+ * @param {Object} data.m 
+ * @param {Number} riChengID 日程id
+ */
+stu.saveSubjectChoose = async function (params = {}) {
+    return common.sendPost(yssCaps.stu + '/api/m/auth/video/save_subject_choose.htm', params);
+}
+
+/**
+ * 考生视频科目列表（正式考）
+ * @param {Object} data
+ * @param {String} data.p
+ * @param {Object} data.m 
+ * @param {Number} riChengID 日程id
+ */
+stu.saveSubjectChoose = async function (params = {}) {
+    return common.sendPost(yssCaps.stu + '/api/m/auth/video/stu_video_subject_list.htm', params);
 }
 
 

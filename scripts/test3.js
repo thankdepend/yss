@@ -1,20 +1,9 @@
-// const res = Math.atan((231-380)/380 * 5.1)
-// console.log(res);
+let webdriver = require('selenium-webdriver');
+let By = webdriver.By;
+let driver = new webdriver.Builder()
+    .forBrowser('chrome')
+    .build();
+driver.get('http://www.baidu.com');
 
-// let p = {
-//     archiveRank:1
-// }
-// function a(){
-//     if(p.archiveRank != undefined && p.archiveRank != null){
-//         console.log('succ');
-//     }else{
-//         console.log(2);
-//     }
-// }
-
-// a()
-
-
-// let a = 750*0.6+50/100*750*0.4
-// console.log(a);
-console.log(null);
+kw_input = driver.findElement(By.id("kw")).sendKeys("csdn itmeng");
+su_button = driver.findElement(By.id("su")).click();
