@@ -1,4 +1,4 @@
-const httpRequest = require('../../lib/httpRequest')
+const { common } = require('../../lib/index')
 const yssCaps = require('../../data/caps');
 
 const base = module.exports = {};
@@ -8,7 +8,7 @@ const base = module.exports = {};
  * @param {*} params 
  */
 base.toAddCollege = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.base + '/auth/admin/college/toAddCollege.htm', params);
+    return common.sendPost(yssCaps.base + '/auth/admin/college/toAddCollege.htm', params);
 };
 
 
@@ -16,7 +16,7 @@ base.toAddCollege = async function (params = {}) {
  * 编辑院校
  */
 base.doEditCollege = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.base + '/auth/admin/college/doEditCollege.htm', params);
+    return common.sendPost(yssCaps.base + '/auth/admin/college/doEditCollege.htm', params);
 };
 
 
@@ -29,7 +29,7 @@ base.doEditCollege = async function (params = {}) {
  * @param pageSize 
  */
 base.getCollegeList = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.base + '/auth/admin/college/collegeListData.htm', Object.assign({
+    return common.sendPost(yssCaps.base + '/auth/admin/college/collegeListData.htm', Object.assign({
         curPage: 1,
         pageSize: 15
     }, params));
@@ -40,14 +40,14 @@ base.getCollegeList = async function (params = {}) {
  * 获取院校专业列表
  */
 base.getGbProfClass = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.base + '/auth/school/profession/getGbProfClass.htm', params);
+    return common.sendPost(yssCaps.base + '/auth/school/profession/getGbProfClass.htm', params);
 };
 
 /**
  * 获取志愿专业编号
  */
 base.getZhuanYeBH = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.base + '/auth/school/profession/getZhuanYeBH.htm', params);
+    return common.sendPost(yssCaps.base + '/auth/school/profession/getZhuanYeBH.htm', params);
 };
 
 /**
@@ -62,7 +62,7 @@ base.getZhuanYeBH = async function (params = {}) {
  */
 
 base.saveBacthProfession = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.base + '/auth/school/profession/saveBacthProfession.htm', params);
+    return common.sendPost(yssCaps.base + '/auth/school/profession/saveBacthProfession.htm', params);
 };
 
 /**
@@ -74,48 +74,9 @@ base.saveBacthProfession = async function (params = {}) {
  * @param {Number} pageSize  每页展示
  */
 base.getprofessionInfoList = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.base + '/auth/school/profession/professionInfoData.htm', params);
+    return common.sendPost(yssCaps.base + '/auth/school/profession/professionInfoData.htm', params);
 };
 
-/**
- * 查看考试专业列表
- * @param {number} kaoShiID 考试id 
- * @param {Array} zhuanYeID 专业id  
- * @param {number} curPage 页数
- * @param {number} pageSize 每页数
- */
-base.getExamProfList = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.base + '/auth/school/examProf/examProfListData.htm', Object.assign({
-        curPage: 1,
-        pageSize: 15
-    }, params));
-};
-
-/**
- * 查看考试列表
- * @param {number} kaoShiND 考试年份 
- * @param {Array} sortList []
- * @param {number} curPage 页数
- * @param {number} pageSize 每页数
- */
-base.getExamList = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.base + '/auth/school/exam/examListData.htm', Object.assign({
-        curPage: 1,
-        pageSize: 15
-    }, params));
-};
-
-
-/**
- * 查看报名时间列表
- * @param {number} kaoShiID 考试id 
- * @param {Array} kaoDianID 考点id  
- * @param {number} curPage 页数
- * @param {number} pageSize 每页数
- */
-base.getsiteDataList = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.base + '/auth/school/sitemanager/siteData.htm', params);
-};
 
 /**
  * 保存考试时间
@@ -144,7 +105,7 @@ base.getsiteDataList = async function (params = {}) {
 
 base.saveExamSchedule = async function (params = {}) {
     // return httpRequest.sendPost({api: yssCaps.login_url + '/' + 'login', body: params});
-    return httpRequest.sendPost(yssCaps.school + '/auth/school/examschedule/saveExamSchedule.htm', params);
+    return common.sendPost(yssCaps.school + '/auth/school/examschedule/saveExamSchedule.htm', params);
 };
 
 /**
@@ -155,7 +116,7 @@ base.saveExamSchedule = async function (params = {}) {
  * @param {number} pageSize 每页数
  */
 base.getExamScheduleList = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.base + '/auth/school/examschedule/examScheduleData.htm', params);
+    return common.sendPost(yssCaps.base + '/auth/school/examschedule/examScheduleData.htm', params);
 };
 
 /**
@@ -175,7 +136,7 @@ base.getExamScheduleList = async function (params = {}) {
  * @param {Number} checkType
  */
 base.saveSite = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.base + '/auth/school/site/doAddSite.htm', params);
+    return common.sendPost(yssCaps.base + '/auth/school/site/doAddSite.htm', params);
 };
 
 /**
@@ -185,23 +146,10 @@ base.saveSite = async function (params = {}) {
  * @param {*} curPage 1
  */
 base.getsiteInfoList = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.base + '/auth/school/site/siteInfoData.htm', Object.assign({
+    return common.sendPost(yssCaps.base + '/auth/school/site/siteInfoData.htm', Object.assign({
         curPage: 1,
         pageSize: 15
     }, params));
 };
 
 
-/**
- * 保存考试
- * @param {*} kaoShiID 考试id 
- * @param {*} kaoShiMC 考试名称
- * @param {*} kaoShiND 考试年份
- * @param {*} kaoShiYF 考试月份
- * @param {*} xianKaoZYS 限考志愿数
- * @param {*} zhiYuanShu 志愿专业数
- * @param {*} kaiTongBZ 开通标志 1为开通2为不开通
- */
-base.saveExam = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.base + '/auth/school/exam/saveExam.htm', params);
-};

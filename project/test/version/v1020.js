@@ -209,7 +209,7 @@ describe.skip('C部', async function () {
 
     });
 
-    describe.only('指南', async function () {
+    describe('指南', async function () {
         it('保存指南用户（旧）', async function () {
             const res = await guideApp.saveGuideUser({
                 data: {

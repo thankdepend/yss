@@ -82,7 +82,7 @@ class Fill {
     async saveStuinfo (params) {
         const res = await user.saveStuinfo(params);
         Object.assign(this, params.data.p);
-        console.log('打印保存信息', res);
+        // console.log('打印保存信息', res);
     };
 
     /** 查询考生信息 */
@@ -101,7 +101,7 @@ class Fill {
     async stuinfoAssert () {
         const stuinfo = await this._getStuinfo();
         // console.log('期望值', this);
-        console.log('实际值', stuinfo);
+        // console.log('实际值', stuinfo);
         common.isApproximatelyEqualAssert(this, stuinfo);
     }
 
@@ -121,7 +121,7 @@ class Fill {
             },
             ticket: TICKET,
         }, params));
-        console.log('上传结果', uploadRes);
+        // console.log('上传结果', uploadRes);
     }
 
     /** 上传身份证 */
@@ -142,7 +142,7 @@ class Fill {
             },
             ticket: TICKET,
         }, params));
-        console.log('上传身份证', res);
+        // console.log('上传身份证', res);
     };
 
     /** 上传在籍证明 */
@@ -161,7 +161,7 @@ class Fill {
             },
             ticket: TICKET,
         }, params));
-        console.log('上传在籍证明', res);
+        // console.log('上传在籍证明', res);
     }
 
     /** 上传审核视频 */
@@ -181,7 +181,7 @@ class Fill {
             },
             ticket: TICKET,
         }, params));
-        console.log('上传视频', res);
+        // console.log('上传视频', res);
     }
 
     /** 确认提交 */
@@ -195,7 +195,7 @@ class Fill {
             },
             ticket: TICKET
         }, params))
-        console.log('确认提交', res);
+        // console.log('确认提交', res);
     }
 
     /** 资料上传查询 */
@@ -207,7 +207,7 @@ class Fill {
             },
             ticket: TICKET
         }, params))
-        console.log('查询提交', res);
+        // console.log('查询提交', res);
     }
 
 
@@ -261,6 +261,6 @@ fillManage.mockExamineeJson = function (params) {
         },
         ticket: TICKET,
     }, params)
-    console.log('examineeJson', examineeJson);
+    // console.log('examineeJson', examineeJson);
     return examineeJson;
 }

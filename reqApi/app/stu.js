@@ -150,14 +150,14 @@ stu.queryExamNotice = async function (params = {}) {
 }
 
 /**
- * 查询科目视频信息列表
+ * 查询科目列表
  * @param {Object} data
  * @param {String} data.m 
  * @param {Object} data.p 
  * @param {Number} data.p.riChengId 日程id
  * @param {Number} data.p.riChengID 日程id(小鱼也是这么传的....)
  * @param {Number} data.p.baoKaoId 报考id
- * @param {Number} data.p.simulation 访真？
+ * @param {Number} data.p.simulation 是否为模拟 0为否，1为是
  */
 stu.querySubjectVideoInfo = async function (params = {}) {
     return common.sendPost(yssCaps.stu + '/api/m/auth/video/querySubjectVideoInfo.htm', params);
@@ -170,7 +170,7 @@ stu.querySubjectVideoInfo = async function (params = {}) {
  * @param {Object} data.p 
  * @param {Number} data.p.esId 
  * @param {Number} data.p.baoKaoId 报考id
- * @param {Number} data.p.examStatus 考试状态
+ * @param {Number} data.p.examStatus 考试状态{100:'进考场',200:'',}
  */
 stu.saveStudentExamStatus = async function (params = {}) {
     return common.sendPost(yssCaps.stu + '/api/m/auth/student/log/saveStudentExamStatus.htm', params);

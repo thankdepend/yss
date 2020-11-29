@@ -12,18 +12,19 @@ const argv = require('yargs').argv;
  * @alias 完善信息-审核一条龙
  */
 
-for (let i = 30; i <= 100; i++) {
+for (let i = 1; i <= 100; i++) {
     describe('完善信息与审核', async function () {
         this.timeout(TESTCASE.timeout);
         const fill = fillManage.setupFill();
         before('登录', async function () {
             let userInfo = {
-                loginName: `xiongli${i}`,
-                password: argv.env == 'test' ? 'Csk001' : argv.env == 'pre' ? 'Ysk002' : 123456,
+                loginName: `hexie${i}`,
+                // loginName: '532501199802040320',
+                password: argv.env == 'test' ? 'Csk001' : argv.env == 'pre' ? 'Ysk002' : 'Kfk001',
                 device: 'm'
             }
             await yysLogin.clientLogin(userInfo);
-            // console.log('登录信息', LOGINDATA);
+            console.log('登录信息', LOGINDATA);
         });
 
         describe('新增考生', async function () {
@@ -58,7 +59,7 @@ for (let i = 30; i <= 100; i++) {
                 let userAudit;
                 before('客服主管登录', async function () {
                     platFromInfo = await yysLogin.platfrom(account[caps.name].kf);
-                    console.log('平台登录', platFromInfo);
+                    // console.log('平台登录', platFromInfo);
                 });
                 it('审核通过', async function () {
                     // 获取psid
@@ -67,7 +68,7 @@ for (let i = 30; i <= 100; i++) {
                         idcardNo: LOGINDATA.loginName,
                         ticket: PLAT_TICKET
                     }).then(res => res.result.datas.page.dataList[0]);
-                    console.log('审核信息', userAudit);
+                    // console.log('审核信息', userAudit);
                     // 审核通过
                     const res = await audit.auditAction({
                         psId: userAudit.psId,
@@ -77,7 +78,10 @@ for (let i = 30; i <= 100; i++) {
                         applyTicket: 1,
                         ticket: PLAT_TICKET
                     })
-                    console.log('审核通过', res);
+                    // console.log('审核通过', res);
+                    if (res.result.message === '操作成功') {
+                        console.log(i);
+                    }
                 });
             });
         });

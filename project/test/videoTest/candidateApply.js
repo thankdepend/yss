@@ -9,6 +9,7 @@ const collegeManage = require('../../help/collegeManage');
 const applyManage = require('../../help/applyManage');
 const orderManage = require('../../help/orderManage');
 const caps = require('../../../data/caps');
+const { update } = require('../../../lib/common');
 const argv = require('yargs').argv;
 
 /**
@@ -33,7 +34,7 @@ describe('考生报名', async function () {
         });
         before('获取学校', async function () {
             await yssLogin.clientLogin({
-                loginName: 'haima4',
+                loginName: 'haitun100',
                 password: 'Csk001',
                 device: 'm'
             });
@@ -53,6 +54,8 @@ describe('考生报名', async function () {
             it('报名考试提交', async function () {
                 // 指定日程id,不指定时设置为0
                 let appointRiChengID = 11107838;
+                // await collegeManage.updateCollegeRiCheng(appointRiChengID)
+
                 // 随机一个日程
                 for (let riCheng of getAsCollege.collegeMap.keys()) {
                     riChengArr.push(riCheng);
@@ -90,7 +93,7 @@ describe('考生报名', async function () {
             //     await order.orderProcessCenter()
             // });
         });
-        describe('确认考试', async function () {
+        describe.skip('确认考试', async function () {
             it('在线确认列表', async function () {
                 await apply.getAffirmList();
             });

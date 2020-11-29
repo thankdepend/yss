@@ -9,24 +9,26 @@ const platfromProb = require('../../../reqApi/platfrom/prob');
 const base = require('../../../reqApi/platfrom/base');
 const doc = require('../../data/doc.json');
 const school = require('../../../reqApi/platfrom/school');
+const collegeManage = require('../../help/collegeManage');
+const { collect } = require('underscore');
 
 /**
  * @alias 网络考试院校端 
  */
-describe.skip('视频考试', async function () {
+describe('网络考试院校端', async function () {
     this.timeout(TESTCASE.timeout);
-
-    before('平台登录-志愿主管', async function () {
-        platFromInfo = await yysLogin.platfrom({
-            loginName: 'mh01',
-            password: 'Csk001'
-        });
-        console.log('平台登录', platFromInfo);
-    });
-    describe('报名', async function () {
+    let college = collegeManage.setupCollege();
+    // before('平台登录-志愿主管', async function () {
+    //     platFromInfo = await yysLogin.platfrom({
+    //         loginName: 'mh01',
+    //         password: 'Csk001'
+    //     });
+    //     console.log('平台登录', platFromInfo);
+    // });
+    describe('设置报名', async function () {
         let addCollegeInfo;
         // 不要刷学校！不要刷学校！不要刷学校！
-        before.skip('新增报名院校', async function () {
+        it.skip('新增报名院校', async function () {
             const randomStr = common.getRandomStr(6),
                 randomNum = common.getRandomNum(12000, 99999),
                 randomImage = doc.test.school[common.getRandomNum(0, doc.test.school.length)];
@@ -65,13 +67,16 @@ describe.skip('视频考试', async function () {
                 // let admin = {loginName:`${addCollegeInfo.params.xueXiaoID}`,password:`Yss${addCollegeInfo.params.xueXiaoID}`}
                 // 指定用户
                 let admin = {
-                    loginName: '11122',
-                    password: 'Yss11122'
+                    loginName: '45600',
+                    password: 'Yss45600'
                 }
                 const res = await yysLogin.schoolAdmin(admin)
                 console.log(res);
             });
-            it('院校常用专业库新增', async function () {
+            it('添加院校考试专业', async function () {
+                await college.autoAddExamProf()
+            });
+            it.skip('院校常用专业库新增', async function () {
                 // 取到总条数
                 const pageRes = await base.getprofessionInfoList({
                     currentFlag: 1,
@@ -116,13 +121,13 @@ describe.skip('视频考试', async function () {
                 }
 
             });
-            it('查询院校常用专业库列表', async function () {
+            it.skip('查询院校常用专业库列表', async function () {
                 const res = await base.getprofessionInfoList({
                     ticket: PLAT_TICKET
                 });
                 console.log('查询院校常用专业库列表', res.result.datas);
             });
-            it('新增院校常用考点库', async function () {
+            it.skip('新增院校常用考点库', async function () {
                 // // 查询考点列表
                 // const siteInfo = await school.getsiteInfoList({ticket: PLAT_TICKET});
                 // console.log('查询院校常用考点库列表',siteInfo);
@@ -144,14 +149,14 @@ describe.skip('视频考试', async function () {
                 const res = await school.saveSite(kdParam)
                 console.log('新增院校常用考点库', res);
             });
-            it('查询院校常用考点库列表', async function () {
+            it.skip('查询院校常用考点库列表', async function () {
                 const res = await school.getsiteInfoList({
                     ticket: PLAT_TICKET
                 });
                 console.log('查询院校常用考点库列表', res);
             });
             // 视情加考试
-            it.skip('保存考试', async function () {
+            it.skip('保存考试（招考层次）', async function () {
                 const monthArr = ['1-2月', '3-4月', '5-6月', '7-8月', '9-10月', '11-12月']
                 const params = {
                     kaoShiMC: `${new Date().getFullYear()}年本科招生`,
@@ -160,17 +165,26 @@ describe.skip('视频考试', async function () {
                 };
                 const res = await school.saveExam(Object.assign({
                     // kaoShiID: , //编辑要传
-                    kaoShiMC: '2020年本科招生',
-                    kaoShiND: 2020, //  考试年度
+                    kaoShiMC: '2021年测试考试',
+                    kaoShiND: 2021, //  考试年度
                     kaoShiYF: '1-2月', // 考试月份
-                    xianKaoZYS: 0,
-                    zhiYuanShu: 0,
+                    xianKaoZYS: 0, // 限考志愿数
+                    zhiYuanShu: 0, // 专业志愿限报数
                     kaiTongBZ: 1, // 1为开通
                     ticket: PLAT_TICKET
                 }, params));
                 console.log('保存考试', res);
             });
-            it('查询考试列表', async function () {
+            it.skip('查询专业列表', async function () {
+                profList = await base.getprofessionInfoList({
+                    year: new Date().getFullYear(),
+                    currentFlag: 1,
+                    zhuanYeMC: '',
+                    curPage: 1,
+                    pageSize: 15,
+                });
+            });
+            it.skip('查询考试列表', async function () {
                 const res = await school.getExamList({
                     kaoShiND: new Date().getFullYear(),
                     sortList: [],
@@ -178,7 +192,7 @@ describe.skip('视频考试', async function () {
                 });
                 console.log('查询考试列表', res);
             });
-            it('保存考试专业', async function () {
+            it.skip('保存考试专业', async function () {
                 const res = await school.saveExamProfAdd({
                     // kaoShiID: 12926, // 编辑要传
                     profType: 1,
@@ -188,7 +202,7 @@ describe.skip('视频考试', async function () {
                 });
                 console.log('保存考试专业', res);
             });
-            it('考试专业列表', async function () {
+            it.skip('考试专业列表', async function () {
                 await school.getExamProfList({
                     kaoShiID: 12926,
                     // zhuanYeID: ,
@@ -197,5 +211,7 @@ describe.skip('视频考试', async function () {
             });
         });
     });
+    describe('', async function () {
 
+    });
 });

@@ -24,7 +24,7 @@ const account = {
             loginName: 'mh01',
             password: 'Csk001'
         },
-        zyzg:{
+        zyzg: {
             loginName: 'zyzg001',
             password: 'Csk001'
         },
@@ -71,11 +71,11 @@ const account = {
             loginName: 'mh02',
             password: 'Ysk002'
         },
-        zyzg:{
+        zyzg: {
             loginName: 'zyzg',
             password: 'Ysk002'
         },
-        cbyy:{
+        cbyy: {
             loginName: 'cbyy001',
             password: 'Ysk002'
         },
@@ -91,6 +91,32 @@ const account = {
             loginName: 'lxyy01',
             password: 'Ysk002'
         }
+    },
+    dev: {
+        kf: {
+            loginName: 'kf01',
+            password: 'Kfk001'
+        },
+        ptzg: {
+            loginName: 'SHUWA',
+            password: 'Csk001'
+        },
+        zyzg: {
+            loginName: 'zyzg',
+            password: 'Ysk002'
+        },
+        cbyy: {
+            loginName: 'cbyy001',
+            password: 'Ysk002'
+        },
+        yyzg: {
+            loginName: 'yyzg',
+            password: 'Ysk002'
+        },
+        lxyy: {
+            loginName: 'lxyy01',
+            password: 'Ysk002'
+        },
     },
     online: {}
 };

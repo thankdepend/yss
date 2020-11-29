@@ -1,5 +1,3 @@
-// const common = require('../../../lib/common');
-const httpRequest = require('../../lib/httpRequest')
 const { common } = require('../../lib/index')
 const yssCaps = require('../../data/caps');
 
@@ -7,53 +5,103 @@ const school = module.exports = {};
 
 
 /**
- * 保存考试专业
- * @param {*} sysControl 
- * @param {*} examProfTypeID_IN 
- * @param {*} kaoShiID 考试id
- * @param {*} profTypeId 
- * @param {*} profType 
- * @param {*} zhuanYeID 专业id
+ * 保存考试
+ * @param {Number} kaoShiID 考试id 
+ * @param {String} kaoShiMC 考试名称
+ * @param {Number} kaoShiND 考试年份
+ * @param {String} kaoShiYF 考试月份
+ * @param {Number} xianKaoZYS 限考志愿数
+ * @param {Number} zhiYuanShu 志愿专业数
+ * @param {Number} kaiTongBZ 开通标志 1为开通2为不开通
  */
-school.saveExamProfAdd = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.school + '/auth/school/examProf/saveExamProfAdd.htm', params);
+school.saveExam = async function (params = {}) {
+    return common.sendPost(yssCaps.school + '/auth/school/exam/saveExam.htm', params);
 };
 
+/**
+ * 保存考试专业
+ * @param {*} sysControl 系统管理
+ * @param {*} examProfTypeID_IN 
+ * @param {Number} kaoShiID 考试id
+ * @param {Number} profTypeId 专业类型id
+ * @param {Number} profType 专业类型
+ * @param {Number} zhuanYeID 专业id
+ */
+school.saveExamProfAdd = async function (params = {}) {
+    return common.sendPost(yssCaps.school + '/auth/school/examProf/saveExamProfAdd.htm', params);
+};
+
+/**
+ * 查看考试专业列表
+ * @param {number} kaoShiID 考试id 
+ * @param {Array} zhuanYeID 专业id  
+ * @param {number} curPage 页数
+ * @param {number} pageSize 每页数
+ */
+school.getExamProfList = async function (params = {}) {
+    return common.sendPost(yssCaps.school + '/auth/school/examProf/examProfListData.htm', Object.assign({
+        curPage: 1,
+        pageSize: 15
+    }, params));
+};
+
+/**
+ * 查看考试列表
+ * @param {number} kaoShiND 考试年份 
+ * @param {Array} sortList []
+ * @param {number} curPage 页数
+ * @param {number} pageSize 每页数
+ */
+school.getExamList = async function (params = {}) {
+    return common.sendPost(yssCaps.school + '/auth/school/exam/examListData.htm', Object.assign({
+        curPage: 1,
+        pageSize: 15
+    }, params));
+};
+
+/**
+ * 查看报名时间列表
+ * @param {number} kaoShiID 考试id 
+ * @param {Array} kaoDianID 考点id  
+ * @param {number} curPage 页数
+ * @param {number} pageSize 每页数
+ */
+school.getsiteDataList = async function (params = {}) {
+    return common.sendPost(yssCaps.school + '/auth/school/sitemanager/siteData.htm', params);
+};
 
 /**
  * 保存报名时间
- * @param {*} kaoShiKDID 
- * @param {*} kaoDianIDs  
- * @param {*} kaoShiID 考试id
- * @param {*} kaoDianID 考点id
- * @param {*} visible 该考点是否只在省考点显示报名入口 0为是1为否
- * @param {*} xianKaoZYS 专业id
- * @param {*} wangBaoKSSJ 网上报名时间
- * @param {*} wangBaoJSSJ 网上截止报名时间
- * @param {*} wangShangQRKSSJ 网上确认时间
- * @param {*} wangShangQRJSSJ 网上截止确认时间
+ * @param {Number} kaoShiKDID 
+ * @param {Number} kaoDianIDs  
+ * @param {Number} kaoShiID 考试id
+ * @param {Number} kaoDianID 考点id
+ * @param {Number} visible 该考点是否只在省考点显示报名入口 0为是1为否
+ * @param {Number} xianKaoZYS 专业id
+ * @param {String} wangBaoKSSJ 网上报名时间
+ * @param {String} wangBaoJSSJ 网上截止报名时间
+ * @param {String} wangShangQRKSSJ 网上确认时间
+ * @param {String} wangShangQRJSSJ 网上截止确认时间
  */
 
 school.saveExamSite = async function (params = {}) {
-    // return httpRequest.sendPost({api: yssCaps.login_url + '/' + 'login', body: params});
-    return httpRequest.sendPost(yssCaps.school + '/auth/school/sitemanager/saveExamSite.htm', params);
+    return common.sendPost(yssCaps.school + '/auth/school/sitemanager/saveExamSite.htm', params);
 };
 
 
 
 /**
  * 保存报考须知
- * @param {*} sysCtrolId 
- * @param {*} examId 考试id
- * @param {*} examPointId 0
+ * @param {Number} sysCtrolId 
+ * @param {Number} examId 考试id
+ * @param {Number} examPointId 0
  * @param {Number} profId 专业id
  * @param {String} defValue 正文
- * @param {*} remark 须知类型，5为承诺书
+ * @param {Number} remark 须知类型，5为承诺书
  */
 
 school.saveApplyNotice = async function (params = {}) {
-    // return httpRequest.sendPost({api: yssCaps.login_url + '/' + 'login', body: params});
-    return httpRequest.sendPost(yssCaps.school + '/auth/school/applynotice/saveApplyNotice.htm', params);
+    return common.sendPost(yssCaps.school + '/auth/school/applynotice/saveApplyNotice.htm', params);
 };
 
 /**
@@ -63,8 +111,7 @@ school.saveApplyNotice = async function (params = {}) {
  */
 
 school.applyNoticeList = async function (params = {}) {
-    // return httpRequest.sendPost({api: yssCaps.login_url + '/' + 'login', body: params});
-    return httpRequest.sendPost(yssCaps.school + '/auth/school/applynotice/applyNoticeData.htm', params);
+    return common.sendPost(yssCaps.school + '/auth/school/applynotice/applyNoticeData.htm', params);
 };
 
 /**
@@ -73,7 +120,7 @@ school.applyNoticeList = async function (params = {}) {
  * @param {number} isSchedConflict 0为是，1为否
  */
 school.saveSchedConflict = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.school + '/auth/school/examschedule/saveSchedConflict.htm', params);
+    return common.sendPost(yssCaps.school + '/auth/school/examschedule/saveSchedConflict.htm', params);
 };
 
 /**
@@ -82,7 +129,7 @@ school.saveSchedConflict = async function (params = {}) {
  * @param {number} isCrossPiont 1为是，2为否
  */
 school.saveCrossPiont = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.school + '/auth/school/examschedule/saveCrossPiont.htm', params);
+    return common.sendPost(yssCaps.school + '/auth/school/examschedule/saveCrossPiont.htm', params);
 };
 
 /**
@@ -91,7 +138,7 @@ school.saveCrossPiont = async function (params = {}) {
  * @param {number} isCrossPiont 1为是，2为否
  */
 school.saveCrossPiont = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.school + '/auth/school/examschedule/saveCrossPiont.htm', params);
+    return common.sendPost(yssCaps.school + '/auth/school/examschedule/saveCrossPiont.htm', params);
 };
 
 /**
@@ -100,7 +147,7 @@ school.saveCrossPiont = async function (params = {}) {
  * @param {number} isProfReject 1为是，2为否
  */
 school.saveProfReject = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.school + '/auth/school/examschedule/saveProfReject.htm', params);
+    return common.sendPost(yssCaps.school + '/auth/school/examschedule/saveProfReject.htm', params);
 };
 
 /**
@@ -113,7 +160,7 @@ school.saveProfReject = async function (params = {}) {
  * @param {number} ticketNoticeNum 准考证取号预警数
  */
 school.saveTicketRule = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.school + '/auth/school/ticketarrange/examScheduleData.htm', params);
+    return common.sendPost(yssCaps.school + '/auth/school/ticketarrange/examScheduleData.htm', params);
 };
 
 /**
@@ -124,7 +171,7 @@ school.saveTicketRule = async function (params = {}) {
  * @param {number} ticketNoticeNum 准考证取号预警数
  */
 school.generateTicket = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.school + '/auth/school/ticketarrange/generate.htm', params);
+    return common.sendPost(yssCaps.school + '/auth/school/ticketarrange/generate.htm', params);
 };
 
 /**
@@ -141,7 +188,7 @@ school.generateTicket = async function (params = {}) {
  * @param {number} examProfSubject.calculateMode 模式，1为专业考试科目，2为网络考试科目
  */
 school.saveExamProfSub = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.school + '/auth/school/examprofsubject/saveExamProfSub.htm', params);
+    return common.sendPost(yssCaps.school + '/auth/school/examprofsubject/saveExamProfSub.htm', params);
 };
 
 /**
@@ -149,7 +196,7 @@ school.saveExamProfSub = async function (params = {}) {
  * @param {number} kaoShiID 考试id
  */
 school.examProfgetDetail = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.school + '/auth/util/examProf.htm', params);
+    return common.sendPost(yssCaps.school + '/auth/util/examProf.htm', params);
 };
 
 /**
@@ -160,7 +207,7 @@ school.examProfgetDetail = async function (params = {}) {
  * @param {number} zhuanYeID 专业id
  */
 school.examProfgetList = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.school + '/auth/school/examprofsubject/examProfSubData.htm', params);
+    return common.sendPost(yssCaps.school + '/auth/school/examprofsubject/examProfSubData.htm', params);
 };
 
 /**
@@ -191,7 +238,7 @@ school.examProfgetList = async function (params = {}) {
  * 
  */
 school.saveSubjectInfo = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.school + '/auth/school/examprofsubject/saveSubjectInfo', params);
+    return common.sendPost(yssCaps.school + '/auth/school/examprofsubject/saveSubjectInfo', params);
 };
 
 /**
@@ -209,7 +256,7 @@ school.saveSubjectInfo = async function (params = {}) {
  * @param {String} questionItemJson[obj.description] 问题简述
  */
 school.saveExaminationPaperQuestion = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.school + '/auth/school/examinationPaperQuestion/saveExaminationPaperQuestion.htm', params);
+    return common.sendPost(yssCaps.school + '/auth/school/examinationPaperQuestion/saveExaminationPaperQuestion.htm', params);
 };
 
 /**
@@ -268,7 +315,7 @@ school.saveExaminationPaperQuestion = async function (params = {}) {
  * @param {String} shootExamPromise 考生承诺书
  */
 school.saveSubjectInfo = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.school + '/auth/school/examprofsubject/saveSubjectInfo.htm', params);
+    return common.sendPost(yssCaps.school + '/auth/school/examprofsubject/saveSubjectInfo.htm', params);
 };
 
 /**
