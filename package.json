@@ -22,7 +22,7 @@
         "formidable": "^1.2.2",
         "glob": "^7.1.6",
         "js-yaml": "^3.13.1",
-        "lodash": "^4.17.15",
+        "lodash": "^4.17.19",
         "mocha-allure-reporter": "^1.4.0",
         "moment": "^2.24.0",
         "mysql2": "^1.7.0",
