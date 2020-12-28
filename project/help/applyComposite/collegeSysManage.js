@@ -1,13 +1,13 @@
-const stu = require('../../reqApi/app/stu');
-const print = require('../../reqApi/app/print');
+const stu = require('../../../reqApi/app/stu');
+const print = require('../../../reqApi/app/print');
 const {
     common
-} = require('../../lib/index');
+} = require('../../../lib/index');
 const {
     object
 } = require('underscore');
 
-class Apply {
+class CollegeSys {
     constructor() {
         /** 学校id */
         this.xueXiaoID = 0;
@@ -22,7 +22,7 @@ class Apply {
     }
 
     /** 保存报名 */
-    async saveProf(params) {
+    async saveProf (params) {
         const res = await stu.saveProf(params);
         // if (res.result.message == 'riChengID is invalid') {
         //     throw new Error(`日程id失效:${res.result.message}`)
@@ -31,13 +31,13 @@ class Apply {
     }
 
     /** 新增报名订单 */
-    async addProfOrder(params) {
+    async addProfOrder (params) {
         const res = await stu.addProfOrder(params);
         console.log(res);
     }
 
     /** 查询专业 */
-    async getProf(params) {
+    async getProf (params) {
         const res = await stu.getProf(params);
         console.log('专业', res);
     }
@@ -46,7 +46,7 @@ class Apply {
      * 在线确认列表
      * @param baoKaoBZ 报考标志 1未提交 2已提交 3已生效 4已关闭 5作废
      */
-    async getAffirmList(params = {}) {
+    async getAffirmList (params = {}) {
         let queryData = Object.assign(common.yssAppJson({
             baoKaoBZ: 3
         }), params)
@@ -62,8 +62,8 @@ class Apply {
     }
 }
 
-const applyManage = module.exports = {};
+const collegeSysManage = module.exports = {};
 
-applyManage.setupApply = function () {
-    return new Apply();
+collegeSysManage.setupCollegeSys = function () {
+    return new CollegeSys();
 }

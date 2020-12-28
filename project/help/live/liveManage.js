@@ -1,12 +1,12 @@
-const hulaquan = require('../../reqApi/platfrom/hulaquan');
-const hulaquanApp = require('../../reqApi/app/hulaquan');
-const caps = require('../../data/caps');
-const doc = require("../data/doc.json");
-const yssLogin = require('../help/yssLogin');
+const hulaquan = require('../../../reqApi/platfrom/hulaquan');
+const hulaquanApp = require('../../../reqApi/app/hulaquan');
+const caps = require('../../../data/caps');
+const doc = require("../../data/doc.json");
+const yssLogin = require('../base/yssLogin');
 const {
     common
-} = require('../../lib/index');
-const user = require('../../reqApi/platfrom/user')
+} = require('../../../lib/index');
+const user = require('../../../reqApi/platfrom/user')
 
 class Live {
     constructor() {
@@ -53,7 +53,7 @@ class Live {
     }
 
     /** 保存直播 */
-    async saveLive(params) {
+    async saveLive (params) {
         const res = await hulaquan.saveRoom(params);
         console.log('保存直播', res);
         // 更新
@@ -86,7 +86,7 @@ class Live {
     }
 
     /** 查询直播间列表 */
-    async queryLiveRoomList(params) {
+    async queryLiveRoomList (params) {
         const liveRoomList = await hulaquan.getLiveRoomList(Object.assign({
             ticket: PLAT_TICKET
         }, params)).then(res => res.result.datas.page.dataList);
@@ -94,7 +94,7 @@ class Live {
     }
 
     /** 直播间列表断言 */
-    async liveRoomListAssert(type = 1) {
+    async liveRoomListAssert (type = 1) {
         // type为自定义属性，1为新增
         let exp;
         const roomLiveActual = await this.queryLiveRoomList({
@@ -109,7 +109,7 @@ class Live {
     }
 
     /** 直播监管列表 */
-    async liveSuperviseList() {
+    async liveSuperviseList () {
         const res = await hulaquan.getLiveSuperviseList({
             ticket: PLAT_TICKET,
             curPage: 1,
@@ -119,7 +119,7 @@ class Live {
     }
 
     /** 获取直播监管id数组 */
-    async getliveSuperviseIdArr() {
+    async getliveSuperviseIdArr () {
         const res = await this.liveSuperviseList();
         const roomIds = res.result.datas.page.dataList.map(room => room.roomId);
         console.log('直播监管', roomIds);
@@ -128,7 +128,7 @@ class Live {
 
 
     /** 关闭直播间 */
-    async closeVcloud(id) {
+    async closeVcloud (id) {
         const res = await hulaquan.closeVcloud({
             ticket: PLAT_TICKET,
             roomId: id || this.roomId
@@ -137,7 +137,7 @@ class Live {
     }
 
     /** 查看直播间列表（客户端） */
-    async queryRoomListByclt() {
+    async queryRoomListByclt () {
         const res = await hulaquanApp.queryRoomList({
             data: {
                 m: '',
@@ -154,7 +154,7 @@ class Live {
     }
 
     /** 客户端直播间列表断言 */
-    async queryRoomListBycltAssert() {
+    async queryRoomListBycltAssert () {
         const roomListClt = await this.queryRoomListByclt();
         const res = roomListClt.find(room => room.roomId == this.roomId)
         const actual = this;
@@ -167,7 +167,7 @@ class Live {
 
 
     /** 查看人数 */
-    async playbackOrMaxLook() {
+    async playbackOrMaxLook () {
         const res = await hulaquanApp.playbackOrMaxLook({
             data: {
                 m: '',
@@ -181,7 +181,7 @@ class Live {
     }
 
     /** 初始化直播间 */
-    async initChartRoom() {
+    async initChartRoom () {
         const res = await hulaquanApp.initChartRoom({
             data: {
                 m: '',
@@ -195,7 +195,7 @@ class Live {
     }
 
     /** 数据统计 */
-    async getStatisticData() {
+    async getStatisticData () {
         const res = await hulaquanApp.getStatisticData({
             data: {
                 m: '',

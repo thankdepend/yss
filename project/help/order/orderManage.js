@@ -1,4 +1,4 @@
-const pay = require('../../reqApi/app/pay');
+const pay = require('../../../reqApi/app/pay');
 
 class Order {
     constructor(params) {
@@ -7,7 +7,7 @@ class Order {
     }
 
     /** 订单处理 */
-    async orderProcessCenter(params = {}, type) {
+    async orderProcessCenter (params = {}, type) {
         switch (type) {
             case 'apply':
                 this.queryApplyOrder();
@@ -21,7 +21,7 @@ class Order {
     }
 
     /** 查询报考订单 */
-    async queryOrder(params) {
+    async queryOrder (params) {
         let reqParams = {
             data: {
                 "p": {

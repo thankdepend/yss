@@ -54,3 +54,28 @@ user.getStuinfo = async function (params = {}) {
 user.checkNeedFillScore = async function (params = {}) {
     return httpRequest.sendPost(yssCaps.user + '/api/m/auth/unite/checkNeedFillScore.htm', params);
 };
+
+/**
+ * 辅机扫码登录
+ * @param {Object} data
+ * @param {String} data.m 
+ * @param {Object} data.p
+ * @param {Object} data.p.businessCode 业务码 1
+ * @param {Object} data.p.videoCode 视频码
+ * @param {Object} data.p.udid
+ * @param {Object} data.p.params
+ * @param {Object} data.p.params.esId 科目id
+ * @param {Object} data.p.params.svId
+ * @param {Object} data.p.params.baoKaoId 报考id
+ * @param {Object} data.p.params.riChengId 日程id
+ * @param {Object} data.p.params.qrcodePageType 
+ * @param {Object} data.p.params.videoCode 视频码
+ * @param {Object} data.p.params.sampleType 样品类型
+ * @param {Object} data.p.params.businessCode 业务码
+ * @param {Object} data.p.params.demo 模拟考为1，非模拟考为2
+ * @param {Object} data.p.params.ticket 登录凭证
+ * @param {Object} data.p.userId 用户id
+ */
+user.multiTerninalLogin = async function (params = {}) {
+    return httpRequest.sendPost(yssCaps.user + '/api/m/user/multi_terninal_login.ws', params);
+};

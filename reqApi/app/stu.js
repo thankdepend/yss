@@ -34,7 +34,7 @@ stu.seekCollege = async function (params = {}) {
  * @param {String} data.m
  * @param {String} data.p
  * @param {Number} data.p.xueXiaoID 学校id
- * @param {Array} data.p.baoKaoBZList 报考标志，1、2、3
+ * @param {Array} data.p.baoKaoBZList 报考标志，[1、2、3]
  */
 stu.getProf = async function (params = {}) {
     return common.sendPost(yssCaps.stu + '/api/m/auth/apply/query_prof.htm', params);
@@ -159,9 +159,41 @@ stu.queryExamNotice = async function (params = {}) {
  * @param {Number} data.p.baoKaoId 报考id
  * @param {Number} data.p.simulation 是否为模拟 0为否，1为是
  */
-stu.querySubjectVideoInfo = async function (params = {}) {
+stu.querySubjectVideoList = async function (params = {}) {
     return common.sendPost(yssCaps.stu + '/api/m/auth/video/querySubjectVideoInfo.htm', params);
 }
+
+/**
+ * 选考模式科目列表
+ * @param {Object} data
+ * @param {String} data.m 
+ * @param {Object} data.p 
+ * @param {Number} data.p.riChengID 日程id
+ */
+stu.stuVideoSubjectList = async function (params = {}) {
+    return common.sendPost(yssCaps.stu + '/api/m/auth/video/stu_video_subject_list.htm', params);
+}
+
+/**
+ * 抽考题
+ * @param {Object} data
+ * @param {String} data.m 
+ * @param {Object} data.p 
+ * @param {Number} data.p.xueXiaoId 学校id
+ * @param {String} data.p.subjectName 学校id
+ * @param {String} data.p.zhuanYeMC 专业名称
+ * @param {String} data.p.esId 科目id
+ * @param {String} data.p.riChengId 日程id
+ * @param {String} data.p.baseRiChengId 基类日程id
+ * @param {String} data.p.svId 视频id
+ * @param {String} data.p.drawQuestion 抽题模式
+ * @param {String} data.p.checkTimeType 检查时间类型
+ */
+stu.checkTimeByType = async function (params = {}) {
+    return common.sendPost(yssCaps.stu + '/api/m/auth/video/check_time_by_type.htm', params);
+}
+
+
 
 /**
  * 变更考生考试状态
@@ -284,15 +316,15 @@ stu.commitVideo = async function (params = {}) {
 }
 
 
-/**
- * 检查考试时间到没到
- * @param {String} subjectName 科目名称
- * @param {Number} riChengId 日程id
- * @param {Number} esId 科目id
- */
-stu.checkAllowToExam = async function (params = {}) {
-    return common.sendPost(yssCaps.stu + '/api/m/auth/video/check_allow_to_exam.htm', params);
-}
+// /**
+//  * 检查考试时间到没到
+//  * @param {String} subjectName 科目名称
+//  * @param {Number} riChengId 日程id
+//  * @param {Number} esId 科目id
+//  */
+// stu.checkAllowToExam = async function (params = {}) {
+//     return common.sendPost(yssCaps.stu + '/api/m/auth/video/check_allow_to_exam.htm', params);
+// }
 
 /**
  * 报考专业查询接口(所有)
@@ -337,6 +369,74 @@ stu.saveSubjectChoose = async function (params = {}) {
     return common.sendPost(yssCaps.stu + '/api/m/auth/video/stu_video_subject_list.htm', params);
 }
 
+/**
+ * 检查辅机状态
+ * @param {Object} data
+ * @param {String} data.p
+ * @param {Object} data.m 
+ * @param {Number} data.p.esId 科目id
+ * @param {Number} data.p.examWay 考试道路 1为录播，2为直播
+ * @param {Number} data.p.simulation 1为模拟，2为正式
+ */
+stu.checkSlaveStatus = async function (params = {}) {
+    return common.sendPost(yssCaps.stu + '/api/m/auth/video/check_slave_status.htm', params);
+}
 
+/**
+ * 辅机获取考试视频信息
+ * @param {Object} data
+ * @param {String} data.p
+ * @param {Object} data.m 
+ * @param {Number} data.p.riChengId 日程id
+ * @param {Number} data.p.baoKaoId 报考id
+ * @param {Number} data.p.esId 科目id
+ * @param {Number} data.p.svId
+ * @param {Number} data.p.simulation 0为非模拟，1为模拟考
+ */
+stu.getExamVideoInfo = async function (params = {}) {
+    return common.sendPost(yssCaps.stu + '/api/m/auth/video/get_exam_video_info.htm', params);
+}
 
+/**
+ * 改变辅机状态
+ * @param {Object} data
+ * @param {String} data.p
+ * @param {Object} data.m 
+ * @param {Number} data.p.riChengId 日程id
+ * @param {Number} data.p.examWay 考试方式，1为录播，2为直播
+ * @param {Number} data.p.esId 科目id
+ * @param {Number} data.p.videoCode 视频码
+ * @param {Number} data.p.simulation 2为非模拟，1为模拟考
+ * @param {Number} data.p.slaveStatus 辅机状态 1为开始录制，2为结束录制
+ */
+stu.changeSlaveStatus = async function (params = {}) {
+    return common.sendPost(yssCaps.stu + '/api/m/auth/video/change_slave_status.htm', params);
+}
 
+/**
+ * 辅机检查主机视频上传
+ * @param {Object} data
+ * @param {String} data.p
+ * @param {Object} data.m 
+ * @param {Number} data.p.svId 
+ * @returns {
+ *    @param videoCode  null
+ *    @param check  false
+ * }
+ */
+stu.checkMasterVideoUpload = async function (params = {}) {
+    return common.sendPost(yssCaps.stu + '/api/m/auth/video/check_master_video_upload.htm', params);
+}
+
+/**
+ * 检查考试时间
+ * @param {Object} data
+ * @param {String} data.p
+ * @param {Object} data.m
+ * @param {Number} data.p.subjectName 科目名称
+ * @param {Number} data.p.riChengId 日程id
+ * @param {Number} data.p.esId 科目id
+ */
+stu.checkAllowToExam = async function (params = {}) {
+    return common.sendPost(yssCaps.stu + '/api/m/auth/video/check_allow_to_exam.htm', params);
+}

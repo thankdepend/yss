@@ -1,6 +1,6 @@
 const evalManage = require('../../help/eval/evaluationManage')
 const teacherManage = require('../../help/eval/evalTeacherManage')
-const yssLogin = require('../../help/yssLogin');
+const yssLogin = require('../../help/base/yssLogin');
 const {
     common
 } = require('../../../lib/index');
@@ -14,7 +14,7 @@ describe('评画老师', async function () {
     const eval = evalManage.setupEvaluation();
     before('平台登录', async function () {
         await yssLogin.platfrom({
-            userType:'yyzg'
+            userType: 'yyzg'
         })
         // 获取评画老师
         teacher = await teacherManage.returnTeacher();
@@ -23,8 +23,8 @@ describe('评画老师', async function () {
     describe('考生创建评画', async function () {
         before('保存评画', async function () {
             await yssLogin.clientLogin({
-                loginName:'330350',
-                password:'Csk001',
+                loginName: '330350',
+                password: 'Csk001',
             })
             // 保存评画
             await eval.saveEvaluation({
@@ -38,7 +38,7 @@ describe('评画老师', async function () {
                         className: teacher.className,
                         profId: 1,
                         profName: teacher.profTag.split(',')[0],
-                        paintUrl:doc[caps.name].school[common.getRandomNum(0, doc.test.school.length)],
+                        paintUrl: doc[caps.name].school[common.getRandomNum(0, doc.test.school.length)],
                         // paintUrl: "http://img.artstudent.cn/pr/2020-10-09/c2a151e21d294425a0aa733b0271f842.jpg",
                         describe: common.getRandomContent(10)
                     }

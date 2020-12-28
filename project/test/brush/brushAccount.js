@@ -3,11 +3,16 @@ const {
 } = require('../../../lib/index');
 const user = require('../../../reqApi/platfrom/user');
 const account = require('../../data/account');
-const yysLogin = require('../../help/yssLogin');
+const yysLogin = require('../../help/base/yssLogin');
 const request = require('superagent');
 const stu = require('../../../reqApi/app/stu');
-
+const fs = require('fs');
+const xlsx = require('node-xlsx');
 const argv = require('yargs').argv;
+
+// const workSheetsFromFile = xlsx.parse(`${__dirname}/xiniu.xlsx`);
+// console.log(workSheetsFromFile[0].data[1][0]);
+
 
 describe('刷用户账号', async function () {
     this.timeout(TESTCASE.timeout);
@@ -20,7 +25,8 @@ describe('刷用户账号', async function () {
     it('创建考生号', async function () {
         for (let a = 1; a <= 100; a++) {
             let params = {
-                yongHuMing: `hexie${a}`,
+                // yongHuMing: `${workSheetsFromFile[0].data[a][0]}`,
+                yongHuMing: `xycs${a}`,
                 yongHuKL: argv.env == 'test' ? 'Csk001' : argv.env == 'pre' ? 'Ysk002' : 'Kfk001',
                 agginYongHuKL: argv.env == 'test' ? 'Csk001' : argv.env == 'pre' ? 'Ysk002' : 'Kfk001',
                 yongHuLB: 100,
@@ -36,27 +42,6 @@ describe('刷用户账号', async function () {
             if (res.result.message === '保存成功') {
                 console.log(a);
             }
-        }
-    });
-    it.skip('报名', async function () {
-        for (let i = 0; i < 90; i++) {
-            let loginAccount = {
-                loginName: `dingding${i}`,
-                password: 'csk001',
-                device: 'm'
-            }
-            let loginInfo = await yysLogin.clientLogin(loginAccount).then(res => res.result.datas.user);
-            const svRes = await stu.saveProf({
-                data: {
-                    "m": "",
-                    "p": {
-                        "riChengID": "11107442"
-                    }
-                },
-                ticket: TICKET
-            });
-            console.log(`${i} --- 报名res`, svRes);
-            common.delay(200)
         }
     });
 });

@@ -1,65 +1,34 @@
-const yysLogin = require('../../help/base/yssLogin');
+const yysLogin = require('../../help/yssLogin');
 const wishFill = require('../../../reqApi/app/wishFill');
 const {
     common
 } = require('../../../lib/index');
 const basicData = require('../../../data/basicData');
+const calculate = require('../../../lib/calculate');
 const platfromProb = require('../../../reqApi/platfrom/prob');
 const base = require('../../../reqApi/platfrom/base');
 const doc = require('../../data/doc.json');
 const school = require('../../../reqApi/platfrom/school');
-const collegeManage = require('../../help/applyComposite/collegeManage');
+const collegeManage = require('../../help/collegeManage');
+const { collect } = require('underscore');
+
+
+/**
+ * 刷脚本模板参数
+ */
+let modeType = {
+    twoCamera: true,
+    examTime: 99999,
+}
+
 
 /**
  * @alias 网络考试院校端 
  */
-describe.skip('网络考试院校端', async function () {
+describe('网络考试院校端', async function () {
     this.timeout(TESTCASE.timeout);
     let college = collegeManage.setupCollege();
-    // before('平台登录-志愿主管', async function () {
-    //     platFromInfo = await yysLogin.platfrom({
-    //         loginName: 'mh01',
-    //         password: 'Csk001'
-    //     });
-    //     console.log('平台登录', platFromInfo);
-    // });
     describe('设置报名', async function () {
-        let addCollegeInfo;
-        // 不要刷学校！不要刷学校！不要刷学校！
-        it.skip('新增报名院校', async function () {
-            const randomStr = common.getRandomStr(6),
-                randomNum = common.getRandomNum(12000, 99999),
-                randomImage = doc.test.school[common.getRandomNum(0, doc.test.school.length)];
-            let addParams = {
-                preSchoolType: 1,
-                xueXiaoMH: randomNum, // 代号
-                xueXiaoID: randomNum,
-                xueXiaoMC: `中国美术学院-${randomStr}`,
-                schoolType: 1, // 是否签约：1为签约，2为未签约
-                hotFlag: 2, // 热门标签: 1为
-                typeIds: 26,
-                provChName: '浙江省',
-                prov: 330000,
-                cityChName: '杭州市',
-                city: 330100,
-                areaChName: '下城区',
-                area: 330103,
-                classId: 5,
-                studentType: '1,2,3,4,5', // 学生类型
-                initUser: 'on', // 初始化用户，on为是
-                // addr: ,
-                // applyUrl: ,
-                logo: `${randomImage}`,
-                // subSystem: ,
-                // sub: ,
-                // orderNo: ,
-                // mobileOrderNo: ,
-                // siteConfirmType: ,
-                ticket: PLAT_TICKET
-            }
-            addCollegeInfo = await base.toAddCollege(addParams)
-            console.log('保存信息', addCollegeInfo);
-        });
         describe('设置报名', async function () {
             before('院校管理员登录', async function () {
                 // let admin = {loginName:`${addCollegeInfo.params.xueXiaoID}`,password:`Yss${addCollegeInfo.params.xueXiaoID}`}
@@ -222,7 +191,6 @@ describe.skip('网络考试院校端', async function () {
                 };
                 if (Object.getOwnPropertyNames(subJectInput).length != 0) {
                     baseData = await college.searchByNameAll(subJectInput);
-                    console.log(baseData);
                     await college.saveSubject({
                         kaoShiID: baseData.kaoShiID,
                         profId: baseData.zhuanYeID,
@@ -236,11 +204,8 @@ describe.skip('网络考试院校端', async function () {
                 await college.saveSubjectInfo({
                     esId: college.esId,
                     kaoShizyID: college.kaoShizyID,
-                }, 2)
+                }, 3)
             });
         });
-    });
-    describe('', async function () {
-
     });
 });

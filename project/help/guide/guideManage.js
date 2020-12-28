@@ -1,4 +1,4 @@
-const guide = require('../../reqApi/app/guide')
+const guide = require('../../../reqApi/app/guide')
 
 class Guide {
     constructor() {
@@ -6,7 +6,7 @@ class Guide {
     }
 
     /** 保存指南用户 */
-    async saveGuideUser(params) {
+    async saveGuideUser (params) {
         let json = Object.assign({
             data: {
                 "m": "",
@@ -25,7 +25,7 @@ class Guide {
     }
 
     /** 指南统考类型列表 */
-    async getGuideUnifiedTypeList() {
+    async getGuideUnifiedTypeList () {
         const res = await guide.getGuideUnifiedTypeList({
             data: {
                 "m": "",
@@ -40,7 +40,7 @@ class Guide {
     }
 
     /** 获取指南首页公告 */
-    async getAnnouceList() {
+    async getAnnouceList () {
         const res = await guide.getAnnouceList({
             ticket: TICKET
         });
@@ -48,7 +48,7 @@ class Guide {
     }
 
     /** 获取指南院校列表 */
-    async getJointSchoolList() {
+    async getJointSchoolList () {
         const res = await guide.getJointSchoolList({
             data: {
                 "m": "",

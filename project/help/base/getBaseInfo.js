@@ -1,9 +1,6 @@
-const common = require('../../lib/common');
-const yssAccount = require('../data/account');
-const caps = require('../../data/caps');
-const base = require('../../reqApi/baseLogin')
-const hulaquanApp = require('../../reqApi/app/hulaquan')
-const crm = require('../../reqApi/platfrom/crm');
+const { common } = require('../../../lib/index');
+const hulaquanApp = require('../../../reqApi/app/hulaquan')
+const crm = require('../../../reqApi/platfrom/crm');
 
 let baseInfo = module.exports = {};
 

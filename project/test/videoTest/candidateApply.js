@@ -1,15 +1,15 @@
-const yssLogin = require('../../help/yssLogin');
+const yssLogin = require('../../help/base/yssLogin');
 const doc = require('../../data/doc.json');
 const account = require('../../data/account');
 const school = require('../../../reqApi/platfrom/school');
 const {
     common
 } = require('../../../lib/index');
-const collegeManage = require('../../help/collegeManage');
-const applyManage = require('../../help/applyManage');
-const orderManage = require('../../help/orderManage');
+const collegeManage = require('../../help/applyComposite/collegeManage');
+const applyManage = require('../../help/applyComposite/applyManage');
+const orderManage = require('../../help/order/orderManage');
 const caps = require('../../../data/caps');
-const { update } = require('../../../lib/common');
+const { update } = require('../../../lib/commonFc');
 const argv = require('yargs').argv;
 
 /**
@@ -34,14 +34,13 @@ describe('考生报名', async function () {
         });
         before('获取学校', async function () {
             await yssLogin.clientLogin({
-                loginName: 'haitun100',
+                loginName: 'mihuan7',
                 password: 'Csk001',
                 device: 'm'
             });
             // 获取学校信息
-            const schoolId = argv.env == 'test' ? 13166 : argv.env == 'pre' ? 45600 : '';
+            const schoolId = argv.env == 'test' ? 61401 : argv.env == 'pre' ? 45600 : argv.env == 'online' ? 90201 : '';
             getAsCollege = await collegeManage.returnCollege(schoolId);
-            // console.log(getAsCollege);
         });
         it('搜索院校', async function () {
             await getAsCollege.searchCollegeAssert()
@@ -50,10 +49,11 @@ describe('考生报名', async function () {
         describe('报名开始', async function () {
             let riChengArr = [],
                 ranValue = '',
-                riChengID = '';
+                riChengID = '',
+                applyMain = '';
             it('报名考试提交', async function () {
                 // 指定日程id,不指定时设置为0
-                let appointRiChengID = 11107838;
+                let appointRiChengID = 25961;
                 // await collegeManage.updateCollegeRiCheng(appointRiChengID)
 
                 // 随机一个日程
@@ -68,14 +68,15 @@ describe('考生报名', async function () {
                     // riChengID: riChengArr[ranValue],
                 });
                 riChengID = profParams.data.p.riChengID;
-                // console.log('日程id',riChengID);
-                await apply.saveProf(profParams)
+                const extraParams = {
+                    yongHuID: LOGINDATA.userId,
+                    zhuanYeID: getAsCollege.collegeMap.get(riChengID).zhuanYeID,
+                    riChengID: riChengID,
+                }
+                applyMain = await apply.saveProf(profParams, extraParams)
+                baoKaoID = applyMain.baoMingMain.baoKaoID;
             });
             it('创建报名订单', async function () {
-                // 从随机的日程id找报考id
-
-                console.log('日程', getAsCollege.collegeMap.get(riChengID));
-                baoKaoID = getAsCollege.collegeMap.get(riChengID).baoKaoID;
                 let billParams = {
                     data: {
                         "m": "",
@@ -97,7 +98,6 @@ describe('考生报名', async function () {
             it('在线确认列表', async function () {
                 await apply.getAffirmList();
             });
-
             it('在线确认', async function () {
                 const res = await apply.saveAffirm({
                     data: {
@@ -106,12 +106,11 @@ describe('考生报名', async function () {
                             baoKaoIDs: [baoKaoID],
                             xueXiaoID: getAsCollege.collegeMain.xueXiaoID,
                         }
-                    }
+                    }, ticket: TICKET
                 })
-                console.log(res);
+                console.log('在线确认', res);
             });
         });
 
     });
-
 });

@@ -1,8 +1,8 @@
 const AppAdvert = require('../../../../reqApi/app/advert')
 const school = require('../../../../reqApi/platfrom/school')
-const yssLogin = require('../../../help/yssLogin')
+const yssLogin = require('../../../help/base/yssLogin')
 const user = require('../../../../reqApi/platfrom/user')
-
+const stuApp = require('../../../../reqApi/app/stu');
 
 describe.skip('验证bug', async function () {
     this.timeout(TESTCASE.timeout);
@@ -53,14 +53,70 @@ describe.skip('测试', async function () {
     });
 });
 
-describe('测试', async function () {
+describe.skip('测试', async function () {
+    this.timeout(TESTCASE.timeout);
+    let baoKaoID;
     before('登录', async function () {
         await yssLogin.clientLogin({
-            loginName: 'xiongli42',
+            loginName: 'mihuan4',
             password: 'Csk001',
         });
     });
-    it('', async function () {
-
+    it.skip('查询专业', async function () {
+        const res = await stuApp.getProf({
+            data: {
+                m: '',
+                p: {
+                    xueXiaoID: 13166,
+                    baoKaoBZList: [1, 2, 3]
+                }
+            },
+            ticket: TICKET
+        });
+        console.log(res.result.datas.list);
+    });
+    it('查询科目列表', async function () {
+        const res = await stuApp.querySubjectVideoList({
+            data: {
+                m: '',
+                p: {
+                    riChengId: 11108259,
+                    riChengID: 11108259,
+                    baoKaoId: 2620672,
+                    simulation: 0,
+                }
+            }, ticket: TICKET
+        })
+        // console.log(res);
+        console.log(res.result.datas.data);
+    });
+    it.skip('选考模式模拟考科目列表', async function () {
+        const res = await stuApp.stuVideoSubjectList({
+            data: {
+                "m": "",
+                "p": {
+                    "riChengID": 11108286
+                }
+            },
+            ticket: TICKET
+        })
+        // console.log(res.params);
+        console.log(res);
     });
 })
+
+describe('测试2', async function () {
+    before('登录', async function () {
+        const res = await yssLogin.platfrom({
+            loginName: '13221197201',
+            password: 'Csk001',
+        }); console.log(res);
+    });
+    it('绑定证件号', async function () {
+        const res = await user.zhengjianBind({
+            // shenFenZH: `<script>alert(20973)</script>`,
+            // ticket: PLAT_TICKET
+        })
+        console.log(res);
+    });
+});

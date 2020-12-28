@@ -1,10 +1,10 @@
-const user = require('../../reqApi/platfrom/user');
-const crm = require('../../reqApi/platfrom/crm');
-const wishApp = require('../../reqApi/app/wish');
-const info = require('../../reqApi/app/info');
+const user = require('../../../reqApi/platfrom/user');
+const crm = require('../../../reqApi/platfrom/crm');
+const wishApp = require('../../../reqApi/app/wish');
+const info = require('../../../reqApi/app/info');
 const {
     common
-} = require('../../lib/index');
+} = require('../../../lib/index');
 
 
 /**
@@ -22,7 +22,7 @@ class Crm {
     /** 
      * 添加意向征集表
      */
-    async addStudycollect() {
+    async addStudycollect () {
         const professionIdList = [1, 14, 15, 16, 17, 10]
 
         const randomProfessID = professionIdList[common.getRandomNum(0, professionIdList.length - 1)];
@@ -52,7 +52,7 @@ class Crm {
     /**
      * 添加留学咨询评论
      */
-    async addInfoComment() {
+    async addInfoComment () {
         const studyAbroadList = await info.getStudyAbroad({
             data: {
                 "p": {
@@ -94,7 +94,7 @@ class Crm {
     /** 
      * 新增留学私信咨询发送CRM
      */
-    async wishPrivatechat() {
+    async wishPrivatechat () {
         const wishPrivatechatData = await info.wishPrivatechat({
             data: {
                 m: "",
@@ -102,7 +102,7 @@ class Crm {
                     customerUserId: "70000145",
                     customerMobile: common.getRandomMobile(),
                     customerNickName: `mh-${common.getRandomStr(4)}`,
-                    customerIdCard: `${common.getRandomNum(100000000,9999999999)}`,
+                    customerIdCard: `${common.getRandomNum(100000000, 9999999999)}`,
                     extendsJson: JSON.stringify({
                         countryName: this.willCountryList[common.getRandomNum(0, this.willCountryList.length - 1)],
                         profName: '室内设计'
@@ -118,7 +118,7 @@ class Crm {
     /**
      * 更新线索
      */
-    async updateThreaded(params) {
+    async updateThreaded (params) {
         await this.publicListCustomer(params);
         console.log('更新');
         // console.log(params);
@@ -127,7 +127,7 @@ class Crm {
     /**
      * 查询公海-线索列表
      */
-    async publicListCustomer(params) {
+    async publicListCustomer (params) {
         const res = await crm.publicListCustomer(Object.assign({
             curPage: 1,
             pageSize: 10,
@@ -149,7 +149,7 @@ class Crm {
     /** 
      * 公海-线索列表 断言
      */
-    async publicListCustomerAssert(params) {
+    async publicListCustomerAssert (params) {
         await this.publicListCustomer(params)
     }
 }
@@ -161,6 +161,6 @@ crmManage.setupCrm = function () {
     return new Crm();
 }
 
-function ThreadedMap() {
+function ThreadedMap () {
 
 }

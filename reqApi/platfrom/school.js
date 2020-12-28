@@ -60,6 +60,35 @@ school.getExamList = async function (params = {}) {
 };
 
 /**
+ * 保存考试时间
+ * @param {Number} kaoShiID 考试id
+ * @param {Number} kaoDianID 考点id
+ * @param {Number} zhuanYeID 专业id
+ * @param {Number} shenChaBTF 审查标志，2为不审查
+ * @param {Number} xianKaoZYS 专业id
+ * @param {String} kaoShiRQ 考试日期
+ * @param {String} examStartTime 考试开始时间
+ * @param {String} examEndTime 考试结束时间
+ * @param {String} kaoShiRQSM 考试日期简称
+ * @param {Number} baoMingFei 报名费
+ * @param {Number} orderNo 显示序号
+ * @param {Number} xianBaoRS 限报人数
+ * @param {Number} zhiYuanShu 志愿数
+ * @param {String} beiZhu 考试科目时间说明
+ * @param {String} zhunKaoZZDY 准考证说明
+ * @param {String} videoUploadStartTime 视频上传开始时间
+ * @param {String} videoUploadEndTime 视频上传结束时间
+ * @param {Number} countdownLength 考试时间
+ * @param {Number} allowSimulation 是否允许模拟，1为是，2为否
+ * @param {Number} limitOfgender 性别要求，3为不限
+ * @param {Number} language 新疆考生计划类型 0为不限
+ */
+
+school.saveExamSchedule = async function (params = {}) {
+    return common.sendPost(yssCaps.school + '/auth/school/examschedule/saveExamSchedule.htm', params);
+};
+
+/**
  * 查看报名时间列表
  * @param {number} kaoShiID 考试id 
  * @param {Array} kaoDianID 考点id  
@@ -86,6 +115,17 @@ school.getsiteDataList = async function (params = {}) {
 
 school.saveExamSite = async function (params = {}) {
     return common.sendPost(yssCaps.school + '/auth/school/sitemanager/saveExamSite.htm', params);
+};
+
+/**
+ * 查看考试时间列表
+ * @param {number} kaoShiID 考试id 
+ * @param {Array} kaoDianID 考点id  
+ * @param {number} curPage 页数
+ * @param {number} pageSize 每页数
+ */
+school.getExamScheduleList = async function (params = {}) {
+    return common.sendPost(yssCaps.school + '/auth/school/examschedule/examScheduleData.htm', params);
 };
 
 
@@ -176,10 +216,10 @@ school.generateTicket = async function (params = {}) {
 
 /**
  * 保存专业考试科目
- * @param {Array} examProfSubject 日程id
+ * @param {Array} examProfSubject
  * @param {number} examProfSubject.kaoShiID 考试id
- * @param {number} examProfSubject.profId 
- * @param {number} examProfSubject.ord     1为专业考试科目，2为网络考试科目
+ * @param {number} examProfSubject.profId 专业id
+ * @param {number} examProfSubject.ord  排序
  * @param {number} examProfSubject.subjectName 科目名称
  * @param {string} examProfSubject.remark 备注
  * @param {number} examProfSubject.shootFlag
@@ -319,6 +359,27 @@ school.saveSubjectInfo = async function (params = {}) {
 };
 
 /**
+ * 科目考题列表
+ * @param {number} kaoShiId 考试id
+ * @param {number} zhuanYeId 专业id
+ * @param {number} esId 科目id
+ * @param {number} quesBankType 试题库类型，正式为1，模拟为2
+ * @param {number} publishFlag 发布标志1，2为未发布
+ * @param {number} examType 考试类型，1为直播，2为非直播
+ * @param {number} examinationBatchNo
+ * @param {number} checkFlag 校验标志，1为已核验，2为未核验，3为未通过
+ * @param {number} curPage 1
+ * @param {number} pageSize 15
+ */
+school.examinationList = async function (params = {}) {
+    return common.sendPost(yssCaps.school + '/auth/school/examination/examinationData.htm', params);
+};
+
+
+
+
+
+/**
  * 考试列表工具
  * @param {number} 
  * @param {number} 
@@ -330,6 +391,16 @@ school.utilExamList = async function (params = {}) {
 };
 
 /**
+ * 查看科目列表
+ * @param {Number} kaoShiID 考试id
+ * @param {Number} zhuanYeID 专业id
+ */
+school.getSubjectList = async function (params = {}) {
+    return common.sendPost(yssCaps.school + '/auth/school/examprofsubject/examSubjectData.htm', params);
+};
+
+
+/**
  * 文本生成语音
  * @param {Number} esId 科目id
  * @param {String} convertTextStr 文本字符
@@ -339,3 +410,29 @@ school.getTextConvertAudioUrl = async function (params = {}) {
     return common.sendGet(yssCaps.school + '/auth/school/examprofsubject/getTextConvertAudioUrl.htm', params);
 };
 
+/**
+ * 获取视频打回token
+ * @param {Number} authCode 密码
+ * @param {String} optRemark 测试打回
+ */
+school.pwdAuth = async function (params = {}) {
+    return common.sendGet(yssCaps.school + '/auth/school/examstatistic/pwdAuth.htm', params);
+};
+
+/**
+ * 视频打回
+ * @param {Number} svId 考试视频id
+ * @param {Number} authCode 密码
+ * @param {String} optRemark 测试打回
+ */
+school.resetVideo = async function (params = {}) {
+    return common.sendGet(yssCaps.school + '/auth/school/examstatistic/resetVideo.htm', params);
+};
+
+/**
+ * 考题详情
+ * @param {Number} tiId
+ */
+school.kaoTiDetail = async function (params = {}) {
+    return common.sendGet(yssCaps.school + '/auth/school/examination/kaoTiDetail.htm?', params);
+};

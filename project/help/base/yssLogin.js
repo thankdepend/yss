@@ -1,9 +1,9 @@
 'use strict';
-const common = require('../../lib/common');
-const yssAccount = require('../data/account');
-const caps = require('../../data/caps');
-const base = require('../../reqApi/baseLogin')
-const user = require('../../reqApi/platfrom/user')
+const { common } = require('../../../lib/index');
+const yssAccount = require('../../data/account');
+const caps = require('../../../data/caps');
+const base = require('../../../reqApi/baseLogin')
+const user = require('../../../reqApi/platfrom/user')
 const qs = require('qs');
 
 let yssLogin = module.exports = {};

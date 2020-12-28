@@ -1,7 +1,7 @@
-const user = require('../../reqApi/platfrom/user');
+const user = require('../../../reqApi/platfrom/user');
 const {
     common
-} = require('../../lib/index');
+} = require('../../../lib/index');
 
 let argv = require('yargs').argv;
 
@@ -17,7 +17,7 @@ class CounSelor {
      * 保存平台顾问用户
      * @alias 为了不乱刷顾问，不做这一步
      */
-    async saveCounSelor() {
+    async saveCounSelor () {
         let json = {
             yongHuMing: `ptgw-${common.getRandomStr(5)}`,
             yongHuKL: argv.env == 'test' ? 'Csk001' : argv.env == 'pre' ? 'Ysk002' : 123456,

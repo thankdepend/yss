@@ -1,6 +1,7 @@
 // const common = require('../../../lib/common');
 const httpRequest = require('../lib/httpRequest')
 const yssCaps = require('../data/caps');
+const { common } = require('../lib/index');
 
 const base = module.exports = {};
 
@@ -10,10 +11,10 @@ const base = module.exports = {};
  * app登录
  */
 base.userLogin = async function (params = {}) {
-    return httpRequest.post(yssCaps.user + '/login', {
-        ...params
-    });
-
+    // return httpRequest.post(yssCaps.user + '/login', {
+    //     ...params
+    // });
+    return common.sendPost(yssCaps.user + '/login', params);
 };
 
 /**

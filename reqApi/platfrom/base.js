@@ -78,35 +78,6 @@ base.getprofessionInfoList = async function (params = {}) {
 };
 
 
-/**
- * 保存考试时间
- * @param {*} kaoShiID 考试id
- * @param {*} kaoDianID 考点id
- * @param {*} zhuanYeID 专业id
- * @param {*} shenChaBTF 审查标志，2为不审查
- * @param {*} xianKaoZYS 专业id
- * @param {*} kaoShiRQ 考试日期
- * @param {*} examStartTime 考试开始时间
- * @param {*} examEndTime 考试结束时间
- * @param {*} kaoShiRQSM 考试日期简称
- * @param {*} baoMingFei 报名费
- * @param {*} orderNo 显示序号
- * @param {*} xianBaoRS 限报人数
- * @param {*} zhiYuanShu 志愿数
- * @param {*} beiZhu 考试科目时间说明
- * @param {*} zhunKaoZZDY 准考证说明
- * @param {*} videoUploadStartTime
- * @param {*} videoUploadEndTime
- * @param {*} countdownLength 考试时间
- * @param {*} allowSimulation 是否允许模拟，1为是，2为否
- * @param {*} limitOfgender 性别要求，3为不限
- * @param {*} language 新疆考生计划类型 0为不限
- */
-
-base.saveExamSchedule = async function (params = {}) {
-    // return httpRequest.sendPost({api: yssCaps.login_url + '/' + 'login', body: params});
-    return common.sendPost(yssCaps.school + '/auth/school/examschedule/saveExamSchedule.htm', params);
-};
 
 /**
  * 查看考试时间列表

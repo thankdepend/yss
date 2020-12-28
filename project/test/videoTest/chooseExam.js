@@ -1,4 +1,4 @@
-const yysLogin = require('../../help/yssLogin');
+const yssLogin = require('../../help/yssLogin');
 const stuApp = require('../../../reqApi/app/stu');
 const {
     common
@@ -16,7 +16,7 @@ describe('选考', async function () {
             password: 'csk001',
             device: 'm'
         }
-        loginInfo = await yysLogin.clientLogin(loginAccount).then(res => res.result.datas.user);
+        loginInfo = await yssLogin.clientLogin(loginAccount).then(res => res.result.datas.user);
         console.log('登录', loginInfo);
 
     });

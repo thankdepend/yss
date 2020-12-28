@@ -1,10 +1,10 @@
-const user = require('../../reqApi/app/user');
-const service = require('../../reqApi/app/service');
+const user = require('../../../reqApi/app/user');
+const service = require('../../../reqApi/app/service');
 const {
     common
-} = require('../../lib/index');
-const doc = require('../data/doc.json');
-const caps = require('../../data/caps');
+} = require('../../../lib/index');
+const doc = require('../../data/doc.json');
+const caps = require('../../../data/caps');
 
 /**
  * 填充信息
@@ -222,45 +222,54 @@ fillManage.setupFill = function () {
 }
 
 fillManage.mockExamineeJson = function (params) {
-    let examineeJson = Object.assign({
+    // let province = common.getRandomProvince();
+    let randomHs = common.getRandomNum(1, 5);
+
+    let province = {
+        provinceName: '四川省',
+        provinceCode: 510000,
+        provinceSxCode: 51,
+    }
+    let examineeJson = {
         data: {
             m: "",
-            p: {
-                'zhengJianLX': 3, // 证件类型
-                'shenFenZH': `${LOGINDATA.loginName}`,
-                'kaoShengXM': `${common.getRandomChineseStr(3)}`,
-                'xingBie': `${['男', '女'][common.getRandomNum(0, ['男', '女'].length - 1)]}`,
-                'chuShengRQ': `${common.getCurrentDate()}`,
-                "minZu": "汉族",
-                'tongXinDZExt': "230000-230300",
-                'tongXinDZ': common.getRandomStr(5),
-                'addressee': "杭州市余杭未来科技城",
-                'shouJi': common.getRandomMobile(),
-                'tongXinYB': 558855,
-                'jiaZhangDH': common.getRandomMobile(),
-                'qQ': "",
-                'xueLi': "初中",
-                'stuType': 2,
-                'gaoKaoSFH': 340000,
-                'gaoKaoSF': "安徽省",
-                'zhengZhiMM': "团员",
-                'suoZaiXX': common.getRandomStr(5),
-                'kaoShengHao': "",
-                'yingWangJie': "应届",
-                'wenLiKe': "不分文理",
-                'name': [common.getRandomStr(3)],
-                'relation': ["父亲"],
-                'companyName': [common.getRandomStr(3)],
-                'job': [`obj-${common.getRandomStr(3)}`],
-                'phoneNumber': [common.getRandomMobile()],
-                'huKou': "",
-                'qualifyAuth': "",
-                'passFlag': "",
-                'grade': ""
-            }
+            p: Object.assign({
+                zhengJianLX: 3, // 证件类型
+                shenFenZH: `${LOGINDATA.loginName}`,
+                kaoShengXM: `${common.getRandomChineseStr(3)}`,
+                xingBie: `${['男', '女'][common.getRandomNum(0, ['男', '女'].length - 1)]}`,
+                chuShengRQ: `${common.getCurrentDate()}`,
+                minZu: "汉族",
+                tongXinDZExt: "230000-230300",
+                tongXinDZ: common.getRandomStr(5),
+                addressee: "杭州市余杭未来科技城",
+                shouJi: common.getRandomMobile(),
+                tongXinYB: 558855,
+                jiaZhangDH: common.getRandomMobile(),
+                qQ: "",
+                xueLi: '高中',
+                stuType: 3, // 初中2，高中3
+                gaoKaoSFH: province.provinceCode,
+                gaoKaoSF: province.provinceName,
+                zhengZhiMM: `${common.getRandomNum(1, 2) == 1 ? '团员' : '党员'}`,
+                suoZaiXX: `${province.provinceName.slice(0, 2)}一中`, // 文化课学校
+                suoZaiHS: `${randomHs == 1 ? '老鹰' : randomHs == 2 ? '将军' : randomHs == 3 ? '大象' : randomHs == 4 ? '白塔岭' : '厚一'}画室`, // 培训学校
+                kaoShengHao: `${common.add(common.getCurrentDate().split('-').join(',').slice(2, 4), 1)}${province.provinceSxCode}${common.getRandomNum(1000000000, 9999999999)}`,
+                yingWangJie: "应届",
+                wenLiKe: common.getProvinceWenliKe(province.provinceName),
+                name: [common.getRandomStr(3)],
+                relation: ["父亲"],
+                companyName: [common.getRandomStr(3)],
+                job: [`职业-${common.getRandomStr(3)}`],
+                phoneNumber: [common.getRandomMobile()],
+                huKou: "",
+                qualifyAuth: "",
+                passFlag: "",
+                grade: ""
+            }, params)
         },
         ticket: TICKET,
-    }, params)
-    // console.log('examineeJson', examineeJson);
+    }
+    console.log('examineeJson', examineeJson);
     return examineeJson;
 }

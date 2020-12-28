@@ -10,7 +10,9 @@ const fs = require('fs');
 const xlsx = require('node-xlsx');
 const argv = require('yargs').argv;
 
-// const workSheetsFromFile = xlsx.parse(`${__dirname}/xiniu.xlsx`);
+const workSheetsFromFile = xlsx.parse(`${__dirname}/xiniu.xlsx`);
+// console.log(workSheetsFromFile);
+// console.log(workSheetsFromFile[0].data[1][1]);
 
 
 /**
@@ -23,8 +25,7 @@ for (let i = 1; i <= 100; i++) {
         const fill = fillManage.setupFill();
         before('登录', async function () {
             let userInfo = {
-                // loginName: `${workSheetsFromFile[0].data[i][0]}`,
-                loginName: `xycs${i}`,
+                loginName: `${workSheetsFromFile[0].data[i][0]}`,
                 password: argv.env == 'test' ? 'Csk001' : argv.env == 'pre' ? 'Ysk002' : 'Kfk001',
                 device: 'm'
             }
@@ -34,7 +35,10 @@ for (let i = 1; i <= 100; i++) {
 
         describe('新增考生', async function () {
             it('新增考生信息', async function () {
-                const examineeJson = fillManage.mockExamineeJson();
+                const examineeJson = fillManage.mockExamineeJson({
+                    shenFenZH: `${workSheetsFromFile[0].data[i][0]}`,
+                    kaoShengXM: `${workSheetsFromFile[0].data[i][1]}`
+                });
                 await fill.saveStuinfo(examineeJson);
             });
             it('查询考生信息', async function () {

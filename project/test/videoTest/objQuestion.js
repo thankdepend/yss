@@ -1,4 +1,4 @@
-const yssLogin = require('../../help/yssLogin');
+const yssLogin = require('../../help/base/yssLogin');
 const stu = require('../../../reqApi/app/stu');
 
 // 需要一个已报名的人

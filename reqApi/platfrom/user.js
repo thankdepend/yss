@@ -94,3 +94,9 @@ user.idRegisterByCq = async function (params = {}) {
     return common.sendPost(yssCaps.user + '/signUp/idRegister/65001.htm', params);
 };
 
+/**
+ * 绑定证件号
+ */
+user.zhengjianBind = async function (params = {}) {
+    return common.sendPost(yssCaps.user + '/auth/student/accountSafe/zhengjianBind.htm', params);
+};
