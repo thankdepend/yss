@@ -6,7 +6,7 @@ const { common } = require('../../../lib/index');
 /**
  * @alias 监考笔试类考试
  */
-describe.only('监考笔试', async function () {
+describe('监考笔试', async function () {
     this.timeout(TESTCASE.timeout);
     let invigilate = invigilateManage.setupInvigilate()
 
@@ -62,7 +62,7 @@ describe.only('监考笔试', async function () {
     });
     describe('开始录制', async function () {
         it('开始录制', async function () {
-            await invigilate.startRecord();
+            await invigilate.startRecordByInv();
         });
         it('校验照片是否是本人', async function () {
             await invigilate.checkAttestPhotoByInv()
@@ -71,7 +71,7 @@ describe.only('监考笔试', async function () {
             await invigilate.saveScreenshotByInv()
         });
         it('清除录制状态', async function () {
-            await invigilate.clearRecordStatus()
+            await invigilate.clearRecordStatusByInv()
         });
     });
     describe('抽到题开始减次数', async function () {
@@ -89,7 +89,7 @@ describe.only('监考笔试', async function () {
                 password: 'Yss13166'
             })
             // 确保能进入考试，自动调整考试时间
-            await invigilate.saveSubject();
+            await invigilate.saveSubjectByInv();
 
             // 交卷
             await yssLogin.clientLogin({
@@ -105,6 +105,9 @@ describe.only('监考笔试', async function () {
     describe('提交视频', async function () {
         it('提交视频', async function () {
             await invigilate.checkAndcommitVideo()
+        });
+        it('考生考试结果', async function () {
+            await invigilate.assignDetailAssert()
         });
     });
 

@@ -314,11 +314,14 @@ class Invigilate extends examBase {
             ticket: PLAT_TICKET
         })
         // console.log(res.result.datas.page);
+        return res;
     }
 
 
+
+
     /** 保存科目 */
-    async saveSubject (params) {
+    async saveSubjectByInv (params) {
         const res = await school.saveSubjectInfo(Object.assign({
             esId: this.esId,
             kaoShizyID: this.subjectData.kaoShizyID,
@@ -400,38 +403,20 @@ class Invigilate extends examBase {
         // console.log(res);
     }
 
-    /** 开始录制 */
-    async startRecord () {
-        const res = await stuApp.startRecord({
-            data: {
-                p: {
-                    mirror: 2,
-                    esId: this.esId,
-                    simulation: 2,
-                    baoKaoId: this.baoKaoId,
-                    master: 1
-                },
-                m: ""
-            }, ticket: TICKET
+    /** 开始录制-监考笔试类 */
+    async startRecordByInv () {
+        await this.startRecord({
+            esId: this.esId,
+            baoKaoId: this.baoKaoId,
         });
-        // console.log('开始录制', res);
     }
 
-    /** 清除录制状态 */
-    async clearRecordStatus () {
-        const res = await stuApp.clearRecordStatus({
-            data: {
-                p: {
-                    mirror: 2,
-                    esId: this.esId,
-                    simulation: 2,
-                    baoKaoId: this.baoKaoId,
-                    master: 1
-                },
-                m: ""
-            }, ticket: TICKET
+    /** 清除录制状态-监考笔试类 */
+    async clearRecordStatusByInv () {
+        await this.clearRecordStatus({
+            esId: this.esId,
+            baoKaoId: this.baoKaoId,
         });
-        // console.log('清除录制状态', res);
     }
 
     /** 校验照片是否是本人-监考笔试类 */
@@ -507,6 +492,7 @@ class Invigilate extends examBase {
                 m: ""
             }, ticket: TICKET
         })
+        this.videoUrl = res.params.data.p.videoUrl;
         // console.log('提交视频', res);
     }
 
@@ -523,20 +509,17 @@ class Invigilate extends examBase {
                 }
             }, ticket: TICKET
         })
-        // console.log(checkRes.result);
-        // console.log('打印切割', checkRes.result.message.split('于')[0]);
         if (checkRes.result.datas.allowExam == true) {
             await this.commitVideo()
         } else if (checkRes.result.datas.allowExam == undefined && checkRes.result.message.split('于')[0] == '视频提交将') {
             // throw new Error('提交视频时间没到');
-
             // 平台登录修改时间
             await yssLogin.platfrom({
                 loginName: '13166',
                 password: 'Yss13166',
             })
             // 修改时间
-            await this.saveSubject({
+            await this.saveSubjectByInv({
                 shootEndDate: common.getCurrentTime(), // 录制截止时间（当前时间）
                 commitPaperEndDate: common.getCurrentTime(2), // 提交答卷截止时间(当前时间)
                 commitVideoStartDate: common.getCurrentTime(2), // 视频提交开始时间(当前时间)
@@ -549,6 +532,17 @@ class Invigilate extends examBase {
             await this.commitVideo()
         }
 
+    }
+
+    /** 考生考试结果断言 */
+    async assignDetailAssert () {
+        const detailData = await this.getAssignDetail();
+        let actual = detailData.result.datas.page.dataList[0]
+        // console.log(detailData.result.datas.page.dataList[0]);
+        let exp = {
+            videoUrl: this.videoUrl
+        }
+        common.isApproximatelyEqualAssert(exp, actual)
     }
 
 }
