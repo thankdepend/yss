@@ -188,6 +188,23 @@ class examBase {
         return assignDetail;
     }
 
+    /** 开始录制 */
+    async startRecord (params) {
+        const res = await stuApp.startRecord({
+            data: {
+                p: Object.assign({
+                    mirror: 2,
+                    // esId: this.esId,
+                    simulation: 2,
+                    // baoKaoId: this.baoKaoId,
+                    master: 1
+                }, params),
+                m: ""
+            }, ticket: TICKET
+        });
+        // console.log('开始录制', res);
+    }
+
     /** 校验照片是否是本人 */
     async checkAttestPhoto (params) {
         return await stuApp.attestPhoto(params);
@@ -196,6 +213,23 @@ class examBase {
     /** 保存截图 */
     async saveScreenshot (params) {
         return await stuApp.saveScreenshot(params)
+    }
+
+    /** 清除录制状态 */
+    async clearRecordStatus (params) {
+        const res = await stuApp.clearRecordStatus({
+            data: {
+                p: Object.assign({
+                    mirror: 2,
+                    // esId: this.esId,
+                    simulation: 2,
+                    // baoKaoId: this.baoKaoId,
+                    master: 1
+                }, params),
+                m: ""
+            }, ticket: TICKET
+        });
+        // console.log('清除录制状态', res);
     }
 
 }

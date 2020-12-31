@@ -38,6 +38,20 @@ describe('视频录制类', async function () {
         //     await transcribe.subjectInfoAssert()
         // });
     });
+    describe('开始录制', async function () {
+        it('开始录制', async function () {
+            await transcribe.startRecordByTran();
+        });
+        it('校验照片是否是本人', async function () {
+            await transcribe.checkAttestPhotoByInv()
+        });
+        it('保存截图', async function () {
+            await transcribe.checkAttestPhotoByTran()
+        });
+        it('清除录制状态', async function () {
+            await transcribe.clearRecordStatusByTran()
+        });
+    });
     describe('录制完成-保存次数', async function () {
         it('录制完成-保存次数', async function () {
             await transcribe.saveCount()

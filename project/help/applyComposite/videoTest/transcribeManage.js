@@ -112,8 +112,50 @@ class Transcribe extends examBase {
         }
     }
 
-}
+    /** 开始考试-视频录制类 */
+    async startRecordByTran () {
+        await this.startRecord({
+            esId: this.esId,
+            baoKaoId: this.baoKaoId,
+        });
+    }
 
+    /** 校验照片是否是本人-监考笔试类 */
+    async checkAttestPhotoByTran () {
+        const res = await this.checkAttestPhoto({
+            data: {
+                p: {
+                    videoCode: "v1609395849590",
+                    esId: this.esId,
+                    attestUrl: "http://art-video.artstudent.cn/photo/test/13166/1223644/1688/3348bde6ec7549dea989415ed5e55e54_uid1078675.jpg",
+                    svId: this.svId,
+                    kaoShengID: "247383",
+                    baoKaoId: this.baoKaoId,
+                    riChengId: this.riChengID,
+                    xueXiaoID: this.schoolId,
+                    retryTimes: 1,
+                    shenFenZH: LOGINDATA.loginName,
+                    zhuanYeId: this.zhuanYeId,
+                    fileSize: 994606,
+                    zhuanYeMC: this.zhuanYeMC,
+                    seId: "0",
+                    subjectCode: 2,
+                    subjectName: this.subjectName
+                },
+                m: ""
+            }, ticket: TICKET
+        })
+    }
+
+    /** 清除录制状态-视频录制类 */
+    async clearRecordStatusByTran () {
+        await this.clearRecordStatus({
+            esId: this.esId,
+            baoKaoId: this.baoKaoId,
+        })
+    }
+
+}
 const transcribeManage = module.exports = {};
 
 transcribeManage.setupTranscribe = function () {
