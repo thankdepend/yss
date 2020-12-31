@@ -109,6 +109,9 @@ describe('监考笔试', async function () {
         it('考生考试结果', async function () {
             await invigilate.assignDetailAssert()
         });
+        it('考生专业视频', async function () {
+            await invigilate.studentSubjectVideoListByinvAssert()
+        });
     });
 
 });

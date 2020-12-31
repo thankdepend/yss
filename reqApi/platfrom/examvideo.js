@@ -31,3 +31,13 @@ examvideo.getExaminerAssignDetailList = async function (params = {}) {
         pageSize: 15,
     }, params));
 };
+
+
+/**
+ * 考生专业视频列表-视频列表查询
+ * @param {Number} riChengId
+ * @param {Number} yongHuID
+ */
+examvideo.queryStudentSubjectVideoList = async function (params = {}) {
+    return common.sendPost(yssCaps.examvideo + '/auth/school/studentVideo/queryStudentSubjectVideoList.htm', params);
+};

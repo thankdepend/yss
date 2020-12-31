@@ -317,7 +317,26 @@ class Invigilate extends examBase {
         return res;
     }
 
+    /** 查询考生专业视频列表-监考笔试类 */
+    async queryStudentSubjectVideoListByinv () {
+        const res = await this.queryStudentSubjectVideoList({
+            riChengId: this.riChengID,
+            yongHuID: LOGINDATA.userId,
+            ticket: PLAT_TICKET
+        });
+        return res;
+    }
 
+    /** 考生考试查询-监考笔试类 */
+    async stuInfoDetail () {
+        const res = await this.stuInfoDetail({
+            baoKaoId: this.baoKaoId,
+            riChengId: this.riChengID,
+            userId: LOGINDATA.userId,
+            ticket: PLAT_TICKET
+        });
+        return res;
+    }
 
 
     /** 保存科目 */
@@ -543,6 +562,18 @@ class Invigilate extends examBase {
             videoUrl: this.videoUrl
         }
         common.isApproximatelyEqualAssert(exp, actual)
+    }
+
+    /**
+     * 查询考生专业视频列表-监考笔试类断言
+     */
+    async studentSubjectVideoListByinvAssert () {
+        const res = await this.queryStudentSubjectVideoListByinv();
+        // console.log(res.result.datas.stuVideoDOList.find(es => es.esId == this.esId));
+        let exp = {
+            videoUrl: this.videoUrl
+        }
+        common.isApproximatelyEqualAssert(exp, res.result.datas.stuVideoDOList.find(es => es.esId == this.esId))
     }
 
 }

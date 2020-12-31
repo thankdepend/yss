@@ -188,6 +188,17 @@ class examBase {
         return assignDetail;
     }
 
+    /** 考生专业视频列表查询 */
+    async queryStudentSubjectVideoList (params) {
+        const res = await examvideo.queryStudentSubjectVideoList(params)
+        return res;
+    }
+
+    /** 考生考试查询 */
+    async stuInfoDetail (params) {
+        return await school.stuInfoDetail(params)
+    }
+
     /** 开始录制 */
     async startRecord (params) {
         const res = await stuApp.startRecord({

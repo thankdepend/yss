@@ -375,7 +375,15 @@ school.examinationList = async function (params = {}) {
     return common.sendPost(yssCaps.school + '/auth/school/examination/examinationData.htm', params);
 };
 
-
+/**
+ * 考生考试详情
+ * @param {number} userId 用户id
+ * @param {number} riChengId 日程id
+ * @param {number} baoKaoId 报考id
+ */
+school.stuInfoDetail = async function (params = {}) {
+    return common.sendGet(yssCaps.school + '/auth/school/examstatistic/stuInfoDetail.htm?', params);
+};
 
 
 
