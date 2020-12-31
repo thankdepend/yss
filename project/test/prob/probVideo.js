@@ -1,9 +1,7 @@
-const yssLogin = require('../../help/yssLogin');
+const yssLogin = require('../../help/base/yssLogin');
 const xyk = require('../../../reqApi/app/xyk');
 const prob = require('../../../reqApi/app/prob');
-const {
-    common
-} = require('../../../lib/index');
+const { common } = require('../../../lib/index');
 
 describe('志愿视频', async function () {
     before('用户登录', async function () {

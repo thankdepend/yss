@@ -1,6 +1,6 @@
 const informationManage = require('../../help/hlq/informationManage');
-const yssLogin = require('../../help/yssLogin');
-const common = require('../../../lib/common');
+const yssLogin = require('../../help/base/yssLogin');
+const { common } = require('../../../lib/index');
 
 describe('资讯', async function () {
     this.timeout(TESTCASE.timeout);

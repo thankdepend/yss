@@ -1,5 +1,5 @@
-const guideManage = require('../../help/guideManage');
-const yssLogin = require('../../help/yssLogin');
+const guideManage = require('../../help/guide/guideManage');
+const yssLogin = require('../../help/base/yssLogin');
 const {
     common
 } = require('../../../lib/index');

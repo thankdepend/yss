@@ -1,4 +1,4 @@
-const yssLogin = require('../../help/yssLogin');
+const yssLogin = require('../../help/base/yssLogin');
 const wishFill = require('../../../reqApi/app/wishFill');
 const wish = require('../../../reqApi/app/wish');
 const prob = require('../../../reqApi/app/prob');

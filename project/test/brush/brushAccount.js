@@ -14,7 +14,7 @@ const argv = require('yargs').argv;
 // console.log(workSheetsFromFile[0].data[1][0]);
 
 
-describe('刷用户账号', async function () {
+describe.skip('刷用户账号', async function () {
     this.timeout(TESTCASE.timeout);
     before('平台登录', async function () {
         platFromInfo = await yysLogin.platfrom({

@@ -1,4 +1,4 @@
-const yssLogin = require('../../help/yssLogin');
+const yssLogin = require('../../help/base/yssLogin');
 const notice = require('../../../reqApi/platfrom/notice');
 const {
     common

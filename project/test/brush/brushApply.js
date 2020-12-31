@@ -15,7 +15,7 @@ const argv = require('yargs').argv;
  * @alias 报名
  */
 
-describe('考生报名', async function () {
+describe.skip('考生报名', async function () {
     this.timeout(TESTCASE.timeout);
     let college = collegeManage.setupCollege(),
         apply = applyManage.setupApply(),

@@ -1,5 +1,5 @@
 const teacherManage = require('../../help/eval/evalTeacherManage')
-const yssLogin = require('../../help/yssLogin');
+const yssLogin = require('../../help/base/yssLogin');
 const {
     common
 } = require('../../../lib/index');
@@ -15,14 +15,14 @@ describe('评画老师', async function () {
     describe('新增评画老师', async function () {
         before('新增', async function () {
             await teacher.saveTeacher({
-                ticket:PLAT_TICKET
+                ticket: PLAT_TICKET
             });
         });
         it('查询评画老师列表', async function () {
             await teacher.getTeacherList({
-                ticket:PLAT_TICKET
+                ticket: PLAT_TICKET
             });
         });
-        
+
     });
 });

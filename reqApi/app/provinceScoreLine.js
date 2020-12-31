@@ -1,4 +1,4 @@
-const common = require('../../lib/common');
+const { common } = require('../../lib/index');
 // const format = require('../../../data/format');
 const yssCaps = require('../../data/caps');
 const httpRequest = require('../../lib/httpRequest')

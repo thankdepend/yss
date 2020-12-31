@@ -2,14 +2,11 @@ const yssLogin = require('../../help/base/yssLogin');
 const doc = require('../../data/doc.json');
 const account = require('../../data/account');
 const school = require('../../../reqApi/platfrom/school');
-const {
-    common
-} = require('../../../lib/index');
+const { common } = require('../../../lib/index');
 const collegeManage = require('../../help/applyComposite/collegeManage');
 const applyManage = require('../../help/applyComposite/applyManage');
 const orderManage = require('../../help/order/orderManage');
 const caps = require('../../../data/caps');
-const { update } = require('../../../lib/commonFc');
 const argv = require('yargs').argv;
 
 /**

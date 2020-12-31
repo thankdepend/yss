@@ -3,7 +3,7 @@ const stu = require('../../../reqApi/app/stu');
 const examvideo = require('../../../reqApi/app/examVideo');
 const print = require('../../../reqApi/app/print')
 const fileCenter = require('../../../reqApi/app/fileCenter')
-const yssLogin = require('../../help/yssLogin')
+const yssLogin = require('../../help/base/yssLogin')
 
 // A部抓包
 

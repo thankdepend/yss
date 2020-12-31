@@ -179,4 +179,13 @@ caps.email = {
     // password: 'dpvxbrwcsaxoiggh',
 };
 
+caps.mysql = {
+    test: {
+        host: '192.168.18.203',
+        userName: 'root',
+        password: 'testtest',
+        port: 3307,
+    }
+}
+
 module.exports = caps;

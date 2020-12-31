@@ -175,7 +175,7 @@ stu.stuVideoSubjectList = async function (params = {}) {
 }
 
 /**
- * 抽考题
+ * 科目详情
  * @param {Object} data
  * @param {String} data.m 
  * @param {Object} data.p 
@@ -187,7 +187,7 @@ stu.stuVideoSubjectList = async function (params = {}) {
  * @param {String} data.p.baseRiChengId 基类日程id
  * @param {String} data.p.svId 视频id
  * @param {String} data.p.drawQuestion 抽题模式
- * @param {String} data.p.checkTimeType 检查时间类型
+ * @param {String} data.p.checkTimeType 检查时间类型 【1-校验看题开始时间 2-校验拍摄截止时间 3-校验提交视频开始时间】
  */
 stu.checkTimeByType = async function (params = {}) {
     return common.sendPost(yssCaps.stu + '/api/m/auth/video/check_time_by_type.htm', params);
@@ -213,12 +213,12 @@ stu.saveStudentExamStatus = async function (params = {}) {
  * @param {Object} data
  * @param {String} data.m 
  * @param {Object} data.p 
- * @param {Number} data.p.esId 
+ * @param {Number} data.p.esId 科目id
  * @param {Number} data.p.subjectName 科目名
  * @param {Number} data.p.riChengId 日程id
  * @param {Number} data.p.updateNum 更新数
  */
-stu.querySubjectVideoInfo = async function (params = {}) {
+stu.saveCount = async function (params = {}) {
     return common.sendPost(yssCaps.stu + '/api/m/auth/video/saveCount.htm', params);
 }
 
@@ -265,66 +265,74 @@ stu.queryOtherPlatformApplyData = async function (params = {}) {
 
 /**
  * 检查照片
- * @param {*} esId 科目id
- * @param {*} attestUrl
- * @param {*} svId
- * @param {*} kaoShengID
- * @param {*} baoKaoId
- * @param {*} riChengId
- * @param {*} master
- * @param {*} xueXiaoID
- * @param {*} retryTimes
- * @param {*} shenFenZH
- * @param {*} zhuanYeId
- * @param {*} fileSize
- * @param {*} zhuanYeMC
- * @param {*} seId
- * @param {*} subjectCode
- * @param {*} subjectName
+ * @param {Object} data
+ * @param {Object} data.p
+ * @param {String} data.p.videoCode 视频码
+ * @param {Number} data.p.esId 科目id
+ * @param {String} data.p.attestUrl 照片url
+ * @param {Number} data.p.svId 视频id
+ * @param {Number} data.p.kaoShengID 考生id
+ * @param {Number} data.p.baoKaoId 报考id
+ * @param {Number} data.p.riChengId 日程id
+ * @param {Number} data.p.master 
+ * @param {Number} data.p.xueXiaoID 学校id
+ * @param {Number} data.p.retryTimes 重试时间
+ * @param {String} data.p.shenFenZH 身份证
+ * @param {Number} data.p.zhuanYeId 专业id
+ * @param {Number} data.p.fileSize 文件大小
+ * @param {String} data.p.zhuanYeMC 专业名称
+ * @param {Number} data.p.seId
+ * @param {Number} data.p.subjectCode 科目码
+ * @param {String} data.p.subjectName 科目名称
+ * @param {String} data.m
  */
 stu.attestPhoto = async function (params = {}) {
     return common.sendPost(yssCaps.stu + '/api/m/auth/video/attestPhoto.ws', params);
 }
 
 /**
- * 提交视频
- * @param {*} esId
- * @param {*} videoFileSize
- * @param {*} svId
- * @param {*} kaoShengID
- * @param {*} baoKaoId
- * @param {*} riChengId
- * @param {*} shootTime
- * @param {*} recordPhoto
- * @param {*} photoAttachment
- * @param {*} master
- * @param {*} xueXiaoID
- * @param {*} stuVideoLength
- * @param {*} shenFenZH
- * @param {*} yongHuID
- * @param {*} videoUrl
- * @param {*} zhuanYeId
- * @param {*} supplement
- * @param {*} zhuanYeMC
- * @param {*} seId
- * @param {*} shootArea
- * @param {*} subjectCode
- * @param {*} subjectName
+ * 保存截图
+ * @param {Object} data
+ * @param {Object} data.p
+ * @param {String} data.p.screenshotUrl 截图url
+ * @param {Number} data.p.svId 视频id
+ * @param {String} data.m
  */
-stu.commitVideo = async function (params = {}) {
-    return common.sendPost(yssCaps.stu + '/api/m/auth/video/commitVideo.ws', params);
+stu.saveScreenshot = async function (params = {}) {
+    return common.sendPost(yssCaps.stu + '/api/m/auth/video/save_screenshot.ws', params);
+}
+
+/**
+ * 清除录制状态
+ * @param {Object} data
+ * @param {Object} data.p
+ * @param {Number} data.p.mirror 镜像
+ * @param {Number} data.p.esId 科目id
+ * @param {Number} data.p.simulation 是否模拟，1为正式
+ * @param {Number} data.p.baoKaoId 报考id
+ * @param {Number} data.p.master 1
+ * @param {String} data.m
+ */
+stu.clearRecordStatus = async function (params = {}) {
+    return common.sendPost(yssCaps.stu + '/api/m/auth/video/v20201219/clear_record_status.ws', params);
+}
+
+/**
+ * 开始录制
+ * @param {Object} data
+ * @param {Object} data.p
+ * @param {Number} data.p.mirror 镜像
+ * @param {Number} data.p.esId 科目id
+ * @param {Number} data.p.simulation 是否模拟，1为正式
+ * @param {Number} data.p.baoKaoId 报考id
+ * @param {Number} data.p.master 1
+ * @param {String} data.m
+ */
+stu.startRecord = async function (params = {}) {
+    return common.sendPost(yssCaps.stu + '/api/m/auth/video/v20201219/start_record.ws', params);
 }
 
 
-// /**
-//  * 检查考试时间到没到
-//  * @param {String} subjectName 科目名称
-//  * @param {Number} riChengId 日程id
-//  * @param {Number} esId 科目id
-//  */
-// stu.checkAllowToExam = async function (params = {}) {
-//     return common.sendPost(yssCaps.stu + '/api/m/auth/video/check_allow_to_exam.htm', params);
-// }
 
 /**
  * 报考专业查询接口(所有)
@@ -440,3 +448,52 @@ stu.checkMasterVideoUpload = async function (params = {}) {
 stu.checkAllowToExam = async function (params = {}) {
     return common.sendPost(yssCaps.stu + '/api/m/auth/video/check_allow_to_exam.htm', params);
 }
+
+/**
+ * 提交考试试卷
+ * @param {Number} xueXiaoId 学校id
+ * @param {String} subjectName 科目名
+ * @param {String} zhuanYeMC 专业名称
+ * @param {String} photoAttachment 照片地址
+ * @param {Number} baoKaoId 报考id
+ * @param {Number} yongHuID 用户id
+ * @param {Number} esId 科目id
+ * @param {Number} riChengId 日程id
+ */
+stu.commitPaper = async function (params = {}) {
+    return common.sendPost(yssCaps.stu + '/api/m/auth/video/commit_paper_by_union_mode.htm', params);
+}
+
+/**
+ * 提交考试试卷
+ * @param {Object} data
+ * @param {String} data.p
+ * @param {String} data.p.videoCode 视频码
+ * @param {String} data.p.ticket 
+ * @param {Number} data.p.esId 科目id
+ * @param {Number} data.p.videoFileSize 视频大小
+ * @param {Number} data.p.svId 视频id
+ * @param {Number} data.p.kaoShengID 考生id
+ * @param {Number} data.p.baoKaoId 报考id
+ * @param {Number} data.p.riChengId 日程id
+ * @param {Number} data.p.shootTime 拍摄时间
+ * @param {String} data.p.recordPhoto 录制照片url
+ * @param {String} data.p.photoAttachment  附加照片url
+ * @param {Number} data.p.xueXiaoID 学校id
+ * @param {Number} data.p.stuVideoLength 视频长度（秒）
+ * @param {String} data.p.shenFenZH 身份证
+ * @param {Number} data.p.yongHuID 用户id
+ * @param {String} data.p.videoUrl 视频url
+ * @param {Number} data.p.zhuanYeId 专业id
+ * @param {String} data.p.supplement
+ * @param {String} data.p.zhuanYeMC 专业名称
+ * @param {Number} data.p.seId
+ * @param {String} data.p.shootArea
+ * @param {Number} data.p.subjectCode 科目编号
+ * @param {String} data.p.subjectName 科目名称
+ * @param {String} data.m
+ */
+stu.commitVideo = async function (params = {}) {
+    return common.sendPost(yssCaps.stu + '/api/m/auth/video/commitVideo.ws', params);
+}
+

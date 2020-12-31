@@ -17,4 +17,14 @@ sys.checkVersion = async function (params = {}) {
     });
 };
 
+/**
+ * 查询网络考试消息通知
+ */
+sys.queryOnlineExamNews = async function (params = {}) {
+    return common.sendPost(yssCaps.sys + '/api/m/schoolNews/query_online_exam_news.htm', {
+        ...params
+    });
+};
+
+
 

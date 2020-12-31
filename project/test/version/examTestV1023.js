@@ -1,4 +1,4 @@
-const yssLogin = require('../../help/yssLogin');
+const yssLogin = require('../../help/base/yssLogin');
 const school = require('../../../reqApi/platfrom/school');
 
 
@@ -18,19 +18,19 @@ describe('加考题', async function () {
             paperName: '川美理论测试密卷A卷',
             orderNum: 5,
             questionItemJson: [{
-                    option: "A",
-                    description: '玛雅人',
-                }, {
-                    option: "B",
-                    description: '山顶洞人',
-                },
-                {
-                    option: "C",
-                    description: '罗马人',
-                }, {
-                    option: "D",
-                    description: '阿兹特克人',
-                }
+                option: "A",
+                description: '玛雅人',
+            }, {
+                option: "B",
+                description: '山顶洞人',
+            },
+            {
+                option: "C",
+                description: '罗马人',
+            }, {
+                option: "D",
+                description: '阿兹特克人',
+            }
             ],
             ticket: PLAT_TICKET
         })
@@ -45,19 +45,19 @@ describe('加考题', async function () {
             paperName: '川美理论测试密卷A卷',
             orderNum: 5,
             questionItemJson: [{
-                    option: "A",
-                    description: '玛雅人',
-                }, {
-                    option: "B",
-                    description: '山顶洞人',
-                },
-                {
-                    option: "C",
-                    description: '罗马人',
-                }, {
-                    option: "D",
-                    description: '阿兹特克人',
-                }
+                option: "A",
+                description: '玛雅人',
+            }, {
+                option: "B",
+                description: '山顶洞人',
+            },
+            {
+                option: "C",
+                description: '罗马人',
+            }, {
+                option: "D",
+                description: '阿兹特克人',
+            }
             ],
             ticket: PLAT_TICKET
         })

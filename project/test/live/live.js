@@ -1,10 +1,10 @@
-const liveManage = require('../../help/liveManage')
-const yssLogin = require('../../help/yssLogin');
+const liveManage = require('../../help/live/liveManage')
+const yssLogin = require('../../help/base/yssLogin');
 const caps = require('../../../data/caps');
 const account = require('../../data/account');
 const user = require('../../../reqApi/platfrom/user');
 const hulaquanApp = require('../../../reqApi/app/hulaquan');
-const common = require('../../../lib/common');
+const { common } = require('../../../lib/index');
 
 describe('直播', async function () {
     this.timeout(TESTCASE.timeout);

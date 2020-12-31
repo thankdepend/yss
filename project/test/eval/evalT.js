@@ -1,4 +1,4 @@
-const yssLogin = require('../../help/yssLogin');
+const yssLogin = require('../../help/base/yssLogin');
 const evalApp = require('../../../reqApi/app/eval');
 const {
     common
@@ -66,7 +66,7 @@ describe('评画', async function () {
                     teacherId: evaluationData.params.data.p.teacherId,
                     userDiscountsID: '',
                 }
-            } ,
+            },
             ticket: TICKET
         })
         console.log('订单', evalOrderData);
@@ -79,8 +79,8 @@ describe('评画', async function () {
     describe.skip('老师评画', async function () {
         before('老师登录', async function () {
             await yssLogin.clientLogin({
-                loginName:'330325',
-                password:'Csk001'
+                loginName: '330325',
+                password: 'Csk001'
             })
         });
         it('提交批改', async function () {
@@ -119,5 +119,5 @@ describe('评画', async function () {
             console.log(res);
         });
     });
-    
+
 });

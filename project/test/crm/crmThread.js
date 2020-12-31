@@ -1,10 +1,10 @@
-const yssLogin = require('../../help/yssLogin');
-const baseInfo = require('../../help/getBaseInfo');
+const yssLogin = require('../../help/base/yssLogin');
+const baseInfo = require('../../help/base/getBaseInfo');
 const account = require('../../data/account');
 const {
     common
 } = require('../../../lib/index');
-const crmManage = require('../../help/crmManage');
+const crmManage = require('../../help/crm/crmManage');
 const argv = require('yargs').argv;
 
 describe('留学部客户系统管理', async function () {

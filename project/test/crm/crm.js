@@ -1,7 +1,7 @@
 const crm = require('../../../reqApi/platfrom/crm');
 const wishApp = require('../../../reqApi/app/wish');
-const baseInfo = require('../../help/getBaseInfo');
-const yssLogin = require('../../help/yssLogin');
+const baseInfo = require('../../help/base/getBaseInfo');
+const yssLogin = require('../../help/base/yssLogin');
 const account = require('../../data/account');
 const {
     common
@@ -157,7 +157,7 @@ describe('留学部客户系统管理', async function () {
                             customerUserId: "70000145",
                             customerMobile: common.getRandomMobile(),
                             customerNickName: `mh-${common.getRandomStr(4)}`,
-                            customerIdCard: `${common.getRandomNum(100000000,9999999999)}`,
+                            customerIdCard: `${common.getRandomNum(100000000, 9999999999)}`,
                             extendsJson: JSON.stringify({
                                 countryName: willCountryList[common.getRandomNum(0, willCountryList.length - 1)],
                                 profName: '室内设计'

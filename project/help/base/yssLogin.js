@@ -21,7 +21,7 @@ yssLogin.clientLogin = async function (params) {
     const reqParams = Object.assign(userReq || {}, params);
 
     const res = await base.userLogin(reqParams);
-    console.log(res);
+    // console.log(res);
     LOGINDATA = res.result.datas.user
     TICKET = res.result.ticket
     return res;
@@ -43,7 +43,7 @@ yssLogin.platfrom = async function (params = {}) {
         delete params.userType;
     }
     let reqParams;
-    console.log(caps.name);
+    // console.log(caps.name);
     // 只传userType就去account取用户信息，什么都不传取account的ptzg信息，传了params且不为ptzg则取params
     let userReq = yssAccount[caps.name][userType];
     if (Object.keys(params).length != 0 && userType == 'ptzg') {

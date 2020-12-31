@@ -416,11 +416,11 @@ school.getTextConvertAudioUrl = async function (params = {}) {
  * @param {String} optRemark 测试打回
  */
 school.pwdAuth = async function (params = {}) {
-    return common.sendGet(yssCaps.school + '/auth/school/examstatistic/pwdAuth.htm', params);
+    return common.sendPost(yssCaps.school + '/auth/school/examstatistic/pwdAuth.htm', params);
 };
 
 /**
- * 视频打回
+ * 视频重拍
  * @param {Number} svId 考试视频id
  * @param {Number} authCode 密码
  * @param {String} optRemark 测试打回
@@ -428,6 +428,17 @@ school.pwdAuth = async function (params = {}) {
 school.resetVideo = async function (params = {}) {
     return common.sendGet(yssCaps.school + '/auth/school/examstatistic/resetVideo.htm', params);
 };
+
+/**
+ * 视频打回
+ * @param {Number} svId 考试视频id
+ * @param {Number} token 密码
+ * @param {String} optRemark 测试打回
+ */
+school.repulseVideo = async function (params = {}) {
+    return common.sendGet(yssCaps.school + '/auth/school/examstatistic/repulseVideo.htm?', params);
+};
+
 
 /**
  * 考题详情

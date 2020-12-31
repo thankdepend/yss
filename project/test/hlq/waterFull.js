@@ -1,6 +1,6 @@
 const waterFullManage = require('../../help/hlq/waterFullManage');
-const yssLogin = require('../../help/yssLogin');
-const baseInfo = require('../../help/getBaseInfo');
+const yssLogin = require('../../help/base/yssLogin');
+const baseInfo = require('../../help/base/getBaseInfo');
 
 describe('帖子', async function () {
     const waterFall = waterFullManage.setupWaterFull();

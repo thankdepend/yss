@@ -4,23 +4,7 @@
  * 
  */
 
-const h = {
-    schId: 65001,
-    errPhone: '',
-    errKaoShengHao: '',
-    err: '',
-    remark: '',
-    authCodeErr: '验证码错误',
-    partPhone: '',
-    zhengJianLX: 1,
-    shenFenZH: 500101197003075879,
-    kaoShengHao: 20500102011001,
-    shouJiHao: 13221197201,
-    yongHuKL: 'Csk001',
-    agginYongHuKL: 'Csk001',
-    authCode: 'wne35',
-    sid: 'c5f1c1d6344648a284f9f0c5079ea512',
-}
+const h = { "xueXiaoId": 13166, "subjectName": "美术中级（统一模式）", "zhuanYeMC": "美术", "photoAttachment": "http://art-video.artstudent.cn/img/test/13166/1223644/1688/74a10784889c4aa9a8def51f4fd5390b_uid1078675.jpg", "baoKaoId": 2628461, "yongHuID": 1078675, "esId": 1688, "riChengId": 11108259 }
 
 
 Object.keys(h).map((key) => {

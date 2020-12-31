@@ -8,7 +8,7 @@ const examvideo = module.exports = {};
 
 /**
  * 获取考生考试结果
- * @param {Number} showSubject: 1
+ * @param {Number} showSubject 1
  * @param {Number} showSchedule 1
  * @param {Number} kaoShiID 考试id
  * @param {Number} kaoDianID 考点id
@@ -31,6 +31,3 @@ examvideo.getExaminerAssignDetailList = async function (params = {}) {
         pageSize: 15,
     }, params));
 };
-
-
-

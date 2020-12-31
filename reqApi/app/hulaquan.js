@@ -1,6 +1,6 @@
 const httpRequest = require('../../lib/httpRequest')
 const yssCaps = require('../../data/caps');
-const common = require('../../lib/common');
+const { common } = require('../../lib/index');
 
 const hulaquan = module.exports = {};
 

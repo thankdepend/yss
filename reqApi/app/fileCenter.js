@@ -6,7 +6,7 @@ const fileCenter = module.exports = {};
 
 
 /**
- * OSS上传信息
+ * 查询OSS上传信息
  */
 fileCenter.ossUploadInfo = async function (params = {}) {
     return common.sendPost(yssCaps.fileCenter + '/api/m/auth/file/v202007/ossUploadInfo.ws', params);

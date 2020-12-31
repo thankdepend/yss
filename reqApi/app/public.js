@@ -20,7 +20,7 @@ public.getTopticList = async function (params = {}) {
  * @param {Object} data
  * @param {String} data.m
  * @param {Object} data.p
- * @param {String} data.p.modelCode 模式码 pic_hulaquan_live
+ * @param {String} data.p.modelCode 模式码 pic_hulaquan_live(直播)、pic_online_exam(网络考试)
  */
 public.getPictureList = async function (params = {}) {
     return httpRequest.sendPost(yssCaps.public + '/api/m/v1/banner/queryPictureList.htm', params);

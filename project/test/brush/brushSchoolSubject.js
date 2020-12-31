@@ -1,31 +1,18 @@
-const yysLogin = require('../../help/yssLogin');
-const wishFill = require('../../../reqApi/app/wishFill');
+const yysLogin = require('../../help/base/yssLogin');
 const {
     common
 } = require('../../../lib/index');
-const basicData = require('../../../data/basicData');
-const calculate = require('../../../lib/calculate');
-const platfromProb = require('../../../reqApi/platfrom/prob');
 const base = require('../../../reqApi/platfrom/base');
-const doc = require('../../data/doc.json');
 const school = require('../../../reqApi/platfrom/school');
-const collegeManage = require('../../help/collegeManage');
-const { collect } = require('underscore');
+const collegeManage = require('../../help/applyComposite/collegeManage');
 
 
-/**
- * 刷脚本模板参数
- */
-let modeType = {
-    twoCamera: true,
-    examTime: 99999,
-}
 
 
 /**
  * @alias 网络考试院校端 
  */
-describe('网络考试院校端', async function () {
+describe.skip('网络考试院校端', async function () {
     this.timeout(TESTCASE.timeout);
     let college = collegeManage.setupCollege();
     describe('设置报名', async function () {

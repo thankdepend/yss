@@ -1,8 +1,6 @@
-const yssLogin = require('../../help/yssLogin');
+const yssLogin = require('../../help/base/yssLogin');
 const stuApp = require('../../../reqApi/app/stu');
-const {
-    common
-} = require('../../../lib/index');
+const { common } = require('../../../lib/index');
 
 /**
  * @alias 选考模式

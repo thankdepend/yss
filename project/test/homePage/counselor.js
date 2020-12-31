@@ -1,6 +1,6 @@
-const counSelorManage = require('../../help/counSelorManage');
-const yssLogin = require('../../help/yssLogin');
-const baseInfo = require('../../help/getBaseInfo');
+const counSelorManage = require('../../help/homePage/counSelorManage');
+const yssLogin = require('../../help/base/yssLogin');
+const baseInfo = require('../../help/base/getBaseInfo');
 const user = require('../../../reqApi/platfrom/user');
 
 const argv = require('yargs').argv;

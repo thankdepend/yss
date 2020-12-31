@@ -1,5 +1,5 @@
 const abroadManage = require('../../help/abroad/abroadManage');
-const yssLogin = require('../../help/yssLogin')
+const yssLogin = require('../../help/base/yssLogin')
 const schoolTypeManage = require('../../help/abroad/schoolTypeManage');
 
 describe('留学', async function () {

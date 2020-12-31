@@ -1,4 +1,4 @@
-const yssLogin = require('../../help/yssLogin');
+const yssLogin = require('../../help/base/yssLogin');
 const xyk = require('../../../reqApi/app/xyk');
 const prob = require('../../../reqApi/app/prob');
 const pay = require('../../../reqApi/app/pay');

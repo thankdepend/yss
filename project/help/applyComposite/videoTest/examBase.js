@@ -1,4 +1,8 @@
 const stuApp = require('../../../../reqApi/app/stu');
+const school = require('../../../../reqApi/platfrom/school');
+const examvideo = require('../../../../reqApi/platfrom/examvideo')
+const { common } = require('../../../../lib/index');
+const mysql = require('mysql2');
 
 class examBase {
     constructor() {
@@ -6,6 +10,8 @@ class examBase {
         this.schoolId = 13166;
         /** 考试id */
         this.kaoShiId = 13047;
+        /** 考点id */
+        this.kaoDianID = 731;
         /** 报考id */
         this.baoKaoId = '';
         /** 日程池 */
@@ -22,9 +28,9 @@ class examBase {
      */
     async getRicheng (mode) {
         if (mode == '视频录制') {
-
+            return this.riChengObj.invigilate;
         } else if (mode == '监考笔试') {
-
+            return this.riChengObj.transcribe;
         } else if (mode == '客观题同时') {
 
         } else if (mode == '客观题非同时') {
@@ -32,52 +38,6 @@ class examBase {
         } else if (mode == '仅作品') {
 
         }
-    }
-
-    /** 获取视频录制日程 */
-    async getTranscribe () {
-
-    }
-
-    /** 获取监考笔试类日程 */
-    async getWritten () {
-
-    }
-
-    /** 保存考试状态 */
-    async saveStudentExamStatus () {
-        await stuApp.saveStudentExamStatus({
-            data: {
-                m: "",
-                p: {
-                    esId: 1701,
-                    baoKaoId: 2622186,
-                    examStatus: 200
-                }
-            }, ticket: TICKET
-        })
-    }
-
-    /** 查询考试科目列表 */
-    async querySubjectVideoList () {
-        const subjectList = await stuApp.querySubjectVideoList({
-            data: {
-                "m": "",
-                "p": {
-                    "riChengId": 11107838,
-                    "riChengID": 11107838,
-                    "baoKaoId": 2619297,
-                    "simulation": 0
-                }
-            }
-        })
-    }
-
-    /**
-     * 报名考试承诺书集合
-     */
-    async examPromiseAssemble () {
-
     }
 
     /** 考试承诺书 */
@@ -95,9 +55,86 @@ class examBase {
         });
     }
 
+    /** 获取考题列表 */
+    async examinationList (params) {
+        const examinationList = await school.examinationList(params);
+        return examinationList;
+    }
+
+
     /** 获取科目列表 */
     async getSubjectVideoList (params) {
         return await stuApp.querySubjectVideoList(params);
+    }
+
+    /**
+     * 院校科目题库列表
+     */
+    async getExaminationList () {
+        let examinationData;
+        const res = await this.examinationList({
+            kaoShiId: this.kaoShiId,
+            // zhuanYeId: this.zhuanYeId,
+            // esId: this.esId,
+            quesBankType: 1,
+            publishFlag: 1,
+            examType: 2,
+            examinationBatchNo: 0,
+            checkFlag: 1,
+            curPage: 1,
+            pageSize: 15,
+            ticket: PLAT_TICKET
+        })
+        examinationData = res.result.datas.page.dataList;
+        // console.log('题库列表', res.result.datas.page.dataList);
+        let arr = [];
+        for (let examination of examinationData) {
+            let kaoTi = await this.getKaoTiDetail(examination.tiId)
+            examination.kaoTi = kaoTi;
+            arr.push(examination)
+        }
+        return examinationData;
+    }
+
+    /**
+     * 取考题
+     */
+    async getKaoTiDetail (tiId) {
+        const res = await school.kaoTiDetail({
+            tiId: tiId,
+            ticket: PLAT_TICKET,
+        });
+        const kaoTi = res.res.text.split('<p>')[1].split('</p>')[0]
+        return kaoTi;
+    }
+
+    /**
+     * 进考场（科目列表）
+     */
+    async underwayExam (params) {
+        await this._getBaoKaoId();
+        const subjectData = await this.getSubjectVideoList({
+            data: {
+                m: "",
+                p: Object.assign({
+                    // riChengId: this.riChengID,
+                    // riChengID: this.riChengID,
+                    baoKaoId: this.baoKaoId,
+                    simulation: 0
+                }, params)
+            },
+            ticket: TICKET
+        })
+
+        this.subjectName = subjectData.result.datas.data.subjectList.find(obj => obj.esId == this.esId).subjectName;
+        this.subjectList = subjectData.result.datas.data
+
+        const svId = subjectData.result.datas.data.subjectList.find(obj => obj.esId == this.esId).svId;
+        const obj = {
+            svId: svId,
+            zhuanYeMC: subjectData.result.datas.data.zhuanYeMC
+        }
+        return obj;
     }
 
     /** 获取考试专业 */
@@ -109,9 +146,56 @@ class examBase {
         return examProfRes;
     }
 
+    /** 获取报考id */
     async _getBaoKaoId () {
         const examProf = await this.getExamProf();
         this.baoKaoId = examProf.result.datas.list[0].baoKaoID;
+    }
+
+    /** 连接数据库 */
+    async createPool () {
+        const pool = mysql.createPool({
+            user: 'root',
+            password: 'testtest',
+            host: '192.168.18.203',
+            port: 3307,
+            database: 'befexam',
+            // charset: 'utf8mb4',
+        });
+        return pool.promise();
+    };
+
+    /**
+     * 后台-考生考试结果查询
+     */
+    async getExaminerAssignDetailList (params) {
+        const assignDetail = await examvideo.getExaminerAssignDetailList(Object.assign({
+            showSubject: 1,
+            showSchedule: 1,
+            kaoShiID: '',
+            kaoDianID: '',
+            riChengId: '',
+            riChengID: '',
+            esId: '',
+            videoLengthComPare: '',
+            commitFlag: '',
+            paperCommitFlag: '',
+            stuIDCard: '',
+            stuName: '',
+            zhunKaoZH: '',
+        }, params))
+        // console.log(assignDetail);
+        return assignDetail;
+    }
+
+    /** 校验照片是否是本人 */
+    async checkAttestPhoto (params) {
+        return await stuApp.attestPhoto(params);
+    }
+
+    /** 保存截图 */
+    async saveScreenshot (params) {
+        return await stuApp.saveScreenshot(params)
     }
 
 }

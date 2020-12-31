@@ -1,7 +1,7 @@
-const yysLogin = require('../../help/yssLogin');
+const yysLogin = require('../../help/base/yssLogin');
 const wishFill = require('../../../reqApi/app/wishFill');
 const wish = require('../../../reqApi/app/wish');
-const common = require('../../../lib/common');
+const { common } = require('../../../lib/index');
 const provinceScoreLine = require('../../../reqApi/app/provinceScoreLine');
 const basicData = require('../../../data/basicData');
 const check = require('../../../lib/assert');

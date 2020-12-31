@@ -1,11 +1,9 @@
 // const factionalismManage = require('../../help/hlq/factionalismManage')
 const Faction = require('../../help/hlq/factionalismManage')
-const yssLogin = require('../../help/yssLogin');
-const {
-    saveType
-} = require('../../../reqApi/platfrom/hulaquan');
-const common = require('../../../lib/common');
-const baseInfo = require('../../help/getBaseInfo');
+const yssLogin = require('../../help/base/yssLogin');
+const hulaquan = require('../../../reqApi/platfrom/hulaquan');
+const { common } = require('../../../lib/index');
+const baseInfo = require('../../help/base/getBaseInfo');
 
 describe('圈子', async function () {
     this.timeout(TESTCASE.timeout);
