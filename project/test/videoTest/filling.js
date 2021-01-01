@@ -18,7 +18,7 @@ const argv = require('yargs').argv;
  */
 
 for (let i = 1; i <= 1; i++) {
-    describe('完善信息与审核', async function () {
+    describe.skip('完善信息与审核', async function () {
         this.timeout(TESTCASE.timeout);
         const fill = fillManage.setupFill();
         before('登录', async function () {

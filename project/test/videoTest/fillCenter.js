@@ -8,7 +8,7 @@ const {
  * @alias 视频上传
  */
 
-describe('视频上传', async function () {
+describe.skip('视频上传', async function () {
     this.timeout(TESTCASE.timeout);
     before('用户登录', async function () {
         loginAccount = {

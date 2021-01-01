@@ -1,8 +1,8 @@
 const yssLogin = require('../../help/base/yssLogin');
-const stu = require('../../../reqApi/app/stu');
+const stuApp = require('../../../reqApi/app/stu');
 
 // 需要一个已报名的人
-describe('客观题', async function () {
+describe.skip('客观题', async function () {
     before('考生登录', async function () {
         await yssLogin.clientLogin({
             loginName: '330331',
