@@ -3,7 +3,6 @@ const stuApp = require('../../../reqApi/app/stu');
 const { common } = require('../../../lib/index');
 
 /**
- * @alias 选考模式
  * @alias 选考模式()
  */
 
