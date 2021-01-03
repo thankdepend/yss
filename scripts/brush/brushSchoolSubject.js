@@ -1,10 +1,10 @@
-const yysLogin = require('../../help/base/yssLogin');
+const yysLogin = require('../../project/help/base/yssLogin');
 const {
     common
-} = require('../../../lib/index');
-const base = require('../../../reqApi/platfrom/base');
-const school = require('../../../reqApi/platfrom/school');
-const collegeManage = require('../../help/applyComposite/collegeManage');
+} = require('../../lib/index');
+const base = require('../../reqApi/platfrom/base');
+const school = require('../../reqApi/platfrom/school');
+const collegeManage = require('../../project/help/applyComposite/collegeManage');
 
 
 

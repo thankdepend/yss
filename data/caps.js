@@ -115,7 +115,7 @@ let caps = {
     crm: 'http://crm.51bm.net.cn',
     xyk: 'http://xyk.51bm.net.cn',
     print: 'http://print.51bm.net.cn',
-    eval: 'eval.51bm.net.cn',
+    eval: 'http://eval.51bm.net.cn',
     advert: 'http://advert.51bm.net.cn',
     examvideo: 'http://examvideo.51bm.net.cn',
     sys: 'http://sys.51bm.net.cn',

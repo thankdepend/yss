@@ -1,13 +1,13 @@
-const user = require('../../../reqApi/app/user');
-const stu = require('../../../reqApi/app/stu');
-const examvideo = require('../../../reqApi/app/examVideo');
-const print = require('../../../reqApi/app/print')
-const fileCenter = require('../../../reqApi/app/fileCenter')
-const yssLogin = require('../../help/base/yssLogin')
+const user = require('../../reqApi/app/user');
+const stu = require('../../reqApi/app/stu');
+const examvideo = require('../../reqApi/app/examVideo');
+const print = require('../../reqApi/app/print')
+const fileCenter = require('../../reqApi/app/fileCenter')
+const yssLogin = require('../../project/help/base/yssLogin')
 
 // A部抓包
 
-describe('报名', async function () {
+describe.skip('报名', async function () {
     before('', async function () {
 
     });
@@ -83,7 +83,7 @@ describe('报名', async function () {
     });
 });
 
-describe('网络考试(普通模式)', async function () {
+describe.skip('网络考试(普通模式)', async function () {
     before('考生登录', async function () {
         // http://user.51bm.net.cn/login
         await yssLogin.clientLogin()
@@ -192,7 +192,7 @@ describe('网络考试(普通模式)', async function () {
     });
 });
 
-describe('网络考试(客观题-同时考)', async function () {
+describe.skip('网络考试(客观题-同时考)', async function () {
     before('考生登录', async function () {
         // http://user.51bm.net.cn/login
         await yssLogin.clientLogin()
@@ -282,8 +282,4 @@ describe('网络考试(客观题-同时考)', async function () {
             data: { "p": { "ticket": "oJ0neJmEMv$2VG1jOVBRPT07TlRjeE56VStOekF4TmpjPTs2Ng==", "esId": 895, "videoFileSize": 163965222, "svId": 2764, "kaoShengID": "246682", "baoKaoId": 2619414, "riChengId": 11107838, "shootTime": "1604578366610", "recordPhoto": "http://art-video.artstudent.cn/photo/demo/13166/1223644/895/8b4bca0f878f41a0b5957585df082062_uid1076183.jpg", "photoAttachment": "http://art-video.artstudent.cn/img/demo/13166/1223644/895/e7c69764aab24fbea53fc535c1c1cfab_uid1076183.jpg;http://art-video.artstudent.cn/img/demo/13166/1223644/895/372666e7c7ac4683a565d63c1a642e5d_uid1076183.jpg", "master": 1, "xueXiaoID": 13166, "stuVideoLength": "556", "shenFenZH": "330329", "yongHuID": 1076183, "videoUrl": "http://art-video.artstudent.cn/pr/demo/13166/1223644/895/54b3debdd81542679e68b1d9c94c3355_uid1076183.mp4", "zhuanYeId": 1223644, "supplement": "", "zhuanYeMC": "美术", "seId": "", "shootArea": " ", "subjectCode": "1", "subjectName": "美术理论（普通）" }, "m": "" }
         })
     });
-});
-
-describe('', async function () {
-
 });

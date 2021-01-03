@@ -1,11 +1,11 @@
 const {
     common
-} = require('../../../lib/index');
-const user = require('../../../reqApi/platfrom/user');
-const account = require('../../data/account');
-const yysLogin = require('../../help/base/yssLogin');
+} = require('../../lib/index');
+const user = require('../../reqApi/platfrom/user');
+const account = require('../../project/data/account');
+const yysLogin = require('../../project/help/base/yssLogin');
 const request = require('superagent');
-const stu = require('../../../reqApi/app/stu');
+const stu = require('../../reqApi/app/stu');
 const fs = require('fs');
 const xlsx = require('node-xlsx');
 const argv = require('yargs').argv;
@@ -23,10 +23,10 @@ describe.skip('刷用户账号', async function () {
         console.log('平台登录', platFromInfo);
     });
     it('创建考生号', async function () {
-        for (let a = 1; a <= 100; a++) {
+        for (let a = 41; a <= 45; a++) {
             let params = {
                 // yongHuMing: `${workSheetsFromFile[0].data[a][0]}`,
-                yongHuMing: `xycs${a}`,
+                yongHuMing: `heilang${a}`,
                 yongHuKL: argv.env == 'test' ? 'Csk001' : argv.env == 'pre' ? 'Ysk002' : 'Kfk001',
                 agginYongHuKL: argv.env == 'test' ? 'Csk001' : argv.env == 'pre' ? 'Ysk002' : 'Kfk001',
                 yongHuLB: 100,

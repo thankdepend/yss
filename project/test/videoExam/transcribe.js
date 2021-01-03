@@ -43,7 +43,7 @@ describe('视频录制类', async function () {
             await transcribe.startRecordByTran();
         });
         it('校验照片是否是本人', async function () {
-            await transcribe.checkAttestPhotoByInv()
+            await transcribe.checkAttestPhotoByTran()
         });
         it('保存截图', async function () {
             await transcribe.checkAttestPhotoByTran()

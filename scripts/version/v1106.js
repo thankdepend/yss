@@ -1,5 +1,5 @@
-const stuApp = require('../../../reqApi/app/stu');
-const yssLogin = require('../../help/base/yssLogin');
+const stuApp = require('../../reqApi/app/stu');
+const yssLogin = require('../../project/help/base/yssLogin');
 
 describe('接口测试', async function () {
     before('客户登录', async function () {

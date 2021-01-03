@@ -222,14 +222,19 @@ fillManage.setupFill = function () {
 }
 
 fillManage.mockExamineeJson = function (params) {
-    // let province = common.getRandomProvince();
+    let province = common.getRandomProvince();
     let randomHs = common.getRandomNum(1, 5);
 
-    let province = {
-        provinceName: '四川省',
-        provinceCode: 510000,
-        provinceSxCode: 51,
-    }
+    // let province = {
+    //     provinceName: '广东省',
+    //     provinceCode: 440000,
+    //     provinceSxCode: 44,
+    // }
+
+    // let params = {
+    //     // 广东
+    //     kaoShengHao: `${21}${province.provinceSxCode}${common.getRandomNum(100000, 999990)}`,
+    // }
     let examineeJson = {
         data: {
             m: "",
@@ -254,7 +259,8 @@ fillManage.mockExamineeJson = function (params) {
                 zhengZhiMM: `${common.getRandomNum(1, 2) == 1 ? '团员' : '党员'}`,
                 suoZaiXX: `${province.provinceName.slice(0, 2)}一中`, // 文化课学校
                 suoZaiHS: `${randomHs == 1 ? '老鹰' : randomHs == 2 ? '将军' : randomHs == 3 ? '大象' : randomHs == 4 ? '白塔岭' : '厚一'}画室`, // 培训学校
-                kaoShengHao: `${common.add(common.getCurrentDate().split('-').join(',').slice(2, 4), 1)}${province.provinceSxCode}${common.getRandomNum(1000000000, 9999999999)}`,
+                // kaoShengHao: `${common.add(common.getCurrentDate().split('-').join(',').slice(2, 4), 1)}${province.provinceSxCode}${common.getRandomNum(1000000000, 9999999999)}`,
+                kaoShengHao: `${21}${province.provinceSxCode}${common.getRandomNum(1000000000, 9999999999)}`,
                 yingWangJie: "应届",
                 wenLiKe: common.getProvinceWenliKe(province.provinceName),
                 name: [common.getRandomStr(3)],

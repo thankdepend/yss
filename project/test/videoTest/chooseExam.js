@@ -6,7 +6,7 @@ const { common } = require('../../../lib/index');
  * @alias 选考模式
  */
 
-describe('选考', async function () {
+describe.skip('选考', async function () {
     this.timeout(TESTCASE.timeout);
     before('用户登录', async function () {
         loginAccount = {
