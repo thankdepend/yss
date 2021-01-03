@@ -115,7 +115,7 @@ let caps = {
     crm: 'http://crm.51bm.net.cn',
     xyk: 'http://xyk.51bm.net.cn',
     print: 'http://print.51bm.net.cn',
-    eval: 'eval.51bm.net.cn',
+    eval: 'http://eval.51bm.net.cn',
     advert: 'http://advert.51bm.net.cn',
     examvideo: 'http://examvideo.51bm.net.cn',
     sys: 'http://sys.51bm.net.cn',
@@ -137,7 +137,7 @@ if (envName == 'test') {
         notice: 'http://192.168.18.202:10800',
         monitor: 'http://192.168.18.202:10900',
         sys: 'http://192.168.18.202:11000',
-        hlq: 'http://192.168.18.202:12000',
+        hulaquan: 'http://192.168.18.202:12000',
         report: 'http://192.168.18.202:13000',
         advert: 'http://192.168.18.202:15000',
         xyk: 'http://192.168.18.202:16000',
@@ -156,9 +156,9 @@ if (envName == 'test') {
         examvideo: 'http://192.168.18.202:24000',
         course: 'http://192.168.18.202:25000',
         live: 'http://192.168.18.202:26000',
-        evaluation: 'http://192.168.18.202:27000',
+        eval: 'http://192.168.18.202:27000',
         examlog: 'http://192.168.18.202:28000',
-        crmApi: 'http://192.168.18.202:40000',
+        crm: 'http://192.168.18.202:40000',
     }
 }
 

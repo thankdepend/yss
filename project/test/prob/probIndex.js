@@ -9,7 +9,7 @@ const calculate = require('../../../lib/calculate');
 const platfromProb = require('../../../reqApi/platfrom/prob');
 
 
-describe('录取概率首页', function () {
+describe.skip('录取概率首页', function () {
     this.timeout(TESTCASE.timeout);
     let loginInfo, ModifyNum, time = Date.now();;
     before('登录', async function () {

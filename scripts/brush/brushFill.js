@@ -1,11 +1,11 @@
 const {
     common
-} = require('../../../lib/index');
-const yysLogin = require('../../help/base/yssLogin');
-const fillManage = require('../../help/applyComposite/fillManage');
-const caps = require('../../../data/caps');
-const account = require('../../data/account');
-const audit = require('../../../reqApi/platfrom/audit')
+} = require('../../lib/index');
+const yysLogin = require('../../project/help/base/yssLogin');
+const fillManage = require('../../project/help/applyComposite/fillManage');
+const caps = require('../../data/caps');
+const account = require('../../project/data/account');
+const audit = require('../../reqApi/platfrom/audit')
 const fs = require('fs');
 const xlsx = require('node-xlsx');
 const argv = require('yargs').argv;

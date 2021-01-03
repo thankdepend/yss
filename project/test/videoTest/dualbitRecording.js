@@ -5,7 +5,7 @@ const examvideo = require('../../../reqApi/platfrom/examvideo');
 const school = require('../../../reqApi/platfrom/school');
 const { common } = require('../../../lib/index');
 
-describe('双机位网络考试', async function () {
+describe.skip('双机位网络考试', async function () {
     this.timeout(TESTCASE.timeout);
     before('主机登录', async function () {
         await yssLogin.clientLogin({

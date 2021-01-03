@@ -1,14 +1,14 @@
-const yssLogin = require('../../help/base/yssLogin');
-const doc = require('../../data/doc.json');
-const account = require('../../data/account');
-const school = require('../../../reqApi/platfrom/school');
+const yssLogin = require('../../project/help/base/yssLogin');
+const doc = require('../../project/data/doc.json');
+const account = require('../../project/data/account');
+const school = require('../../reqApi/platfrom/school');
 const {
     common
-} = require('../../../lib/index');
-const collegeManage = require('../../help/applyComposite/collegeManage');
-const applyManage = require('../../help/applyComposite/applyManage');
-const orderManage = require('../../help/order/orderManage');
-const caps = require('../../../data/caps');
+} = require('../../lib/index');
+const collegeManage = require('../../project/help/applyComposite/collegeManage');
+const applyManage = require('../../project/help/applyComposite/applyManage');
+const orderManage = require('../../project/help/order/orderManage');
+const caps = require('../../data/caps');
 const argv = require('yargs').argv;
 
 /**

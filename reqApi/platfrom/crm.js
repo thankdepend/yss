@@ -35,7 +35,7 @@ crm.login = async function (params = {}) {
  * @param {String} customerSource 线索来源[1,2,3,4,5]
  */
 crm.publicListCustomer = async function (params = {}) {
-    return common.crmPost(yssCaps.crm + '/auth/org/orgCustomer/listCustomer.htm', params);
+    return common.sendPost(yssCaps.crm + '/auth/org/orgCustomer/listCustomer.htm', params);
 };
 
 /**
