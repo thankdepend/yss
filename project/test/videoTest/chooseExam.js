@@ -4,6 +4,7 @@ const { common } = require('../../../lib/index');
 
 /**
  * @alias 选考模式
+ * @alias 选考模式()
  */
 
 describe.skip('选考', async function () {
