@@ -1,5 +1,5 @@
 const { random } = require('lodash');
-const { common } = require('../lib/index')
+const { common } = require('../../lib/index')
 let a = '2021-01-03'
 const list = a.split('-')
 // console.log(list[0].slice(2, 4));

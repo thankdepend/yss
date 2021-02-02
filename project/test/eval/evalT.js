@@ -5,7 +5,7 @@ const {
 } = require('../../../lib/index');
 const pay = require('../../../reqApi/app/pay');
 
-describe('评画', async function () {
+describe.skip('评画', async function () {
     let evaluationData, evalOrderData;
     this.timeout(TESTCASE.timeout);
     before('登录', async function () {

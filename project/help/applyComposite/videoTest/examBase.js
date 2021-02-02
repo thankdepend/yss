@@ -7,18 +7,18 @@ const mysql = require('mysql2');
 class examBase {
     constructor() {
         /** 学校id */
-        this.schoolId = 13166;
+        this.schoolId = 70355;
         /** 考试id */
-        this.kaoShiId = 13047;
+        this.kaoShiId = 13177;
         /** 考点id */
-        this.kaoDianID = 731;
+        this.kaoDianID = 906;
         /** 报考id */
         this.baoKaoId = '';
         /** 日程池 */
         this.richengMap = new Map();
         /** */
         this.riChengObj = {
-            invigilate: 11108259, // 监考笔试
+            invigilate: 11109903, // 11108259 监考笔试
             transcribe: 11108259, // 视频录制
         }
     }
@@ -149,6 +149,7 @@ class examBase {
     /** 获取报考id */
     async _getBaoKaoId () {
         const examProf = await this.getExamProf();
+        // console.log('查看报考信息', examProf);
         this.baoKaoId = examProf.result.datas.list[0].baoKaoID;
     }
 

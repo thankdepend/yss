@@ -39,7 +39,13 @@
             ]
         },
         "other": [
-            "http://img.artstudent.cn/pr/2020-08-18/8728bfaa9fea487ea0ef2c9832d30e76.jpeg"
+            "http://img.artstudent.cn/pr/2020-08-18/8728bfaa9fea487ea0ef2c9832d30e76.jpeg",
+            "http://img.artstudent.cn/pr/2021-01-12/d82d093c528f40bbbb987c785d826e5d.jpg",
+            "http://img.artstudent.cn/pr/2021-01-12/3343f0623df14b76a25343fc124e9b1f.jpg",
+            "http://img.artstudent.cn/pr/2021-01-12/8e6a766d56c2452fa09e3fa93cb061ac.jpg",
+            "http://img.artstudent.cn/pr/2021-01-12/4aea9f295f1c43e79baf88188c67e57d.jpg",
+            "http://img.artstudent.cn/pr/2021-01-12/17718a1672fe4696b65e086f82bc7e69.jpg",
+            "http://img.artstudent.cn/pr/2021-01-12/8118e3d485b94d5c9bcd8f37950f9ceb.jpg"
         ],
         "voice": [
             "http://img.artstudent.cn/pr/2020-12-02/7c89b6d2979b42b7b1f8d64135bd0db6.mp3"
@@ -75,6 +81,7 @@
             "absenteeUrl":[
                 "http://img.artstudent.cn/pr/2020-11-08/7b6fb993a06448d6bd2472ddfc73867a.png"
             ]
+            
         },
         "video": {
             "shortUrl": [
@@ -85,7 +92,13 @@
             ]
         },
         "other": [
-            "http://img.artstudent.cn/pr/2020-08-18/8728bfaa9fea487ea0ef2c9832d30e76.jpeg"
+            "http://img.artstudent.cn/pr/2020-08-18/8728bfaa9fea487ea0ef2c9832d30e76.jpeg",
+            "http://img.artstudent.cn/pr/2021-01-12/d82d093c528f40bbbb987c785d826e5d.jpg",
+            "http://img.artstudent.cn/pr/2021-01-12/3343f0623df14b76a25343fc124e9b1f.jpg",
+            "http://img.artstudent.cn/pr/2021-01-12/8e6a766d56c2452fa09e3fa93cb061ac.jpg",
+            "http://img.artstudent.cn/pr/2021-01-12/4aea9f295f1c43e79baf88188c67e57d.jpg",
+            "http://img.artstudent.cn/pr/2021-01-12/17718a1672fe4696b65e086f82bc7e69.jpg",
+            "http://img.artstudent.cn/pr/2021-01-12/8118e3d485b94d5c9bcd8f37950f9ceb.jpg"
         ]
     },
     "dev": {

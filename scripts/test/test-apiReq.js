@@ -1,6 +1,6 @@
 const { before } = require('lodash');
-const yssLogin = require('./../project/help/base/yssLogin');
-const stu = require('../reqApi/app/stu');
+const yssLogin = require('../../project/help/base/yssLogin');
+const stu = require('../../reqApi/app/stu');
 
 describe('登录测试', async function () {
     let siteInfo;

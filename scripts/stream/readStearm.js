@@ -12,9 +12,9 @@ console.log(imgBuf);
 
 // 创建一个bufferstream
 var bufferStream = new stream.PassThrough();
-//将Buffer写入
+// 将Buffer写入
 bufferStream.end(new Buffer('Test data.'));
-//进一步使用
+// 进一步使用
 const a = bufferStream.pipe(process.stdout)
 console.log('流', a);
 

@@ -232,10 +232,10 @@ school.saveExamProfSub = async function (params = {}) {
 };
 
 /**
- * 查询专业考试科目详情
+ * 查询考试专业
  * @param {number} kaoShiID 考试id
  */
-school.examProfgetDetail = async function (params = {}) {
+school.examProf = async function (params = {}) {
     return common.sendPost(yssCaps.school + '/auth/util/examProf.htm', params);
 };
 

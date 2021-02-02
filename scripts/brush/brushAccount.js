@@ -14,7 +14,7 @@ const argv = require('yargs').argv;
 // console.log(workSheetsFromFile[0].data[1][0]);
 
 
-describe.skip('刷用户账号', async function () {
+describe('刷用户账号', async function () {
     this.timeout(TESTCASE.timeout);
     before('平台登录', async function () {
         platFromInfo = await yysLogin.platfrom({
@@ -23,10 +23,10 @@ describe.skip('刷用户账号', async function () {
         console.log('平台登录', platFromInfo);
     });
     it('创建考生号', async function () {
-        for (let a = 41; a <= 45; a++) {
+        for (let a = 87; a <= 95; a++) {
             let params = {
                 // yongHuMing: `${workSheetsFromFile[0].data[a][0]}`,
-                yongHuMing: `heilang${a}`,
+                yongHuMing: `lj100${a}`,
                 yongHuKL: argv.env == 'test' ? 'Csk001' : argv.env == 'pre' ? 'Ysk002' : 'Kfk001',
                 agginYongHuKL: argv.env == 'test' ? 'Csk001' : argv.env == 'pre' ? 'Ysk002' : 'Kfk001',
                 yongHuLB: 100,

@@ -9,7 +9,7 @@ const {
 const info = require('../../../reqApi/app/info');
 const argv = require('yargs').argv;
 
-describe('留学部客户系统管理', async function () {
+describe.skip('留学部客户系统管理', async function () {
     this.timeout(TESTCASE.timeout);
     let willCountryList = ['英国', '韩国', '俄罗斯', '意大利', '德国', '日本', '美国', '澳大利亚', '其他'];
     before('crm登录ticket获取', async function () {

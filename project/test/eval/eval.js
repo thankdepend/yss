@@ -8,7 +8,7 @@ const { slice } = require('lodash');
 const doc = require("../../data/doc.json");
 const caps = require("../../../data/caps");
 
-describe('评画老师', async function () {
+describe.skip('评画老师', async function () {
     let teacher;
     this.timeout(TESTCASE.timeout);
     const eval = evalManage.setupEvaluation();

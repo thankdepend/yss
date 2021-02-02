@@ -7,7 +7,7 @@ const {
 const crmManage = require('../../help/crm/crmManage');
 const argv = require('yargs').argv;
 
-describe('留学部客户系统管理', async function () {
+describe.skip('留学部客户系统管理', async function () {
     this.timeout(TESTCASE.timeout);
     const crm = crmManage.setupCrm();
     before('crm登录ticket获取', async function () {

@@ -6,7 +6,7 @@ const {
     common
 } = require('../../../lib/index');
 
-describe('电子周刊', async function () {
+describe.skip('电子周刊', async function () {
     let orderId;
     before('用户登录', async function () {
         await yssLogin.clientLogin({

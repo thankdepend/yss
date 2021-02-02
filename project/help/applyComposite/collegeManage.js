@@ -326,7 +326,11 @@ class College {
      * 保存考试专业科目
      */
     async saveSubject (params) {
+        // 专业id和考试id一定要在这个位置更新
+        this.profId = params.profId;
+        this.kaoShiID = params.kaoShiID;
 
+        // 获取最大科目数
         const total = await this.getMaxTotalSub(params);
 
         const res = await school.saveExamProfSub({
@@ -344,15 +348,15 @@ class College {
                 }, params)],
             ticket: PLAT_TICKET
         });
-        // console.log('examProfSubject', res.params.examProfSubject);
-        // console.log('保存考试专业科目', res);
+
         // 获取科目id
         const esId = await this.getEsid();
-        this.kaoShiID = params.kaoShiID;
-        this.profId = params.profId;
-        this.esId = esId
-        this.kaoShizyID = await this.getKaoShiZyId();
 
+
+        this.esId = esId
+        console.log(esId);
+        this.kaoShizyID = await this.getKaoShiZyId();
+        return total + 1;
     }
 
     /**
@@ -360,13 +364,22 @@ class College {
      */
     async getEsid () {
         let totalNum = await this.getMaxTotalSub()
+        console.log('考试id', this.kaoShiID);
         const esId = await school.getSubjectList({
             kaoShiID: this.kaoShiID,
-            zhuanYeID: 0,
+            zhuanYeID: this.profId,
             curPage: 1,
             pageSize: totalNum,
             ticket: PLAT_TICKET
         }).then(res => res.result.datas.page.dataList[res.result.datas.page.dataList.length - 1].esId)
+        // const subjectList = await school.getSubjectList({
+        //     kaoShiID: this.kaoShiID,
+        //     zhuanYeID: this.profId,
+        //     curPage: 1,
+        //     // pageSize: totalNum,
+        //     ticket: PLAT_TICKET
+        // })
+        // console.log(subjectList.result.datas.page.dataList[subjectList.result.datas.page.dataList.length - 1]);
         return esId;
     }
 
@@ -374,13 +387,24 @@ class College {
      * 获取考试专业id
      */
     async getKaoShiZyId () {
-        const res = await school.getExamProfList({
+        // 方案1
+        // const res = await school.getExamProfList({
+        //     kaoShiID: this.kaoShiID,
+        //     zhuanYeID: this.profId,
+        //     ticket: PLAT_TICKET
+        // });
+        // const kaoShiZy = res.result.datas.page.dataList[0]
+        // // console.log('kaoShiZy', kaoShiZy);
+        // const kaoShiZyId = kaoShiZy.kaoShizyID;
+        // // console.log('kaoShiZyId', kaoShiZyId);
+        // return kaoShiZyId;
+
+        // 方案2
+        const res = await school.examProf({
             kaoShiID: this.kaoShiID,
-            zhuanYeID: this.profId,
             ticket: PLAT_TICKET
-        });
-        const kaoShiZy = res.result.datas.page.dataList[0]
-        const kaoShiZyId = kaoShiZy.zhuanYeID;
+        })
+        const kaoShiZyId = res.result.datas.examProfList[0].kaoShizyID
         return kaoShiZyId;
     }
 
@@ -421,7 +445,7 @@ class College {
      */
     async saveSubjectInfo (params, mode) {
         const pas = await this.mockSubjectJson(params, mode)
-        console.log(pas);
+        // console.log(pas);
         const res = await school.saveSubjectInfo(pas);
         console.log(res);
     }
@@ -435,6 +459,7 @@ class College {
             kaoShiID: '',
             zhuanYeID: '',
         };
+        // console.log('入参', params);
         const kaoShiID = await this.searchExamId(params.kaoShiMC);
         data.kaoShiID = kaoShiID;
         const zhuanYeID = await this.searchProfId({
@@ -450,7 +475,7 @@ class College {
      */
     async searchExamId (kaoShiMC) {
         const examList = await school.getExamList({
-            kaoShiND: new Date().getFullYear() + 1,
+            kaoShiND: new Date().getFullYear(),
             ticket: PLAT_TICKET
         }).then(res => res.result.datas.page.dataList);
         // console.log(examList);
@@ -477,7 +502,8 @@ class College {
         let satTime = dateHandler.getCurrentTime()
         let endTime = dateHandler.getMonthGap()
 
-        let jkBs = {
+        // 监考笔试类
+        let invigilate = {
             esId: '', // 考试专业科目ID
             kaoShizyID: '', // 考试专业ID
             subjectExtendDataUrl: '', // 科目扩展信息数据Oss地址
@@ -502,7 +528,7 @@ class College {
             showQuesMode: 1,  // 考题查看模式:0普通模式 1录制时同时查看考题
             allowStuExplain: 0, // 考试说明开关
             attachmentExplain: '', // 考试说明文案
-            allowAttachment: 1, // 附件照片上传开关 1-允许上传
+            allowAttachment: 1, // 附件照片上传开关 1-允许上传,0为关闭
             picExplain: '请上传1张图片', // 图片上传说明
             externalDeviceCheck: 1, // 外部设备检测开关 1-检测 2-不检测
             breakRecordStatus: 2, // 中断录制：1、是 2、否
@@ -518,23 +544,23 @@ class College {
             examContent: `考试内容-${common.getRandomWord(6)}`, // 考试内容
             examExplain: `考试说明-${common.getRandomWord(6)}`, // 考试说明
             shootExamPromise: `承诺书-${common.getRandomWord(6)}`, // 考试承诺书
-            videoTempUrl: '', // 样例视频
+            videoTempUrl: '', // 样例视频（仅在模拟考使用）
             seeProblemOnRecordingPage: 1, // 是否允许在录制页面看题：1-是，2-否
             checkStartTime: satTime, // 检录开始时间
             showQuesStartDate: satTime, // 审题开始时间
             closeQuesDate: '', // 关闭考题时间
             shootStartDate: satTime, // 录制开始时间
             latestInTime: '', // 最迟进入时间
-            readyVoiceCommandsUrl: doc[caps.name].voice[0], // 准备开始语音指令
-            readyVoiceCommandsLength: 3, // 准备开始语音指令时长
-            readyTimeLength: 10, // 准备开始时长(秒)
-            reviewVoiceCommandsUrl: doc[caps.name].voice[0], // 审题开始语音指令
-            reviewVoiceCommandsLength: 3, // 审题开始语音指令时长
-            reviewTimeLength: 10, // 审题开始时长(秒)
+            // readyVoiceCommandsUrl: doc[caps.name].voice[0], // 准备开始语音指令
+            // readyVoiceCommandsLength: 3, // 准备开始语音指令时长
+            // readyTimeLength: 10, // 准备开始时长(秒)
+            // reviewVoiceCommandsUrl: doc[caps.name].voice[0], // 审题开始语音指令
+            // reviewVoiceCommandsLength: 3, // 审题开始语音指令时长
+            // reviewTimeLength: 10, // 审题开始时长(秒)
             shootEndDate: endTime, // 拍摄截至时间
             commitPaperEndDate: endTime, // 提交答卷截至时间
             commitVideoStartDate: endTime, // 提交视频开始时间
-            sampleType: 0, // 抽题类型 0-普通抽题 1-手机看题 2-网页看题
+            // sampleType: 0, // 抽题类型 0-普通抽题 1-手机看题 2-网页看题
             examiningTime: '', // 审题时间
             drawQuesLimit: 0, // 抽题限制:0-不限制 1-提交后再抽题
             examDirectUrl: '', // 考试指令地址
@@ -548,82 +574,105 @@ class College {
             videoListTip: '', // 视频列表提示
             webUploadVedioStartTime: '', // 考生网页端上传考试视频开始时间
             webUploadVedioEndTime: '', // 考生网页端上传考试视频结束时间
-            localStoreFlag: 1, // 视频本地存储备份开关 1-允许 2-不允许
+            localStoreFlag: 2, // 视频本地存储备份开关 1-允许 2-不允许
             localVideoUploadFlag: 2, // 本地视频上传开关 1-允许 2-不允许
             clientUploadFlag: 2, // 客户端上传开关 1-允许 2-不允许
             ticket: PLAT_TICKET,
         }
 
-        let spLz = {
+        // 视频录制类
+        let transcribe = {
             esId: '',
             kaoShizyID: '',
-            subjectExtendDataUrl: '',
-            subjectName: `视频录制类-${common.getRandomStr(4)}`,
+            subjectExtendDataUrl: 'http://img.artstudent.cn/pr/2021-01-21/16f595c1b01b49e6bdb4699e8dd2c38c.json',
+            subjectName: '自动化测试科目1（视频录制类）',
             examMode: 1,
             subjectTotalScore: 100,
             riChengID: 0,
             kaoShiRQSM: '',
             showStatus: 1,
             syncExamStatus: 1,
-            ord: 2,
+            ord: '',
             shootLimitType: 2,
-            maxShootCount: 6,
+            maxShootCount: 20,
             maxSaveCount: 3,
-            videoLength: 3600,
-            minute: 60,
+            videoLength: 600,
+            minute: 10,
             second: 0,
-            timeExplain: '60分钟',
-            screenStatus: 2,
+            timeExplain: '10分钟',
+            screenStatus: 1,
             cameraDirection: 1,
-            definition: 3,
-            showQuesMode: 1,
+            definition: 2,
+            showQuesMode: 0,
             allowStuExplain: 0,
             attachmentExplain: '',
-            allowAttachment: 1,
-            picExplain: '',
+            allowAttachment: 0,
+            picExplain: '哈哈哈',
+            // takeAnswerSheetTimeLength: '',
+            // takePaperPhotoLimitMinutes: '',
+            // takePaperPhotoLimitSeconds: '',
             externalDeviceCheck: 1,
             breakRecordStatus: 2,
-            allowBreakSeconds: '',
-            allowBreakTimes: '',
-            commitPaperPre: 1,
+            // allowBreakSeconds: '',
+            // allowBreakTimes: '',
+            commitPaperPre: 2,
             faceRecognition: 2,
-            recognitionConfidence: '',
-            mustRecognitionSuccess: '2',
-            takeAnswerSheetTimeLength: '',
-            takePaperPhotoLimitMinutes: '',
-            takePaperPhotoLimitSeconds: '',
-            examContent: `视频录制类-考试内容-${common.getRandomWord(6)}`,
-            examExplain: `视频录制类-考试说明-${common.getRandomWord(6)}`,
-            shootExamPromise: `视频录制类-考试承诺书-${common.getRandomWord(6)}`,
+            // recognitionConfidence: '',
+            mustRecognitionSuccess: 2,
+            whenToCheck: 1,
+            paperCheck: 2,
+            mustCheckPaperSuccess: 2,
+            showPortraitFrame: 1,
+            commitAfterWatchVideo: 2,
+            examContent: '考试内容',
+            examExplain: '考试说明',
+            // shootExamPromise: '',
+            // videoTempUrl: '',
             seeProblemOnRecordingPage: 2,
-            checkStartTime: '',
-            showQuesStartDate: '',
-            closeQuesDate: '',
-            shootStartDate: '',
-            latestInTime: '',
-            readyVoiceCommandsUrl: '',
-            readyVoiceCommandsLength: '',
-            readyTimeLength: '',
-            reviewVoiceCommandsUrl: '',
-            reviewVoiceCommandsLength: '',
-            reviewTimeLength: '',
+            // checkStartTime: '',
+            // showQuesStartDate: '',
+            allowCleanLastInTime: 1,
+            // closeQuesDate: '',
+            // shootStartDate: '',
+            // latestInTime: '',
+            openWaitStage: 2,
+            // waitExamVoiceCommandsUrl: '',
+            // waitExamVoiceCommandsText: '',
+            // waitExamVoiceCommandsLength: '',
+            // waitExamTimeLength: '',
+            // waitingNotes: '',
+            openReviewStage: 2,
+            // reviewVoiceCommandsUrl: '',
+            // reviewVoiceCommandsText: '',
+            // reviewVoiceCommandsLength: '',
+            // reviewTimeLength: '',
+            openReadyStage: 2,
+            // readyVoiceCommandsUrl: '',
+            // readyVoiceCommandsText: '',
+            // readyVoiceCommandsLength: '',
+            // readyTimeLength: '',
+            showPaper: 2,
+            readyNotes: '',
             shootEndDate: '',
-            commitPaperEndDate: '',
-            commitVideoStartDate: '',
-            sampleType: 0,
+            // commitPaperEndDate: '',
+            // commitVideoStartDate: '',
+            // sampleType: 0,
             examiningTime: '',
             drawQuesLimit: 0,
-            examDirectUrl: '',
-            examDirectLength: '',
-            randomDirectUrl: '',
-            timeOrder: 1,
-            randomDirectTimeMinutes: 0,
-            randomDirectTimeSeconds: 30,
-            randomContent: '语音指令来了',
-            cameraPositionLegendUrl: '',
-            videoListTip: '视频录制类',
-            webUploadVedioStartTime: '',
-            webUploadVedioEndTime: '',
+            subjectAudioType: 1,
+            // examDirectUrl: 'http://img.artstudent.cn/pr/2021-01-21/34af819534f940949433810f99af40de.mp3',
+            examDirectLength: 3,
+            examCallType: 0,
+            examCallOrder1: 1,
+            // cameraPositionLegendUrl: '',
+            showPaperStage: 2,
+            // showPaperVoiceCommandsUrl: '',
+            // showPaperVoiceCommandsText: '',
+            // showPaperVoiceCommandsLength: '',
+            // showPaperTimeLength: '',
+            // videoListTip: '',
+            // webUploadVedioStartTime: '',
+            // webUploadVedioEndTime: '',
             localStoreFlag: 2,
             localVideoUploadFlag: 2,
             clientUploadFlag: 2,
@@ -709,9 +758,10 @@ class College {
 
         // 1为视频录制，2为监考笔试，3为客观题同时考，
         if (mode == 1) {
-            return Object.assign(spLz, params)
+            // console.log('打印视频录制类参数', Object.assign(transcribe, params));
+            return Object.assign(transcribe, params)
         } else if (mode == 2) {
-            return Object.assign(jkBs, params)
+            return Object.assign(invigilate, params)
         } else if (mode == 3) {
             return Object.assign(kgTi, params)
         }
@@ -746,6 +796,7 @@ collegeManage.setupCollegeByList = async function (params) {
         data: { m: "", p: { xueXiaoID: setupCollege.collegeMain.xueXiaoID } },
         ticket: TICKET
     });
+    console.log(siteList);
     const examSiteList = siteList.result.datas.list[0].examSiteList
     console.log('获取考点', examSiteList);
 
@@ -759,9 +810,14 @@ collegeManage.setupCollegeByList = async function (params) {
         common.update(kaoDian, site)
         kaoDianMap.set(siteBase, kaoDian)
     })
-    const kdMc = '江苏师范大学';
+    // const kdMc = '中国美术学院(测试)';
+    const kdMc = examSiteList[0].kaoDianMC
+    console.log('考点名称', kdMc);
     const kaoShiKDID = examSiteList.find(obj => obj.kaoDianMC == kdMc).kaoShiKDID;
     const kaoShiID = examSiteList.find(obj => obj.kaoDianMC == kdMc).kaoShiID;
+    // const kaoShiKDID = 1241880;
+    // const kaoShiID = 13061;
+
 
     // 获取日程
     const profList = await stuApp.queryExamSchedule({
@@ -779,7 +835,7 @@ collegeManage.setupCollegeByList = async function (params) {
     });
 
     // console.log('日程请求头', profList.params);
-    console.log('日程列表', profList);
+    // console.log('日程列表', profList);
     // console.log('日程列表响应', profList.result.datas.list);
 
     // 将日程存储起来（因为日程存在多个，所以用map存储）

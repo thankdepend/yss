@@ -7,7 +7,7 @@ const {
     expect
 } = require('chai');
 
-describe('消息推送', async function () {
+describe.skip('消息推送', async function () {
     this.timeout(TESTCASE.timeout);
     before('用户登录', async function () {
         // 获取用户id

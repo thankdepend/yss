@@ -8,7 +8,7 @@ const pay = require('../../../reqApi/app/pay');
 const yxkApp = require('../../../reqApi/app/xyk');
 const guideApp = require('../../../reqApi/app/guide');
 
-describe('平台部', async function () {
+describe.skip('平台部', async function () {
     this.timeout(TESTCASE.timeout);
     before('用户登录', async function () {
         await yssLogin.clientLogin();

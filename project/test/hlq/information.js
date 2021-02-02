@@ -2,7 +2,7 @@ const informationManage = require('../../help/hlq/informationManage');
 const yssLogin = require('../../help/base/yssLogin');
 const { common } = require('../../../lib/index');
 
-describe('资讯', async function () {
+describe.skip('资讯', async function () {
     this.timeout(TESTCASE.timeout);
     const information = informationManage.setupInformation();
     before('运营主管登录', async function () {

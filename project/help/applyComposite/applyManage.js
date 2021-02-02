@@ -27,7 +27,7 @@ class Apply {
     async saveProf (profParams, extraParams) {
         const res = await stu.saveProf(profParams);
 
-        // console.log('保存报名', res);
+        console.log('保存报名', res);
         const examProfRes = await stu.queryExamProf({
             data: { "m": "", "p": {} },
             ticket: TICKET

@@ -6,18 +6,20 @@ const { common } = require('../../../../lib/index');
 const { expect } = require('chai');
 const caps = require('../../../../data/caps');
 const mysql = require('mysql2');
+const { update } = require('../../../../lib/commonFc');
+const { object } = require('underscore');
 
 class Invigilate extends examBase {
-    constructor() {
+    constructor(params) {
         super();
         /** 日程id */
         this.riChengID = this.riChengObj.invigilate;
         /** 专业id */
-        this.zhuanYeId = 1223644;
+        this.zhuanYeId = 1224870; //1223644
         /** 考试专业名称 */
         this.kaoShiMC = '';
         /** 科目id */
-        this.esId = 1688;
+        this.esId = 3310; //1688
         /** 科目名称 */
         this.subjectName = '';
         /** 保存次数 */
@@ -33,6 +35,9 @@ class Invigilate extends examBase {
         /** 科目信息 */
         this.subjectData = {};
     }
+
+    // 更新参数
+    updateConstParams (params) { Object.assign(this, params) }
 
     /**
      * 院校科目题库列表
@@ -52,6 +57,7 @@ class Invigilate extends examBase {
             pageSize: 15,
             ticket: PLAT_TICKET
         })
+        // console.log(res);
         examinationData = res.result.datas.page.dataList;
 
         // console.log('题库列表', res.result.datas.page.dataList);
@@ -94,8 +100,13 @@ class Invigilate extends examBase {
     /** 获取科目编辑页信息 */
     async getExamSubjectEdit () {
         const subjectData = await this.querySubjectList();
-        this.subjectData = subjectData.result.datas.page.dataList.find(obj => obj.esId == this.esId)
-        // console.log(this.subjectData);
+        try {
+            this.subjectData = subjectData.result.datas.page.dataList.find(obj => obj.esId == this.esId)
+            // console.log(this.subjectData);
+        } catch (err) {
+            throw new Error(`没有找到你指定科目的信息\n${err}`)
+        }
+
     }
 
     /** 后台查询科目列表 */
@@ -113,26 +124,30 @@ class Invigilate extends examBase {
 
     /** 断言抽考题 */
     async checkTimeByTypeAssert () {
-        await this.checkTimeByType()
-        const drawExamination = this.examinationMap.get(this.drawExamination.examinationDetail)
-        let exp = {
-            esId: drawExamination.esId,
-            // kaoShizyID:,
-            profId: drawExamination.zhuanYeId,
-            profName: drawExamination.zhuanYeMC,
-            // subjectCode:,
-            subjectName: drawExamination.subjectName,
-            // shootFlag:,
-            examinationDetail: drawExamination.kaoTi,
-            examPicUrl: drawExamination.examPicUrl,
-            examMode: this.examMode,
-            examAudioUrl: drawExamination.examAudioUrl,
-            // publishFlag: 1, // 不发布app端应该拿不到题
+        try {
+            await this.checkTimeByType()
+            const drawExamination = this.examinationMap.get(this.drawExamination.examinationDetail)
+            let exp = {
+                esId: drawExamination.esId,
+                // kaoShizyID:,
+                profId: drawExamination.zhuanYeId,
+                profName: drawExamination.zhuanYeMC,
+                // subjectCode:,
+                subjectName: drawExamination.subjectName,
+                // shootFlag:,
+                examinationDetail: drawExamination.kaoTi,
+                examPicUrl: drawExamination.examPicUrl,
+                examMode: this.examMode,
+                examAudioUrl: drawExamination.examAudioUrl,
+                // publishFlag: 1, // 不发布app端应该拿不到题
 
+            }
+            // console.log('json', exp);
+            // console.log('实际', this.drawExamination);
+            common.isApproximatelyEqualAssert(exp, this.drawExamination)
+        } catch (err) {
+            throw new Error(`没设置考题\n${err}`)
         }
-        // console.log('json', exp);
-        // console.log('实际', this.drawExamination);
-        common.isApproximatelyEqualAssert(exp, this.drawExamination)
     }
 
 
@@ -211,6 +226,9 @@ class Invigilate extends examBase {
             }, ticket: TICKET
         })
         this.drawExamination = examinationInfo.result.datas.examProfSubject;
+        if (examinationInfo.result.message == '考试异常，请检查网络是否正常，稍后重试！') {
+            throw new Error(`快去维护一下科目考题，考生没抽到啊`)
+        }
         // console.log('抽题内容', examinationInfo);
     }
 
@@ -246,7 +264,7 @@ class Invigilate extends examBase {
                     xueXiaoId: this.schoolId,
                     subjectName: this.subjectName,
                     zhuanYeMC: this.zhuanYeMC,
-                    photoAttachment: "http://art-video.artstudent.cn/img/test/13166/1223644/1688/74a10784889c4aa9a8def51f4fd5390b_uid1078675.jpg",
+                    photoAttachment: common.getrandomPic(),
                     baoKaoId: this.baoKaoId,
                     yongHuID: LOGINDATA.userId,
                     esId: this.esId,
@@ -255,7 +273,8 @@ class Invigilate extends examBase {
             },
             ticket: TICKET
         });
-        // console.log(res);
+        console.log(res.params);
+        console.log(res);
         const expData = {
             "success": true,
             "message": "操作成功",
@@ -339,7 +358,7 @@ class Invigilate extends examBase {
     }
 
 
-    /** 保存科目 */
+    /** 保存科目-监考笔试类 */
     async saveSubjectByInv (params) {
         const res = await school.saveSubjectInfo(Object.assign({
             esId: this.esId,
@@ -360,7 +379,7 @@ class Invigilate extends examBase {
             videoLength: 600,
             minute: 10,
             second: 0,
-            timeExplain: '10分钟',
+            timeExplain: `考试时长为10分钟`,
             screenStatus: 1,
             cameraDirection: 1,
             definition: 2,
@@ -368,7 +387,7 @@ class Invigilate extends examBase {
             allowStuExplain: 1,
             attachmentExplain: '',
             allowAttachment: 1,
-            picExplain: '',
+            picExplain: '图片上传说明',
             takeAnswerSheetTimeLength: '',
             takePaperPhotoLimitMinutes: '',
             takePaperPhotoLimitSeconds: '',
@@ -382,9 +401,9 @@ class Invigilate extends examBase {
             mustRecognitionSuccess: 2,
             paperCheck: 2,
             mustCheckPaperSuccess: 2,
-            examContent: '考试内容展示在科目列表和详情',
-            examExplain: '考试说明在科目列表和详情------1111',
-            shootExamPromise: '考生承诺书',
+            examContent: `${this.subjectName}考试内容`,
+            examExplain: `${this.subjectName}考试说明`,
+            shootExamPromise: `${this.subjectName}考生承诺书`,
             videoTempUrl: '',
             seeProblemOnRecordingPage: 2,
             checkStartTime: '',
@@ -411,7 +430,7 @@ class Invigilate extends examBase {
             examCallType: 0,
             examCallOrder1: 1,
             cameraPositionLegendUrl: '',
-            videoListTip: '测试一下录制说明展示位置',
+            videoListTip: `${this.subjectName}录制说明`,
             webUploadVedioStartTime: '',
             webUploadVedioEndTime: '',
             localStoreFlag: 1,
@@ -471,7 +490,7 @@ class Invigilate extends examBase {
         const res = await this.saveScreenshot({
             data: {
                 p: {
-                    screenshotUrl: "http://art-video.artstudent.cn/shot/test/13166/1223644/1688/b007fdb789484159a737ae8bb85a9271_uid1078675.jpg",
+                    screenshotUrl: common.getrandomPic(),
                     svId: this.svId
                 },
                 m: ""
@@ -494,7 +513,7 @@ class Invigilate extends examBase {
                     riChengId: this.riChengID,
                     shootTime: "1609396458496",
                     recordPhoto: "http://art-video.artstudent.cn/photo/test/13166/1223644/1688/3348bde6ec7549dea989415ed5e55e54_uid1078675.jpg",
-                    photoAttachment: "http://art-video.artstudent.cn/img/test/13166/1223644/1688/74a10784889c4aa9a8def51f4fd5390b_uid1078675.jpg",
+                    photoAttachment: "http://img.artstudent.cn/pr/2021-01-06/9835db5050584c51ba193a727827f224.jpg",
                     xueXiaoID: this.schoolId,
                     stuVideoLength: 600,
                     shenFenZH: LOGINDATA.loginName,
@@ -534,8 +553,8 @@ class Invigilate extends examBase {
             // throw new Error('提交视频时间没到');
             // 平台登录修改时间
             await yssLogin.platfrom({
-                loginName: '13166',
-                password: 'Yss13166',
+                loginName: PLAT_LOGINDATA.loginName,
+                password: `Yss${PLAT_LOGINDATA.loginName}`,
             })
             // 修改时间
             await this.saveSubjectByInv({
@@ -544,7 +563,7 @@ class Invigilate extends examBase {
                 commitVideoStartDate: common.getCurrentTime(2), // 视频提交开始时间(当前时间)
             })
             await yssLogin.clientLogin({
-                loginName: 'mihuan30',
+                loginName: LOGINDATA.loginName,
                 password: 'Csk001'
             })
             // 提交视频

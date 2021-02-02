@@ -5,7 +5,7 @@ const user = require('../../../reqApi/platfrom/user');
 
 const argv = require('yargs').argv;
 
-describe('平台顾问', async function () {
+describe.skip('平台顾问', async function () {
     const counSelor = counSelorManage.setupCounSelor();
     let newCounSelor;
     before('平台顾问登录', async function () {

@@ -133,10 +133,10 @@
 // console.log(a.keys());
 const {
     common
-} = require('../lib/index')
+} = require('../../lib/index')
 const yysLogin = require('../prob/help/yssLogin')
 const fs = require('fs');
-const yssCaps = require('../data/caps');
+const yssCaps = require('../../data/caps');
 var path = require('path');
 
 const upl = module.exports = {}

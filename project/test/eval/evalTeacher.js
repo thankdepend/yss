@@ -4,7 +4,7 @@ const {
     common
 } = require('../../../lib/index');
 
-describe('评画老师', async function () {
+describe.skip('评画老师', async function () {
     this.timeout(TESTCASE.timeout);
     const teacher = teacherManage.setupTeacher();
     before('运营主管登录', async function () {

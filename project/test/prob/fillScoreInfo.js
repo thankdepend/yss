@@ -9,7 +9,7 @@ const {
 } = require('../../../lib/index');
 const platfromProb = require('../../../reqApi/platfrom/prob');
 
-describe('完善信息', function () {
+describe.skip('完善信息', function () {
     this.timeout(TESTCASE.timeout);
     // 修改次数
     const num = 1000;

@@ -17,19 +17,19 @@ const argv = require('yargs').argv;
  * @alias 完善信息-审核一条龙
  */
 
-for (let i = 1; i <= 1; i++) {
+for (let i = 87; i <= 95; i++) {
     describe.skip('完善信息与审核', async function () {
         this.timeout(TESTCASE.timeout);
         const fill = fillManage.setupFill();
         before('登录', async function () {
             let userInfo = {
                 // loginName: `${workSheetsFromFile[0].data[i][0]}`,
-                loginName: `xycs${i}`,
+                loginName: `lj100${i}`,
                 password: argv.env == 'test' ? 'Csk001' : argv.env == 'pre' ? 'Ysk002' : 'Kfk001',
                 device: 'm'
             }
             await yysLogin.clientLogin(userInfo);
-            // console.log('登录信息', LOGINDATA);
+            console.log('登录信息', LOGINDATA);
         });
 
         describe('新增考生', async function () {

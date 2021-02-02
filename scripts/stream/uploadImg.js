@@ -38,6 +38,7 @@ const server = http.createServer((req, res) => {
   `);
 });
 
+// 监听9000端口
 server.listen(9000, () => {
     console.log('Server listening on http://localhost:9000/ ...');
 });

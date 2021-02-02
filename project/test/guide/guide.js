@@ -4,7 +4,7 @@ const {
     common
 } = require('../../../lib/index');
 
-describe('报考指南', async function () {
+describe.skip('报考指南', async function () {
     this.timeout(TESTCASE.timeout);
     const guide = guideManage.setupGuide();
     it('运营主管登录', async function () {

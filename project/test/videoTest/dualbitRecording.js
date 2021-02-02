@@ -15,42 +15,42 @@ describe.skip('双机位网络考试', async function () {
     });
     describe('视频录制类', async function () {
         let masterStatus;
-        after('视频打回', async function () {
-            await yssLogin.platfrom({
-                loginName: '13166',
-                password: 'Yss13166'
-            });
-            // 查询考生考试结果查询
-            const examResData = await examvideo.getExaminerAssignDetailList({
-                showSubject: 1,
-                showSchedule: 1,
-                kaoShiID: 13047,
-                kaoDianID: 731,
-                riChengId: 11108262,
-                riChengID: 11108262,
-                esId: 1701,
-                videoLengthComPare: '',
-                commitFlag: 1,
-                paperCommitFlag: '',
-                stuIDCard: '',
-                stuName: '',
-                zhunKaoZH: 'mihuan21',
-                curPage: 1,
-                pageSize: 15,
-            })
-            const videoInfo = examResData.result.datas.page.dataList[0];
-            // 视频打回两步走,获取token，打回
-            await school.pwdAuth({
-                authCode: 'Yss13166',
-                optRemark: `视频打回-${common.getCurrentDate()}`,
-            });
-            await school.resetVideo({
-                svId: videoInfo.svId,
-                authCode: 'Yss13166',
-                optRemark: `视频打回-${common.getCurrentDate()}`,
-            });
-        });
-        it('改变用户状态为进考场', async function () {
+        // after('视频打回', async function () {
+        //     await yssLogin.platfrom({
+        //         loginName: '13166',
+        //         password: 'Yss13166'
+        //     });
+        //     // 查询考生考试结果查询
+        //     const examResData = await examvideo.getExaminerAssignDetailList({
+        //         showSubject: 1,
+        //         showSchedule: 1,
+        //         kaoShiID: 13047,
+        //         kaoDianID: 731,
+        //         riChengId: 11108262,
+        //         riChengID: 11108262,
+        //         esId: 1701,
+        //         videoLengthComPare: '',
+        //         commitFlag: 1,
+        //         paperCommitFlag: '',
+        //         stuIDCard: '',
+        //         stuName: '',
+        //         zhunKaoZH: 'mihuan21',
+        //         curPage: 1,
+        //         pageSize: 15,
+        //     })
+        //     const videoInfo = examResData.result.datas.page.dataList[0];
+        //     // 视频打回两步走,获取token，打回
+        //     await school.pwdAuth({
+        //         authCode: 'Yss13166',
+        //         optRemark: `视频打回-${common.getCurrentDate()}`,
+        //     });
+        //     await school.resetVideo({
+        //         svId: videoInfo.svId,
+        //         authCode: 'Yss13166',
+        //         optRemark: `视频打回-${common.getCurrentDate()}`,
+        //     });
+        // });
+        it.skip('改变用户状态为进考场', async function () {
             const res = await stuApp.saveStudentExamStatus({
                 data: {
                     m: "",
@@ -116,7 +116,7 @@ describe.skip('双机位网络考试', async function () {
             })
             console.log(res);
         });
-        it('辅机获取视频考试信息', async function () {
+        it.skip('辅机获取视频考试信息', async function () {
             const res = await stuApp.getExamVideoInfo({
                 data: {
                     m: "",

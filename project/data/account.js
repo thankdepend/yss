@@ -49,7 +49,29 @@ const account = {
         crm2: {
             loginName: 'zyzg-mh3',
             password: 'Csk001'
-        }
+        },
+        kfList: [
+            {
+                loginName: 'kf01',
+                password: 'Csk001'
+            },
+            {
+                loginName: 'kf02',
+                password: 'Csk001'
+            },
+            {
+                loginName: 'kf03',
+                password: 'Csk001'
+            },
+            {
+                loginName: 'kf04',
+                password: 'Csk001'
+            },
+            {
+                loginName: 'kf05',
+                password: 'Csk001'
+            },
+        ]
 
     },
     pre: {

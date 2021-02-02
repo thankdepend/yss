@@ -3,7 +3,7 @@ const xyk = require('../../../reqApi/app/xyk');
 const prob = require('../../../reqApi/app/prob');
 const { common } = require('../../../lib/index');
 
-describe('志愿视频', async function () {
+describe.skip('志愿视频', async function () {
     before('用户登录', async function () {
         await yssLogin.clientLogin({
             loginName: 'xyf201',

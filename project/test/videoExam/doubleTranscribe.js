@@ -3,7 +3,7 @@ const yssLogin = require('../../help/base/yssLogin');
 const { common } = require('../../../lib/index');
 
 /**
- * @alias 视频录制类考试
+ * @alias 视频录制类双机位考试
  */
 describe.skip('视频录制类', async function () {
     this.timeout(TESTCASE.timeout);

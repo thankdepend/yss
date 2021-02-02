@@ -2,7 +2,7 @@ const abroadManage = require('../../help/abroad/abroadManage');
 const yssLogin = require('../../help/base/yssLogin')
 const schoolTypeManage = require('../../help/abroad/schoolTypeManage');
 
-describe('留学', async function () {
+describe.skip('留学', async function () {
     const abroad = abroadManage.setupAbroad();
     const schoolType = schoolTypeManage.setupSchoolType();
     before('登录', async function () {

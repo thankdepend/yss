@@ -6,7 +6,7 @@ const user = require('../../../reqApi/platfrom/user');
 const hulaquanApp = require('../../../reqApi/app/hulaquan');
 const { common } = require('../../../lib/index');
 
-describe('直播', async function () {
+describe.skip('直播', async function () {
     this.timeout(TESTCASE.timeout);
     const live = liveManage.setupLive();
 
