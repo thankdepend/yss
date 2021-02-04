@@ -24,7 +24,10 @@ const { expect } = require("chai")
 
 let obj = {
     aaa: 123,
+    bb: 456
 }
-if (expect(obj.aaa).to.be.ok) {
-    console.log('success');
-}
+// delete obj.bb
+console.log(obj);
+// if (expect(obj.aaa).to.be.ok) {
+//     console.log('success');
+// }

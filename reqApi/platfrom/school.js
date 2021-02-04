@@ -449,6 +449,31 @@ school.repulseVideo = async function (params = {}) {
 
 
 /**
+ * 保存考题
+ * @param {Number} allowAttachment 
+ * @param {Number} tiId 考题id
+ * @param {String} examGuideText 考试指南文本 
+ * @param {Number} examType 考试类型
+ * @param {Number} quesType 考题类型
+ * @param {Number} quesBankType 
+ * @param {Number} kaoShiID 考试id
+ * @param {Number} zhuanYeId 专业id
+ * @param {Number} esId 科目id
+ * @param {Number} examinationBatchNo 绑定批次号
+ * @param {Number} publishFlag 发布标志[1是]
+ * @param {Number} clearDetail 
+ * @param {String} detail 考题文本
+ * @param {String} examPicUrl 图片考题
+ * @param {String} examVideoUrl 视频考题
+ * @param {String} examAudioUrl
+ * @param {String} examAudioJson
+ * @param {String} examinationAudio
+ */
+school.saveExamination = async function (params = {}) {
+    return common.sendPost(yssCaps.school + '/auth/school/examination/saveExamination.htm', params);
+}
+
+/**
  * 考题详情
  * @param {Number} tiId
  */

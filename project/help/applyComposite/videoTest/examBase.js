@@ -5,19 +5,19 @@ const { common } = require('../../../../lib/index');
 const mysql = require('mysql2');
 
 class examBase {
-    constructor() {
+    constructor(params) {
         /** 学校id */
-        this.schoolId = 70355;
+        this.schoolId = params.schoolId || 70355;
         /** 考试id */
-        this.kaoShiId = 13177;
+        this.kaoShiId = params.kaoShiId || 13177;
         /** 考点id */
-        this.kaoDianID = 906;
+        this.kaoDianID = params.kaoDianID || 906;
         /** 报考id */
-        this.baoKaoId = '';
+        this.baoKaoId = params.baoKaoId || '';
         /** 日程池 */
         this.richengMap = new Map();
-        /** */
-        this.riChengObj = {
+        /** 日程对象 */
+        this.riChengObj = params.riChengObj || {
             invigilate: 11109903, // 11108259 监考笔试
             transcribe: 11108259, // 视频录制
         }
@@ -94,6 +94,35 @@ class examBase {
             arr.push(examination)
         }
         return examinationData;
+    }
+
+    /** 
+     * 保存考题 
+     */
+    async saveExamination (params) {
+
+        const data = Object.assign({
+            allowAttachment: 3,
+            tiId: 4603,
+            examGuideText: '',
+            examType: 2,
+            quesType: '',
+            quesBankType: 1,
+            kaoShiID: 13181,
+            zhuanYeId: 1224972,
+            esId: 3502,
+            examinationBatchNo: 0,
+            publishFlag: 1,
+            clearDetail: 1,
+            detail: '自动化测试科目1（监考笔试类）考题',
+            examPicUrl: 'http://img.artstudent.cn/pr/2021-01-12/9ae44803adf84d7f8008e24da7a1be17.jpg',
+            examVideoUrl: 'http://art-admin1.oss-cn-hangzhou.aliyuncs.com/pr/2021-02-02/df41a6cc64fe427aa9d9d084f8778897.mp4',
+            examAudioUrl: '',
+            examAudioJson: '',
+            examinationAudio: '',
+        }, params)
+
+        await school.saveExamination(data);
     }
 
     /**

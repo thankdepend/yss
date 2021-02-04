@@ -8,18 +8,19 @@ const caps = require('../../../../data/caps');
 const mysql = require('mysql2');
 const { update } = require('../../../../lib/commonFc');
 const { object } = require('underscore');
+const argv = require('yargs').argv;
 
 class Invigilate extends examBase {
-    constructor(params) {
-        super();
+    constructor(params = {}) {
+        super(params);
         /** 日程id */
         this.riChengID = this.riChengObj.invigilate;
         /** 专业id */
-        this.zhuanYeId = 1224870; //1223644
+        this.zhuanYeId = params.zhuanYeId || 1224870; //1223644
         /** 考试专业名称 */
         this.kaoShiMC = '';
         /** 科目id */
-        this.esId = 3310; //1688
+        this.esId = params.esId || 3310; //1688
         /** 科目名称 */
         this.subjectName = '';
         /** 保存次数 */
@@ -118,14 +119,19 @@ class Invigilate extends examBase {
             pageSize: 15,
             ticket: PLAT_TICKET
         });
-        // console.log(res);
+        // console.log('科目列表', res);
         return res;
     }
 
     /** 断言抽考题 */
-    async checkTimeByTypeAssert () {
+    async checkTimeByTypeAssert (params = {}) {
         try {
-            await this.checkTimeByType()
+            const examinationInfo = await this.checkTimeByType()
+            // bef-300202(考试时间未到)
+            if (params.delay) {
+                console.log(examinationInfo.result.code);
+                expect(examinationInfo.result.code).to.be.equal('bef-300202')
+            }
             const drawExamination = this.examinationMap.get(this.drawExamination.examinationDetail)
             let exp = {
                 esId: drawExamination.esId,
@@ -221,7 +227,7 @@ class Invigilate extends examBase {
                     esId: this.esId,
                     riChengId: this.riChengID,
                     svId: this.svId,
-                    checkTimeType: 1 // 是否模拟考
+                    checkTimeType: 1 // 1是抽题,2是录制时校验时间的
                 }
             }, ticket: TICKET
         })
@@ -230,6 +236,7 @@ class Invigilate extends examBase {
             throw new Error(`快去维护一下科目考题，考生没抽到啊`)
         }
         // console.log('抽题内容', examinationInfo);
+        return examinationInfo;
     }
 
     /**
@@ -273,7 +280,7 @@ class Invigilate extends examBase {
             },
             ticket: TICKET
         });
-        console.log(res.params);
+        // console.log(res.params);
         console.log(res);
         const expData = {
             "success": true,
@@ -282,7 +289,11 @@ class Invigilate extends examBase {
         }
         if (res.result == expData) {
             this.commitPaperFlag = true;
+        } else {
+            console.log(res.result);
+            this.commitPaperFlag = false;
         }
+
     }
 
     /** 检查试卷提交时间 */
@@ -357,9 +368,17 @@ class Invigilate extends examBase {
         return res;
     }
 
+    // 获取科目在列表排序编号
+    async getSubOrd () {
+        const res = await this.querySubjectList();
+        const ord = res.result.datas.page.dataList.find(obj => obj.esId == this.esId).ord;
+        return ord;
+    }
+
 
     /** 保存科目-监考笔试类 */
     async saveSubjectByInv (params) {
+        const ord = await this.getSubOrd()
         const res = await school.saveSubjectInfo(Object.assign({
             esId: this.esId,
             kaoShizyID: this.subjectData.kaoShizyID,
@@ -372,7 +391,7 @@ class Invigilate extends examBase {
             kaoShiRQSM: '',
             showStatus: 1,
             syncExamStatus: 1,
-            ord: 2,
+            ord: ord,
             shootLimitType: 2,
             maxShootCount: 8,
             maxSaveCount: 3,
@@ -433,7 +452,7 @@ class Invigilate extends examBase {
             videoListTip: `${this.subjectName}录制说明`,
             webUploadVedioStartTime: '',
             webUploadVedioEndTime: '',
-            localStoreFlag: 1,
+            localStoreFlag: 2,
             localVideoUploadFlag: 2,
             clientUploadFlag: 2,
             ticket: PLAT_TICKET
@@ -547,6 +566,7 @@ class Invigilate extends examBase {
                 }
             }, ticket: TICKET
         })
+        // 如果可以提交
         if (checkRes.result.datas.allowExam == true) {
             await this.commitVideo()
         } else if (checkRes.result.datas.allowExam == undefined && checkRes.result.message.split('于')[0] == '视频提交将') {
@@ -564,10 +584,12 @@ class Invigilate extends examBase {
             })
             await yssLogin.clientLogin({
                 loginName: LOGINDATA.loginName,
-                password: 'Csk001'
+                password: argv.env == 'test' ? 'Csk001' : argv.env == 'pre' ? 'Ysk002' : 'Kfk001'
             })
             // 提交视频
             await this.commitVideo()
+        } else {
+            console.log(checkRes.result);
         }
 
     }
@@ -599,8 +621,8 @@ class Invigilate extends examBase {
 
 const invigilateManage = module.exports = {};
 
-invigilateManage.setupInvigilate = function () {
-    return new Invigilate();
+invigilateManage.setupInvigilate = function (params) {
+    return new Invigilate(params);
 }
 
 function Examination () {

@@ -364,7 +364,7 @@ class College {
      */
     async getEsid () {
         let totalNum = await this.getMaxTotalSub()
-        console.log('考试id', this.kaoShiID);
+        // console.log('考试id', this.kaoShiID);
         const esId = await school.getSubjectList({
             kaoShiID: this.kaoShiID,
             zhuanYeID: this.profId,
@@ -372,14 +372,7 @@ class College {
             pageSize: totalNum,
             ticket: PLAT_TICKET
         }).then(res => res.result.datas.page.dataList[res.result.datas.page.dataList.length - 1].esId)
-        // const subjectList = await school.getSubjectList({
-        //     kaoShiID: this.kaoShiID,
-        //     zhuanYeID: this.profId,
-        //     curPage: 1,
-        //     // pageSize: totalNum,
-        //     ticket: PLAT_TICKET
-        // })
-        // console.log(subjectList.result.datas.page.dataList[subjectList.result.datas.page.dataList.length - 1]);
+
         return esId;
     }
 
