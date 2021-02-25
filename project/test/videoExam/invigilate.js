@@ -73,7 +73,6 @@ for (let i = 1; i <= caseList.length; i++) {
             password: 'Yss45600'
         }
 
-
         let testCase = caseList[i - 1].configParam;
 
         before(`登录-获取关键校验信息-${caseList[i - 1].title}`, async function () {
