@@ -1,11 +1,13 @@
 const stuApp = require('../../../../reqApi/app/stu');
+const userApp = require('../../../../reqApi/app/user');
 const school = require('../../../../reqApi/platfrom/school');
-const examvideo = require('../../../../reqApi/platfrom/examvideo')
+const examvideo = require('../../../../reqApi/platfrom/examvideo');
+const heartbeatApp = require('../../../../reqApi/app/heartbeat');
 const { common } = require('../../../../lib/index');
 const mysql = require('mysql2');
 
 class examBase {
-    constructor(params) {
+    constructor(params = {}) {
         /** 学校id */
         this.schoolId = params.schoolId || 70355;
         /** 考试id */
@@ -231,7 +233,8 @@ class examBase {
 
     /** 开始录制 */
     async startRecord (params) {
-        const res = await stuApp.startRecord({
+        // const res = await stuApp.startRecord({
+        const res = await heartbeatApp.startRecord({
             data: {
                 p: Object.assign({
                     mirror: 2,
@@ -243,7 +246,13 @@ class examBase {
                 m: ""
             }, ticket: TICKET
         });
-        // console.log('开始录制', res);
+        console.log('开始录制', res);
+        return res;
+    }
+
+    /** 清除录制状态 */
+    async clearRecordStatus (params) {
+        return await heartbeatApp.clearRecordStatus(params)
     }
 
     /** 校验照片是否是本人 */
@@ -273,6 +282,32 @@ class examBase {
         // console.log('清除录制状态', res);
     }
 
+    /** 检查辅机状态 */
+    async checkSlaveStatus (params) {
+        return await stuApp.checkSlaveStatus(params);
+    }
+
+    /**
+     * 辅机登录
+     */
+    async multiTerninalLogin (params) {
+        return await userApp.multiTerninalLogin(params);
+    }
+
+    /** 辅机获取主机科目信息 */
+    async getExamVideoInfo (params) {
+        return await stuApp.getExamVideoInfo(params);
+    }
+
+    /** 校验辅机是否录制 */
+    async checkMasterVideoUpload (params) {
+        return await stuApp.checkMasterVideoUpload(params)
+    }
+
+    /** 改变辅机状态 */
+    async changeSlaveStatus (params) {
+        return await stuApp.changeSlaveStatus(params);
+    }
 }
 
 module.exports = examBase;

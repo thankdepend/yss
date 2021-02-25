@@ -120,6 +120,7 @@ let caps = {
     examvideo: 'http://examvideo.51bm.net.cn',
     sys: 'http://sys.51bm.net.cn',
     examlog: 'http://examlog.51bm.net.cn',
+    heartbeat: 'http://heartbeat.51bm.net.cn',
 
     name: 'test',
 };
@@ -158,6 +159,7 @@ if (envName == 'test') {
         live: 'http://192.168.18.202:26000',
         eval: 'http://192.168.18.202:27000',
         examlog: 'http://192.168.18.202:28000',
+        heartbeat: 'http://192.168.18.202:29000',
         crm: 'http://192.168.18.202:40000',
     }
 }

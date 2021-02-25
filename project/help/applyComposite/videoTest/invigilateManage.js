@@ -25,6 +25,8 @@ class Invigilate extends examBase {
         this.subjectName = '';
         /** 保存次数 */
         this.saveCountNum = 0;
+        /** 是否允许辅机拍摄 */
+        this.allowShoot = false;
         /** 考试模式 */
         this.examMode = 2; // 2为统一模式
         /** 试卷提交标志 */
@@ -461,19 +463,19 @@ class Invigilate extends examBase {
     }
 
     /** 开始录制-监考笔试类 */
-    async startRecordByInv () {
-        await this.startRecord({
+    async startRecordByInv (params) {
+        await this.startRecord(Object.assign({
             esId: this.esId,
             baoKaoId: this.baoKaoId,
-        });
+        }, params));
     }
 
     /** 清除录制状态-监考笔试类 */
-    async clearRecordStatusByInv () {
-        await this.clearRecordStatus({
+    async clearRecordStatusByInv (params) {
+        await this.clearRecordStatus(Object.assign({
             esId: this.esId,
             baoKaoId: this.baoKaoId,
-        });
+        }, params));
     }
 
     /** 校验照片是否是本人-监考笔试类 */
@@ -501,7 +503,7 @@ class Invigilate extends examBase {
                 m: ""
             }, ticket: TICKET
         })
-        // console.log('校验照片是否是本人-监考笔试类', res);
+        console.log('校验照片是否是本人-监考笔试类', res);
     }
 
     /** 保存截图-监考笔试类 */
@@ -615,6 +617,114 @@ class Invigilate extends examBase {
             videoUrl: this.videoUrl
         }
         common.isApproximatelyEqualAssert(exp, res.result.datas.stuVideoDOList.find(es => es.esId == this.esId))
+    }
+
+    /** 监考笔试类检查辅机状态 */
+    async checkSlaveStatusByinvigilte () {
+        const res = await this.checkSlaveStatus({
+            data: {
+                m: "",
+                p: {
+                    esId: this.esId,
+                    examWay: 1,
+                    simulation: 2
+                }
+            }
+            , ticket: TICKET
+        })
+        console.log('监考笔试类检查辅机状态', res);
+        this.allowShoot = res.result.datas.allowShoot;
+        return res;
+    }
+
+    /** 监考笔试类辅机登录 */
+    async multiTerninalLoginByinv () {
+        const res = await this.multiTerninalLogin({
+            data: {
+                p: {
+                    businessCode: "1",
+                    videoCode: "",
+                    ticket: TICKET,
+                    udid: LOGINDATA.loginUdid,
+                    params: `{esId:${this.esId},svId:${this.svId},baoKaoId:${this.baoKaoId},riChengId:${this.riChengId},qrcodePageType:1,videoCode:'',sampleType:0,businessCode:1,demo:2}`,
+                    userId: LOGINDATA.userId
+                },
+                m: ""
+            }
+        });
+        console.log('辅机登录', res);
+        return res;
+    }
+
+    /** 监考笔试类获取主机科目信息 */
+    async getExamVideoInfoByInv () {
+        const res = await this.getExamVideoInfo({
+            data: {
+                m: "",
+                p: {
+                    riChengId: this.riChengID,
+                    baoKaoId: this.baoKaoId,
+                    esId: this.esId,
+                    svId: this.svId,
+                    simulation: 0
+                }
+            },
+            ticket: TICKET
+        })
+        console.log('监考笔试类获取主机科目信息', res);
+        return res;
+    }
+
+    /** 监考笔试类校验辅机是否录制 */
+    async checkMasterVideoUploadByInv () {
+        const res = await this.checkMasterVideoUpload({
+            data:
+                { "m": "", "p": { "svId": this.svId } }
+            ,
+            ticket: TICKET
+        });
+        console.log('监考笔试类校验辅机是否录制', res);
+        return res;
+    }
+
+    /** 监考笔试类改变辅机状态 */
+    async changeSlaveStatusByInv (params) {
+        const res = await this.changeSlaveStatus({
+            data: {
+                m: "",
+                p: Object.assign({
+                    esId: this.esId,
+                    examWay: 1,
+                    riChengId: this.riChengID,
+                    slaveStatus: 1,
+                    videoCode: "",
+                    simulation: 2
+                }, params)
+            },
+            ticket: TICKET
+        });
+        console.log('监考笔试类改变辅机状态', res);
+        return res;
+    }
+
+    /** 辅机录制接口套件 */
+    async slaveStart () {
+        // 检查辅机状态（未开始）
+        await this.checkSlaveStatusByinvigilte();
+        // 辅机登录
+        await this.multiTerninalLoginByinv();
+        // 获取主机科目信息
+        await this.getExamVideoInfoByInv();
+        // 改变辅机状态
+        await this.changeSlaveStatusByInv()
+        // 校验辅机是否录制
+        await this.checkMasterVideoUploadByInv();
+        // 检查辅机状态（已开始）
+        await this.checkSlaveStatusByinvigilte();
+        // 清除录制状态
+        await this.clearRecordStatusByInv({ master: 2 })
+        // 辅机开始录制
+        await this.startRecordByInv({ master: 2 });
     }
 
 }

@@ -9,14 +9,14 @@ const argv = require('yargs').argv;
  */
 
 
-// 网络考试配置参数
+// 网络考试自定义配置参数
 const examOpt = {
     schoolId: 45600,
     kaoShiId: 13181,
     kaoDianID: 740,
     baoKaoId: '',
     riChengObj: {
-        invigilate: 11110018, // 监考笔试类日程
+        invigilate: 11110018, // 监考笔试类日程id
     },
     esId: 3502,
     zhuanYeId: 1224972,
@@ -35,7 +35,7 @@ const schedule = {
 
 // 用例集
 const caseList = [
-    { title: '|审题模式不限倒计时(正常考试)', configParam: { sampleType: 1 } },
+    { title: '|审题模式不限倒计时(正常考试)', configParam: { sampleType: 1, hasSlave: true } },
     { title: '|审题模式网页手机同时审题', configParam: { sampleType: 3 } },
     { title: '|迟到考生进入', configParam: { latestInTime: schedule.latestInTime } },
     { title: '|视频考题', configParam: Object.assign({ ...schedule, videoExam: true }, { showQuesStartDate: common.getCurrentTimeAfter(1), shootStartDate: common.getCurrentTimeAfter(1), }) },
@@ -58,14 +58,14 @@ for (let i = 1; i <= caseList.length; i++) {
         let invigilate = invigilateManage.setupInvigilate(examOpt);
 
         // 如果需要指定参数
-        invigilate.updateConstParams({
-            schoolId: 45600, // 学校id
-            kaoShiId: 13181,// 考试id
-            kaoDianID: 740,// 考点id
-            riChengID: 11110018,// 日程id
-            zhuanYeId: 1224972,// 专业id
-            esId: 3502,// 科目id
-        })
+        // invigilate.updateConstParams({
+        //     schoolId: 45600, // 学校id
+        //     kaoShiId: 13181,// 考试id
+        //     kaoDianID: 740,// 考点id
+        //     riChengID: 11110018,// 日程id
+        //     zhuanYeId: 1224972,// 专业id
+        //     esId: 3502,// 科目id
+        // })
         // console.log(invigilate);
         // 指定的学校
         let schoolData = {
@@ -75,7 +75,7 @@ for (let i = 1; i <= caseList.length; i++) {
 
         let testCase = caseList[i - 1].configParam;
 
-        before('登录-获取关键校验信息', async function () {
+        before(`登录-获取关键校验信息-${caseList[i - 1].title}`, async function () {
             let saveData = {};
             // 院校登录
             await yssLogin.platfrom({
@@ -158,6 +158,7 @@ for (let i = 1; i <= caseList.length; i++) {
                 loginName: `mihuan${i + 1}`,
                 password: argv.env == 'test' ? 'Csk001' : argv.env == 'pre' ? 'Ysk002' : 'Kfk001'
             })
+            console.log(LOGINDATA);
             // 进考场
             await invigilate.underwayExamByInvi();
         });
@@ -182,7 +183,7 @@ for (let i = 1; i <= caseList.length; i++) {
             })
             // console.log('视频打回', res);
         });
-        describe('开始考试-监考笔试', async function () {
+        describe(`开始考试-监考笔试-${caseList[i - 1].title}`, async function () {
             // if (testCase.videoExam) {
             //     it('抽考题-并且断言时间未到', async function () {
             //         await invigilate.checkTimeByTypeAssert({ delay: true })
@@ -206,37 +207,52 @@ for (let i = 1; i <= caseList.length; i++) {
             before('抽考题', async function () {
                 await invigilate.checkTimeByType();
             });
-
+            // 如果是双机位，在抽考题结束请求
+            if (testCase.hasSlave) {
+                it('辅机登录', async function () {
+                    await invigilate.slaveStart();
+                });
+            }
             it('校验考题', async function () {
-                await invigilate.checkTimeByTypeAssert()
+                await invigilate.checkTimeByTypeAssert();
             });
             it('详情校验', async function () {
-                await invigilate.subjectInfoAssert()
+                await invigilate.subjectInfoAssert();
             });
         });
-        describe('开始录制', async function () {
+        describe(`开始录制-${caseList[i - 1].title}`, async function () {
             it('开始录制', async function () {
-                await invigilate.startRecordByInv();
+                await invigilate.startRecordByInv({ master: 1 });
             });
             it('校验照片是否是本人', async function () {
-                await invigilate.checkAttestPhotoByInv()
+                await invigilate.checkAttestPhotoByInv();
             });
             it('保存截图', async function () {
-                await invigilate.saveScreenshotByInv()
+                await invigilate.saveScreenshotByInv();
             });
             it('清除录制状态', async function () {
-                await invigilate.clearRecordStatusByInv()
+                await invigilate.clearRecordStatusByInv();
             });
+
         });
-        describe('抽到题开始减次数', async function () {
+        describe(`抽到题开始减次数-${caseList[i - 1].title}`, async function () {
             before('保存次数', async function () {
                 await invigilate.saveCount()
             });
             it('校验考生录制次数', async function () {
                 await invigilate.saveCountAssert()
             });
+            // 如果有辅机
+            if (testCase.hasSlave) {
+                it('辅机结束录制', async function () {
+                    await invigilate.clearRecordStatusByInv({ master: 2 });
+                });
+                it('辅机改变录制状态', async function () {
+                    await invigilate.changeSlaveStatusByInv({ slaveStatus: 1 });
+                });
+            }
         });
-        describe('提交考卷', async function () {
+        describe(`提交考卷-${caseList[i - 1].title}`, async function () {
             before('提交考卷', async function () {
                 await yssLogin.platfrom({
                     loginName: schoolData.loginName,
@@ -256,7 +272,7 @@ for (let i = 1; i <= caseList.length; i++) {
                 await invigilate.subjectInfoAssert()
             });
         });
-        describe('提交视频', async function () {
+        describe(`提交视频-${caseList[i - 1].title}`, async function () {
             it('提交视频', async function () {
                 await invigilate.checkAndcommitVideo()
             });
@@ -266,6 +282,15 @@ for (let i = 1; i <= caseList.length; i++) {
             it('考生专业视频', async function () {
                 await invigilate.studentSubjectVideoListByinvAssert()
             });
+            // 如果有辅机
+            if (testCase.hasSlave) {
+                it('检查主机视频上传状态', async function () {
+                    await invigilate.checkMasterVideoUploadByInv()
+                });
+                it('检查是否允许考试', async function () {
+                    await invigilate.checkAllowToExam();
+                });
+            }
         });
 
     });
