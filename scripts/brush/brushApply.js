@@ -25,7 +25,7 @@ describe('考生报名', async function () {
         platFromInfo = await yssLogin.platfrom(account[caps.name].ptzg);
         console.log('平台登录', platFromInfo);
     });
-    for (let i = 1; i <= 30; i++) {
+    for (let i = 31; i <= 32; i++) {
         describe('报名', async function () {
             before('获取学校', async function () {
                 await yssLogin.clientLogin({

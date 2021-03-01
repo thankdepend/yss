@@ -17,14 +17,14 @@ const argv = require('yargs').argv;
  * @alias 完善信息-审核一条龙
  */
 
-for (let i = 87; i <= 95; i++) {
-    describe.skip('完善信息与审核', async function () {
+for (let i = 31; i <= 50; i++) {
+    describe('完善信息与审核', async function () {
         this.timeout(TESTCASE.timeout);
         const fill = fillManage.setupFill();
         before('登录', async function () {
             let userInfo = {
                 // loginName: `${workSheetsFromFile[0].data[i][0]}`,
-                loginName: `lj100${i}`,
+                loginName: `shuilai${i}`,
                 password: argv.env == 'test' ? 'Csk001' : argv.env == 'pre' ? 'Ysk002' : 'Kfk001',
                 device: 'm'
             }
