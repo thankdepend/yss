@@ -1,4 +1,5 @@
-// const { common } = require('../../lib/index');
+const { random } = require('lodash');
+const { common } = require('../../lib/index');
 // let num = common.getRandomNum(1, 4);
 // console.log(num);
 // switch (num) {
@@ -18,16 +19,16 @@
 //         break;
 // }
 
-const { expect } = require("chai")
+let pointNum = common.getRandomNum(1, 5);
+let pointconTent = new Array(pointNum).fill({})
 
-// day1海豚 day2蜜獾 day3河蟹 day4海贝
-// 增加一句废话
-let obj = {
-    aaa: 123,
-    bb: 456
-}
-// delete obj.bb
-console.log(obj);
-// if (expect(obj.aaa).to.be.ok) {
-//     console.log('success');
-// }
+let allPoint = pointconTent.map(() => {
+    let obj = {};
+    obj.commentStr = common.getPoetry();
+    obj.pointX = Math.random().toFixed(3);
+    obj.pointY = Math.random().toFixed(3);
+    obj.type = 1;
+    obj.voiceTime = 0;
+    return obj
+})
+console.log('bbb', allPoint);

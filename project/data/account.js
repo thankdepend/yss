@@ -71,7 +71,7 @@ const account = {
                 loginName: 'kf05',
                 password: 'Csk001'
             },
-        ]
+        ],
 
     },
     pre: {

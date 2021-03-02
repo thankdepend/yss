@@ -34,6 +34,7 @@ class Eval {
 
     /** 考生保存评画信息 */
     async saveEvaluation (params) {
+        const ranStuGrade = common.getRandomNum(0, 2);
         const res = await evalApp.saveStuEvaluation({
             data: {
                 m: "",
@@ -45,9 +46,9 @@ class Eval {
                     className: params.className,
                     profId: 1,
                     profName: params.profTag.split(',')[0],
-                    paintUrl: doc[caps.name].production[common.getRandomNum(0, doc.test.production.length)],
-                    // paintUrl: "http://img.artstudent.cn/pr/2020-10-09/c2a151e21d294425a0aa733b0271f842.jpg",
-                    describe: common.getRandomContent(10)
+                    paintUrl: doc[caps.name].production[common.getRandomNum(0, doc.test.production.length - 1)],
+                    describe: common.getPoetry(),
+                    stuGrade: `高${ranStuGrade == 0 ? '一' : ranStuGrade == 1 ? '二' : ranStuGrade == 2 ? '三' : '三'}`, // 年级
                 }
             },
             ticket: TICKET
@@ -62,6 +63,11 @@ class Eval {
     /** 更新评画信息 */
     updateEvaluation (params) {
         common.update(this, params)
+    }
+
+    // 获取线上考生评画照片
+    async getOnlinePic () {
+        await evalApp.queryMyEvaluation()
     }
 
     /** 创建评画订单 */

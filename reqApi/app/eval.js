@@ -55,8 +55,10 @@ eval.getEvaluationList = async function (params = {}) {
 
 /**
  * 获取打分项列表
- * @param {Number} classId 类别id
- * @param {Number} profId 专业id
+ * @param {Object} data.p 
+ * @param {String} data.m
+ * @param {Number} data.p.classId 类别id
+ * @param {Number} data.p.profId 专业id
  */
 eval.getScoreItemList = async function (params = {}) {
     return common.evalPost(yssCaps.eval + '/api/m/auth/teacherEvaluation/v200929/query_score_item.ws', params);

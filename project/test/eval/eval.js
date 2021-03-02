@@ -2,17 +2,17 @@ const evalManage = require('../../help/eval/evaluationManage');
 const teacherManage = require('../../help/eval/evalTeacherManage');
 const pubilcManage = require('../../help/public/pubilcManage');
 const yssLogin = require('../../help/base/yssLogin');
+const teacherAccount = require('../../data/evalTeacher')
 const {
     common
 } = require('../../../lib/index');
 const public = require('../../../reqApi/platfrom/public');
-const doc = require("../../data/doc.json");
-const caps = require("../../../data/caps");
 
 describe('评画老师', async function () {
     let teacher;
     this.timeout(TESTCASE.timeout);
     const eval = evalManage.setupEvaluation();
+    const evalTeacher = teacherManage.setupTeacher();
     const public = await pubilcManage.setupPubilc();
     before('平台登录', async function () {
         await yssLogin.platfrom({
@@ -23,7 +23,6 @@ describe('评画老师', async function () {
 
         // 获取评画老师
         teacher = await teacherManage.returnTeacher();
-        console.log(teacher);
     });
     describe('考生创建评画', async function () {
         before('保存评画', async function () {
@@ -31,7 +30,6 @@ describe('评画老师', async function () {
                 loginName: '330350',
                 password: 'Csk001',
             })
-            console.log(teacher);
             // 保存评画
             await eval.saveEvaluation(teacher)
 
@@ -42,6 +40,18 @@ describe('评画老师', async function () {
         });
         it('用户查看评画列表', async function () {
             await eval.queryMyEvaluationAresst()
+        });
+    });
+    describe('老师评画', async function () {
+        it('老师登录', async function () {
+            const teacherAccount = await teacherManage.getTeacherAccount(teacher.teacherName)
+            await yssLogin.clientLogin({
+                loginName: teacherAccount.loginName,
+                password: teacherAccount.password
+            })
+        });
+        it('提交批改', async function () {
+            await evalTeacher.submitEvaluation(eval)
         });
     });
 });
