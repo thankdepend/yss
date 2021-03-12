@@ -9,7 +9,7 @@ const {
 } = require('../../../lib/index');
 const platfromProb = require('../../../reqApi/platfrom/prob');
 
-describe.skip('完善信息', function () {
+describe('完善信息', function () {
     this.timeout(TESTCASE.timeout);
     // 修改次数
     const num = 1000;
@@ -17,7 +17,7 @@ describe.skip('完善信息', function () {
     before('登录', async function () {
         // 需要登录的用户，默认有用户，可以不传
         loginAccount = {
-            loginName: 'xyf1',
+            loginName: 'haima12',
             password: 'Csk001',
             device: 'm'
         }
@@ -85,7 +85,7 @@ describe.skip('完善信息', function () {
         const scoreLineInfo = await provinceScoreLine.getAosAndProfTypeList({
             data: {
                 p: {
-                    provinceId: basicData.province['湖北'],
+                    provinceId: basicData.province['浙江'],
                 },
                 m: ''
             },

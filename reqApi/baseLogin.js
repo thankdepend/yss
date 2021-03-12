@@ -11,9 +11,6 @@ const base = module.exports = {};
  * app登录
  */
 base.userLogin = async function (params = {}) {
-    // return httpRequest.post(yssCaps.user + '/login', {
-    //     ...params
-    // });
     return common.sendPost(yssCaps.user + '/login', params);
 };
 
@@ -49,4 +46,11 @@ base.crmAgentLogin = async function (params = {}) {
  */
 base.cqPlatfromLogin = async function (params = {}) {
     return httpRequest.sendPost(yssCaps.user + '/login/65001.htm', params);
+};
+
+/**
+ * 线上app登录
+ */
+base.onlineUserLogin = async function (params = {}) {
+    return common.sendOlinePost('http://user.artstudent.cn' + '/login', params);
 };

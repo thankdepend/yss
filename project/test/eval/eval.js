@@ -23,6 +23,14 @@ describe('评画老师', async function () {
 
         // 获取评画老师
         teacher = await teacherManage.returnTeacher();
+
+        // 获取线上评画数据
+        await yssLogin.onlineClientLogin({
+            loginName: 'mihuan4',
+            password: 'Xsk001',
+            device: 'm'
+        })
+        await eval.getOnlinePic();
     });
     describe('考生创建评画', async function () {
         before('保存评画', async function () {
@@ -42,7 +50,7 @@ describe('评画老师', async function () {
             await eval.queryMyEvaluationAresst()
         });
     });
-    describe('老师评画', async function () {
+    describe.skip('老师评画', async function () {
         it('老师登录', async function () {
             const teacherAccount = await teacherManage.getTeacherAccount(teacher.teacherName)
             await yssLogin.clientLogin({

@@ -161,3 +161,12 @@ prob.userBuyed = async function (params = {}) {
     return common.sendPost(yssCaps.prob + '/api/m/auth/wish/user/v200630/getUser.ws', params);
 };
 
+/**
+ * 获取校考信息
+ * @param {Object} data
+ * @param {String} data.m
+ * @param {Object} data.p
+ */
+prob.SchoolExamList = async function (params = {}) {
+    return common.sendPost(yssCaps.prob + '/api/m/auth/schoolExamList/v3_2_6/listSchoolExamList.ws', params);
+};

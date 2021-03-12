@@ -1,4 +1,4 @@
-const calProbManage = require('./calProbManage');
+const calSchoolProbManage = require('./calSchoolProbManage');
 const {
     common
 } = require('../lib/index');
@@ -8,25 +8,25 @@ const yssLogin = require('./../project/help/base/yssLogin');
 
 
 describe('计算录取概率', async function () {
-    const cal = calProbManage.setupCalProb()
+    const cal = calSchoolProbManage.setupCalProb()
     it('获取用户信息', async function () {
-        const userInfo = await calProbManage.userLogin();
+        const userInfo = await calSchoolProbManage.userLogin();
         // console.log('userInfo', userInfo);
         await cal.updateUserInfo(userInfo);
     });
     it('获取志愿院校信息', async function () {
-        const probInfo = await calProbManage.getProbInfo();
+        const probInfo = await calSchoolProbManage.getProbInfo();
         // console.log('probInfo', probInfo);
         await cal.updateProbInfo(probInfo)
     });
     it('更新省批次和分数信息', async function () {
-        const provinceInfo = await calProbManage.getProvinceScoreLine(cal.stuInfoMain.provinceID);
+        const provinceInfo = await calSchoolProbManage.getProvinceScoreLine(cal.stuInfoMain.provinceID);
         // console.log('省份分数信息', provinceInfo);
         await cal.updateScoreLine(provinceInfo);
     });
     it('计算统考概率', async function () {
         console.log(cal);
-        const res = await cal.jointCalculate();
-        console.log(`${cal.volDataMain.schoolName}(${cal.volDataMain.profName})专业概率为:`, res);
+        const res = await cal.schoolCalculate();
+        console.log(`${cal.schoolExamMain.schoolName}(${cal.schoolExamMain.profName})专业概率为:`, res);
     });
 });

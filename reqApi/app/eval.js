@@ -100,3 +100,25 @@ eval.queryMyEvaluation = async function (params = {}) {
 };
 
 
+/** 
+ * 查询全部评画列表（考生）
+ * @param {Object} data
+ * @param {String} data.m
+ * @param {Object} data.p
+ * @param {Object} data.p.curPage
+ */
+eval.queryEvaluationList = async function (params = {}) {
+    return common.evalPost(yssCaps.eval + '/api/m/auth/paint/v200929/query_evaluation_list.htm', params);
+};
+
+/** 
+ * 查询线上评画列表（考生）
+ * @param {Object} data
+ * @param {String} data.m
+ * @param {Object} data.p
+ * @param {Object} data.p.curPage
+ */
+eval.queryOnlineMyEvaluation = async function (params = {}) {
+    return common.sendOlinePost('http://eval.artstudent.cn' + '/api/m/auth/paint/v200929/query_evaluation_list.htm', params);
+};
+

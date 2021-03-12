@@ -13,9 +13,7 @@ const provinceScoreLine = module.exports = {};
  */
 
 provinceScoreLine.getAosAndProfTypeList = async function (params = {}) {
-    return httpRequest.post(yssCaps.prob + '/api/m/auth/provinceScoreLine/aosAndProfTypeList.ws', {
-        ...params
-    });
+    return common.sendPost(yssCaps.prob + '/api/m/auth/provinceScoreLine/aosAndProfTypeList.ws', params);
 };
 
 /**

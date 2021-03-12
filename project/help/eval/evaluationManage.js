@@ -67,7 +67,17 @@ class Eval {
 
     // 获取线上考生评画照片
     async getOnlinePic () {
-        await evalApp.queryMyEvaluation()
+        const res = await evalApp.queryOnlineMyEvaluation({
+            data: {
+                m: "",
+                p: {
+                    curPage: 1
+                }
+            }, ticket: TICKET
+        });
+        const picList = res.result.datas.page.dataList.map(obj => obj.paintUrl)
+        // 将doc池的图片替换成线上图
+        doc[caps.name].production = picList
     }
 
     /** 创建评画订单 */

@@ -23,6 +23,10 @@ const teacher = {
         haibei: {
             loginName: 'xyf1',
             password: 'Csk001',
+        },
+        xiaoyu: {
+            loginName: 'xycs5',
+            password: 'Csk001'
         }
     }
 }

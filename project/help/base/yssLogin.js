@@ -147,3 +147,18 @@ yssLogin.cqSchLogin = async function (params = {}) {
 
     return res;
 };
+
+/**
+ * 线上app登录
+ * @param {String} loginName 账号
+ * @param {String} password 密码
+ * @param {String} device 设备'm'
+ */
+yssLogin.onlineClientLogin = async function (params) {
+
+    const res = await base.onlineUserLogin(params);
+    console.log(res);
+    LOGINDATA = res.result.datas.user
+    TICKET = res.result.ticket
+    return res;
+};
