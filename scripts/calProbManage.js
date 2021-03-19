@@ -17,6 +17,8 @@ class CalProb {
         this.stuInfoMain = new StuInfoMain();
         // 分数线信息
         this.scoreLineMain = new ScoreLineMain();
+        // 批次线信息
+        this.batchLineMain = new Object();
         /** 替换公式 */
         this.formula = {
             S: '综合分',
@@ -63,6 +65,10 @@ class CalProb {
             throw new Error('投档或录取公式为空')
         }
 
+        // 判统考分数线
+        await this.checkJointLine();
+        // 判文化分数线
+        await this.checkCultureLine();
 
         // 如果是平行志愿
         if (this.volDataMain.archiveRule == 1) {
@@ -327,6 +333,88 @@ class CalProb {
         this.formula.Z = this.stuInfoMain.jointRank;
     }
 
+    // 判断统考分数线
+    async checkJointLine () {
+        /**
+         * 专业分数线
+         */
+
+        // 如果考生统考合格线过线
+        if (this.stuInfoMain.jointExamScore >= this.scoreLineMain.i) {
+            // 如果批次层次没填
+            if (this.batchLineMain.diploma == null) {
+                // 如果专业分数线有值
+                if (this.batchLineMain.profScoreLine) {
+                    if (this.stuInfoMain.jointExamScore >= this.batchLineMain.profScoreLine) {
+                        console.log('统考分过线1');
+                    } else {
+                        console.log('统考分没过线2');
+                    }
+                }
+
+            }
+            // 如果批次层次是本科
+            if (this.batchLineMain.diploma == 1) {
+                // 如果考生本科批次线过线
+                if (this.stuInfoMain.jointExamScore >= this.scoreLineMain.h) {
+                    console.log('统考分过线3');
+                } else {
+                    console.log('统考分没过线4');
+                }
+            }
+            // 批次层次是专科
+            else if (this.batchLineMain.diploma == 2) {
+                // 如果考生专科批次线过线
+                if (this.stuInfoMain.jointExamScore >= this.scoreLineMain.x) {
+                    console.log('统考分过线5');
+                } else {
+                    console.log('统考分没过线6');
+                }
+            }
+        } else {
+            console.log(`考生统考合格线未达线,${this.stuInfoMain.provinceName}省,统考合格线为${this.scoreLineMain.i},考生统考分为${this.stuInfoMain.jointExamScore}`);
+        }
+    }
+
+    // 判断文化分数线
+    async checkCultureLine () {
+        /** 
+         * 文化分数线
+        */
+        // 如果批次层次没填
+        if (this.batchLineMain.diploma == null) {
+            // 如果专业分数线有值
+            if (this.batchLineMain.cultureScoreLine) {
+                if (this.stuInfoMain.collEntrExamScore >= this.batchLineMain.cultureScoreLine) {
+                    console.log('文化分过线1');
+                } else {
+                    console.log('文化分没过线2');
+                }
+            }
+
+        }
+        // 如果批次层次是本科
+        if (this.batchLineMain.diploma == 1) {
+            // 如果考生本科批次线过线
+            if (this.stuInfoMain.collEntrExamScore >= this.scoreLineMain.j) {
+                console.log('文化分过线3');
+            } else {
+                console.log('文化分没过线4');
+            }
+        }
+        // 批次层次是专科
+        else if (this.batchLineMain.diploma == 2) {
+            // 如果考生专科批次线过线
+            if (this.stuInfoMain.collEntrExamScore >= this.scoreLineMain.l) {
+                console.log('文化分过线5');
+            } else {
+                console.log('文化分没过线6');
+            }
+        } else {
+            console.log(`考生文化文未达线,${this.stuInfoMain.provinceName}省,文化分线为${this.scoreLineMain.j},考生文化分为${this.stuInfoMain.collEntrExamScore}`);
+        }
+    }
+
     // 更新用户信息
     async updateUserInfo (params) {
         Object.assign(this.stuInfoMain, params.jointMain);
@@ -340,6 +428,10 @@ class CalProb {
     // 更新分数线信息
     async updateScoreLine (params) {
         Object.assign(this.scoreLineMain, params);
+    }
+    // 更新批次线信息
+    async updateBatchLine (params) {
+        Object.assign(this.batchLineMain, params);
     }
 }
 
@@ -468,12 +560,13 @@ calProbManage.setupCalProb = function () {
 
 calProbManage.userLogin = async function () {
     await yssLogin.clientLogin({
-        loginName: 'yunbao3',
+        loginName: 'haitun10',
         password: 'Csk001'
     })
     const res = await probApp.getUser({
         ticket: TICKET
     });
+
     const jointMain = res.result.datas.obj;
     return { jointMain }
 }
@@ -485,7 +578,7 @@ calProbManage.getProbInfo = async function () {
 
     // 概率-志愿专业数据-业务表(统考计算公式)
     const res = await prob.getJointScoreList({
-        id: 1676314, // 院校专业数据id
+        id: 1657960, // 院校专业数据id
         ticket: PLAT_TICKET
     })
     const jointInfo = res.result.datas.page.dataList[0];
@@ -504,4 +597,13 @@ calProbManage.getProvinceScoreLine = async function (provinceId) {
     });
     console.log(res);
     return res.result.datas.list[0].jointCategoryList[0];
+}
+
+// 获取省份批次线
+calProbManage.getProvinceBatchLine = async function (batchLineParam) {
+    const res = await prob.getProvinceBatchLine(Object.assign({
+        ticket: PLAT_TICKET,
+    }, batchLineParam));
+    console.log(res);
+    return res.result.datas.page.dataList[0];
 }

@@ -4,7 +4,21 @@
  * 
  */
 
-const h = { "xueXiaoId": 13166, "subjectName": "美术中级（统一模式）", "zhuanYeMC": "美术", "photoAttachment": "http://art-video.artstudent.cn/img/test/13166/1223644/1688/74a10784889c4aa9a8def51f4fd5390b_uid1078675.jpg", "baoKaoId": 2628461, "yongHuID": 1078675, "esId": 1688, "riChengId": 11108259 }
+const h = {
+    "userId": 0,
+    "userName": 0,
+    "schoolId": 0,
+    "schoolName": 0,
+    "examId": 0,
+    "examName": 0,
+    "pointId": 0,
+    "pointName": 0,
+    "profId": 0,
+    "profName": 0,
+    "registrationFormUrl": 0,
+    "baoKaoId": 0,
+
+}
 
 
 Object.keys(h).map((key) => {

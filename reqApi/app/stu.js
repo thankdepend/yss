@@ -497,3 +497,32 @@ stu.commitVideo = async function (params = {}) {
     return common.sendPost(yssCaps.stu + '/api/m/auth/video/commitVideo.ws', params);
 }
 
+/**
+ * 保存报名登记表信息
+ * @param {Number} userId 用户id
+ * @param {String} userName  用户名
+ * @param {Number} schoolId  学校id
+ * @param {String} schoolName 学校名
+ * @param {Number} examId   考试id
+ * @param {String} examName  考试名称
+ * @param {Number} pointId   考点id
+ * @param {String} pointName 考点名
+ * @param {Number} profId  专业id
+ * @param {String} profName 专业名
+ * @param {String} registrationFormUrl 注册表单url
+ * @param {Number} baoKaoId 报考id
+ */
+stu.saveRegistrationForms = async function (params = {}) {
+    return common.sendPost(yssCaps.stu + '/api/m/auth/apply/v210316/save_registration_forms.ws', params);
+}
+
+/**
+ * 查询报名登记表信息
+ * @param {Object} data
+ * @param {String} data.m
+ * @param {Object} data.p
+ * @param {Number} data.p.baoKaoId 报考id
+ */
+stu.queryRegistrationForms = async function (params = {}) {
+    return common.sendPost(yssCaps.stu + '/api/m/auth/apply/v210316/query_registration_forms.ws', params);
+}

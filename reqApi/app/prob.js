@@ -167,6 +167,6 @@ prob.userBuyed = async function (params = {}) {
  * @param {String} data.m
  * @param {Object} data.p
  */
-prob.SchoolExamList = async function (params = {}) {
+prob.schoolExamList = async function (params = {}) {
     return common.sendPost(yssCaps.prob + '/api/m/auth/schoolExamList/v3_2_6/listSchoolExamList.ws', params);
 };

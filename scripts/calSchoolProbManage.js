@@ -150,12 +150,14 @@ class CalProb {
         this.formula.Q = this.scoreLineMain.q;
         this.formula.W = this.scoreLineMain.w;
         this.formula.Z = this.stuInfoMain.jointRank;
+        this.formula.T = this.schoolScoreList.find(obj => obj.expressionId == this.schoolExamMain.id).schoolExamScore
     }
 
     // 更新用户信息
     async updateUserInfo (params) {
         Object.assign(this.stuInfoMain, params.jointMain);
-        Object.assign(this.schoolScoreList, params.schoolScoreList);
+        console.log('aaaaaaaaaa', params.schoolScoreList);
+        this.schoolScoreList = [...this.schoolScoreList, ...params.schoolScoreList]
     }
 
     // 更新志愿专业数据
@@ -300,12 +302,12 @@ calSchoolProbManage.userLogin = async function () {
     const res = await probApp.getUser({
         ticket: TICKET
     });
-    const exmaList = await probApp.SchoolExamList({
+    const exmaList = await probApp.schoolExamList({
         ticket: TICKET
     });
     const jointMain = res.result.datas.obj;
-    const schoolMain = exmaList.result.datas.list;
-    return { jointMain, schoolMain }
+    const schoolScoreList = exmaList.result.datas.list;
+    return { jointMain, schoolScoreList }
 }
 
 calSchoolProbManage.getProbInfo = async function () {
@@ -333,6 +335,5 @@ calSchoolProbManage.getProvinceScoreLine = async function (provinceId) {
             m: ""
         }, ticket: TICKET
     });
-    console.log(res);
     return res.result.datas.list[0].jointCategoryList[0];
 }

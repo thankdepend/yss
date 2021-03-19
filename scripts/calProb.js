@@ -19,7 +19,16 @@ describe('计算录取概率', async function () {
         // console.log('probInfo', probInfo);
         await cal.updateProbInfo(probInfo)
     });
-    it('更新省批次和分数信息', async function () {
+    it('更新省批次信息', async function () {
+        let batchLineParam = {
+            dataYear: cal.volDataMain.dataYear,
+            provinceID: cal.stuInfoMain.provinceID,
+            jointProfTypeID: cal.stuInfoMain.jointProfTypeID,
+        }
+        const batchLineInfo = await calProbManage.getProvinceBatchLine(batchLineParam);
+        await cal.updateBatchLine(batchLineInfo);
+    });
+    it('更新省分数信息', async function () {
         const provinceInfo = await calProbManage.getProvinceScoreLine(cal.stuInfoMain.provinceID);
         // console.log('省份分数信息', provinceInfo);
         await cal.updateScoreLine(provinceInfo);

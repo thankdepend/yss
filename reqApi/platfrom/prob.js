@@ -53,3 +53,14 @@ prob.getJointScoreList = async function (params = {}) {
 prob.getSchoolScoreExpressionList = async function (params = {}) {
     return httpRequest.sendPost(yssCaps.prob + '/auth/prob/schoolScoreExpression/loadSchoolScoreExpressionData.htm', params);
 };
+
+/**
+ * 获取省批次信息（后台）
+ * @param lineId 数据id
+ * @param dataYear 年份
+ * @param provinceID 省份id
+ * @param jointProfTypeID 统考专业类型
+ */
+prob.getProvinceBatchLine = async function (params = {}) {
+    return httpRequest.sendPost(yssCaps.prob + '/auth/prob/provinceBatchLine/loadProvinceBatchLineData.htm', params);
+};
