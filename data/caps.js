@@ -121,6 +121,7 @@ let caps = {
     sys: 'http://sys.51bm.net.cn',
     examlog: 'http://examlog.51bm.net.cn',
     heartbeat: 'http://heartbeat.51bm.net.cn',
+    monitor: 'http://monitor.51bm.net.cn',
 
     name: 'test',
 };

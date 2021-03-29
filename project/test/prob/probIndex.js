@@ -27,7 +27,6 @@ describe.skip('录取概率首页', function () {
                 "p": {},
                 "m": ""
             },
-            ts: 1591060573972,
             ticket: TICKET
         })
     });

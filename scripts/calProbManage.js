@@ -560,7 +560,7 @@ calProbManage.setupCalProb = function () {
 
 calProbManage.userLogin = async function () {
     await yssLogin.clientLogin({
-        loginName: 'haitun10',
+        loginName: 'mihuan11',
         password: 'Csk001'
     })
     const res = await probApp.getUser({

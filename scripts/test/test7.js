@@ -35,7 +35,7 @@ async function threadTest () {
         });
     }
 }
-it('sss', async function () {
+it('new thread', async function () {
     await threadTest();
 });
 

@@ -1,22 +1,23 @@
-const { before } = require('lodash');
 const yssLogin = require('../../project/help/base/yssLogin');
-const stu = require('../../reqApi/app/stu');
+const monitor = require('../../reqApi/platfrom/monitor');
 
 describe('登录测试', async function () {
-    let siteInfo;
-    before('登录', async function () {
-        const res = await yssLogin.clientLogin();
+
+    it('登录', async function () {
+        const res = await yssLogin.platfrom({
+            loginName: 'jk_mh',
+            password: 'Csk001'
+        });
         console.log(res);
     });
-    it('查询考点', async function () {
-        siteInfo = await stu.getExamSite({
-            data: {
-                m: "",
-                p: {
-                    xueXiaoID: 13166
-                }
-            }, ticket: TICKET
-        })
-        console.log(siteInfo);
+    it('更新缓存', async function () {
+        const res = await monitor.updateExamDateCache({
+            riChengId: 11110148,
+            userId: 1077970,
+            minutes: 120000,
+            ticket: PLAT_TICKET
+        });
+        console.log(res);
     });
+
 });

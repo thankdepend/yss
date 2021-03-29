@@ -35,6 +35,7 @@
         "qrcode-reader": "^1.0.4",
         "react": "^16.12.0",
         "redis": "^2.8.0",
+        "request": "^2.88.2",
         "superagent": "^5.2.1",
         "supports-color": "^5.5.0",
         "underscore": "^1.11.0",

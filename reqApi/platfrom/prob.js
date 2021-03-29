@@ -38,7 +38,7 @@ prob.getJointScoreList = async function (params = {}) {
 };
 
 /**
- * 查询概率统考数据列表（校考计算公式）
+ * 查询概率校考数据列表（校考计算公式）
  * @param id 数据id
  * @param dataYear 年份
  * @param schoolID 学校id

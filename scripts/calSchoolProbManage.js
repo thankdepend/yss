@@ -15,10 +15,12 @@ class CalProb {
         this.stuInfoMain = new StuInfoMain();
         // 考生校考信息
         this.schoolScoreList = new Array();
-        // 院校专业统考主要信息
+        // 院校专业校考主要信息
         this.schoolExamMain = new Object();
-        // 分数线信息
+        // 省分数线信息
         this.scoreLineMain = new ScoreLineMain();
+        // 省批次信息
+        this.batchLineMain = new Object();
         /** 替换公式 */
         this.formula = {
             S: '综合分',
@@ -67,20 +69,25 @@ class CalProb {
         }
 
 
-        // 梯度志愿  (所有校考)
+        // 校考判线
+        /** 校考分 */
+        await this.checkSchoolLine();
+        /** 文化分 */
+        await this.checkCultureLine();
+
 
         // 如果录取公式是“综合分”
         if (this.schoolExamMain.enrollBasisType == 1) {
             // 如果录取最低分存在
             if (this.schoolExamMain.entrolScoreMin != '' || null) {
                 console.log(1);
-                const val = Number((0.4725 + Math.atan((eval(schoolFormulaRes) - this.schoolExamMain.entrolScoreMin) / this.volDataMain.entrolScoreMin) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
+                const val = Number((0.4725 + Math.atan((eval(schoolFormulaRes) - this.schoolExamMain.entrolScoreMin) / this.schoolExamMain.entrolScoreMin) * 5.1) * 100 - (this.schoolExamMain.competitionDegree * 100)).toFixed(2) + '%';
                 return val;
             }
             // 如果预计录取最低分存在
             else if (this.schoolExamMain.preEnrollScoreMin != '' || null) {
                 console.log(2);
-                const val = Number((0.4725 + Math.atan((eval(schoolFormulaRes) - this.schoolExamMain.preEnrollScoreMin) / this.volDataMain.preEnrollScoreMin) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
+                const val = Number((0.4725 + Math.atan((eval(schoolFormulaRes) - this.schoolExamMain.preEnrollScoreMin) / this.schoolExamMain.preEnrollScoreMin) * 5.1) * 100 - (this.schoolExamMain.competitionDegree * 100)).toFixed(2) + '%';
                 return val;
             } else {
                 console.log('取上一年，这里不做计算');
@@ -91,13 +98,13 @@ class CalProb {
             // 如果录取最低分存在
             if (this.schoolExamMain.entrolScoreMin != '' || null) {
                 console.log(3);
-                const val = Number((0.4725 + Math.atan((eval(schoolFormulaRes) - this.schoolExamMain.entrolScoreMin) / this.volDataMain.entrolScoreMin) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
+                const val = Number((0.4725 + Math.atan((eval(schoolFormulaRes) - this.schoolExamMain.entrolScoreMin) / this.schoolExamMain.entrolScoreMin) * 5.1) * 100 - (this.schoolExamMain.competitionDegree * 100)).toFixed(2) + '%';
                 return val;
             }
             // 如果预计录取最低分存在
             else if (this.schoolExamMain.preEnrollScoreMin != '' || null) {
                 console.log(4);
-                const val = Number((0.4725 + Math.atan((eval(schoolFormulaRes) - this.schoolExamMain.preEnrollScoreMin) / this.volDataMain.preEnrollScoreMin) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
+                const val = Number((0.4725 + Math.atan((eval(schoolFormulaRes) - this.schoolExamMain.preEnrollScoreMin) / this.schoolExamMain.preEnrollScoreMin) * 5.1) * 100 - (this.schoolExamMain.competitionDegree * 100)).toFixed(2) + '%';
                 return val;
             } else {
                 console.log('取上一年，这里不做计算');
@@ -108,13 +115,13 @@ class CalProb {
             // 如果录取最低分存在
             if (this.schoolExamMain.entrolScoreMin != '' || null) {
                 console.log(5);
-                const val = Number((0.4725 + Math.atan((eval(schoolFormulaRes) - this.schoolExamMain.entrolScoreMin) / this.volDataMain.entrolScoreMin) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
+                const val = Number((0.4725 + Math.atan((eval(schoolFormulaRes) - this.schoolExamMain.entrolScoreMin) / this.schoolExamMain.entrolScoreMin) * 5.1) * 100 - (this.schoolExamMain.competitionDegree * 100)).toFixed(2) + '%';
                 return val;
             }
             // 如果预计录取最低分存在
             else if (this.schoolExamMain.preEnrollScoreMin != '' || null) {
                 console.log(6);
-                const val = Number((0.4725 + Math.atan((eval(schoolFormulaRes) - this.schoolExamMain.preEnrollScoreMin) / this.volDataMain.preEnrollScoreMin) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
+                const val = Number((0.4725 + Math.atan((eval(schoolFormulaRes) - this.schoolExamMain.preEnrollScoreMin) / this.schoolExamMain.preEnrollScoreMin) * 5.1) * 100 - (this.schoolExamMain.competitionDegree * 100)).toFixed(2) + '%';
                 return val;
             } else {
                 console.log('取上一年，这里不做计算');
@@ -123,15 +130,15 @@ class CalProb {
         // 如果录取公式是"专业分排名"
         else if (this.schoolExamMain.enrollBasisType == 4) {
             // 如果录取最低位次存在
-            if (this.volDataMain.entrolScoreMin != '' || null) {
+            if (this.schoolExamMain.entrolScoreMin != '' || null) {
                 console.log(7);
-                const val = Number((0.4725 - Math.atan((eval(schoolFormulaRes) - this.schoolExamMain.entrolScoreMin) / this.volDataMain.entrolScoreMin) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
+                const val = Number((0.4725 - Math.atan((eval(schoolFormulaRes) - this.schoolExamMain.entrolScoreMin) / this.schoolExamMain.entrolScoreMin) * 5.1) * 100 - (this.schoolExamMain.competitionDegree * 100)).toFixed(2) + '%';
                 return val;
             }
             // 如果预计录取最低分存在
             else if (this.schoolExamMain.preEnrollScoreMin != '' || null) {
                 console.log(8);
-                const val = Number((0.4725 - Math.atan((eval(schoolFormulaRes) - this.schoolExamMain.preEnrollScoreMin) / this.volDataMain.preEnrollScoreMin) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
+                const val = Number((0.4725 - Math.atan((eval(schoolFormulaRes) - this.schoolExamMain.preEnrollScoreMin) / this.schoolExamMain.preEnrollScoreMin) * 5.1) * 100 - (this.schoolExamMain.competitionDegree * 100)).toFixed(2) + '%';
                 return val;
             } else {
                 console.log('取上一年，这里不做计算');
@@ -151,12 +158,107 @@ class CalProb {
         this.formula.W = this.scoreLineMain.w;
         this.formula.Z = this.stuInfoMain.jointRank;
         this.formula.T = this.schoolScoreList.find(obj => obj.expressionId == this.schoolExamMain.id).schoolExamScore
+        this.formula.P = this.schoolExamMain.profScoreFull;
     }
+
+    // 判断校考分数线
+    async checkSchoolLine () {
+        // 如果考生统考合格线过线
+        if (this.stuInfoMain.jointExamScore >= this.scoreLineMain.i) {
+            // 如果批次层次没填
+            if (this.batchLineMain.diploma == null) {
+                // 如果专业分数线有值
+                if (this.batchLineMain.profScoreLine) {
+                    if (this.stuInfoMain.jointExamScore >= this.batchLineMain.profScoreLine) {
+                        console.log('统考分过线1');
+                    } else {
+                        console.log('统考分没过线2');
+                    }
+                }
+
+            }
+            // 如果批次层次是本科
+            if (this.batchLineMain.diploma == 1) {
+                // 如果考生本科批次线过线
+                if (this.stuInfoMain.jointExamScore >= this.scoreLineMain.h) {
+                    console.log('统考分过线3');
+                } else {
+                    console.log('统考分没过线4');
+                }
+            }
+            // 批次层次是专科
+            else if (this.batchLineMain.diploma == 2) {
+                // 如果考生专科批次线过线
+                if (this.stuInfoMain.jointExamScore >= this.scoreLineMain.x) {
+                    console.log('统考分过线5');
+                } else {
+                    console.log('统考分没过线6');
+                }
+            }
+        } else {
+            console.log(`考生统考合格线未达线,${this.stuInfoMain.provinceName}省,统考合格线为${this.scoreLineMain.i},考生统考分为${this.stuInfoMain.jointExamScore}`);
+        }
+
+        // 如果专业合格线有值
+        if (this.schoolExamMain.profScoreFull) {
+            let schoolExam = this.schoolScoreList.find(obj => obj.expressionId == this.schoolExamMain.id).schoolExamScore;
+            if (this.schoolExamMain.profScoreFull < schoolExam) {
+                console.log('校考合格线过线7');
+            } else {
+                console.log(`考生校考（专业）合格线未达线,${this.stuInfoMain.provinceName}省,校考（专业）合格线为${this.schoolExamMain.profScoreFull},考生校考分为${schoolExam}`);
+            }
+        }
+    }
+
+    // 判断文化分数线
+    async checkCultureLine () {
+        /** 
+         * 文化分数线
+        */
+        // 如果批次层次没填
+        if (this.batchLineMain.diploma == null) {
+            // 如果专业分数线有值
+            if (this.batchLineMain.cultureScoreLine) {
+                if (this.stuInfoMain.collEntrExamScore >= this.batchLineMain.cultureScoreLine) {
+                    console.log('文化分过线1');
+                } else {
+                    console.log('文化分没过线2');
+                }
+            }
+
+        }
+        // 如果批次层次是本科
+        else if (this.batchLineMain.diploma == 1) {
+            // 如果考生本科批次线过线
+            if (this.stuInfoMain.collEntrExamScore >= this.scoreLineMain.j) {
+                console.log('文化分过线3');
+            } else {
+                console.log('文化分没过线4');
+            }
+        }
+        // 批次层次是专科
+        else if (this.batchLineMain.diploma == 2) {
+            // 如果考生专科批次线过线
+            if (this.stuInfoMain.collEntrExamScore >= this.scoreLineMain.l) {
+                console.log('文化分过线5');
+            } else {
+                console.log('文化分没过线6');
+            }
+        } else {
+            console.log(`考生文化文未达线,${this.stuInfoMain.provinceName}省,文化分线为${this.scoreLineMain.j},考生文化分为${this.stuInfoMain.collEntrExamScore}`);
+        }
+    }
+
+    // 检查额外信息（语文、英语、校考文化分、校考专业分）
+    // async checkExtraInfo () {
+    //     if () {
+
+    //     }
+    // }
 
     // 更新用户信息
     async updateUserInfo (params) {
         Object.assign(this.stuInfoMain, params.jointMain);
-        console.log('aaaaaaaaaa', params.schoolScoreList);
         this.schoolScoreList = [...this.schoolScoreList, ...params.schoolScoreList]
     }
 
@@ -169,30 +271,10 @@ class CalProb {
     async updateScoreLine (params) {
         Object.assign(this.scoreLineMain, params);
     }
-}
 
-class VolDataMain {
-    constructor() {
-        /** 投档位次 */
-        this.archiveRank = '';
-        /** 投档规则 */
-        this.archiveRule = 1; // 平行或非平行
-        /** 投档方式 */
-        this.archiveMode = 1; // 只取前4种其他的相对较少，[1:综合分,2:文化分,3:专业分,4:专业分排名]
-        /** 投档公式 */
-        this.archiveExpression = '';
-        /** 投档最低分 */
-        this.archiveMinScore = '';
-        /** 录取最低分 */
-        this.entrolScoreMin = '';
-        /** 预计录取最低分 */
-        this.preEnrollScoreMin = '';
-        /** 预计录取投档分 */
-        this.preArchiveScoreMin = '';
-        /** 公式取值 */
-        this.expression = 0;
-        /** p4,修正录取概率 */
-        this.competitionDegree = 0;
+    // 更新批次线信息
+    async updateBatchLine (params) {
+        Object.assign(this.batchLineMain, params);
     }
 }
 
@@ -336,4 +418,13 @@ calSchoolProbManage.getProvinceScoreLine = async function (provinceId) {
         }, ticket: TICKET
     });
     return res.result.datas.list[0].jointCategoryList[0];
+}
+
+// 获取省份批次线
+calSchoolProbManage.getProvinceBatchLine = async function (batchLineParam) {
+    const res = await prob.getProvinceBatchLine(Object.assign({
+        ticket: PLAT_TICKET,
+    }, batchLineParam));
+    console.log(res);
+    return res.result.datas.page.dataList[0];
 }

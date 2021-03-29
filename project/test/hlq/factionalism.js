@@ -5,7 +5,7 @@ const hulaquan = require('../../../reqApi/platfrom/hulaquan');
 const { common } = require('../../../lib/index');
 const baseInfo = require('../../help/base/getBaseInfo');
 
-describe.skip('圈子', async function () {
+describe('圈子', async function () {
     this.timeout(TESTCASE.timeout);
     const faction = new Faction();
     // const faction = factionalismManage.setupFactionalism();
