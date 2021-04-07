@@ -33,3 +33,11 @@ index.loadRoomBaseSet = async function (params = {}) {
 index.saveLiveRecommend = async function (params = {}) {
     return httpRequest.sendPost(yssCaps.index + '/auth/hulaquan/base/vcloudRecommend/saveData.htm', params);
 };
+
+/**
+ * 资讯分类推荐
+ * @param {Number} setType 设置类型 12
+ */
+index.indexSetInfoCateList = async function (params = {}) {
+    return httpRequest.sendPost(yssCaps.index + '/auth/hulaquan/base/indexset/infoCateLoadData.htm', params);
+};

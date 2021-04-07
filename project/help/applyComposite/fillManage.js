@@ -222,15 +222,15 @@ fillManage.setupFill = function () {
 }
 
 fillManage.mockExamineeJson = function (params) {
-    // let province = common.getRandomProvince();
+    let province = common.getRandomProvince();
     let randomHs = common.getRandomNum(1, 5);
 
-    let province =
-    {
-        provinceName: '湖南省',
-        provinceCode: 430000,
-        provinceSxCode: 43,
-    }
+    // let province =
+    // {
+    //     provinceName: '湖南省',
+    //     provinceCode: 430000,
+    //     provinceSxCode: 43,
+    // }
 
     // let params = {
     //     // 广东

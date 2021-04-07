@@ -56,8 +56,8 @@ info.getLoadInfoList = async function (params = {}) {
 /**
  * 资讯详情
  */
-info.getLoadInfoDetail = async function (params = {}) {
-    return common.sendGet(yssCaps.info + `/auth/info/info/${params.infoID}/infoDetailContent.htm?${params.ticket}`);
+info.getLoadInfoDetail = async function (infoID, params = {}) {
+    return common.sendPost(yssCaps.info + `/auth/info/info/${infoID}/infoDetailContent.htm`, params);
 };
 
 /**
@@ -65,7 +65,7 @@ info.getLoadInfoDetail = async function (params = {}) {
  * @param {Number} infoID 资讯id
  */
 info.setTop = async function (params = {}) {
-    return common.sendGet(yssCaps.info + `/auth/info/info/top.htm`, params);
+    return common.sendPost(yssCaps.info + `/auth/info/info/top.htm`, params);
 };
 
 /** 
@@ -98,4 +98,25 @@ info.loadInfoCategoryList = async function (params = {}) {
         curPage: 1,
         pageSize: 15
     }, params))
+}
+
+/**
+ * 添加资讯评论
+ * @param {Number} infoID 资讯id
+ * @param {Number} pCommentUserID 评论用户id
+ * @param {Number} commentID 评论id
+ * @param {Number} infoTitle 资讯标题
+ * @param {Number} answerer [{1：当前账号},{2:其他账号}]
+ * @param {Number} otherAnswererLoginName 评论用户名称
+ * @param {Number} content 评论内容
+ */
+info.addInfoComment = async function (params = {}) {
+    return common.sendPost(yssCaps.info + `/auth/info/infoComment/addInfoComment.htm`, params)
+}
+
+/** 查看资讯评论
+ * @param {Number} infoID 资讯id
+ */
+info.getInfoReviewList = async function (params = {}) {
+    return common.sendPost(yssCaps.info + `/auth/info/info/loadInfoReviewData.htm?`, params)
 }

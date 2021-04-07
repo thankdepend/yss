@@ -35,8 +35,13 @@ async function threadTest () {
         });
     }
 }
-it('new thread', async function () {
-    await threadTest();
+describe('test td', async function () {
+    console.log(
+        1111
+    );
+    it('new thread', async function () {
+        await threadTest();
+    });
 });
 
 

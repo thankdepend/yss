@@ -1,6 +1,7 @@
 const info = require('../../../reqApi/platfrom/info');
+const index = require('../../../reqApi/platfrom/index');
 const hulaquanApp = require('../../../reqApi/app/hulaquan');
-const index = require('../../../reqApi/app/index');
+const indexApp = require('../../../reqApi/app/index');
 const {
     common
 } = require('../../../lib/index');
@@ -8,6 +9,7 @@ const {
     assert,
     expect
 } = require('chai');
+const { update } = require('../../../lib/commonFc');
 
 /**
  * 资讯
@@ -41,7 +43,7 @@ class Information {
         /** 评论标志 */
         this.commentFlag = '';
         /** 省份编码 */
-        this.provinceCode = '';
+        this.provinceCode = 330000;
         /** 是否需要支付 */
         this.needPay = '';
         /** 支付所属类型 */
@@ -66,10 +68,12 @@ class Information {
         this.showEdit = true;
         /** 是否允许评论 */
         this.isCanComment = false;
+        /** 评论map */
+        this.commentMap = new Map();
     }
 
     /** 保存资讯 */
-    async saveInfo(params) {
+    async saveInfo (params) {
         const res = await info.saveInfo(params);
         // console.log(res);
         common.update(this, res.params);
@@ -91,11 +95,10 @@ class Information {
             showEdit: true,
             isCanComment: false,
         });
-        // console.log(this);
     }
 
     /** 查询资讯列表 */
-    async _loadInfoList(params) {
+    async _loadInfoList (params) {
         const res = await info.getLoadInfoList(Object.assign({
             ticket: PLAT_TICKET,
             curPage: 1,
@@ -106,7 +109,7 @@ class Information {
     }
 
     /** 资讯列表断言 */
-    async loadInfoListAssert(del) {
+    async loadInfoListAssert (del) {
         if (del) {
             const delRes = await this._loadInfoList();
             const a = delRes.dataList.find(obj => obj.infoID == this.infoID);
@@ -145,61 +148,134 @@ class Information {
     }
 
     /** 查询资讯详情 */
-    async _loadInfoDetail(params) {
-        const res = await info.getLoadInfoDetail(Object.assign({
+    async _loadInfoDetail () {
+        const res = await info.getLoadInfoDetail(
+            this.infoID, {
             ticket: PLAT_TICKET,
-            infoID: this.infoID
-        }, params));
+        });
         return res;
     }
 
     /** 资讯详情断言 */
-    async loadInfoDetailAssert() {
+    async loadInfoDetailAssert (del = false) {
         const detail = await this._loadInfoDetail();
-        console.log(detail);
+        // console.log(detail);
+        if (del) {
+            const delContext = detail.result.split('<div class="content">')[1].split('<span>')[1].split('</span>')[0]
+            expect(delContext).to.be.equal("暂无此资讯")
+        } else {
+            const title = detail.result.split('<span>标题:')[1].split('</span>')[1].split('</h3>')[0];
+            const author = detail.result.split('<span>作者：')[1].split('</span>')[0]
+            const context = detail.result.split('<p style="text-indent: 32px;">')[1].split('</p>\r\n')[0]
+            const exp = {
+                infoTitle: title,
+                author: author,
+                infoContentUrl: context
+            }
+            common.isApproximatelyArray(exp, this)
+        }
     }
 
     /** 置顶帖子 */
-    async setTop() {
+    async setTop () {
         await info.setTop({
             infoID: this.infoID,
             ticket: PLAT_TICKET
         })
-        this.topFlag = 2;
+        if (this.topFlag == 2) {
+            this.topFlag = 1
+        } else {
+            this.topFlag = 2;
+        }
+
     }
 
     /** 发布帖子 */
-    async publish(off) {
-        if (off == true) {
-            await info.publish({
-                infoID: this.infoID,
-                ticket: PLAT_TICKET
-            });
-            this.infoState = 2;
-            this.showEdit = true;
+    async publish (params) {
+        let publishParams = Object.assign({
+            off: false
+        }, params)
+        if (publishParams) {
+            if (publishParams.off) {
+                await info.publish({
+                    infoID: this.infoID,
+                    ticket: PLAT_TICKET
+                });
+                this.infoState = 2;
+                this.showEdit = true;
+            }
+            else {
+                await info.publish({
+                    infoID: this.infoID,
+                    ticket: PLAT_TICKET
+                });
+                this.infoState = 1;
+                this.showEdit = false;
+            }
         }
 
-        await info.publish({
-            infoID: this.infoID,
-            ticket: PLAT_TICKET
-        });
-        this.infoState = 1;
-        this.showEdit = false;
+
         // this.publishDate = new Date().getTime()
     }
 
     /** 删除帖子 */
-    async deleteInfo() {
+    async deleteInfo () {
         const res = await info.deleteInfo({
             infoID: this.infoID,
             ticket: PLAT_TICKET
         })
-        console.log('删除', res);
+        // console.log('删除', res);
+    }
+
+    /** 添加评论 */
+    async addInfoComment () {
+        const commentParams = {
+            infoID: this.infoID,
+            pCommentUserID: '',
+            commentID: '',
+            infoTitle: this.infoTitle,
+            answerer: 2,
+            otherAnswererLoginName: 'mihuan1',
+            content: `蜜獾评论${new Date().getTime()}`,
+            ticket: PLAT_TICKET
+        }
+        const res = await info.addInfoComment(commentParams);
+        // 更新评论信息
+        await this.updateCommentMap(commentParams);
+        // console.log(res);
+        if (this.commentFlag == 2) {
+            return res.result.message;
+        }
+    }
+
+    /** 更新评论map */
+    async updateCommentMap (params) {
+        let comment = this.commentMap.has(params.content) ? this.commentMap.get(params.content) : false;
+        if (!comment) {
+            this.commentMap.set(params.content, params)
+            this.content = params.content;
+        }
+    }
+
+    /** 后台添加评论断言 */
+    async commentAssert (params) {
+        if (params) {
+            expect(params).to.be.equal('不允许评论！')
+        } else {
+            const res = await info.getInfoReviewList({
+                infoID: this.infoID,
+                ticket: PLAT_TICKET
+            });
+            const actual = res.result.datas.infoCommentList[res.result.datas.infoCommentList.length - 1]
+            const exp = this.commentMap.get(this.content)
+            common.isApproximatelyEqualAssert(exp, actual, ['commentID', 'otherAnswererLoginName'])
+        }
+
     }
 
     /** 客户端查看资讯列表 */
-    async quaryinformationList() {
-        const categoryList = await index.queryIndex({
+    async quaryinformationList () {
+        const categoryList = await indexApp.queryIndex({
             data: {
                 p: {},
                 m: ''
@@ -208,11 +284,13 @@ class Information {
         }).then(res => res.result.datas.obj.infoCategoryList);
         // console.log(categoryList);
         const id1 = this.infoCategoryID
+        // console.log(id1);
         if (categoryList.find(obj => obj.infoCategoryID == id1) != undefined) {
             const res = await hulaquanApp.getPostQuery({
                 data: {
                     m: '',
                     p: {
+                        provinceCode: this.provinceCode,
                         curPage: 1,
                         infoCategoryID: id1
                     }
@@ -220,7 +298,6 @@ class Information {
                 ticket: TICKET,
 
             }).then(res => res.result.datas)
-            console.log(res);
         } else {
             return new Error('没有找分类id')
         }
@@ -239,9 +316,14 @@ informationManage.setupInformation = function () {
 
 /** 保存资讯mock参数 */
 informationManage.informationMockJson = async function (params) {
-    const infoCategoryList = await info.loadInfoCategoryList({
+    // 取的分类是全部分类不是首页分类，已弃用
+    // const infoCategoryList = await info.loadInfoCategoryList({
+    //     ticket: PLAT_TICKET
+    // }).then(res => res.result.datas.page.dataList);
+    const infoCategoryList = await index.indexSetInfoCateList({
+        setType: 12,
         ticket: PLAT_TICKET
-    }).then(res => res.result.datas.page.dataList);
+    }).then(res => res.result.datas.infoCateList);
     const categoryIdArr = infoCategoryList.map(category => {
         return {
             'id': category.infoCategoryID,
@@ -275,7 +357,7 @@ informationManage.informationMockJson = async function (params) {
         pictureURL: 'http://img.artstudent.cn/pr/2020-08-10/3b697be5a37b4f68b3a557343fc737b3.png',
         publishDate: '',
         infoPreview: '',
-        infoContentUrl: common.getRandomContent(100),
+        infoContentUrl: common.getPoetry(),
         ticket: PLAT_TICKET,
     }, params)
     return json;

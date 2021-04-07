@@ -383,7 +383,7 @@ class CalProb {
         */
         // 如果批次层次没填
         if (this.batchLineMain.diploma == null) {
-            // 如果专业分数线有值
+            // 如果文化分数线有值
             if (this.batchLineMain.cultureScoreLine) {
                 if (this.stuInfoMain.collEntrExamScore >= this.batchLineMain.cultureScoreLine) {
                     console.log('文化分过线1');
@@ -395,7 +395,7 @@ class CalProb {
         }
         // 如果批次层次是本科
         if (this.batchLineMain.diploma == 1) {
-            // 如果考生本科批次线过线
+            // 如果艺术文化本科线有值
             if (this.stuInfoMain.collEntrExamScore >= this.scoreLineMain.j) {
                 console.log('文化分过线3');
             } else {
@@ -404,7 +404,7 @@ class CalProb {
         }
         // 批次层次是专科
         else if (this.batchLineMain.diploma == 2) {
-            // 如果考生专科批次线过线
+            // 如果艺术文化专科线有值
             if (this.stuInfoMain.collEntrExamScore >= this.scoreLineMain.l) {
                 console.log('文化分过线5');
             } else {
