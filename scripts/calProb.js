@@ -8,6 +8,7 @@ const yssLogin = require('./../project/help/base/yssLogin');
 
 
 describe('计算录取概率', async function () {
+    this.timeout(90000)
     const cal = calProbManage.setupCalProb()
     it('获取用户信息', async function () {
         /** 填写用户信息在这 ↓ */
@@ -17,7 +18,7 @@ describe('计算录取概率', async function () {
     it('获取志愿院校信息', async function () {
         /** 填写院校数据id在这 ↓ */
         const probInfo = await calProbManage.getProbInfo();
-        // console.log('probInfo', probInfo);
+        console.log('probInfo', probInfo);
         await cal.updateProbInfo(probInfo)
     });
     it('更新省批次信息', async function () {

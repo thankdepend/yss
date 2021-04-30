@@ -40,7 +40,7 @@ user.getStuInfo = async function (params = {}) {
 
 /**
  * 查询用户列表(平台端)
- * @param {Number} shenFenZH 身份证号
+ * @param {String} shenFenZH 身份证号
  * @param {Number} shouJiHao 手机号
  * @param {Number} yongHuLB 用户类别
  * @param {Number} xueXiaoID 学校id
@@ -50,7 +50,6 @@ user.getStuInfo = async function (params = {}) {
  * @param {Number} pageSize
  */
 user.getUserList = async function (params = {}) {
-    // 非常不幸，这个接口只能测试环境使用
     return common.sendPost(yssCaps.user + '/auth/admin/user/userListData.htm', Object.assign({
         curPage: 1,
         pageSize: 15

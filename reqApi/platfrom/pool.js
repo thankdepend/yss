@@ -1,5 +1,6 @@
 const httpRequest = require('../../lib/httpRequest')
 const yssCaps = require('../../data/caps');
+const { common } = require('../../lib/index');
 
 const pool = module.exports = {};
 
@@ -13,7 +14,7 @@ const pool = module.exports = {};
  * @param {Number} pageSize 个数
  */
 pool.getProvinceBatchList = async function (params = {}) {
-    return httpRequest.sendPost( yssCaps.pool + '/auth/pool/year/provinceBatch/loadProvinceBatchData.htm' ,Object.assign({curPage:1,pageSize:15},params));
+    return httpRequest.sendPost(yssCaps.pool + '/auth/pool/year/provinceBatch/loadProvinceBatchData.htm', Object.assign({ curPage: 1, pageSize: 15 }, params));
 };
 
 /**
@@ -27,7 +28,7 @@ pool.getProvinceBatchList = async function (params = {}) {
  * @param {String} aosName 文理科名称
  */
 pool.saveProvinceAos = async function (params = {}) {
-    return httpRequest.sendPost( yssCaps.pool + '/auth/pool/year/provinceAos/saveProvinceAos.htm' , params);
+    return httpRequest.sendPost(yssCaps.pool + '/auth/pool/year/provinceAos/saveProvinceAos.htm', params);
 };
 
 /**
@@ -35,7 +36,7 @@ pool.saveProvinceAos = async function (params = {}) {
  * @param {Number} id 
  */
 pool.deleteProvinceAos = async function (params = {}) {
-    return httpRequest.sendPost( yssCaps.pool + '/auth/pool/year/provinceAos/deleteProvinceAos.htm' , params);
+    return httpRequest.sendPost(yssCaps.pool + '/auth/pool/year/provinceAos/deleteProvinceAos.htm', params);
 };
 
 
@@ -48,7 +49,7 @@ pool.deleteProvinceAos = async function (params = {}) {
  * @param {Number} pageSize 个数
  */
 pool.getProvinceAosList = async function (params = {}) {
-    return httpRequest.sendPost( yssCaps.pool + '/auth/pool/year/provinceAos/loadProvinceAosData.htm' ,Object.assign({curPage:1,pageSize:15},params));
+    return httpRequest.sendPost(yssCaps.pool + '/auth/pool/year/provinceAos/loadProvinceAosData.htm', Object.assign({ curPage: 1, pageSize: 15 }, params));
 };
 
 /**
@@ -60,7 +61,7 @@ pool.getProvinceAosList = async function (params = {}) {
  * @param {Number} jointCategoryId 统考类别id
  */
 pool.saveProvinceJointCategory = async function (params = {}) {
-    return httpRequest.sendPost( yssCaps.pool + '/auth/pool/year/provinceJointCategory/saveProvinceJointCategory.htm' ,Object.assign({curPage:1,pageSize:15},params));
+    return httpRequest.sendPost(yssCaps.pool + '/auth/pool/year/provinceJointCategory/saveProvinceJointCategory.htm', Object.assign({ curPage: 1, pageSize: 15 }, params));
 };
 
 /**
@@ -68,7 +69,7 @@ pool.saveProvinceJointCategory = async function (params = {}) {
  * @param {Number} id
  */
 pool.getProvinceAosList = async function (params = {}) {
-    return httpRequest.sendPost( yssCaps.pool + '/auth/pool/year/provinceJointCategory/deleteProvinceJointCategory.htm' , params);
+    return httpRequest.sendPost(yssCaps.pool + '/auth/pool/year/provinceJointCategory/deleteProvinceJointCategory.htm', params);
 };
 
 /**
@@ -80,7 +81,7 @@ pool.getProvinceAosList = async function (params = {}) {
  * @param {Number} pageSize 个数
  */
 pool.getProvinceJointCategoryList = async function (params = {}) {
-    return httpRequest.sendPost( yssCaps.pool + '/auth/pool/year/provinceJointCategory/loadProvinceJointCategoryData.htm' ,Object.assign({curPage:1,pageSize:15},params));
+    return httpRequest.sendPost(yssCaps.pool + '/auth/pool/year/provinceJointCategory/loadProvinceJointCategoryData.htm', Object.assign({ curPage: 1, pageSize: 15 }, params));
 };
 
 /**
@@ -92,7 +93,7 @@ pool.getProvinceJointCategoryList = async function (params = {}) {
  * @param {Number} pageSize 个数
  */
 pool.getProvinceJointCategoryList = async function (params = {}) {
-    return httpRequest.sendPost( yssCaps.pool + '/auth/pool/year/provinceJointCategory/loadProvinceJointCategoryData.htm' ,Object.assign({curPage:1,pageSize:15},params));
+    return httpRequest.sendPost(yssCaps.pool + '/auth/pool/year/provinceJointCategory/loadProvinceJointCategoryData.htm', Object.assign({ curPage: 1, pageSize: 15 }, params));
 };
 
 /**
@@ -110,7 +111,7 @@ pool.getProvinceJointCategoryList = async function (params = {}) {
  * @param {Number} typeId 统考大类id
  */
 pool.savePoolJointClazz = async function (params = {}) {
-    return httpRequest.sendPost( yssCaps.pool + '/auth/pool/data/poolJointClazz/savePoolJointClazz.htm' ,Object.assign({curPage:1,pageSize:15},params));
+    return httpRequest.sendPost(yssCaps.pool + '/auth/pool/data/poolJointClazz/savePoolJointClazz.htm', Object.assign({ curPage: 1, pageSize: 15 }, params));
 };
 
 /**
@@ -118,7 +119,7 @@ pool.savePoolJointClazz = async function (params = {}) {
  * @param {Number} id
  */
 pool.deletePoolJointClazz = async function (params = {}) {
-    return httpRequest.sendPost( yssCaps.pool + '/auth/pool/data/poolJointClazz/deletePoolJointClazz.htm' , params);
+    return httpRequest.sendPost(yssCaps.pool + '/auth/pool/data/poolJointClazz/deletePoolJointClazz.htm', params);
 };
 
 
@@ -131,7 +132,7 @@ pool.deletePoolJointClazz = async function (params = {}) {
  * @param {Number} pageSize 个数
  */
 pool.getPoolJointClazzList = async function (params = {}) {
-    return httpRequest.sendPost( yssCaps.pool + '/auth/pool/data/poolJointClazz/loadPoolJointClazzData.htm' ,Object.assign({curPage:1,pageSize:15},params));
+    return httpRequest.sendPost(yssCaps.pool + '/auth/pool/data/poolJointClazz/loadPoolJointClazzData.htm', Object.assign({ curPage: 1, pageSize: 15 }, params));
 };
 
 /**
@@ -162,7 +163,7 @@ pool.getPoolJointClazzList = async function (params = {}) {
  * @param {Number} typeId 统考大类id
  */
 pool.saveProvinceBatchLine = async function (params = {}) {
-    return httpRequest.sendPost( yssCaps.pool + '/auth/pool/data/provinceBatchLine/saveProvinceBatchLine.htm' , params);
+    return httpRequest.sendPost(yssCaps.pool + '/auth/pool/data/provinceBatchLine/saveProvinceBatchLine.htm', params);
 };
 
 /**
@@ -178,7 +179,7 @@ pool.saveProvinceBatchLine = async function (params = {}) {
  * @param {Number} pageSize 个数
  */
 pool.deleteProvinceBatchLine = async function (params = {}) {
-    return httpRequest.sendPost( yssCaps.pool + '/auth/pool/data/provinceBatchLine/deleteProvinceBatchLine.htm' ,params);
+    return httpRequest.sendPost(yssCaps.pool + '/auth/pool/data/provinceBatchLine/deleteProvinceBatchLine.htm', params);
 };
 
 /**
@@ -194,7 +195,7 @@ pool.deleteProvinceBatchLine = async function (params = {}) {
  * @param {Number} pageSize 个数
  */
 pool.getProvinceBatchLineList = async function (params = {}) {
-    return httpRequest.sendPost( yssCaps.pool + '/auth/pool/data/provinceBatchLine/loadProvinceBatchLineData.htm' ,Object.assign({curPage:1,pageSize:15},params));
+    return httpRequest.sendPost(yssCaps.pool + '/auth/pool/data/provinceBatchLine/loadProvinceBatchLineData.htm', Object.assign({ curPage: 1, pageSize: 15 }, params));
 };
 
 /**
@@ -230,7 +231,7 @@ pool.getProvinceBatchLineList = async function (params = {}) {
  * @param {Number} l 301 艺术文化专科线
  */
 pool.saveProvinceBatchLine = async function (params = {}) {
-    return httpRequest.sendPost( yssCaps.pool + '/auth/pool/data/provinceBatchLine/saveProvinceBatchLine.htm' , params);
+    return httpRequest.sendPost(yssCaps.pool + '/auth/pool/data/provinceBatchLine/saveProvinceBatchLine.htm', params);
 };
 
 /**
@@ -238,7 +239,7 @@ pool.saveProvinceBatchLine = async function (params = {}) {
  * @param {Number} dataId 数据id
  */
 pool.deleteProvinceScoreLine = async function (params = {}) {
-   return httpRequest.sendPost( yssCaps.pool + '/auth/pool/data/provinceScoreLine/deleteProvinceScoreLine.htm' , params);
+    return httpRequest.sendPost(yssCaps.pool + '/auth/pool/data/provinceScoreLine/deleteProvinceScoreLine.htm', params);
 };
 
 /**
@@ -254,7 +255,7 @@ pool.deleteProvinceScoreLine = async function (params = {}) {
  * @param {Number} pageSize 个数
  */
 pool.getProvinceScoreLineList = async function (params = {}) {
-    return httpRequest.sendPost( yssCaps.pool + '/auth/pool/data/provinceScoreLine/loadProvinceScoreLineData.htm' ,Object.assign({curPage:1,pageSize:15},params));
+    return httpRequest.sendPost(yssCaps.pool + '/auth/pool/data/provinceScoreLine/loadProvinceScoreLineData.htm', Object.assign({ curPage: 1, pageSize: 15 }, params));
 };
 
 /**
@@ -298,7 +299,7 @@ pool.getProvinceScoreLineList = async function (params = {}) {
  * @param {Number} enrollOnOffYear 大小年 1为是，2为否
  */
 pool.savePool = async function (params = {}) {
-    return httpRequest.sendPost( yssCaps.pool + '/auth/pool/data/pool/savePool.htm' , params);
+    return httpRequest.sendPost(yssCaps.pool + '/auth/pool/data/pool/savePool.htm', params);
 };
 
 /**
@@ -306,7 +307,7 @@ pool.savePool = async function (params = {}) {
  * @param {Number} dataId 数据id 
  */
 pool.deletePool = async function (params = {}) {
-    return httpRequest.sendPost( yssCaps.pool + '/auth/pool/data/pool/deletePool.htm' , params);
+    return httpRequest.sendPost(yssCaps.pool + '/auth/pool/data/pool/deletePool.htm', params);
 };
 
 /**
@@ -326,5 +327,43 @@ pool.deletePool = async function (params = {}) {
  * @param {Number} examType 考试类型id
  */
 pool.getProvinceScoreLineList = async function (params = {}) {
-    return httpRequest.sendPost( yssCaps.pool + '/auth/pool/data/provinceScoreLine/loadProvinceScoreLineData.htm' ,Object.assign({curPage:1,pageSize:15},params));
+    return httpRequest.sendPost(yssCaps.pool + '/auth/pool/data/provinceScoreLine/loadProvinceScoreLineData.htm', Object.assign({ curPage: 1, pageSize: 15 }, params));
+};
+
+/**
+ * 保存白名单
+ * @param {Number} id 数据id
+ * @param {Number} userID 用户id
+ * @param {Number} roleTag [1:内部用户,2:外部用户]
+ * @param {Number} nickName 文理科id
+ * @param {Number} activiyType 业务类型[1:校考服务,2:统考服务,3:报考指南,4:录取概率（组合套餐）,5:志愿视频,6:电子周刊]
+ * @param {Number} type 类型 [1:白名单，2:黑名单]
+ * @param {Number} resourceId 资源id
+ * @param {String} tryEndDate 结束时间
+ * @param {String} remark 备注
+ */
+pool.saveWhiteBlack = async function (params = {}) {
+    return httpRequest.sendPost(yssCaps.pool + '/auth/pool/whiteBlack/saveWhiteBlack.htm', params);
+};
+
+/**
+ * 数据池同步数据
+ * @param {Number} dataId 数据id
+ * @param {Number} businessType 业务类型
+ */
+pool.syncData = async function (params = {}) {
+    return common.sendPost(yssCaps.pool + '/auth/pool/data/pool/syncData.htm', params);
+};
+
+/**
+ * 数据池列表
+ * @param {Number} dataYear 数据年份
+ * @param {Number} provinceId 省份
+ * @param {Number} aos 文理科
+ * @param {Number} jointCategoryId 统考类别
+ * @param {Number} dataId 数据id
+ * @param {Number} schoolId 学校id
+ */
+pool.getPoolList = async function (params = {}) {
+    return common.sendPost(yssCaps.pool + '/auth/pool/data/pool/loadPoolData.htm', params);
 };

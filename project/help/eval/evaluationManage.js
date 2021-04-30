@@ -94,7 +94,12 @@ class Eval {
             ticket: TICKET
         })
         console.log('订单', evalOrderData);
-        this.updateEvaluation({ orderId: evalOrderData.result.datas.orderId })
+        this.updateEvalOrder({ orderId: evalOrderData.result.datas.orderId })
+    }
+
+    updateEvalOrder (params) {
+        this.orderId = params.orderId;
+        console.log('aaaaaaaaaaaa', this);
     }
 
     /**

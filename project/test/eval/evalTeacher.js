@@ -14,15 +14,16 @@ describe.skip('评画老师', async function () {
     });
     describe('新增评画老师', async function () {
         before('新增', async function () {
-            await teacher.saveTeacher({
-                ticket: PLAT_TICKET
-            });
+            await teacher.saveTeacher();
         });
         it('查询评画老师列表', async function () {
-            await teacher.getTeacherList({
-                ticket: PLAT_TICKET
-            });
+            await teacher.getTeacherList();
         });
 
     });
+    // describe('删除评画老师', async function () {
+    //     before('删除', async function () {
+    //         await teacher.deleteTeacher();
+    //     });
+    // });
 });

@@ -31,7 +31,7 @@ pay.checkOrderPayway = async function (params = {}) {
 };
 
 /**
- * 查询报名订单
+ * 查询订单列表
  */
 pay.queryOrder = async function (params = {}) {
     return common.sendPost(yssCaps.pay + '/api/m/auth/pay/query_order.ws', params);

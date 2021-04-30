@@ -1,5 +1,5 @@
-const stuApp = require('../../reqApi/app/stu')
-const yssLogin = require('../../project/help/base/yssLogin')
+const stuApp = require('../../../reqApi/app/stu')
+const yssLogin = require('../../../project/help/base/yssLogin')
 
 describe('3-17测试', async function () {
     this.timeout(TESTCASE.timeout)

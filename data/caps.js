@@ -12,7 +12,7 @@ const argv = require('yargs')
     .help('h')
     .alias('h', 'help')
     .usage('Usage: mocha xxx.js [options]')
-    .example('mocha test --env=test', 'adev3环境下运行test目录下所有用例')
+    .example('mocha test --env=test', 'test环境下运行test目录下所有用例')
     .argv;
 // console.log(`argv = ${JSON.stringify(argv)}`);
 

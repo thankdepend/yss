@@ -16,7 +16,7 @@ const workSheetsFromFile = xlsx.parse(`${__dirname}/xiniu.xlsx`);
  * @alias 完善信息-审核一条龙
  */
 
-for (let i = 10; i <= 12; i++) {
+for (let i = 200; i <= 250; i++) {
     describe.skip('完善信息与审核', async function () {
         this.timeout(TESTCASE.timeout);
         const fill = fillManage.setupFill();

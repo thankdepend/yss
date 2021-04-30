@@ -58,6 +58,7 @@ class Teacher {
             orderNo: 5,
             introduction: '老师简介',
             detail: '老师介绍',
+            ticket: PLAT_TICKET
         }, params)
         const res = await eval.saveTeacher(req);
         console.log('评画老师', res);
@@ -80,7 +81,9 @@ class Teacher {
      * 查询老师列表
      */
     async getTeacherList (params) {
-        const res = await eval.getTeacherList(params);
+        const res = await eval.getTeacherList(Object.assign({
+            ticket: PLAT_TICKET
+        }, params));
         console.log(res);
     }
 

@@ -229,6 +229,9 @@ class Information {
 
     /** 添加评论 */
     async addInfoComment () {
+        if (this.commentFlag == 2) {
+            return res.result.message;
+        }
         const commentParams = {
             infoID: this.infoID,
             pCommentUserID: '',
@@ -243,9 +246,7 @@ class Information {
         // 更新评论信息
         await this.updateCommentMap(commentParams);
         // console.log(res);
-        if (this.commentFlag == 2) {
-            return res.result.message;
-        }
+
     }
 
     /** 更新评论map */
@@ -257,7 +258,7 @@ class Information {
         }
     }
 
-    /** 后台添加评论断言 */
+    /** 后台添加评论记录断言 */
     async commentAssert (params) {
         if (params) {
             expect(params).to.be.equal('不允许评论！')
@@ -269,7 +270,14 @@ class Information {
             const actual = res.result.datas.infoCommentList[res.result.datas.infoCommentList.length - 1]
             const exp = this.commentMap.get(this.content)
             common.isApproximatelyEqualAssert(exp, actual, ['commentID', 'otherAnswererLoginName'])
+            // 断言完成更新评论
+            await this.updateCommentMap(actual)
         }
+
+    }
+
+    /** 评论管理断言 */
+    async commentManageAssert () {
 
     }
 
@@ -282,9 +290,9 @@ class Information {
             },
             ticket: TICKET
         }).then(res => res.result.datas.obj.infoCategoryList);
-        // console.log(categoryList);
+
         const id1 = this.infoCategoryID
-        // console.log(id1);
+
         if (categoryList.find(obj => obj.infoCategoryID == id1) != undefined) {
             const res = await hulaquanApp.getPostQuery({
                 data: {

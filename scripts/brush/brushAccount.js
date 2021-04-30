@@ -23,10 +23,10 @@ describe('刷用户账号', async function () {
         console.log('平台登录', platFromInfo);
     });
     it('创建考生号', async function () {
-        for (let a = 87; a <= 95; a++) {
+        for (let a = 101; a <= 200; a++) {
             let params = {
                 // yongHuMing: `${workSheetsFromFile[0].data[a][0]}`,
-                yongHuMing: `lj100${a}`,
+                yongHuMing: `zhuzhu${a}`,
                 yongHuKL: argv.env == 'test' ? 'Csk001' : argv.env == 'pre' ? 'Ysk002' : 'Kfk001',
                 agginYongHuKL: argv.env == 'test' ? 'Csk001' : argv.env == 'pre' ? 'Ysk002' : 'Kfk001',
                 yongHuLB: 100,

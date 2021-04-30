@@ -1,4 +1,5 @@
 const httpRequest = require('../../lib/httpRequest')
+const { common } = require('../../lib/index');
 const yssCaps = require('../../data/caps');
 
 const hulaquan = module.exports = {};
@@ -275,4 +276,13 @@ hulaquan.dissolveGroup = async function (params = {}) {
  */
 hulaquan.deleteGroup = async function (params = {}) {
     return httpRequest.sendPost(yssCaps.hulaquan + '/auth/hulaquan/groups/group/deleteGroup.htm?', params);
+};
+
+/** 
+ * 获取用户信息
+ * @param {String} shenFenZH  身份证号
+ * @param {Number} yongHuID 用户id
+ */
+hulaquan.getUserInfo = async function (params = {}) {
+    return common.sendPost(yssCaps.hulaquan + '/auth/hulaquan/user/baseUser/loadData.htm', params);
 };

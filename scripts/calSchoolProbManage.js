@@ -81,13 +81,13 @@ class CalProb {
             // 如果录取最低分存在
             if (this.schoolExamMain.entrolScoreMin != '' || null) {
                 console.log(1);
-                const val = Number((0.4725 + Math.atan((eval(schoolFormulaRes) - this.schoolExamMain.entrolScoreMin) / this.schoolExamMain.entrolScoreMin) * 5.1) * 100 - (this.schoolExamMain.competitionDegree * 100)).toFixed(2) + '%';
+                const val = Number(((this.schoolExamMain.p0 + Math.atan((eval(schoolFormulaRes) - this.schoolExamMain.entrolScoreMin) / this.schoolExamMain.entrolScoreMin) * 5.1) - (this.schoolExamMain.competitionDegree)) * 100).toFixed(2) + '%';
                 return val;
             }
             // 如果预计录取最低分存在
             else if (this.schoolExamMain.preEnrollScoreMin != '' || null) {
                 console.log(2);
-                const val = Number((0.4725 + Math.atan((eval(schoolFormulaRes) - this.schoolExamMain.preEnrollScoreMin) / this.schoolExamMain.preEnrollScoreMin) * 5.1) * 100 - (this.schoolExamMain.competitionDegree * 100)).toFixed(2) + '%';
+                const val = Number((this.schoolExamMain.p0 + Math.atan((eval(schoolFormulaRes) - this.schoolExamMain.preEnrollScoreMin) / this.schoolExamMain.preEnrollScoreMin) * 5.1) * 100 - (this.schoolExamMain.competitionDegree * 100)).toFixed(2) + '%';
                 return val;
             } else {
                 console.log('取上一年，这里不做计算');
@@ -98,13 +98,13 @@ class CalProb {
             // 如果录取最低分存在
             if (this.schoolExamMain.entrolScoreMin != '' || null) {
                 console.log(3);
-                const val = Number((0.4725 + Math.atan((eval(schoolFormulaRes) - this.schoolExamMain.entrolScoreMin) / this.schoolExamMain.entrolScoreMin) * 5.1) * 100 - (this.schoolExamMain.competitionDegree * 100)).toFixed(2) + '%';
+                const val = Number((this.schoolExamMain.p0 + Math.atan((eval(schoolFormulaRes) - this.schoolExamMain.entrolScoreMin) / this.schoolExamMain.entrolScoreMin) * 5.1) * 100 - (this.schoolExamMain.competitionDegree * 100)).toFixed(2) + '%';
                 return val;
             }
             // 如果预计录取最低分存在
             else if (this.schoolExamMain.preEnrollScoreMin != '' || null) {
                 console.log(4);
-                const val = Number((0.4725 + Math.atan((eval(schoolFormulaRes) - this.schoolExamMain.preEnrollScoreMin) / this.schoolExamMain.preEnrollScoreMin) * 5.1) * 100 - (this.schoolExamMain.competitionDegree * 100)).toFixed(2) + '%';
+                const val = Number((this.schoolExamMain.p0 + Math.atan((eval(schoolFormulaRes) - this.schoolExamMain.preEnrollScoreMin) / this.schoolExamMain.preEnrollScoreMin) * 5.1) * 100 - (this.schoolExamMain.competitionDegree * 100)).toFixed(2) + '%';
                 return val;
             } else {
                 console.log('取上一年，这里不做计算');
@@ -115,13 +115,13 @@ class CalProb {
             // 如果录取最低分存在
             if (this.schoolExamMain.entrolScoreMin != '' || null) {
                 console.log(5);
-                const val = Number((0.4725 + Math.atan((eval(schoolFormulaRes) - this.schoolExamMain.entrolScoreMin) / this.schoolExamMain.entrolScoreMin) * 5.1) * 100 - (this.schoolExamMain.competitionDegree * 100)).toFixed(2) + '%';
+                const val = Number((this.schoolExamMain.p0 + Math.atan((eval(schoolFormulaRes) - this.schoolExamMain.entrolScoreMin) / this.schoolExamMain.entrolScoreMin) * 5.1) * 100 - (this.schoolExamMain.competitionDegree * 100)).toFixed(2) + '%';
                 return val;
             }
             // 如果预计录取最低分存在
             else if (this.schoolExamMain.preEnrollScoreMin != '' || null) {
                 console.log(6);
-                const val = Number((0.4725 + Math.atan((eval(schoolFormulaRes) - this.schoolExamMain.preEnrollScoreMin) / this.schoolExamMain.preEnrollScoreMin) * 5.1) * 100 - (this.schoolExamMain.competitionDegree * 100)).toFixed(2) + '%';
+                const val = Number((this.schoolExamMain.p0 + Math.atan((eval(schoolFormulaRes) - this.schoolExamMain.preEnrollScoreMin) / this.schoolExamMain.preEnrollScoreMin) * 5.1) * 100 - (this.schoolExamMain.competitionDegree * 100)).toFixed(2) + '%';
                 return val;
             } else {
                 console.log('取上一年，这里不做计算');
@@ -132,13 +132,13 @@ class CalProb {
             // 如果录取最低位次存在
             if (this.schoolExamMain.entrolScoreMin != '' || null) {
                 console.log(7);
-                const val = Number((0.4725 - Math.atan((eval(schoolFormulaRes) - this.schoolExamMain.entrolScoreMin) / this.schoolExamMain.entrolScoreMin) * 5.1) * 100 - (this.schoolExamMain.competitionDegree * 100)).toFixed(2) + '%';
+                const val = Number((this.schoolExamMain.p0 - Math.atan((eval(schoolFormulaRes) - this.schoolExamMain.entrolScoreMin) / this.schoolExamMain.entrolScoreMin) * 5.1) * 100 - (this.schoolExamMain.competitionDegree * 100)).toFixed(2) + '%';
                 return val;
             }
             // 如果预计录取最低分存在
             else if (this.schoolExamMain.preEnrollScoreMin != '' || null) {
                 console.log(8);
-                const val = Number((0.4725 - Math.atan((eval(schoolFormulaRes) - this.schoolExamMain.preEnrollScoreMin) / this.schoolExamMain.preEnrollScoreMin) * 5.1) * 100 - (this.schoolExamMain.competitionDegree * 100)).toFixed(2) + '%';
+                const val = Number((this.schoolExamMain.p0 - Math.atan((eval(schoolFormulaRes) - this.schoolExamMain.preEnrollScoreMin) / this.schoolExamMain.preEnrollScoreMin) * 5.1) * 100 - (this.schoolExamMain.competitionDegree * 100)).toFixed(2) + '%';
                 return val;
             } else {
                 console.log('取上一年，这里不做计算');
@@ -378,8 +378,8 @@ calSchoolProbManage.setupCalProb = function () {
 
 calSchoolProbManage.userLogin = async function () {
     await yssLogin.clientLogin({
-        loginName: 'yunbao3',
-        password: 'Csk001'
+        loginName: 'haitun2',
+        password: 'Test1234'
     })
     const res = await probApp.getUser({
         ticket: TICKET
@@ -399,7 +399,7 @@ calSchoolProbManage.getProbInfo = async function () {
 
     // 概率-志愿专业数据-业务表(校考计算公式)
     const schoolExamRes = await prob.getSchoolScoreExpressionList({
-        id: 1671555, // 院校专业数据id
+        id: 1847566, // 院校专业数据id
         ticket: PLAT_TICKET
     })
 
