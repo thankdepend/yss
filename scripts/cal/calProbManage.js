@@ -1,10 +1,10 @@
 const {
     common
-} = require('../lib/index');
-const probApp = require('../reqApi/app/prob');
-const prob = require('../reqApi/platfrom/prob');
-const yssLogin = require('../project/help/base/yssLogin');
-const provinceScoreLine = require('../reqApi/app/provinceScoreLine');
+} = require('../../lib/index');
+const probApp = require('../../reqApi/app/prob');
+const prob = require('../../reqApi/platfrom/prob');
+const yssLogin = require('../../project/help/base/yssLogin');
+const provinceScoreLine = require('../../reqApi/app/provinceScoreLine');
 
 
 
@@ -19,6 +19,8 @@ class CalProb {
         this.scoreLineMain = new ScoreLineMain();
         // 批次线信息
         this.batchLineMain = new Object();
+        // 判线日志
+        this.checkLineLog = new CheckLineLog();
         /** 替换公式 */
         this.formula = {
             S: '综合分',
@@ -65,10 +67,16 @@ class CalProb {
             throw new Error('投档或录取公式为空')
         }
 
-        // 判统考分数线
-        await this.checkJointLine();
-        // 判文化分数线
-        await this.checkCultureLine();
+        // 批次层次判线
+        await this.jointDiplomaControl();
+        // 省批次线判线
+        await this.jointBatchControl();
+        // 志愿数据校控线
+        await this.jointSchoolControl();
+        // 小分控制
+        await this.artsControl();
+
+
 
         // 如果是平行志愿
         if (this.volDataMain.archiveRule == 1) {
@@ -79,9 +87,6 @@ class CalProb {
                     // 如果考生综合分位次存在
                     if (this.stuInfoMain.comprehensiveRank != '' || null) {
                         console.log(33);
-                        console.log(this.stuInfoMain.comprehensiveRank);
-                        console.log(this.volDataMain.archiveRank);
-                        console.log(this.volDataMain.competitionDegree);
                         // const val = Number((this.volDataMain.p0 - Math.atan((this.stuInfoMain.comprehensiveRank - this.volDataMain.archiveRank) / this.volDataMain.archiveRank) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
                         const val = Number((Math.atan((this.stuInfoMain.comprehensiveRank - this.volDataMain.archiveRank) / this.volDataMain.archiveRank) * (-1) + this.volDataMain.p5) * 100).toFixed(2) + '%';
                         return val;
@@ -327,6 +332,17 @@ class CalProb {
         }
     }
 
+    /** 获取计算结果
+     * @param {Number} [1:'分数'，2:'位次']
+     */
+    async getCalProbResult (cal) {
+        if (cal == 1) {
+            return Number((Math.atan((this.stuInfoMain.comprehensiveRank - this.volDataMain.archiveRank) / this.volDataMain.archiveRank) * (-1) + this.volDataMain.p5) * 100).toFixed(2) + '%';
+        } else if (cal == 2) {
+            return Number((this.volDataMain.p0 + Math.atan((eval(formulaRes) - this.volDataMain.preArchiveScoreMin) / this.volDataMain.preArchiveScoreMin) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
+        }
+    }
+
     // 将注释替换成字段值(例如：U = collEntrExamScore = 10)
     async replaceFormula () {
         this.formula.R = this.stuInfoMain.collEntrExamScore;
@@ -336,12 +352,165 @@ class CalProb {
         this.formula.Z = this.stuInfoMain.jointRank;
     }
 
+    /** 批次层次判线 */
+    async jointDiplomaControl () {
+        // 若批次层次不存在
+        if (this.batchLineMain.diploma == null) {
+            // 如果统考合格线过线
+            if (this.stuInfoMain.jointExamScore >= this.scoreLineMain.i) {
+                // 标记为过线
+                this.checkLineLog.i = 0;
+            } else if (!this.scoreLineMain.i) {
+                // 标记为过线
+                this.checkLineLog.i = 0;
+            } else {
+                // 标记未过线
+                this.checkLineLog.i = 1;
+                throw new Error(`统考合格线未达线:${this.scoreLineMain.i}`);
+            }
+        }
+        // 若批次层次为本科
+        else if (this.batchLineMain.diploma == 1) {
+            // 如果统考合格线过线
+            if (this.stuInfoMain.jointExamScore >= this.scoreLineMain.h) {
+                // 标记为过线
+                this.checkLineLog.h = 0;
+                // 艺术文化本科线过线
+                if (this.stuInfoMain.collEntrExamScore >= this.scoreLineMain.j) {
+                    this.checkLineLog.j = 0;
+                } else if (!this.scoreLineMain.j) {
+                    this.checkLineLog.j = 0;
+                } else {
+                    throw new Error(`艺术文化本科线未达线：${this.scoreLineMain.j}`)
+                }
+            } else if (!this.scoreLineMain.h) {
+                // 本科批次线取不到值再判统考合格线
+                if (this.stuInfoMain.jointExamScore >= this.scoreLineMain.i) {
+                    // 标记2个过线
+                    this.checkLineLog.i = 0;
+                    this.checkLineLog.h = 0;
+                } else {
+                    // 标记2个过线
+                    this.checkLineLog.i = 1;
+                    this.checkLineLog.h = 1;
+                    throw new Error(`统考本科线未达线：${this.scoreLineMain.i}`)
+                }
+            } else {
+                this.checkLineLog.h = 1;
+                throw new Error(`统考本科线未达线：${this.scoreLineMain.h}`)
+            }
+        }
+        // 若批次层次为专科
+        else if (this.batchLineMain.diploma == 2) {
+            // 如果统考合格线过线
+            if (this.stuInfoMain.jointExamScore >= this.scoreLineMain.x) {
+                // 标记为过线
+                this.checkLineLog.x = 0;
+                // 艺术文化本科线过线
+                if (this.stuInfoMain.collEntrExamScore >= this.scoreLineMain.l) {
+                    this.checkLineLog.l = 0;
+                } else if (!this.scoreLineMain.l) {
+                    this.checkLineLog.l = 0;
+                } else {
+                    throw new Error(`艺术文化专科线未达线：${this.scoreLineMain.l}`)
+                }
+            } else if (!this.scoreLineMain.x) {
+                // 本科批次线取不到值再判统考合格线
+                if (this.stuInfoMain.jointExamScore >= this.scoreLineMain.i) {
+                    // 标记2个过线
+                    this.checkLineLog.i = 0;
+                    this.checkLineLog.x = 0;
+                } else {
+                    // 标记2个过线
+                    this.checkLineLog.i = 1;
+                    this.checkLineLog.x = 1;
+                    throw new Error(`统考专科线未达线：${this.scoreLineMain.i}`)
+                }
+            } else {
+                this.checkLineLog.x = 1;
+                throw new Error(`统考专科线未达线：${this.scoreLineMain.x}`)
+            }
+        } else {
+            throw new Error(`批次层次异常${this.batchLineMain.diploma}`)
+        }
+    }
+
+    /** 省批次线判线 */
+    async jointBatchControl () {
+        // 如果省批次：专业分数线，过线
+        console.log('bbbbb', this.stuInfoMain.jointExamScore);
+        console.log('aaaaa', this.batchLineMain.profScoreLine);
+        if (this.stuInfoMain.jointExamScore >= this.batchLineMain.profScoreLine) {
+            this.checkLineLog.profScoreLine = 0;
+            if (this.stuInfoMain.collEntrExamScore >= this.batchLineMain.profScoreLine) {
+                this.checkLineLog.profScoreLine = 0;
+            } else if (!this.scoreLineMain.profScoreLine) {
+                this.checkLineLog.profScoreLine = 0;
+            } else {
+                throw new Error(`[省批次]文化分数线未达线：${this.batchLineMain.profScoreLine}`)
+            }
+        } else if (!this.batchLineMain.profScoreLine) {
+            this.checkLineLog.profScoreLine = 0;
+            if (this.stuInfoMain.collEntrExamScore >= this.batchLineMain.profScoreLine) {
+                this.checkLineLog.profScoreLine = 0;
+            } else if (!this.batchLineMain.profScoreLine) {
+                this.checkLineLog.profScoreLine = 0;
+            } else {
+                throw new Error(`[省批次]文化分数线未达线：${this.batchLineMain.profScoreLine}`)
+            }
+        } else {
+            this.checkLineLog.profScoreLine = 1;
+            throw new Error(`[省批次]专业分数线未达线：${this.batchLineMain.profScoreLine}`)
+        }
+    }
+
+    /** 志愿数据校控线 */
+    async jointSchoolControl () {
+        if (this.stuInfoMain.jointExamScore >= this.volDataMain.profControlLine) {
+            this.checkLineLog.profControlLine = 0;
+            // 院校文化录取控制线
+            if (this.stuInfoMain.collEntrExamScore >= this.volDataMain.cultureControlLine) {
+                this.checkLineLog.cultureControlLine = 0;
+            } else if (!this.volDataMain.cultureControlLine) {
+                this.checkLineLog.cultureControlLine = 0;
+            } else {
+                throw new Error(`[省批次]文化分数线未达线：${this.volDataMain.cultureControlLine}`)
+            }
+        } else if (!this.volDataMain.profControlLine) {
+            this.checkLineLog.profControlLine = 0;
+        } else {
+            this.checkLineLog.profControlLine = 1;
+            throw new Error(`统考专业分控制线未达线：${this.volDataMain.profControlLine}`)
+        }
+    }
+
+    /** 小分控制 */
+    async artsControl () {
+        // 语文分过线
+        if (this.stuInfoMain.chineseScore >= this.volDataMain.chineseScoreLimit) {
+            this.checkLineLog.chineseScore = 0;
+            // 英语分过线
+            if (this.stuInfoMain.englishScore >= this.volDataMain.englishScoreLimit) {
+                this.checkLineLog.englishScore = 0;
+            } else if (!this.volDataMain.englishScoreLimit) {
+                this.checkLineLog.englishScore = 0;
+            } else {
+                this.checkLineLog.englishScore = 1;
+                throw new Error(`英语控制线未达线：${this.volDataMain.englishScoreLimit}`)
+            }
+        } else if (!this.volDataMain.chineseScoreLimit) {
+            this.checkLineLog.chineseScore = 0;
+        } else {
+            this.checkLineLog.chineseScore = 1;
+            throw new Error(`语文控制线未达线：${this.volDataMain.chineseScoreLimit}`)
+        }
+    }
+
     // 判断统考分数线
     async checkJointLine () {
         /**
          * 专业分数线
          */
-
         // 如果考生统考合格线过线
         if (this.stuInfoMain.jointExamScore >= this.scoreLineMain.i) {
             // 如果批次层次没填
@@ -539,7 +708,11 @@ class ScoreLineMain {
         this.w = '';
         this.a = '';
         this.c = '';
+        /** 艺术文化本科线 */
         this.j = '';
+        /** 艺术文化专科线 */
+        this.l = '';
+        /** 统考合格线 */
         this.i = '';
         /** 分数描述 */
         this.scoreExpression = '';
@@ -554,6 +727,33 @@ class ScoreLineMain {
     }
 }
 
+class CheckLineLog {
+    constructor() {
+        /** 统考合格线 */
+        this.i = '';
+        /** 统考本科线 */
+        this.h = '';
+        /** 统考专科线 */
+        this.x = '';
+        /** 艺术文化本科线 */
+        this.j = '';
+        /** 艺术文化专科线 */
+        this.l = '';
+        /** 专业分数线 */
+        this.profScoreLine = '';
+        /** 统考专业分控制线 */
+        this.profControlLine = '';
+        /** 统考文化分控制线 */
+        this.cultureControlLine = '';
+        /** 语文控制线 */
+        this.chineseScore = '';
+        /** 英语控制线 */
+        this.englishScore = '';
+    }
+
+
+}
+
 const calProbManage = module.exports = {};
 
 // 初始化
@@ -561,11 +761,11 @@ calProbManage.setupCalProb = function () {
     return new CalProb();
 }
 
-calProbManage.userLogin = async function () {
-    await yssLogin.clientLogin({
-        loginName: 'haitun2',
-        password: 'Test1234'
-    })
+calProbManage.userLogin = async function (params) {
+    await yssLogin.clientLogin(Object.assign({
+        loginName: 'mihuan30', // 
+        password: 'Csk001' // 
+    }, params))
     const res = await probApp.getUser({
         ticket: TICKET
     });
@@ -574,14 +774,16 @@ calProbManage.userLogin = async function () {
     return { jointMain }
 }
 
-calProbManage.getProbInfo = async function () {
+calProbManage.getProbInfo = async function (id) {
     await yssLogin.platfrom({
         userType: 'zyzg'
+        // userName: '水濑_zyzg',
+        // password: 'Abc12345'
     });
 
     // 概率-志愿专业数据-业务表(统考计算公式)
     const res = await prob.getJointScoreList({
-        id: 1847561, // 院校专业数据id
+        id: id, // 院校专业数据id
         ticket: PLAT_TICKET
     })
     const jointInfo = res.result.datas.page.dataList[0];
@@ -598,7 +800,7 @@ calProbManage.getProvinceScoreLine = async function (provinceId) {
             m: ""
         }, ticket: TICKET
     });
-    console.log(res);
+    console.log('打印省分数线', res.result.datas.list[0].jointCategoryList);
     return res.result.datas.list[0].jointCategoryList[0];
 }
 
@@ -607,6 +809,6 @@ calProbManage.getProvinceBatchLine = async function (batchLineParam) {
     const res = await prob.getProvinceBatchLine(Object.assign({
         ticket: PLAT_TICKET,
     }, batchLineParam));
-    console.log(res);
+    console.log('打印省批次线', res.result.datas);
     return res.result.datas.page.dataList[0];
 }

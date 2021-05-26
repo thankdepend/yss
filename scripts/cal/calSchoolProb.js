@@ -1,10 +1,10 @@
-const calSchoolProbManage = require('./calSchoolProbManage');
+const calSchoolProbManage = require('../calSchoolProbManage');
 const {
     common
-} = require('../lib/index');
-const probApp = require('../reqApi/app/prob');
-const prob = require('../reqApi/platfrom/prob');
-const yssLogin = require('./../project/help/base/yssLogin');
+} = require('../../lib/index');
+const probApp = require('../../reqApi/app/prob');
+const prob = require('../../reqApi/platfrom/prob');
+const yssLogin = require('../../project/help/base/yssLogin');
 
 
 describe('计算录取概率', async function () {

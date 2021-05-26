@@ -18,76 +18,6 @@ const argv = require('yargs')
 
 const envName = argv.env;
 
-// let caps;
-
-// if (envName == 'online') {
-//     caps = {
-//         audit: 'http://audit.artstudent.cn',
-//         user: 'http://user.artstudent.cn',
-//         prob: 'http://prob.artstudent.cn',
-//         base: 'http://base.artstudent.cn',
-//         pool: 'http://pool.artstudent.cn',
-//         college: 'http://college.artstudent.cn',
-//         school: 'http://school.artstudent.cn',
-//         stu: 'http://stu.artstudent.cn',
-//         guide: 'http://guide.artstudent.cn',
-//         notice: 'http://notice.artstudent.cn',
-//         fillCenter: 'http://fillCenter.artstudent.cn',
-//         fileCenter: 'http://fileCenter.artstudent.cn',
-//         fillCenterOnline: 'https://filecenter.artstudent.cn',
-//         pay: 'http://pay.artstudent.cn',
-//         index: 'http://index.artstudent.cn',
-//         hulaquan: 'http://hulaquan.artstudent.cn',
-//         info: 'http://info.artstudent.cn',
-//         public: 'http://public.artstudent.cn',
-//         wish: 'http://wish.artstudent.cn',
-//         crm: 'http://crm.artstudent.cn',
-//         xyk: 'http://xyk.artstudent.cn',
-//         print: 'http://print.artstudent.cn',
-//         eval: 'eval.artstudent.cn',
-//         advert: 'http://advert.artstudent.cn',
-//         examvideo: 'http://examvideo.artstudent.cn',
-//         sys: 'http://sys.artstudent.cn',
-//         examlog: 'http://examlog.artstudent.cn',
-
-//         name: 'online',
-//     }
-// } else {
-//     caps = {
-//         url: 'http://192.168.18.202:18000',
-//         login_url: 'http://192.168.18.202:10100',
-//         upload_url: '192.168.18.202:23000',
-//         audit: 'http://audit.51bm.net.cn',
-//         user: 'http://user.51bm.net.cn',
-//         prob: 'http://prob.51bm.net.cn',
-//         base: 'http://base.51bm.net.cn',
-//         pool: 'http://pool.51bm.net.cn',
-//         college: 'http://college.51bm.net.cn',
-//         school: 'http://school.51bm.net.cn',
-//         stu: 'http://stu.51bm.net.cn',
-//         guide: 'http://guide.51bm.net.cn',
-//         notice: 'http://notice.51bm.net.cn',
-//         fillCenter: 'http://fillCenter.51bm.net.cn',
-//         fileCenter: 'http://fileCenter.51bm.net.cn',
-//         fillCenterOnline: 'https://filecenter.artstudent.cn',
-//         pay: 'http://pay.51bm.net.cn',
-//         index: 'http://index.51bm.net.cn',
-//         hulaquan: 'http://hulaquan.51bm.net.cn',
-//         info: 'http://info.51bm.net.cn',
-//         public: 'http://public.51bm.net.cn',
-//         wish: 'http://wish.51bm.net.cn',
-//         crm: 'http://crm.51bm.net.cn',
-//         xyk: 'http://xyk.51bm.net.cn',
-//         print: 'http://print.51bm.net.cn',
-//         eval: 'eval.51bm.net.cn',
-//         advert: 'http://advert.51bm.net.cn',
-//         examvideo: 'http://examvideo.51bm.net.cn',
-//         sys: 'http://sys.51bm.net.cn',
-//         examlog: 'http://examlog.51bm.net.cn',
-
-//         name: 'test',
-//     };
-// }
 
 // 开发环境： http://192.168.18.200  测试环境： http://192.168.18.202   演示环境、线上环境：域名
 
@@ -122,6 +52,7 @@ let caps = {
     examlog: 'http://examlog.51bm.net.cn',
     heartbeat: 'http://heartbeat.51bm.net.cn',
     monitor: 'http://monitor.51bm.net.cn',
+    kideval: 'http://kideval.51bm.net.cn',
 
     name: 'test',
 };
@@ -159,9 +90,49 @@ if (envName == 'test') {
         course: 'http://192.168.18.202:25000',
         live: 'http://192.168.18.202:26000',
         eval: 'http://192.168.18.202:27000',
+        kideval: 'http://192.168.18.202:27100',
         examlog: 'http://192.168.18.202:28000',
         heartbeat: 'http://192.168.18.202:29000',
         crm: 'http://192.168.18.202:40000',
+
+    }
+}
+else if (envName == 'online') {
+    caps = {
+        analysis: 'http://analysis.artstudent.cn',
+        index: 'http://index.artstudent.cn',
+        user: 'http://user.artstudent.cn',
+        base: 'http://base.artstudent.cn',
+        aftexam: 'http://aftexam.artstudent.cn',
+        pay: 'http://pay.artstudent.cn',
+        news: 'http://news.artstudent.cn',
+        filecenter: 'http://filecenter.artstudent.cn',
+        notice: 'http://notice.artstudent.cn',
+        monitor: 'http://monitor.artstudent.cn',
+        sys: 'http://sys.artstudent.cn',
+        hulaquan: 'http://hulaquan.artstudent.cn',
+        report: 'http://report.artstudent.cn',
+        advert: 'http://advert.artstudent.cn',
+        xyk: 'http://xyk.artstudent.cn',
+        wish: 'http://wish.artstudent.cn',
+        prob: 'http://prob.artstudent.cn',
+        member: 'http://member.artstudent.cn',
+        public: 'http://public.artstudent.cn',
+        info: 'http://info.artstudent.cn',
+        pool: 'http://pool.artstudent.cn',
+        stu: 'http://stu.artstudent.cn',
+        print: 'http://print.artstudent.cn',
+        school: 'http://school.artstudent.cn',
+        menu: 'http://menu.artstudent.cn',
+        guide: 'http://guide.artstudent.cn',
+        audit: 'http://audit.artstudent.cn',
+        examvideo: 'http://examvideo.artstudent.cn',
+        course: 'http://course.artstudent.cn',
+        live: 'http://live.artstudent.cn',
+        eval: 'http://eval.artstudent.cn',
+        examlog: 'http://examlog.artstudent.cn',
+        heartbeat: 'http://heartbeat.artstudent.cn',
+        crm: 'http://crm.artstudent.cn',
     }
 }
 

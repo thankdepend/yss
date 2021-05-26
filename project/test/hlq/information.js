@@ -8,11 +8,8 @@ describe('资讯', async function () {
     const information = informationManage.setupInformation();
     before('运营主管登录', async function () {
         await yssLogin.platfrom({
-            // loginName: 'yyzg',
-            // password: 'csk001',
             userType: 'yyzg'
         })
-        // console.log(PLAT_LOGINDATA);
     });
     describe('新增', async function () {
         before('新增资讯', async function () {

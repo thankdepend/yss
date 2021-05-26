@@ -1,10 +1,10 @@
 const calProbManage = require('./calProbManage');
 const {
     common
-} = require('../lib/index');
-const probApp = require('../reqApi/app/prob');
-const prob = require('../reqApi/platfrom/prob');
-const yssLogin = require('./../project/help/base/yssLogin');
+} = require('../../lib/index');
+const probApp = require('../../reqApi/app/prob');
+const prob = require('../../reqApi/platfrom/prob');
+const yssLogin = require('../../project/help/base/yssLogin');
 
 
 describe('计算录取概率', async function () {
@@ -12,12 +12,15 @@ describe('计算录取概率', async function () {
     const cal = calProbManage.setupCalProb()
     it('获取用户信息', async function () {
         /** 填写用户信息在这 ↓ */
-        const userInfo = await calProbManage.userLogin();
+        const userInfo = await calProbManage.userLogin({
+            loginName: 'mihuan65',
+            password: 'Csk001',
+        });
         await cal.updateUserInfo(userInfo);
     });
     it('获取志愿院校信息', async function () {
         /** 填写院校数据id在这 ↓ */
-        const probInfo = await calProbManage.getProbInfo();
+        const probInfo = await calProbManage.getProbInfo(1656089);
         console.log('probInfo', probInfo);
         await cal.updateProbInfo(probInfo)
     });

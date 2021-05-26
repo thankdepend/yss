@@ -34,7 +34,7 @@ class Faction {
     }
 
     /** 保存圈子类型 */
-    async saveType(params) {
+    async saveType (params) {
         const res = await hulaquan.saveType(Object.assign({
             typeID: '', // 编辑要用
             businessType: 2,
@@ -51,7 +51,7 @@ class Faction {
     }
 
     /** 更新圈子类型信息 */
-    async updateType(params) {
+    async updateType (params) {
         const res = await hulaquan.getgroupsTypeList({
             typeName: params.typeName,
             businessType: params.businessType,
@@ -68,7 +68,7 @@ class Faction {
     }
 
     /** 查询圈子类型列表 */
-    async getgroupsTypeList(params) {
+    async getgroupsTypeList (params) {
         const res = await hulaquan.getgroupsTypeList(Object.assign({
             // typeName: '',
             businessType: 2, // 业务类型
@@ -81,7 +81,7 @@ class Faction {
     }
 
     /** 圈子类型列表断言 */
-    async groupsTypeListAssert(del) {
+    async groupsTypeListAssert (del) {
         let typeList, actual;
         // 删除圈子类型断言
         if (del) {
@@ -114,7 +114,7 @@ class Faction {
     }
 
     /** 删除圈子类型 */
-    async delType() {
+    async delType () {
         await hulaquan.delType({
             typeID: this.typeID,
             ticket: PLAT_TICKET
@@ -125,7 +125,7 @@ class Faction {
      * 保存圈子
      * @param {Object} params 编辑要传  
      */
-    async saveGroup(params) {
+    async saveGroup (params) {
         let json = {
             groupID: '',
             schoolName: '',
@@ -174,7 +174,7 @@ class Faction {
     }
 
     /** 更新圈子信息 */
-    async updateGroup(params) {
+    async updateGroup (params) {
         const updateRes = await this.getGroupList({
             groupName: params.groupName || this.groupMain.groupName,
         }).then(res => res.result.datas.page.dataList[0]);
@@ -190,7 +190,7 @@ class Faction {
     }
 
     /** 查询圈子列表 */
-    async getGroupList(params) {
+    async getGroupList (params) {
         const res = await hulaquan.getGroupList(Object.assign({
             ticket: PLAT_TICKET
         }, params));
@@ -199,7 +199,7 @@ class Faction {
     }
 
     /** 圈子列表断言 */
-    async groupListAssert(del) {
+    async groupListAssert (del) {
         const totalSize = await this.getGroupList().then(res => res.result.datas.page.totalSize);
         if (del) {
             const groupList1 = await this.getGroupList({
@@ -239,7 +239,7 @@ class Faction {
                 typeFlagStr: groupMain.typeFlag == 1 ? '官方' : groupMain.typeFlag == 2 ? '普通' : groupMain.typeFlag == 3 ? '平台' : '',
                 stopFlagStr: groupMain.stopFlag == 1 ? '启用' : groupMain.stopFlag == 0 ? '禁用' : '',
                 verifyFlagStr: groupMain.verifyFlag == 3 ? '允许任何人' : '',
-            }, )
+            })
 
             // console.log('圈子列表期望值', exp);
             // console.log('圈子列表实际值', findRes);
@@ -248,7 +248,7 @@ class Faction {
     }
 
     /** 圈子成员列表 */
-    async groupUserList() {
+    async groupUserList () {
         const res = await hulaquan.groupUserList({
             ticket: PLAT_TICKET,
             groupID: this.groupID
@@ -257,13 +257,13 @@ class Faction {
     }
 
     /** 圈子成员断言 */
-    async groupUserListAssert() {
+    async groupUserListAssert () {
         const userList = await this.groupUserList();
         expect(0).to.be.equal(userList.result.datas.page.dataList.length);
     }
 
     /** 统计圈子数据 */
-    async singlenGroupData(params) {
+    async singlenGroupData (params) {
         const res = await hulaquan.singlenGroupData(Object.assign({
             ticket: PLAT_TICKET
         }, params));
@@ -271,7 +271,7 @@ class Faction {
     }
 
     /** 统计圈子数据断言 */
-    async singlenGroupDataAssert() {
+    async singlenGroupDataAssert () {
         const params = {
             groupID: this.groupID,
             beginRepDate: common.getCurrentBefore(192),
@@ -283,7 +283,7 @@ class Faction {
     }
 
     /** 解散圈子 */
-    async dissolveGroup() {
+    async dissolveGroup () {
         const res = await hulaquan.dissolveGroup({
             groupName: this.groupName,
             groupID: this.groupID,
@@ -294,7 +294,7 @@ class Faction {
     }
 
     /** 删除圈子 */
-    async deleteGroup() {
+    async deleteGroup () {
         const res = await hulaquan.deleteGroup({
             groupID: this.groupID,
             ticket: PLAT_TICKET
@@ -303,7 +303,7 @@ class Faction {
     }
 
     /** 加入圈子-客户端 */
-    async addFaction() {
+    async addFaction () {
         const res = await hulaquanApp.addFaction({
             data: {
                 "p": {
@@ -317,7 +317,7 @@ class Faction {
     }
 
     /** 查询圈子类型列表-客户端 */
-    async getQueryGroupType() {
+    async getQueryGroupType () {
         const res = await hulaquanApp.getQueryGroupType({
             data: {
                 "p": {},
@@ -329,7 +329,7 @@ class Faction {
     }
 
     /** 查询圈子列表-客户端 */
-    async queryGroupsList() {
+    async queryGroupsList () {
         const res = await hulaquanApp.queryGroupsList({
             data: {
                 "p": {
@@ -344,7 +344,7 @@ class Faction {
     }
 
     /** 保存贴子-客户端 */
-    async saveBrief() {
+    async saveBrief () {
         const topList = await hulaquanApp.getWaterfallList({
             data: {
                 p: {
@@ -377,7 +377,7 @@ class Faction {
     }
 
     /** 删除帖子 */
-    async deletePost() {
+    async deletePost () {
         const delRes = await hulaquanApp.deletePost({
             data: {
                 p: {
@@ -392,7 +392,7 @@ class Faction {
     }
 
     /** 更新贴子信息 */
-    async updateWaterFall(params) {
+    async updateWaterFall (params) {
         if (!!!params) {
             this.groupMain.postNum = 0;
             return;
@@ -445,7 +445,7 @@ class Faction {
     }
 
     /** 查询贴子列表-客户端 */
-    async waterfallList() {
+    async waterfallList () {
         const res = await hulaquanApp.getWaterfallList({
             data: {
                 p: {
@@ -461,7 +461,7 @@ class Faction {
     }
 
     /** 查询贴子列表-客户端断言 */
-    async waterfallListAssert(del) {
+    async waterfallListAssert (del) {
         if (del) {
             const del = await this.waterfallList();
             const delFind = del.list.find(obj => obj.postID == this.postID)
@@ -476,7 +476,7 @@ class Faction {
     }
 
     /** 随机圈子id */
-    async _getRandomGroup() {
+    async _getRandomGroup () {
         const groupList = await this.getGroupList().then(res => res.result.datas.page.dataList);
         const groupIDList = groupList.map(obj => obj.groupID);
 
@@ -486,9 +486,9 @@ class Faction {
 
 // const factionalismManage = module.exports = {};
 module.exports = Faction;
-// factionalismManage.setupFactionalism = function () {
-//     return new Faction();
-// }
+factionalismManage.setupFactionalism = function () {
+    return new Faction();
+}
 
 class GroupTypeMain {
     constructor() {

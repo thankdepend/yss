@@ -1,28 +1,41 @@
-const yssLogin = require('../../help/base/yssLogin');
-const hulaquan = require('../../../reqApi/platfrom/hulaquan');
-const prob = require('../../../reqApi/platfrom/prob');
-const pool = require('../../../reqApi/platfrom/pool');
+const yssLogin = require('../../project/help/base/yssLogin');
+const hulaquan = require('../../reqApi/platfrom/hulaquan');
+const prob = require('../../reqApi/platfrom/prob');
+const pool = require('../../reqApi/platfrom/pool');
 const mysql = require('mysql2');
 const { object } = require('underscore');
-const common = require('../../../lib/commonFc');
+const common = require('../../lib/commonFc');
+const argv = require('yargs').argv;
 
 // 模型类型
 const modelType = [
-    '统考|梯度志愿|投档方式综合分|投档公式文化分+专业分|投档最低分100',
-    '统考|平行志愿|录取方式综合分|录取公式文化分+专业分|录取最低分100',
+    '统考|平行志愿|投档方式综合分|投档公式文化分+专业分|投档最低分100',
+    '统考|梯度志愿|录取方式综合分|录取公式文化分+专业分|录取最低分100',
 ]
 
 
 /** 连接数据库 */
 async function createPool () {
-    const pool = mysql.createPool({
-        user: 'root', // 演示环境：baomingtest
-        password: 'testtest', // 演示环境：baomingtest
-        host: '192.168.18.203',  // 演示环境：mysql.51bm.net.cn
-        port: 3307,  // 演示环境：3306
-        database: 'pool',
-        // charset: 'utf8mb4',
-    });
+    let pool;
+    if (argv.env == 'test') {
+        pool = mysql.createPool({
+            user: 'root', // 演示环境：baomingtest
+            password: 'testtest', // 演示环境：baomingtest
+            host: '192.168.18.203',  // 演示环境：mysql.51bm.net.cn
+            port: 3307,  // 演示环境：3306
+            database: 'pool',
+            // charset: 'utf8mb4',
+        });
+    } else if (argv.env == 'pre') {
+        pool = mysql.createPool({
+            user: 'baomingtest', // 演示环境：baomingtest
+            password: 'baomingtest', // 演示环境：baomingtest
+            host: 'mysql.51bm.net.cn',  // 演示环境：mysql.51bm.net.cn
+            port: 3306,  // 演示环境：3306
+            database: 'pool',
+            // charset: 'utf8mb4',
+        });
+    }
     return pool.promise();
 };
 
@@ -52,10 +65,10 @@ function poolDataMock (model, params = {}) {
     const modelData = choiceModel(model);
     // 次要数据
     let minor = {
-        lengthOfSchooling: 2, // 学制[1:三年，2:四年，3:五年]
-        tuition: 9000.0,  // 学费
-        planNum: 5, // 招生人数
-        diploma: 1,
+        lengthOfSchooling: common.getRandomNum(1, 3), // 学制[1:三年，2:四年，3:五年]
+        tuition: common.getRandomNum(5000, 40000),  // 学费
+        planNum: common.getRandomNum(5, 50), // 招生人数
+        diploma: 1,  // 学历：本科
         ticket: PLAT_TICKET
     }
 
@@ -74,13 +87,30 @@ function poolDataMock (model, params = {}) {
 
 /** 选择模型 */
 function choiceModel (model) {
-    if (model == '统考|梯度志愿|投档方式综合分|投档公式文化分+专业分|投档最低分100') {
+    if (model == '统考|平行志愿|投档方式综合分|投档公式文化分+专业分|投档最低分100') {
         let json = {
             archiveRule: 1, // 投档规则
             archiveType: 1, // 投档方式
             archiveFormulaId: 8, // 投档公式
             archiveCultExpression: 'S-U', // 投档文化分计算公式
             archiveMinScore: 100, // 投档最低分
+            provinceId: '', // 省份id
+            jointCategoryId: '', // 统考类别id
+            examType: 1, // 考试类型[1:统考,2:校考]
+            batch: 1, // 批次id
+            p0: 0.4725, // p0
+            enrollOnOffYear: 2, // 录取大小年
+            p5: 0.55, // p5
+        };
+        return json;
+    }
+    else if (model == '统考|梯度志愿|录取方式综合分|录取公式文化分+专业分|录取最低分100') {
+        let json = {
+            archiveRule: 2, // 投档规则:梯度志愿
+            enrollType: 1, // 录取方式：综合分
+            enrollFormulaId: 29, // 录取公式：写死
+            culturalExpression: '(S-(U/Q)*0.6*750)/750/0.4*W', // 综合分文化计算公式
+            enrollScoreMin: 100, // 录取最低分
             provinceId: '', // 省份id
             jointCategoryId: '', // 统考类别id
             examType: 1, // 考试类型[1:统考,2:校考]
@@ -112,12 +142,17 @@ describe('志愿数据批量生成', async function () {
         profList = await msyqlQuery("SELECT profId,profName,diploma FROM pool_base_prof_info");
         // console.log(profList);
     });
-    // 设定起始分和截止分
+
+    /**
+     * 设定起始分和截止分
+     * i为录取最低分
+     */
     for (let i = 100; i < 101; i++) {
         it(`数据池数据构造${i}`, async function () {
             await yssLogin.platfrom({
                 userType: 'zyzg'
             })
+            console.log(profList);
             // 自定义参数
             const customizeData = {
                 dataYear: publicParams.dataYear,
@@ -126,11 +161,11 @@ describe('志愿数据批量生成', async function () {
                 provinceId: publicParams.provinceId, // 省份id
                 jointCategoryId: publicParams.jointCategoryId, // 统考类别id
                 aos: publicParams.aos,
-                profId: Number(profList[common.getRandomNum(0, profList.length - 1)].profNo),
+                profId: Number(profList[common.getRandomNum(0, profList.length - 1)].profId),
                 diploma: Number(profList[common.getRandomNum(0, profList.length - 1)].diploma)
             }
             // 选择数据模型，生成参数
-            genData = poolDataMock(modelType[0], customizeData);
+            genData = poolDataMock(modelType[1], customizeData);
             // console.log(`打印${i}`, genData);
 
             const res = await pool.savePool(genData);

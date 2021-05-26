@@ -362,7 +362,7 @@ informationManage.informationMockJson = async function (params) {
         orderNum: common.getRandomNum(0, 1000),
         belongOrg: 1,
         author: '蜜獾',
-        pictureURL: 'http://img.artstudent.cn/pr/2020-08-10/3b697be5a37b4f68b3a557343fc737b3.png',
+        pictureURL: 'http://img.artstudent.cn/pr/2020-08-10/3b697be5a37b4f68b3a557343fc737b3.png',  // doc[caps.name].production[common.getRandomNum(0, doc.test.production.length - 1)]
         publishDate: '',
         infoPreview: '',
         infoContentUrl: common.getPoetry(),

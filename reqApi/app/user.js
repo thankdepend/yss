@@ -3,7 +3,6 @@ const {
 } = require('../../lib/index');
 // const format = require('../../../data/format');
 const yssCaps = require('../../data/caps');
-const httpRequest = require('../../lib/httpRequest')
 const user = module.exports = {};
 
 
@@ -34,7 +33,7 @@ const user = module.exports = {};
  * @param {String} data.p.wenLiKe 文理科（中文）
  */
 user.saveStuinfo = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.user + '/api/m/auth/user/save_stuinfo.htm', params);
+    return common.sendPost(yssCaps.user + '/api/m/auth/user/save_stuinfo.htm', params);
 };
 
 /**
@@ -42,7 +41,7 @@ user.saveStuinfo = async function (params = {}) {
  * @param {Object} data 
  */
 user.getStuinfo = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.user + '/api/m/auth/user/get_stuinfo.htm', params);
+    return common.sendPost(yssCaps.user + '/api/m/auth/user/get_stuinfo.htm', params);
 };
 
 /**
@@ -52,7 +51,7 @@ user.getStuinfo = async function (params = {}) {
  * @param {Object} data.p
  */
 user.checkNeedFillScore = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.user + '/api/m/auth/unite/checkNeedFillScore.htm', params);
+    return common.sendPost(yssCaps.user + '/api/m/auth/unite/checkNeedFillScore.htm', params);
 };
 
 /**
@@ -77,5 +76,43 @@ user.checkNeedFillScore = async function (params = {}) {
  * @param {Object} data.p.userId 用户id
  */
 user.multiTerninalLogin = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.user + '/api/m/user/multi_terninal_login.ws', params);
+    return common.sendPost(yssCaps.user + '/api/m/user/multi_terninal_login.ws', params);
+};
+
+/**
+ * 获取密码问题
+ * @param {Object} data
+ * @param {String} data.m 
+ * @param {Object} data.p
+ * @param {Object} data.p.shenFenZH
+ * @param {Object} data.p.zhengJianLX
+ */
+user.getQuestion = async function (params = {}) {
+    return common.sendPost(yssCaps.user + '/api/m/security/get_question.ws', params);
+};
+
+/**
+ * 核实密码问题
+ * @param {Object} data
+ * @param {String} data.m 
+ * @param {Object} data.p
+ * @param {Object} data.p.shenFenZH
+ * @param {Object} data.p.daAn
+ */
+user.verifyQuestion = async function (params = {}) {
+    return common.sendPost(yssCaps.user + '/api/m/security/verify_question.ws', params);
+};
+
+/**
+ * 设置新密码
+ * @param {Object} data
+ * @param {String} data.m 
+ * @param {Object} data.p
+ * @param {String} data.p.shenFenZH
+ * @param {String} data.p.daAn
+ * @param {String} data.p.yongHuKL
+ * @param {Number} data.p.type
+ */
+user.setNewPwd = async function (params = {}) {
+    return common.sendPost(yssCaps.user + '/api/m/security/set_new_pwd.ws', params);
 };

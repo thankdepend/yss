@@ -99,3 +99,34 @@ user.idRegisterByCq = async function (params = {}) {
 user.zhengjianBind = async function (params = {}) {
     return common.sendPost(yssCaps.user + '/auth/student/accountSafe/zhengjianBind.htm', params);
 };
+
+/**
+ * 验证身份
+ * @param {Number} schId 学校id
+ * @param {String} shenFenZH 身份证
+ * @param {String} authCode 验证码
+ * @param {String} sid dad1ff0de1c34762949e36f6b3a11038
+ */
+user.zhengjianBind = async function (params = {}) {
+    return common.sendPost(yssCaps.user + '/retrieve/quSecond/10047.htm', params);
+};
+
+/**
+ * 验证答案
+ * @param {String} shenFenZH 身份证
+ * @param {String} authCode 验证码
+ * @param {String} sid dad1ff0de1c34762949e36f6b3a11038
+ */
+user.secondStep = async function (params = {}) {
+    return common.sendPost(yssCaps.user + '/findPwdByQuestion/secondStep.htm', params);
+};
+
+/**
+ * 设置新密码（千校千面）
+ * @param {String} shenFenZH 身份证
+ * @param {String} authCode 验证码
+ * @param {String} sid dad1ff0de1c34762949e36f6b3a11038
+ */
+user.setNewPwd = async function (params = {}) {
+    return common.sendPost(yssCaps.user + '/findPwdByQuestion/setNewPwd.htm', params);
+};
