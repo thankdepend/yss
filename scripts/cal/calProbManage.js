@@ -438,8 +438,6 @@ class CalProb {
     /** 省批次线判线 */
     async jointBatchControl () {
         // 如果省批次：专业分数线，过线
-        console.log('bbbbb', this.stuInfoMain.jointExamScore);
-        console.log('aaaaa', this.batchLineMain.profScoreLine);
         if (this.stuInfoMain.jointExamScore >= this.batchLineMain.profScoreLine) {
             this.checkLineLog.profScoreLine = 0;
             if (this.stuInfoMain.collEntrExamScore >= this.batchLineMain.profScoreLine) {
@@ -506,86 +504,7 @@ class CalProb {
         }
     }
 
-    // 判断统考分数线
-    async checkJointLine () {
-        /**
-         * 专业分数线
-         */
-        // 如果考生统考合格线过线
-        if (this.stuInfoMain.jointExamScore >= this.scoreLineMain.i) {
-            // 如果批次层次没填
-            if (this.batchLineMain.diploma == null) {
-                // 如果专业分数线有值
-                if (this.batchLineMain.profScoreLine) {
-                    if (this.stuInfoMain.jointExamScore >= this.batchLineMain.profScoreLine) {
-                        console.log('统考分过线1');
-                    } else {
-                        console.log('统考分没过线2');
-                    }
-                }
 
-            }
-            // 如果批次层次是本科
-            if (this.batchLineMain.diploma == 1) {
-                // 如果考生本科批次线过线
-                if (this.stuInfoMain.jointExamScore >= this.scoreLineMain.h) {
-                    console.log('统考分过线3');
-                } else {
-                    console.log('统考分没过线4');
-                }
-            }
-            // 批次层次是专科
-            else if (this.batchLineMain.diploma == 2) {
-                // 如果考生专科批次线过线
-                if (this.stuInfoMain.jointExamScore >= this.scoreLineMain.x) {
-                    console.log('统考分过线5');
-                } else {
-                    console.log('统考分没过线6');
-                }
-            }
-        } else {
-            console.log(`考生统考合格线未达线,${this.stuInfoMain.provinceName}省,统考合格线为${this.scoreLineMain.i},考生统考分为${this.stuInfoMain.jointExamScore}`);
-        }
-    }
-
-    // 判断文化分数线
-    async checkCultureLine () {
-        /** 
-         * 文化分数线
-        */
-        // 如果批次层次没填
-        if (this.batchLineMain.diploma == null) {
-            // 如果文化分数线有值
-            if (this.batchLineMain.cultureScoreLine) {
-                if (this.stuInfoMain.collEntrExamScore >= this.batchLineMain.cultureScoreLine) {
-                    console.log('文化分过线1');
-                } else {
-                    console.log('文化分没过线2');
-                }
-            }
-
-        }
-        // 如果批次层次是本科
-        if (this.batchLineMain.diploma == 1) {
-            // 如果艺术文化本科线有值
-            if (this.stuInfoMain.collEntrExamScore >= this.scoreLineMain.j) {
-                console.log('文化分过线3');
-            } else {
-                console.log('文化分没过线4');
-            }
-        }
-        // 批次层次是专科
-        else if (this.batchLineMain.diploma == 2) {
-            // 如果艺术文化专科线有值
-            if (this.stuInfoMain.collEntrExamScore >= this.scoreLineMain.l) {
-                console.log('文化分过线5');
-            } else {
-                console.log('文化分没过线6');
-            }
-        } else {
-            console.log(`考生文化文未达线,${this.stuInfoMain.provinceName}省,文化分线为${this.scoreLineMain.j},考生文化分为${this.stuInfoMain.collEntrExamScore}`);
-        }
-    }
 
     // 更新用户信息
     async updateUserInfo (params) {
