@@ -17,14 +17,14 @@ const argv = require('yargs').argv;
  * @alias 完善信息-审核一条龙
  */
 
-for (let i = 101; i <= 110; i++) {
+for (let i = 1; i <= 100; i++) {
     describe('完善信息与审核', async function () {
         this.timeout(TESTCASE.timeout);
         const fill = fillManage.setupFill();
         before('登录', async function () {
             let userInfo = {
                 // loginName: `${workSheetsFromFile[0].data[i][0]}`,
-                loginName: `zhuzhu${i}`,
+                loginName: `qinghe${i}`,
                 password: argv.env == 'test' ? 'Csk001' : argv.env == 'pre' ? 'Ysk002' : 'Kfk001',
                 device: 'm'
             }
@@ -40,7 +40,7 @@ for (let i = 101; i <= 110; i++) {
             it('查询考生信息', async function () {
                 await fill.stuinfoAssert();
             });
-            describe.skip('图片上传', async function () {
+            describe('图片上传', async function () {
                 it('上传考生照片', async function () {
                     await fill.uploadAuth()
                 });
@@ -60,7 +60,7 @@ for (let i = 101; i <= 110; i++) {
                     await fill.queryUpload();
                 });
             });
-            describe.skip('客服审核', async function () {
+            describe('客服审核', async function () {
                 let userAudit;
                 before('客服主管登录', async function () {
                     platFromInfo = await yysLogin.platfrom(account[caps.name].kf);

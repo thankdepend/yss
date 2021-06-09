@@ -56,7 +56,7 @@ class Prob {
             }, ticket: TICKET
         }).then(res => res.result.datas.obj);
 
-        console.log(res);
+        console.log('aaa', res);
         return res;
     }
 

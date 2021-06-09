@@ -484,7 +484,7 @@ class Faction {
     }
 }
 
-const factionalismManage = module.exports = {};
+// const factionalismManage = module.exports = {};
 module.exports = Faction;
 // factionalismManage.setupFactionalism = function () {
 //     return new Faction();

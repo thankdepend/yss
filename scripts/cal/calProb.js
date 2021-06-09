@@ -20,7 +20,7 @@ describe('计算录取概率', async function () {
     });
     it('获取志愿院校信息', async function () {
         /** 填写院校数据id在这 ↓ */
-        const probInfo = await calProbManage.getProbInfo(1656089);
+        const probInfo = await calProbManage.getProbInfo(1848141);
         console.log('probInfo', probInfo);
         await cal.updateProbInfo(probInfo)
     });

@@ -55,6 +55,7 @@ class CalProb {
     async jointCalculate () {
         // 替换公式为相应字段中的值
         await this.replaceFormula();
+        console.log(this.volDataMain.expression);
         let formulaRes;
         try {
             formulaRes = this.volDataMain.expression.replace(
@@ -88,7 +89,7 @@ class CalProb {
                     if (this.stuInfoMain.comprehensiveRank != '' || null) {
                         console.log(33);
                         // const val = Number((this.volDataMain.p0 - Math.atan((this.stuInfoMain.comprehensiveRank - this.volDataMain.archiveRank) / this.volDataMain.archiveRank) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
-                        const val = Number((Math.atan((this.stuInfoMain.comprehensiveRank - this.volDataMain.archiveRank) / this.volDataMain.archiveRank) * (-1) + this.volDataMain.p5) * 100).toFixed(2) + '%';
+                        const val = await this.getCalProbResult(4);
                         return val;
                     }
                 }
@@ -98,29 +99,33 @@ class CalProb {
                     if (this.stuInfoMain.comprehensiveRank != '' || null) {
                         console.log(34);
                         // const val = Number((this.volDataMain.p0 - Math.atan((this.stuInfoMain.comprehensiveRank - this.volDataMain.expectArchiveRank) / this.volDataMain.expectArchiveRank) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
-                        const val = Number((Math.atan((this.stuInfoMain.comprehensiveRank - this.volDataMain.archiveRank) / this.volDataMain.archiveRank) * (-1) + this.volDataMain.p5) * 100).toFixed(2) + '%';
+                        const val = await this.getCalProbResult(6);
                         return val;
                     }
                 }
                 if (this.volDataMain.archiveMinScore != '' || null) {
                     // 如果投档最低分存在
                     console.log(1);
-                    const val = Number((this.volDataMain.p0 + Math.atan((eval(formulaRes) - this.volDataMain.archiveMinScore) / this.volDataMain.archiveMinScore) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
+                    console.log('综合分', eval(formulaRes));
+                    console.log(Math.atan((eval(formulaRes) - this.volDataMain.archiveMinScore) / this.volDataMain.archiveMinScore) * 5.1);
+                    console.log(this.volDataMain.competitionDegree * 100);
+                    const val = await this.getCalProbResult(1);
+                    return val;
+                }
+                else if (this.volDataMain.preArchiveScoreMin != '' || null) {
+                    // 如果预计投档分存在
+                    console.log(4);
+                    const val = await this.getCalProbResult(2);
                     return val;
                 } else if (this.volDataMain.entrolScoreMin != '' || null) {
                     // 如果录取最低分存在
                     console.log(2);
-                    const val = Number((this.volDataMain.p0 + Math.atan((eval(formulaRes) - this.volDataMain.entrolScoreMin) / this.volDataMain.entrolScoreMin) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
+                    const val = await this.getCalProbResult(7);
                     return val;
                 } else if (this.volDataMain.preEnrollScoreMin != '' || null) {
                     // 如果预计录取最低分存在
                     console.log(3);
-                    const val = Number((this.volDataMain.p0 + Math.atan((eval(formulaRes) - this.volDataMain.preEnrollScoreMin) / this.volDataMain.preEnrollScoreMin) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
-                    return val;
-                } else if (this.volDataMain.preArchiveScoreMin != '' || null) {
-                    // 如果预计投档分存在
-                    console.log(4);
-                    const val = Number((this.volDataMain.p0 + Math.atan((eval(formulaRes) - this.volDataMain.preArchiveScoreMin) / this.volDataMain.preArchiveScoreMin) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
+                    const val = await this.getCalProbResult(8);
                     return val;
                 } else {
                     console.log('不可能出现');
@@ -131,22 +136,24 @@ class CalProb {
                 if (this.volDataMain.archiveMinScore != '' || null) {
                     // 如果投档最低分存在
                     console.log(5);
-                    const val = Number((this.volDataMain.p0 + Math.atan((eval(formulaRes) - this.volDataMain.archiveMinScore) / this.volDataMain.archiveMinScore) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
+                    const val = await this.getCalProbResult(1);
                     return val;
-                } else if (this.volDataMain.entrolScoreMin != '' || null) {
+                }
+                else if (this.volDataMain.preArchiveScoreMin != '' || null) {
+                    // 如果预计投档分存在
+                    console.log(8);
+                    const val = await this.getCalProbResult(2);
+                    return val;
+                }
+                else if (this.volDataMain.entrolScoreMin != '' || null) {
                     // 如果录取最低分存在
                     console.log(6);
-                    const val = Number((this.volDataMain.p0 + Math.atan((eval(formulaRes) - this.volDataMain.entrolScoreMin) / this.volDataMain.entrolScoreMin) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
+                    const val = await this.getCalProbResult(7);
                     return val;
                 } else if (this.volDataMain.preEnrollScoreMin != '' || null) {
                     // 如果预计录取最低分存在
                     console.log(7);
-                    const val = Number((this.volDataMain.p0 + Math.atan((eval(formulaRes) - this.volDataMain.preEnrollScoreMin) / this.volDataMain.preEnrollScoreMin) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
-                    return val;
-                } else if (this.volDataMain.preArchiveScoreMin != '' || null) {
-                    // 如果预计投档分存在
-                    console.log(8);
-                    const val = Number((this.volDataMain.p0 + Math.atan((eval(formulaRes) - this.volDataMain.preArchiveScoreMin) / this.volDataMain.preArchiveScoreMin) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
+                    const val = await this.getCalProbResult(8);
                     return val;
                 } else {
                     console.log('不可能出现');
@@ -160,7 +167,7 @@ class CalProb {
                     if (this.stuInfoMain.jointRank != '' || null) {
                         console.log(35);
                         // const val = Number((this.volDataMain.p0 - Math.atan((this.stuInfoMain.jointRank - this.volDataMain.archiveRank) / this.volDataMain.archiveRank) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
-                        const val = Number((Math.atan((this.stuInfoMain.comprehensiveRank - this.volDataMain.archiveRank) / this.volDataMain.archiveRank) * (-1) + this.volDataMain.p5) * 100).toFixed(2) + '%';
+                        const val = await this.getCalProbResult(6);
                         return val;
                     }
 
@@ -171,7 +178,7 @@ class CalProb {
                     if (this.stuInfoMain.jointRank != '' || null) {
                         console.log(36);
                         // const val = Number((this.volDataMain.p0 - Math.atan((this.stuInfoMain.jointRank - this.volDataMain.expectArchiveRank) / this.volDataMain.expectArchiveRank) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
-                        const val = Number((Math.atan((this.stuInfoMain.comprehensiveRank - this.volDataMain.archiveRank) / this.volDataMain.archiveRank) * (-1) + this.volDataMain.p5) * 100).toFixed(2) + '%';
+                        const val = await this.getCalProbResult(4);
                         return val;
                     }
                 }
@@ -179,22 +186,24 @@ class CalProb {
                 if (this.volDataMain.archiveMinScore != '' || null) {
                     // 如果投档最低分存在
                     console.log(9);
-                    const val = Number((this.volDataMain.p0 + Math.atan((eval(formulaRes) - this.volDataMain.archiveMinScore) / this.volDataMain.archiveMinScore) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
+                    const val = await this.getCalProbResult(1);
                     return val;
-                } else if (this.volDataMain.entrolScoreMin != '' || null) {
+                }
+                else if (this.volDataMain.preArchiveScoreMin != '' || null) {
+                    // 如果预计投档分存在
+                    console.log(12);
+                    const val = await this.getCalProbResult(2);
+                    return val;
+                }
+                else if (this.volDataMain.entrolScoreMin != '' || null) {
                     // 如果录取最低分存在
                     console.log(10);
-                    const val = Number((this.volDataMain.p0 + Math.atan((eval(formulaRes) - this.volDataMain.entrolScoreMin) / this.volDataMain.entrolScoreMin) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
+                    const val = await this.getCalProbResult(7);
                     return val;
                 } else if (this.volDataMain.preEnrollScoreMin != '' || null) {
                     // 如果预计录取最低分存在
                     console.log(11);
-                    const val = Number((this.volDataMain.p0 + Math.atan((eval(formulaRes) - this.volDataMain.preEnrollScoreMin) / this.volDataMain.preEnrollScoreMin) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
-                    return val;
-                } else if (this.volDataMain.preArchiveScoreMin != '' || null) {
-                    // 如果预计投档分存在
-                    console.log(12);
-                    const val = Number((this.volDataMain.p0 + Math.atan((eval(formulaRes) - this.volDataMain.preArchiveScoreMin) / this.volDataMain.preArchiveScoreMin) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
+                    const val = await this.getCalProbResult(8);
                     return val;
                 } else {
                     console.log('不可能出现');
@@ -208,14 +217,14 @@ class CalProb {
                     if (this.volDataMain.archiveRank != '' || null) {
                         console.log(13);
                         // const val = Number((this.volDataMain.p0 - Math.atan((this.stuInfoMain.jointRank - this.volDataMain.archiveRank) / this.volDataMain.archiveRank) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
-                        const val = Number((Math.atan((this.stuInfoMain.comprehensiveRank - this.volDataMain.archiveRank) / this.volDataMain.archiveRank) * (-1) + this.volDataMain.p5) * 100).toFixed(2) + '%';
+                        const val = await this.getCalProbResult(3);
                         return val;
                     }
                     // 如果预计投档最低位次存在
                     else if (this.volDataMain.expectArchiveRank != '' || null) {
                         console.log(14);
                         // const val = Number((this.volDataMain.p0 - Math.atan((this.stuInfoMain.jointRank - this.volDataMain.expectArchiveRank) / this.volDataMain.expectArchiveRank) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
-                        const val = Number((Math.atan((this.stuInfoMain.comprehensiveRank - this.volDataMain.archiveRank) / this.volDataMain.archiveRank) * (-1) + this.volDataMain.p5) * 100).toFixed(2) + '%';
+                        const val = await this.getCalProbResult(4);
                         return val;
                     }
                     // 如果院校数据没有投档最低位次、预计投档最低位次，就按分数算
@@ -223,22 +232,24 @@ class CalProb {
                         if (this.volDataMain.archiveMinScore != '' || null) {
                             // 如果投档最低分存在
                             console.log(15);
-                            const val = Number((this.volDataMain.p0 + Math.atan((eval(formulaRes) - this.volDataMain.archiveMinScore) / this.volDataMain.archiveMinScore) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
+                            const val = await this.getCalProbResult(1);
                             return val;
-                        } else if (this.volDataMain.entrolScoreMin != '' || null) {
+                        }
+                        else if (this.volDataMain.preArchiveScoreMin != '' || null) {
+                            // 如果预计投档分存在
+                            console.log(18);
+                            const val = await this.getCalProbResult(2);
+                            return val;
+                        }
+                        else if (this.volDataMain.entrolScoreMin != '' || null) {
                             // 如果录取最低分存在
                             console.log(16);
-                            const val = Number((this.volDataMain.p0 + Math.atan((eval(formulaRes) - this.volDataMain.entrolScoreMin) / this.volDataMain.entrolScoreMin) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
+                            const val = await this.getCalProbResult(7);
                             return val;
                         } else if (this.volDataMain.preEnrollScoreMin != '' || null) {
                             // 如果预计录取最低分存在
                             console.log(17);
-                            const val = Number((this.volDataMain.p0 + Math.atan((eval(formulaRes) - this.volDataMain.preEnrollScoreMin) / this.volDataMain.preEnrollScoreMin) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
-                            return val;
-                        } else if (this.volDataMain.preArchiveScoreMin != '' || null) {
-                            // 如果预计投档分存在
-                            console.log(18);
-                            const val = Number((this.volDataMain.p0 + Math.atan((eval(formulaRes) - this.volDataMain.preArchiveScoreMin) / this.volDataMain.preArchiveScoreMin) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
+                            const val = await this.getCalProbResult(8);
                             return val;
                         } else {
                             console.log('不可能出现');
@@ -250,7 +261,36 @@ class CalProb {
                 else {
                     console.log('用户没填位次');
                 }
-            } else {
+            }
+            // 如果投档公式是"英语分成绩"
+            else if (this.volDataMain.archiveMode == 5) {
+                if (this.volDataMain.archiveMinScore != '' || null) {
+                    // 如果投档最低分存在
+                    console.log(70);
+                    const val = await this.getCalProbResult(1);
+                    return val;
+                }
+                else if (this.volDataMain.preArchiveScoreMin != '' || null) {
+                    // 如果预计投档分存在
+                    console.log(73);
+                    const val = await this.getCalProbResult(2);
+                    return val;
+                }
+                else if (this.volDataMain.entrolScoreMin != '' || null) {
+                    // 如果录取最低分存在
+                    console.log(71);
+                    const val = await this.getCalProbResult(7);
+                    return val;
+                } else if (this.volDataMain.preEnrollScoreMin != '' || null) {
+                    // 如果预计录取最低分存在
+                    console.log(72);
+                    const val = await this.getCalProbResult(8);
+                    return val;
+                } else {
+                    console.log('不可能出现');
+                }
+            }
+            else {
                 console.log('其他计算方式');
             }
         }
@@ -261,13 +301,13 @@ class CalProb {
                 // 如果录取最低分存在
                 if (this.volDataMain.entrolScoreMin != '' || null) {
                     console.log(25);
-                    const val = Number((this.volDataMain.p0 + Math.atan((eval(formulaRes) - this.volDataMain.entrolScoreMin) / this.volDataMain.entrolScoreMin) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
+                    const val = await this.getCalProbResult(7);
                     return val;
                 }
                 // 如果预计录取最低分存在
                 else if (this.volDataMain.preEnrollScoreMin != '' || null) {
                     console.log(26);
-                    const val = Number((this.volDataMain.p0 + Math.atan((eval(formulaRes) - this.volDataMain.preEnrollScoreMin) / this.volDataMain.preEnrollScoreMin) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
+                    const val = await this.getCalProbResult(8);
                     return val;
                 } else {
                     console.log('取上一年，这里不做计算');
@@ -278,13 +318,13 @@ class CalProb {
                 // 如果录取最低分存在
                 if (this.volDataMain.entrolScoreMin != '' || null) {
                     console.log(27);
-                    const val = Number((this.volDataMain.p0 + Math.atan((eval(formulaRes) - this.volDataMain.entrolScoreMin) / this.volDataMain.entrolScoreMin) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
+                    const val = await this.getCalProbResult(7);
                     return val;
                 }
                 // 如果预计录取最低分存在
                 else if (this.volDataMain.preEnrollScoreMin != '' || null) {
                     console.log(28);
-                    const val = Number((this.volDataMain.p0 + Math.atan((eval(formulaRes) - this.volDataMain.preEnrollScoreMin) / this.volDataMain.preEnrollScoreMin) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
+                    const val = await this.getCalProbResult(8);
                     return val;
                 } else {
                     console.log('取上一年，这里不做计算');
@@ -295,13 +335,13 @@ class CalProb {
                 // 如果录取最低分存在
                 if (this.volDataMain.entrolScoreMin != '' || null) {
                     console.log(29);
-                    const val = Number((this.volDataMain.p0 + Math.atan((eval(formulaRes) - this.volDataMain.entrolScoreMin) / this.volDataMain.entrolScoreMin) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
+                    const val = await this.getCalProbResult(7);
                     return val;
                 }
                 // 如果预计录取最低分存在
                 else if (this.volDataMain.preEnrollScoreMin != '' || null) {
                     console.log(30);
-                    const val = Number((this.volDataMain.p0 + Math.atan((eval(formulaRes) - this.volDataMain.preEnrollScoreMin) / this.volDataMain.preEnrollScoreMin) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
+                    const val = await this.getCalProbResult(8);
                     return val;
                 } else {
                     console.log('取上一年，这里不做计算');
@@ -311,14 +351,13 @@ class CalProb {
             else if (this.volDataMain.enrollBasisType == 4) {
                 // 如果录取最低位次存在
                 if (this.volDataMain.entrolScoreMin != '' || null) {
-                    console.log(31);
-                    const val = Number((this.volDataMain.p0 - Math.atan((eval(formulaRes) - this.volDataMain.entrolScoreMin) / this.volDataMain.entrolScoreMin) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
+                    console.log(31); await this.getCalProbResult(9);
                     return val;
                 }
                 // 如果预计录取最低分存在
                 else if (this.volDataMain.preEnrollScoreMin != '' || null) {
                     console.log(32);
-                    const val = Number((this.volDataMain.p0 - Math.atan((eval(formulaRes) - this.volDataMain.preEnrollScoreMin) / this.volDataMain.preEnrollScoreMin) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
+                    const val = await this.getCalProbResult(10);
                     return val;
                 } else {
                     console.log('取上一年，这里不做计算');
@@ -333,13 +372,32 @@ class CalProb {
     }
 
     /** 获取计算结果
-     * @param {Number} [1:'分数'，2:'位次']
+     * @param {Number} [1:'平行-考生综合分-投档最低'，2:'平行-考生综合分-预计投档最低',3:'平行-考生统考位次-投档最低位次',
+     *                  4:'平行-考生统考位次-预计投档最低位次',5:'平行-考生综合分位次-投档最低位次' ,
+     *                  6:'平行-考生综合分位次-预计投档最低位次', 7:'梯度-考生综合分-录取最低',8:'梯度-考生综合分-预计录取最低',
+     *                  9:'梯度-考生统考位次-录取最低位次',10:'梯度-考生统考位次-预计录取最低位次']
      */
     async getCalProbResult (cal) {
         if (cal == 1) {
-            return Number((Math.atan((this.stuInfoMain.comprehensiveRank - this.volDataMain.archiveRank) / this.volDataMain.archiveRank) * (-1) + this.volDataMain.p5) * 100).toFixed(2) + '%';
+            return Number((this.volDataMain.p0 + Math.atan((eval(formulaRes) - this.volDataMain.archiveMinScore) / this.volDataMain.archiveMinScore) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
         } else if (cal == 2) {
             return Number((this.volDataMain.p0 + Math.atan((eval(formulaRes) - this.volDataMain.preArchiveScoreMin) / this.volDataMain.preArchiveScoreMin) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
+        } else if (cal == 3) {
+            return Number((Math.atan((this.stuInfoMain.jointRank - this.volDataMain.archiveRank) / this.volDataMain.archiveRank) * (-1) + this.volDataMain.p5) * 100).toFixed(2) + '%';
+        } else if (cal == 4) {
+            return Number((Math.atan((this.stuInfoMain.jointRank - this.volDataMain.expectArchiveRank) / this.volDataMain.expectArchiveRank) * (-1) + this.volDataMain.p5) * 100).toFixed(2) + '%';
+        } else if (cal == 5) {
+            return Number((Math.atan((this.stuInfoMain.comprehensiveRank - this.volDataMain.archiveRank) / this.volDataMain.archiveRank) * (-1) + this.volDataMain.p5) * 100).toFixed(2) + '%';
+        } else if (cal == 6) {
+            return Number((Math.atan((this.stuInfoMain.comprehensiveRank - this.volDataMain.expectArchiveRank) / this.volDataMain.expectArchiveRank) * (-1) + this.volDataMain.p5) * 100).toFixed(2) + '%';
+        } else if (cal == 7) {
+            return Number((this.volDataMain.p0 + Math.atan((eval(formulaRes) - this.volDataMain.entrolScoreMin) / this.volDataMain.entrolScoreMin) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
+        } else if (cal == 8) {
+            return Number((this.volDataMain.p0 + Math.atan((eval(formulaRes) - this.volDataMain.preEnrollScoreMin) / this.volDataMain.preEnrollScoreMin) * 5.1) * 100 - (this.volDataMain.competitionDegree * 100)).toFixed(2) + '%';
+        } else if (cal == 9) {
+            return Number((Math.atan((this.stuInfoMain.jointRank - this.volDataMain.entrolScoreMin) / this.volDataMain.entrolScoreMin) * (-1) + this.volDataMain.p5) * 100).toFixed(2) + '%';
+        } else if (cal == 10) {
+            return Number((Math.atan((this.stuInfoMain.jointRank - this.volDataMain.expectArchiveRank) / this.volDataMain.expectArchiveRank) * (-1) + this.volDataMain.p5) * 100).toFixed(2) + '%';
         }
     }
 
@@ -350,6 +408,7 @@ class CalProb {
         this.formula.Q = this.scoreLineMain.q;
         this.formula.W = this.scoreLineMain.w;
         this.formula.Z = this.stuInfoMain.jointRank;
+        this.formula.E = this.stuInfoMain.englishScore;
     }
 
     /** 批次层次判线 */
@@ -690,6 +749,7 @@ calProbManage.userLogin = async function (params) {
     });
 
     const jointMain = res.result.datas.obj;
+    console.log(jointMain);
     return { jointMain }
 }
 

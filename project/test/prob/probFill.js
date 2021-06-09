@@ -1,6 +1,7 @@
 const probManage = require('../../help/prob/probManage');
 const yssLogin = require('../../help/base/yssLogin');
 describe('录取概率-完善信息', async function () {
+    this.timeout(TESTCASE.timeout);
     // 初始化
     const prob = await probManage.setupProb();
     before('用户登录', async function () {

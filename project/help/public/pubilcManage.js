@@ -22,6 +22,7 @@ class Pubilc {
             paramValueTemp: this.paramKey.EVALUATION_TEACHER_DEFAULT_PRICE,
             remark: '只能设置为金额',
             status: 1,
+            ticket: PLAT_TICKET
         })
     }
 

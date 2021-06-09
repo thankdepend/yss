@@ -32,3 +32,7 @@ let allPoint = pointconTent.map(() => {
     return obj
 })
 console.log('bbb', allPoint);
+
+
+a = 10
+a = ['a']

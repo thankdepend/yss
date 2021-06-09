@@ -3,6 +3,7 @@ const yssCaps = require('../../data/caps');
 const {
     common
 } = require('../../lib/index');
+const { object } = require('underscore');
 
 const stu = module.exports = {};
 
@@ -526,3 +527,62 @@ stu.saveRegistrationForms = async function (params = {}) {
 stu.queryRegistrationForms = async function (params = {}) {
     return common.sendPost(yssCaps.stu + '/api/m/auth/apply/v210316/query_registration_forms.ws', params);
 }
+
+/**
+ * 查询机构详情信息
+ * @param {Object} data
+ * @param {String} data.m
+ * @param {Object} data.p
+ * @param {Number} data.p.xueXiaoID 报考id
+ */
+stu.queryOrgInfo = async function (params = {}) {
+    return common.sendPost(yssCaps.stu + '/api/m/auth/org/query_org_info.ws', params);
+}
+
+/**
+ * 查询机构下面考试日程列表
+ * @param {Object} data
+ * @param {String} data.m
+ * @param {Object} data.p
+ * @param {Number} data.p.xueXiaoID 报考id
+ */
+stu.queryExamScheduleList = async function (params = {}) {
+    // object.assign(params, {
+    //     curPage: 1,
+    //     pageSize: 10,
+    // })
+    return common.sendPost(yssCaps.stu + '/api/m/auth/org/query_exam_schedule_list.ws', params);
+}
+
+/**
+ * 机构扫描学生二维码报名考试
+ * @param {Object} data
+ * @param {String} data.m
+ * @param {Object} data.p
+ * @param {Number} data.p.riChengID 日程id
+ * @param {Number} data.p.code 学生考试二维码密文
+ */
+stu.orgScanQrCode = async function (params = {}) {
+    // object.assign(params, {
+    //     curPage: 1,
+    //     pageSize: 10,
+    // })
+    return common.sendPost(yssCaps.stu + '/api/m/auth/org/org_scan_qr_code.ws', params);
+}
+
+/**
+ * 机构扫描学生二维码报名考试
+ * @param {Object} data
+ * @param {String} data.m
+ * @param {Object} data.p
+ * @param {Number} data.p.riChengID 日程id
+ * @param {Number} data.p.code 学生考试二维码密文
+ */
+stu.orgScanQrCode = async function (params = {}) {
+    // object.assign(params, {
+    //     curPage: 1,
+    //     pageSize: 10,
+    // })
+    return common.sendPost(yssCaps.stu + '/api/m/auth/org/v210601/check_org_capacity.ws', params);
+}
+

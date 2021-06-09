@@ -863,7 +863,7 @@ collegeManage.returnCollege = async function (schoolID) {
     } else if (argv.envName == 'test') {
         // 查院校列表
         college = await base.getCollegeList({
-            xueXiaoMH: schoolID ? schoolID : 13166,
+            xueXiaoMH: schoolID ? schoolID : 11996,
             ticket: PLAT_TICKET,
         }).then((res) => res.result.datas.page);
     } else if (argv.envName == 'online') {

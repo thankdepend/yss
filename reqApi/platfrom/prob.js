@@ -95,3 +95,39 @@ prob.syncRecordList = async function (params = {}) {
 prob.syncOneRecord = async function (params = {}) {
     return common.sendPost(yssCaps.prob + '/auth/prob/pool/syncOneRecord.htm', params);
 };
+
+/**
+ * 保存用户省份修改次数
+ * @param {Number} userID 用户id
+ * @param {Number} userName 用户名
+ * @param {Number} rovinceName 高考省份
+ * @param {Number} jointProfTypeName 统考类别
+ * @param {Number} artsOrSciencesStr 文理科别
+ * @param {Number} collEntrExamScore 高考分数
+ * @param {Number} jointExamScore 统考分数
+ * @param {Number} probabilityModProvNum 省份信息已修改次数
+ * @param {Number} modifyNum 高考分数已修改次数
+ * @param {Number} modifyJointScoreNum 统考分数已修改次数
+ * @param {Number} englishModifyNum  英语分已修改次数
+ * @param {Number} chineseModifyNum  语文分已修改次数
+ * @param {Number} jointRank  统考位次
+ * @param {Number} comprehensiveRank  综合分位次
+ * @param {Number} englishScore  英语成绩
+ * @param {Number} chineseScore  语文成绩
+ * @param {Number} modifyComprehensiveRankNum 综合分位次
+ * @param {Number} modifyJointRankNum 统考位次已修改次数
+ * @param {Number} modifyJointProfTypeNum 统考类别已修改次数
+ * @param {Number} probabilityCanModProvNum 省份信息可修改次数
+ * @param {Number} canModifyJointProfTypeNum  统考类别可修改次数
+ * @param {Number} canModifyCollEntrNum  高考分数可修改次数
+ * @param {Number} canModifyJointScoreNum  统考分数可修改次数
+ * @param {Number} chineseLeftNum  中文可修改次数
+ * @param {Number} englishLeftNum  英语分可修改次数
+ * @param {Number} canModifyJointRankNum  统考位次可修改次数
+ * @param {Number} canModifyComprehensiveRankNum  综合分位次可修改次数
+ * @param {Number} remark 备注
+ */
+prob.saveModifyNumEdit = async function (params = {}) {
+    return common.sendPost(yssCaps.prob + '/auth/prob/wishuser/saveModifyNumEdit.htm', params);
+};
+
