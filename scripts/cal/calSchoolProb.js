@@ -1,4 +1,4 @@
-const calSchoolProbManage = require('../calSchoolProbManage');
+const calSchoolProbManage = require('./calSchoolProbManage');
 const {
     common
 } = require('../../lib/index');
@@ -17,7 +17,7 @@ describe('计算录取概率', async function () {
     });
     it('获取志愿院校信息', async function () {
         /** 填写院校数据id在这 ↓ */
-        const probInfo = await calSchoolProbManage.getProbInfo();
+        const probInfo = await calSchoolProbManage.getProbInfo(1847566);
         // console.log('probInfo', probInfo);
         await cal.updateProbInfo(probInfo)
     });

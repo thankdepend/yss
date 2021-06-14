@@ -376,11 +376,11 @@ calSchoolProbManage.setupCalProb = function () {
     return new CalProb();
 }
 
-calSchoolProbManage.userLogin = async function () {
-    await yssLogin.clientLogin({
-        loginName: 'haitun2',
-        password: 'Test1234'
-    })
+calSchoolProbManage.userLogin = async function (params) {
+    await yssLogin.clientLogin(Object.assign({
+        loginName: 'mihuan65',
+        password: 'Csk001'
+    }, params))
     const res = await probApp.getUser({
         ticket: TICKET
     });
@@ -392,14 +392,14 @@ calSchoolProbManage.userLogin = async function () {
     return { jointMain, schoolScoreList }
 }
 
-calSchoolProbManage.getProbInfo = async function () {
+calSchoolProbManage.getProbInfo = async function (id) {
     await yssLogin.platfrom({
         userType: 'zyzg'
     });
 
     // 概率-志愿专业数据-业务表(校考计算公式)
     const schoolExamRes = await prob.getSchoolScoreExpressionList({
-        id: 1847566, // 院校专业数据id
+        id: id, // 院校专业数据id
         ticket: PLAT_TICKET
     })
 
