@@ -52,7 +52,7 @@ const caseList = [
 ]
 
 for (let i = 1; i <= caseList.length; i++) {
-    describe(`监考笔试${caseList[i - 1].title}`, async function () {
+    describe.skip(`监考笔试${caseList[i - 1].title}`, async function () {
         this.timeout(TESTCASE.timeout);
 
         let invigilate = invigilateManage.setupInvigilate(examOpt);

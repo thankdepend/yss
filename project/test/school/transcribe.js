@@ -5,7 +5,7 @@ const { common } = require('../../../lib/index');
 /**
  * @alias 视频录制类考试
  */
-describe('视频录制类', async function () {
+describe.skip('视频录制类', async function () {
     this.timeout(TESTCASE.timeout);
     let transcribe = transcribeManage.setupTranscribe()
 

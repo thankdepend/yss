@@ -62,7 +62,7 @@ yssLogin.platfrom = async function (params = {}) {
 
     // reqParams =  qs.stringify(reqParams);
     const res = await base.platfromLogin(reqParams);
-    // console.log('平台登录', res.result.datas);
+    console.log('平台登录', res.result.datas);
     PLAT_TICKET = res.result.ticket;
     PLAT_LOGINDATA = res.result.datas.user;
 

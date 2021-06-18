@@ -77,41 +77,41 @@ const account = {
     pre: {
         user1: {
             loginName: 'dingding001',
-            password: 'Ysk001',
+            password: 'ysk002',
             device: 'm'
         },
         user2: {
             loginName: 'dingding002',
-            password: 'Ysk001',
+            password: 'ysk002',
             device: 'm'
         },
         kf: {
             loginName: 'kf01',
-            password: 'Ysk002'
+            password: 'ysk002'
         },
         ptzg: {
             loginName: 'mh02',
-            password: 'Ysk002'
+            password: 'ysk002'
         },
         zyzg: {
             loginName: 'zyzg',
-            password: 'Ysk002'
+            password: 'ysk002'
         },
         cbyy: {
             loginName: 'cbyy001',
-            password: 'Ysk002'
+            password: 'ysk002'
         },
         yyzg: {
             loginName: 'yyzg',
-            password: 'Ysk002'
+            password: 'ysk002'
         },
         lxyy: {
             loginName: 'lxyy01',
-            password: 'Ysk002'
+            password: 'ysk002'
         },
         crm2: {
             loginName: 'lxyy01',
-            password: 'Ysk002'
+            password: 'ysk002'
         }
     },
     dev: {
@@ -125,19 +125,19 @@ const account = {
         },
         zyzg: {
             loginName: 'zyzg',
-            password: 'Ysk002'
+            password: 'ysk002'
         },
         cbyy: {
             loginName: 'cbyy001',
-            password: 'Ysk002'
+            password: 'ysk002'
         },
         yyzg: {
             loginName: 'yyzg',
-            password: 'Ysk002'
+            password: 'ysk002'
         },
         lxyy: {
             loginName: 'lxyy01',
-            password: 'Ysk002'
+            password: 'ysk002'
         },
     },
     online: {}

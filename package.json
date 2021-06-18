@@ -10,7 +10,7 @@
         "*.js": "eslint"
     },
     "scripts": {
-        "test": "mocha --recursive project/test -s 500 --reporter mochawesome --env=test",
+        "test": "mocha --recursive project/test --reporter mochawesome --env=test",
         "test-backup": "mocha --recursive project/test -s 500 --reporter mocha-allure-reporter --env=test",
         "pre": "mocha --recursive project/test --reporter mochawesome --env=pre"
     },

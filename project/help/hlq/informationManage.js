@@ -229,9 +229,7 @@ class Information {
 
     /** 添加评论 */
     async addInfoComment () {
-        if (this.commentFlag == 2) {
-            return res.result.message;
-        }
+
         const commentParams = {
             infoID: this.infoID,
             pCommentUserID: '',
@@ -242,10 +240,19 @@ class Information {
             content: `蜜獾评论${new Date().getTime()}`,
             ticket: PLAT_TICKET
         }
-        const res = await info.addInfoComment(commentParams);
-        // 更新评论信息
-        await this.updateCommentMap(commentParams);
-        // console.log(res);
+        try {
+            const res = await info.addInfoComment(commentParams);
+            // 更新评论信息
+            await this.updateCommentMap(commentParams);
+            // console.log(res);
+            if (this.commentFlag == 2) {
+                return res.result.message;
+            }
+        } catch (err) {
+            return err.message.split('message":"')[1].split('"')[0];
+        }
+
+
 
     }
 

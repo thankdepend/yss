@@ -266,6 +266,7 @@ liveManage.liveMockJson = async function (params) {
     let json = Object.assign({
         roomName: `${common.getRandomChineseStr(3)}の直播间`,
         categoryName: '直播分类名称',
+        // authority:,
         picUrl: randomImg,
         categoryID: categoryIdList[common.getRandomNum(0, categoryIdList.length - 1)],
         // startTime: common.getCurrentTime(), // 不等半小时
