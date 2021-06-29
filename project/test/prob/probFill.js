@@ -6,9 +6,8 @@ describe('录取概率-完善信息', async function () {
     const prob = await probManage.setupProb();
     before('用户登录', async function () {
         loginAccount = {
-            loginName: 'haitun2',
-            password: 'Test1234',
-            device: 'm'
+            loginName: 'mihuan65',
+            password: 'Csk001',
         }
         await yssLogin.clientLogin(loginAccount);
         // 获取用户信息
