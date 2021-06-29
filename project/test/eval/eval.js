@@ -13,7 +13,7 @@ describe('评画老师', async function () {
     // 初始化评画
     const eval = evalManage.setupEvaluation();
     // 初始化评画老师
-    const evalTeacher = teacherManage.setupTeacher();
+    const evalTeacher = await teacherManage.setupTeacher();
     // 初始化公共方法
     const public = await pubilcManage.setupPubilc();
     // 初始化订单
