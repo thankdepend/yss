@@ -6,6 +6,17 @@ const yssCaps = require('../../data/caps');
 const guide = module.exports = {};
 
 
+/**
+ * 搜索院校索引
+ * @param {Object} data
+ * @param {String} data.m
+ * @param {Object} data.p
+ */
+guide.query = async function (params = {}) {
+    return common.sendPost(yssCaps.guide + '/api/m/school/params/query.ws', params);
+};
+
+
 
 /**
  * 查询是否购买指南

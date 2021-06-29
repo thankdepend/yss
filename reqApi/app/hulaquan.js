@@ -132,6 +132,28 @@ hulaquan.getQueryUserQueList = async function (params = {}) {
     return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/v1/que/queQuestion/queryUserQueList.ws', params);
 };
 
+/**
+ * 呼啦圈获取证书
+ * @param {Object} data
+ * @param {String} data.m
+ * @param {Object} data.p
+ */
+
+hulaquan.getCredentials = async function (params = {}) {
+    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/auth/my/info/v3/getCredentials.ws', params);
+};
+
+
+/**
+ * 获取用户详细信息
+ * @param {Object} data
+ * @param {String} data.m
+ * @param {Object} data.p
+ */
+ hulaquan.get = async function (params = {}) {
+    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/auth/my/info/v3/get.ws', params);
+};
+
 
 /**
  * 获取圈子

@@ -11,6 +11,25 @@ const sys = module.exports = {};
  * @param {Object} data.m
  */
 
+/**
+ * 获取系统消息
+ * @param {Object} data
+ * @param {String} data.m
+ * @param {Object} data.p
+ * @returns 
+ */
+
+/**
+ * 获取系统消息
+ */
+sys.getNotice = async function (params = {}) {
+    return common.sendPost(yssCaps.sys + 'api/m/notice/getNotice.ws',{
+        ...params
+    });
+};
+
+
+
 sys.checkVersion = async function (params = {}) {
     return common.sendPost(yssCaps.sys + '/api/m/app/check_version.ws', {
         ...params

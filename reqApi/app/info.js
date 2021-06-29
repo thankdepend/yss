@@ -5,6 +5,16 @@ const yssCaps = require('../../data/caps');
 
 const info = module.exports = {};
 
+/**
+ * 资讯遍历--推荐
+ * @param {Object} data 
+ * @param {String} data.m
+ * @param {Object} data.p
+ */
+ info.queryRecommendInfoList = async function (params = {}) {
+    return common.sendPost(yssCaps.info + 'api/m/v3/info/queryRecommendInfoList.ws', params);
+};
+
 
 /**
  * 获取留学院校首页列表（banner+资讯）

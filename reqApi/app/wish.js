@@ -6,6 +6,21 @@ const yssCaps = require('../../data/caps');
 const wish = module.exports = {};
 
 
+
+/**
+ * 留学院校热门列表
+ * @param {Object} data
+ * @param {String} data.m
+ * @param {Object} data.p 
+ */
+wish.abroadHotSchoolList = async function (params = {}) {
+    return common.sendPost(yssCaps.wish + '/api/m/school/abroad/v191221/abroadHotSchoolList.ws', params);
+};
+
+
+
+
+
 /**
  * 获取用户订阅列表
  * @param {Object} data
