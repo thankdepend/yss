@@ -11,8 +11,6 @@ it('支付', async function () {
         password: 'Csk001',
     });
     console.log(LOGINDATA);
-
-    
     const payList = await pay.queryOrder({
         data: {
             m: "",
