@@ -1,21 +1,13 @@
 const yssLogin = require('../../help/base/yssLogin');
 const notice = require('../../../reqApi/platfrom/notice');
-const {
-    common
-} = require('../../../lib');
-const {
-    expect
-} = require('chai');
+const { common } = require('../../../lib');
 
-describe.skip('消息推送', async function () {
+
+describe('消息推送', async function () {
     this.timeout(TESTCASE.timeout);
     before('用户登录', async function () {
         // 获取用户id
-        const res = await yssLogin.clientLogin({
-            // loginName: 'dingding002',
-            // password: 'Ysk001',
-            // device: 'm'
-        })
+        await yssLogin.clientLogin()
     });
     describe('消息推送', async function () {
         before('运营主管登录', async function () {
@@ -56,9 +48,9 @@ describe.skip('消息推送', async function () {
                 console.log('平台login信息', PLAT_LOGINDATA);
                 const exp = {
                     businessId: common.add(firstQuery.datas.page.totalSize, 1),
-                    senderId: PLAT_LOGINDATA.datas.user.userId,
+                    senderId: PLAT_LOGINDATA.userId,
                     queryType: pushMsg.params.queryType,
-                    senderName: PLAT_LOGINDATA.datas.user.loginName,
+                    senderName: PLAT_LOGINDATA.loginName,
                     msgContent: context,
                     pop: pushMsg.params.pop,
                     queryTypeStr: '用户Id推送', // 这里为什么写死，是因为我们的测试点就是测id推送

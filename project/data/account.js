@@ -76,12 +76,12 @@ const account = {
     },
     pre: {
         user1: {
-            loginName: 'dingding001',
+            loginName: 'mihuan65',
             password: 'ysk002',
             device: 'm'
         },
         user2: {
-            loginName: 'dingding002',
+            loginName: 'mihuan60',
             password: 'ysk002',
             device: 'm'
         },

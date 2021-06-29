@@ -36,13 +36,10 @@ describe.skip('留学部客户系统管理', async function () {
         }
 
     });
-    describe.skip('添加公海信息', async function () {
+    describe('添加公海信息', async function () {
         // 5种场景
         before('用户登录', async function () {
-            await yssLogin.clientLogin({
-                loginName: 'dingding002',
-                password: 'Ysk001'
-            });
+            await yssLogin.clientLogin();
         });
         describe('添加意向征集表', async function () {
             let proFessReq;
@@ -63,7 +60,8 @@ describe.skip('留学部客户系统管理', async function () {
                             studyBudget: common.getRandomNum(1, 4), // 预算类型
                             profAvgScore: common.getRandomNum(1, 300), // 专业平均分
                             cultureAvgScore: common.getRandomNum(1, 100), // 文化平均分
-                            parentPhone: common.getRandomMobile()
+                            parentPhone: common.getRandomMobile(),
+                            willCountryRemark: '意向表备注',
                         }
                     },
                     ticket: TICKET
@@ -83,7 +81,7 @@ describe.skip('留学部客户系统管理', async function () {
                     sortFiledStr: 'createdOn',
                     customerSource: 1,
                     ticket: PLAT_TICKET
-                }).then(res => res.result.datas)
+                })
                 console.log('公海列表', res);
                 // const r = res.page.dataList.find(obj => obj.customerRealName == proFessReq.data.p.userName)
                 // console.log(r);

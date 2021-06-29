@@ -1,8 +1,8 @@
-const yssLogin = require('../../help/base/yssLogin');
-const hulaquan = require('../../../reqApi/platfrom/hulaquan');
-const prob = require('../../../reqApi/platfrom/prob');
-const pool = require('../../../reqApi/platfrom/pool');
-const { common } = require('../../../lib/index');
+const yssLogin = require('../../project/help/base/yssLogin');
+const hulaquan = require('../../reqApi/platfrom/hulaquan');
+const prob = require('../../reqApi/platfrom/prob');
+const pool = require('../../reqApi/platfrom/pool');
+const { common } = require('../../lib/index');
 for (let i = 1; i <= 1; i++) {
     describe('添加概率白名单', async function () {
         let userId;

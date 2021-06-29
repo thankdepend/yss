@@ -19,6 +19,7 @@ describe('评画老师', async function () {
     // 初始化订单
     const order = await orderManage.setupOrder();
     before('平台登录', async function () {
+        this.timeout(TESTCASE.timeout);
         await yssLogin.platfrom({
             userType: 'yyzg'
         })
