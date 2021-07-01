@@ -36,3 +36,14 @@ console.log('bbb', allPoint);
 
 a = 10
 a = ['a']
+a = 10
+a = 10
+a = ['a']
+a = 10
+a = ['a']
+a = 10
+a = ['a']
+a = 10
+a = ['a']
+a = 10
+a = ['a']
