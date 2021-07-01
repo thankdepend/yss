@@ -25,3 +25,34 @@ index.getArtCourseRecommend = async function (params = {}) {
 index.queryIndex = async function (params = {}) {
     return httpRequest.sendPost(yssCaps.index + '/api/m/index/v201020/queryIndex.htm', params);
 };
+
+/**
+ * 功能入口
+ * @param {Object} data
+ * @param {String} data.m
+ * @param {Object} data.p
+ */
+index.queryIndex = async function (params = {}) {
+    return httpRequest.sendPost(yssCaps.index + '/api/m/index/v210520/queryIndex.ws', params);
+};
+
+/**
+ * 获取直播视频
+ * @param {Object} data
+ * @param {String} data.m
+ * @param {Object} data.p
+ */
+index.recommend = async function (params = {}) {
+    return httpRequest.sendPost(yssCaps.index + '/api/m/v1/index/v190617/recommend.ws', params);
+};
+
+/**
+ * 分类与话题--分类管理
+ * @param {Object} data
+ * @param {String} data.m
+ * @param {Object} data.p
+ */
+
+index.queryInfoCateList = async function (params = {}) {
+    return httpRequest.sendPost(yssCaps.index + '/api/m/v1/index/queryInfoCateList.ws', params);
+};

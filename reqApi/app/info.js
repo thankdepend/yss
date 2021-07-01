@@ -12,7 +12,7 @@ const info = module.exports = {};
  * @param {Object} data.p
  */
  info.queryRecommendInfoList = async function (params = {}) {
-    return common.sendPost(yssCaps.info + 'api/m/v3/info/queryRecommendInfoList.ws', params);
+    return common.sendPost(yssCaps.info + '/api/m/v3/info/queryRecommendInfoList.ws', params);
 };
 
 

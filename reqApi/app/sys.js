@@ -23,7 +23,7 @@ const sys = module.exports = {};
  * 获取系统消息
  */
 sys.getNotice = async function (params = {}) {
-    return common.sendPost(yssCaps.sys + 'api/m/notice/getNotice.ws',{
+    return common.sendPost(yssCaps.sys + '/api/m/notice/getNotice.ws',{
         ...params
     });
 };

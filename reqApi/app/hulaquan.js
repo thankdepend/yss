@@ -310,3 +310,34 @@ hulaquan.queryGroupsList = async function (params = {}) {
 hulaquan.deletePost = async function (params = {}) {
     return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/auth/groups/post/v3/delete.ws', params);
 };
+
+/**
+ * 分类与话题--话题管理
+ * @param {Object} data
+ * @param {String} data.m 
+ * @param {Object} data.p
+ */
+hulaquan.queryTopicAttentionList = async function (params = {}) {
+    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/auth/v1/hulaquan/topic/topicAttention/queryTopicAttentionList.ws', params);
+};
+
+/**
+ * 取消关注话题
+ * @param {Object} data
+ * @param {String} data.m 
+ * @param {Object} data.p
+ */
+hulaquan.queryTopicAttentionList = async function (params = {}) {
+    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/auth/hulaquan/topic/topicUserAttention/v2/addOrCancelTopicAttention.ws', params);
+};
+
+
+/**
+ * 遍历历史评论
+ * @param {Object} data
+ * @param {String} data.m 
+ * @param {Object} data.p
+ */
+hulaquan.query = async function (params = {}) {
+    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/auth/my/message/v3/query.ws', params);
+};

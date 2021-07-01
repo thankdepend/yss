@@ -16,6 +16,20 @@ prob.saveUser = async function (params = {}) {
     });
 };
 
+
+
+/**
+ * 服务器列表
+ * @param {Object} data
+ * @param {String} data.m
+ * @param {Number} data.p
+ */
+prob.serverList = async function (params = {}) {
+    return common.sendPost(yssCaps.prob + '/api/m/auth/toB/student/serverList.ws', params);
+};
+
+
+
 /**
  * 概率用户查询(新接口)
  * @param {Object} data
