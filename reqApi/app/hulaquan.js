@@ -1,4 +1,3 @@
-const httpRequest = require('../../lib/httpRequest')
 const yssCaps = require('../../data/caps');
 const { common } = require('../../lib/index');
 
@@ -12,7 +11,7 @@ const hulaquan = module.exports = {};
  * @param {String} data.m 
  */
 hulaquan.getUserInfo = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/my/info/info/v3/get.ws', params);
+    return common.sendPost(yssCaps.hulaquan + '/api/m/my/info/info/v3/get.ws', params);
 };
 
 /**
@@ -23,7 +22,7 @@ hulaquan.getUserInfo = async function (params = {}) {
  * @param {String} data.p.roomId 直播间id
  */
 hulaquan.initChartRoom = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/v1/vcloud/v200309/initChartRoom.htm', params);
+    return common.sendPost(yssCaps.hulaquan + '/api/m/v1/vcloud/v200309/initChartRoom.htm', params);
 };
 
 /**
@@ -34,7 +33,7 @@ hulaquan.initChartRoom = async function (params = {}) {
  * @param {Number} data.p.roomId 直播间id
  */
 hulaquan.getStatisticData = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/auth/v1/vcloud/statisticData.htm', params);
+    return common.sendPost(yssCaps.hulaquan + '/api/m/auth/v1/vcloud/statisticData.htm', params);
 };
 
 /**
@@ -45,7 +44,7 @@ hulaquan.getStatisticData = async function (params = {}) {
  * @param {Number} liveNumBase 实时在线基数
  */
 hulaquan.staticsBaseSet = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.hulaquan + '/auth/hulaquan/vcloud/room/staticsBaseSet.htm', params);
+    return common.sendPost(yssCaps.hulaquan + '/auth/hulaquan/vcloud/room/staticsBaseSet.htm', params);
 };
 
 /**
@@ -58,7 +57,7 @@ hulaquan.staticsBaseSet = async function (params = {}) {
  * @param {Number} data.p.categoryID 分类id
  */
 hulaquan.queryRoomList = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/v1/vcloud/v190620/queryRoomList.htm', params);
+    return common.sendPost(yssCaps.hulaquan + '/api/m/v1/vcloud/v190620/queryRoomList.htm', params);
 };
 
 /**
@@ -71,7 +70,7 @@ hulaquan.queryRoomList = async function (params = {}) {
  * @param {Number} data.p.categoryID 分类id
  */
 hulaquan.playbackOrMaxLook = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/auth/vcloud/statistics/playbackOrMaxLook.htm', params);
+    return common.sendPost(yssCaps.hulaquan + '/api/m/auth/vcloud/statistics/playbackOrMaxLook.htm', params);
 };
 
 /**
@@ -81,7 +80,7 @@ hulaquan.playbackOrMaxLook = async function (params = {}) {
  * @param {Object} data.p
  */
 hulaquan.getQueryTopicList = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/v1/que/queTopic/v190827/queryTopicList.ws', params);
+    return common.sendPost(yssCaps.hulaquan + '/api/m/v1/que/queTopic/v190827/queryTopicList.ws', params);
 };
 
 /**
@@ -93,7 +92,7 @@ hulaquan.getQueryTopicList = async function (params = {}) {
  * @param {Number} data.p.topicCateID 话题分类ID
  */
 hulaquan.getQueryHotQueList = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/v1/que/queQuestion/v200630/queryHotQueList.ws', params);
+    return common.sendPost(yssCaps.hulaquan + '/api/m/v1/que/queQuestion/v200630/queryHotQueList.ws', params);
 };
 
 /**
@@ -105,7 +104,7 @@ hulaquan.getQueryHotQueList = async function (params = {}) {
  * @param {Number} data.p.topicCateID 话题分类ID
  */
 hulaquan.getQueryQueList = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/v1/que/queQuestion/v191029/queryQueList.ws', params);
+    return common.sendPost(yssCaps.hulaquan + '/api/m/v1/que/queQuestion/v191029/queryQueList.ws', params);
 };
 
 /**
@@ -117,7 +116,7 @@ hulaquan.getQueryQueList = async function (params = {}) {
  * @param {Number} data.p.topicCateID 话题分类ID
  */
 hulaquan.getQueryTopicQueList = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/v1/que/queQuestion/v190827/queryTopicQueList.ws', params);
+    return common.sendPost(yssCaps.hulaquan + '/api/m/v1/que/queQuestion/v190827/queryTopicQueList.ws', params);
 };
 
 /**
@@ -129,7 +128,7 @@ hulaquan.getQueryTopicQueList = async function (params = {}) {
  * @param {Number} data.p.userID 用户ID
  */
 hulaquan.getQueryUserQueList = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/v1/que/queQuestion/queryUserQueList.ws', params);
+    return common.sendPost(yssCaps.hulaquan + '/api/m/v1/que/queQuestion/queryUserQueList.ws', params);
 };
 
 /**
@@ -140,7 +139,7 @@ hulaquan.getQueryUserQueList = async function (params = {}) {
  */
 
 hulaquan.getCredentials = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/auth/my/info/v3/getCredentials.ws', params);
+    return common.sendPost(yssCaps.hulaquan + '/api/m/auth/my/info/v3/getCredentials.ws', params);
 };
 
 
@@ -150,8 +149,8 @@ hulaquan.getCredentials = async function (params = {}) {
  * @param {String} data.m
  * @param {Object} data.p
  */
- hulaquan.get = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/auth/my/info/v3/get.ws', params);
+hulaquan.get = async function (params = {}) {
+    return common.sendPost(yssCaps.hulaquan + '/api/m/auth/my/info/v3/get.ws', params);
 };
 
 
@@ -163,7 +162,7 @@ hulaquan.getCredentials = async function (params = {}) {
  * @param {Object} data.p
  */
 hulaquan.getGroupQuery = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/auth/groups/v3/groupQuery.ws', params);
+    return common.sendPost(yssCaps.hulaquan + '/api/m/auth/groups/v3/groupQuery.ws', params);
 };
 
 /**
@@ -174,7 +173,7 @@ hulaquan.getGroupQuery = async function (params = {}) {
  * @param {Number} data.p.curPage 当前页
  */
 hulaquan.getWaterfallList = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/groups/post/v3/waterfall_query.ws', params);
+    return common.sendPost(yssCaps.hulaquan + '/api/m/groups/post/v3/waterfall_query.ws', params);
 };
 
 /**
@@ -185,7 +184,7 @@ hulaquan.getWaterfallList = async function (params = {}) {
  * @param {Number} data.p.pageSize 页数
  */
 hulaquan.getRecommendGroup = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/groups/v3/recommendGroup.ws', params);
+    return common.sendPost(yssCaps.hulaquan + '/api/m/groups/v3/recommendGroup.ws', params);
 };
 
 /**
@@ -195,7 +194,7 @@ hulaquan.getRecommendGroup = async function (params = {}) {
  * @param {Object} data.p
  */
 hulaquan.getQueryGroupType = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/groups/v3/queryGroupType.ws', params);
+    return common.sendPost(yssCaps.hulaquan + '/api/m/groups/v3/queryGroupType.ws', params);
 };
 
 /**
@@ -206,7 +205,7 @@ hulaquan.getQueryGroupType = async function (params = {}) {
  * @param {Number} data.p.groupID 圈子ID
  */
 hulaquan.getGroupDetail = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/groups/v3/details.ws', params);
+    return common.sendPost(yssCaps.hulaquan + '/api/m/groups/v3/details.ws', params);
 };
 
 /**
@@ -219,7 +218,7 @@ hulaquan.getGroupDetail = async function (params = {}) {
  * @param {Number} data.p.pageSize 页数
  */
 hulaquan.getPostQuery = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/groups/post/v3/query.ws', params);
+    return common.sendPost(yssCaps.hulaquan + '/api/m/groups/post/v3/query.ws', params);
 };
 
 /**
@@ -230,7 +229,7 @@ hulaquan.getPostQuery = async function (params = {}) {
  * @param {Number} data.p.postID 帖子ID
  */
 hulaquan.getPostDetail = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/groups/post/v3/detail.ws', params);
+    return common.sendPost(yssCaps.hulaquan + '/api/m/groups/post/v3/detail.ws', params);
 };
 
 /**
@@ -240,7 +239,7 @@ hulaquan.getPostDetail = async function (params = {}) {
  * @param {Object} data.p
  */
 hulaquan.getInfoCheck = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/auth/my/info/v3/check.ws', params);
+    return common.sendPost(yssCaps.hulaquan + '/api/m/auth/my/info/v3/check.ws', params);
 };
 
 /**
@@ -254,7 +253,7 @@ hulaquan.getInfoCheck = async function (params = {}) {
  * @param {String} data.p.content 帖子内容
  */
 hulaquan.getPostAdd = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/auth/groups/post/v3/add.ws', params);
+    return common.sendPost(yssCaps.hulaquan + '/api/m/auth/groups/post/v3/add.ws', params);
 };
 
 /**
@@ -264,7 +263,7 @@ hulaquan.getPostAdd = async function (params = {}) {
  * @param {Object} data.p
  */
 hulaquan.getVisitQuery = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/auth/my/visit/v191126/query.ws', params);
+    return common.sendPost(yssCaps.hulaquan + '/api/m/auth/my/visit/v191126/query.ws', params);
 };
 
 /**
@@ -275,7 +274,7 @@ hulaquan.getVisitQuery = async function (params = {}) {
  * @param {Number} data.p.curPage 当前页
  */
 hulaquan.getVisitQuery = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/auth/my/drawschedule/v3/query.ws', params);
+    return common.sendPost(yssCaps.hulaquan + '/api/m/auth/my/drawschedule/v3/query.ws', params);
 };
 
 /** 
@@ -286,7 +285,7 @@ hulaquan.getVisitQuery = async function (params = {}) {
  * @param {Number} data.p.groupID 组id
  */
 hulaquan.addFaction = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/auth/groups/group/v3/add.ws', params);
+    return common.sendPost(yssCaps.hulaquan + '/api/m/auth/groups/group/v3/add.ws', params);
 };
 
 /** 
@@ -297,7 +296,7 @@ hulaquan.addFaction = async function (params = {}) {
  * @param {Number} data.p.curPage 当前页
  */
 hulaquan.queryGroupsList = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/groups/v4/queryGroups.ws', params);
+    return common.sendPost(yssCaps.hulaquan + '/api/m/groups/v4/queryGroups.ws', params);
 };
 
 /** 
@@ -308,7 +307,7 @@ hulaquan.queryGroupsList = async function (params = {}) {
  * @param {Number} data.p.postID 帖子ID
  */
 hulaquan.deletePost = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/auth/groups/post/v3/delete.ws', params);
+    return common.sendPost(yssCaps.hulaquan + '/api/m/auth/groups/post/v3/delete.ws', params);
 };
 
 /**
@@ -318,7 +317,7 @@ hulaquan.deletePost = async function (params = {}) {
  * @param {Object} data.p
  */
 hulaquan.queryTopicAttentionList = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/auth/v1/hulaquan/topic/topicAttention/queryTopicAttentionList.ws', params);
+    return common.sendPost(yssCaps.hulaquan + '/api/m/auth/v1/hulaquan/topic/topicAttention/queryTopicAttentionList.ws', params);
 };
 
 /**
@@ -328,7 +327,7 @@ hulaquan.queryTopicAttentionList = async function (params = {}) {
  * @param {Object} data.p
  */
 hulaquan.queryTopicAttentionList = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/auth/hulaquan/topic/topicUserAttention/v2/addOrCancelTopicAttention.ws', params);
+    return common.sendPost(yssCaps.hulaquan + '/api/m/auth/hulaquan/topic/topicUserAttention/v2/addOrCancelTopicAttention.ws', params);
 };
 
 
@@ -339,5 +338,5 @@ hulaquan.queryTopicAttentionList = async function (params = {}) {
  * @param {Object} data.p
  */
 hulaquan.query = async function (params = {}) {
-    return httpRequest.sendPost(yssCaps.hulaquan + '/api/m/auth/my/message/v3/query.ws', params);
+    return common.sendPost(yssCaps.hulaquan + '/api/m/auth/my/message/v3/query.ws', params);
 };
