@@ -8,8 +8,8 @@ describe('帖子', async function () {
         await yssLogin.platfrom({
             userType: 'yyzg'
         })
-        const res = await waterFall._getRandomGroup();
-        console.log(res);
+        const groupId = await waterFall._getRandomGroup();
+        console.log(groupId);
         // await waterFall.updateWater();
         // await waterFall.waterFullDetailAssert()
     });

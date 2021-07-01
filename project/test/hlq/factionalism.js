@@ -1,14 +1,13 @@
-// const factionalismManage = require('../../help/hlq/factionalismManage')
-const Faction = require('../../help/hlq/factionalismManage')
+const factionalismManage = require('../../help/hlq/factionalismManage')
 const yssLogin = require('../../help/base/yssLogin');
-const hulaquan = require('../../../reqApi/platfrom/hulaquan');
 const { common } = require('../../../lib/index');
 const baseInfo = require('../../help/base/getBaseInfo');
+const waterFullManage = require('../../help/hlq/waterFullManage');
 
 describe('圈子', async function () {
     this.timeout(TESTCASE.timeout);
-    const faction = new Faction();
-    // const faction = factionalismManage.setupFactionalism();
+    const faction = factionalismManage.setupFactionalism();
+    const waterFull = waterFullManage.setupWaterFull();
     before('运营主管登录', async function () {
         await yssLogin.platfrom({
             userType: 'yyzg'
@@ -65,23 +64,26 @@ describe('圈子', async function () {
                 await faction.addFaction()
             });
             it('客户端查询圈子列表', async function () {
-                faction.queryGroupsList();
+                await faction.queryGroupsList();
             });
         });
         describe('保存贴子', async function () {
             before('保存', async function () {
-                await faction.saveBrief();
+                const groupId = await factionalismManage.getRandomGroup()
+                await waterFull.saveBrief({
+                    groupId: groupId
+                });
             });
             it('客户端贴子列表', async function () {
-                await faction.waterfallListAssert();
+                await waterFull.waterfallListAssert();
             });
         });
         describe('删除帖子', async function () {
-            before('', async function () {
-                await faction.deletePost();
+            before('删除', async function () {
+                await waterFull.deletePost();
             });
             it('客户端贴子列表', async function () {
-                await faction.waterfallListAssert({
+                await waterFull.waterfallListAssert({
                     del: true
                 });
             });
