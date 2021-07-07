@@ -3,14 +3,10 @@ const hulaquan = require('../../../reqApi/platfrom/hulaquan');
 const {
     common
 } = require('../../../lib/index');
-const doc = require('../../data/doc.json');
-const caps = require('../../../data/caps');
+
 const {
     expect
 } = require('chai');
-const {
-    group
-} = require('yargs');
 
 /** 圈子 */
 class Faction {
@@ -186,6 +182,13 @@ class Faction {
         this.groupMain.dissolveFlag = 1;
     }
 
+    // 圈子更新-帖子
+    async updateGroupForWaterFull (postNum, userNum) {
+        this.groupMain.postNum += postNum;
+        this.groupMain.userNum += userNum;
+    }
+
+
     /** 查询圈子列表 */
     async getGroupList (params) {
         const res = await hulaquan.getGroupList(Object.assign({
@@ -340,11 +343,6 @@ class Faction {
         // console.log('查询圈子列表', res);
     }
 
-
-    /** 随机圈子id */
-    async _getRandomGroup () {
-
-    }
 }
 
 const factionalismManage = module.exports = {};
@@ -352,6 +350,7 @@ factionalismManage.setupFactionalism = function () {
     return new Faction();
 }
 
+// 获取随机圈子
 factionalismManage.getRandomGroup = async function () {
     const groupList = await hulaquan.getGroupList({
         ticket: PLAT_TICKET
@@ -359,6 +358,27 @@ factionalismManage.getRandomGroup = async function () {
     const groupIDList = groupList.map(obj => obj.groupID);
 
     return groupIDList[common.getRandomNum(0, groupIDList.length - 1)];
+}
+
+// 获取圈子实例
+factionalismManage.getGroupInstantiation = async function (groupID) {
+    const groupDetail = await hulaquan.getGroupList({
+        ticket: PLAT_TICKET,
+        groupID: groupID,
+    }).then(res => res.result.datas.page.dataList[0]);
+    const typeDetail = await hulaquan.getgroupsTypeList({
+        typeID: groupDetail.typeID,
+        ticket: PLAT_TICKET,
+    });
+    const groupInstantiation = new Faction();
+    Object.assign(groupInstantiation.groupMain, groupDetail);
+    Object.assign(groupInstantiation.groupTypeMain, typeDetail)
+    groupInstantiation.groupID = groupDetail.groupID;
+    groupInstantiation.groupName = groupDetail.groupName;
+    groupInstantiation.typeID = groupDetail.typeID;
+    groupInstantiation.typeName = groupDetail.typeName;
+    return groupInstantiation;
+
 }
 
 class GroupTypeMain {
@@ -395,9 +415,9 @@ class GroupMain {
         /** 停用标志 */
         this.stopFlag = '';
         /** 帖子数 */
-        this.postNum = '';
+        this.postNum = 0;
         /** 用户数 */
-        this.userNum = '';
+        this.userNum = 0;
         /** 图片 */
         this.iconURL = '';
         /** 创始人id */

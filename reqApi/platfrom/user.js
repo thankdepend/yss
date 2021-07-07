@@ -1,9 +1,6 @@
-const {
-    common
-} = require('../../lib/index');
+const { common } = require('../../lib/index');
 // const format = require('../../../data/format');
 const yssCaps = require('../../data/caps');
-const http = require('../../lib/httpRequest')
 const user = module.exports = {};
 
 /**

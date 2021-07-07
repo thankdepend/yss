@@ -1,7 +1,8 @@
 const factionBase = require('./factionalismManage');
 const hulaquanApp = require('../../../reqApi/app/hulaquan');
 const { common } = require('../../../lib/index');
-
+const doc = require('../../data/doc.json');
+const caps = require('../../../data/caps');
 /**
  * 帖子
  */
@@ -11,13 +12,15 @@ class WaterFull {
         this.postMain = new PostMain();
         /** 贴子id */
         this.postID = '';
+        /** 帖子名称 */
+        this.postName = '';
     }
 
     /** 保存贴子-客户端 */
     async saveBrief (params) {
         let randomImage = doc[caps.name].other[common.getRandomNum(0, doc[caps.name].other.length - 1)];
 
-        const res = await hulaquanApp.getPostAdd({
+        const postAddData = await hulaquanApp.getPostAdd({
             data: {
                 p: Object.assign({
                     postType: 1,
@@ -30,25 +33,29 @@ class WaterFull {
             },
             ticket: TICKET
         });
-        await this.updateWaterFall(res.params.data.p);
+        console.log(postAddData);
+        await this.updateWaterFall(postAddData.params.data.p);
     }
 
     /** 更新贴子信息 */
     async updateWaterFall (params) {
-        if (!!!params) {
-            this.groupMain.postNum = 0;
-            return;
-        }
-        const res = await this.waterfallList();
+        // if (!!!params) {
+        //     this.groupMain.postNum = 0;
+        //     return;
+        // }
+        const res = await this.waterfallList({ groupID: params.groupID });
         // const findData = res.list.find(obj =>
         //     obj.content == params.content
         // );
         const findData = res.list[0];
         // console.log('findData', findData);
         this.postMain.postID = findData.postID;
+        // this.postMain.postName = params.postName;
         this.postID = findData.postID;
+        // this.postName = params.postName;
+        this.groupID = params.groupID;
+        this.groupName = params.groupName;
         this.postMain = {
-            groupName: this.groupMain.groupName,
             topFlag: 2,
             fineFlag: 2,
             createdUser: LOGINDATA.userId,
@@ -81,33 +88,37 @@ class WaterFull {
             fineFlagStr: '否'
         }
         common.update(this.postMain, params)
-        // 更新圈子
-        this.groupMain.postNum = 1;
-        this.groupMain.userNum = 1;
     }
 
     /** 删除帖子 */
-    async deletePost () {
+    async deletePost (postID) {
         const delRes = await hulaquanApp.deletePost({
             data: {
                 p: {
-                    postID: this.postID,
+                    postID: postID,
                 },
                 m: '',
             },
             ticket: TICKET,
         });
-        await this.updateWaterFall();
+        await this.updateDeletePost();
         // console.log('删除帖子', delRes);
     }
 
+    /** 更新删除帖子 */
+    async updateDeletePost () {
+        this.postMain = new PostMain();
+        this.postID = this.postID;
+        this.postName = '';
+    }
+
     /** 查询贴子列表-客户端 */
-    async waterfallList () {
+    async waterfallList (params) {
         const res = await hulaquanApp.getWaterfallList({
             data: {
-                p: {
+                p: Object.assign({
                     curPage: 1
-                },
+                }, params),
                 m: '',
             },
             ticket: TICKET,

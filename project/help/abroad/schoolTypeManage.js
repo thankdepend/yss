@@ -18,10 +18,12 @@ class SchoolType {
         this.typeFlag = '';
         /** 排序号 */
         this.ord = '';
+        /** 是否删除标志 */
+        this.isDelete = false;
     }
 
     /** 保存院校类别 */
-    async saveWishschooltype(params) {
+    async saveWishschooltype (params) {
         const totalPage = await wish.doWishSchoolTypeList({
             ticket: PLAT_TICKET
         }).then(res => res.result.datas.page.totalPage);
@@ -44,26 +46,27 @@ class SchoolType {
     }
 
     /** 删除留学院校类别 */
-    async deleteWishschooltype() {
+    async deleteWishschooltype () {
         const res = await wish.deleteWishschooltype({
             typeID: this.typeID,
             ticket: PLAT_TICKET
         });
-        console.log(res);
+        // console.log(res);
+        this.isDelete = true;
     }
 
     /** 院校类别列表 */
-    async wishSchoolTypeList(params) {
+    async wishSchoolTypeList (params) {
         const typeList = await wish.doWishSchoolTypeList(Object.assign({
             ticket: PLAT_TICKET
         }, params)).then(res => res.result.datas.page);
-        console.log('院校类别列表', typeList);
+        // console.log('院校类别列表', typeList);
         return typeList;
     }
 
     /** 院校类别列表断言 */
-    async wishSchoolTypeListAssert(del) {
-        if (del) {
+    async wishSchoolTypeListAssert () {
+        if (this.isDelete) {
             const res = await this.wishSchoolTypeList({
                 typeName: this.typeName
             }).then(res => res.dataList);

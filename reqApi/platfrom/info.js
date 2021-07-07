@@ -37,17 +37,17 @@ info.saveInfo = async function (params = {}) {
 
 /**
  * 查询资讯列表
- * @param {*} belongOrg 所属部门
- * @param {*} infoCategoryID 分类id
- * @param {*} topFlag 置顶标志
- * @param {*} infoState 发布标记
- * @param {*} showListFlag 列表显示
- * @param {*} infoID 资讯id
- * @param {*} infoTitle 资讯标题
- * @param {*} begDate 开始时间
- * @param {*} endDate 结束时间
- * @param {*} curPage
- * @param {*} pageSize
+ * @param {Number} belongOrg 所属部门
+ * @param {Number} infoCategoryID 分类id
+ * @param {Number} topFlag 置顶标志
+ * @param {Number} infoState 发布标记
+ * @param {Number} showListFlag 列表显示
+ * @param {Number} infoID 资讯id
+ * @param {String} infoTitle 资讯标题
+ * @param {String} begDate 开始时间
+ * @param {String} endDate 结束时间
+ * @param {Number} curPage
+ * @param {Number} pageSize
  */
 info.getLoadInfoList = async function (params = {}) {
     return common.sendPost(yssCaps.info + `/auth/info/info/loadInfoData.htm`, params);

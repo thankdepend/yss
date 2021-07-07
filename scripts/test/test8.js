@@ -34,5 +34,14 @@ let allPoint = pointconTent.map(() => {
 console.log('bbb', allPoint);
 
 
-a = 10
-a = ['a']
+a = {
+    schoolInfoID: '',
+    saveType: 1,
+    schoolID: 10002,
+    infoTypeID: 28,
+    infoID: '',
+    infoTitle: '蜜獾自动化资讯1',
+    infoIDCheckbox: 26568,
+    infoIdListString: 26568,
+    topFlag: '',
+}

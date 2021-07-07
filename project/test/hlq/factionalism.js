@@ -69,10 +69,10 @@ describe('圈子', async function () {
         });
         describe('保存贴子', async function () {
             before('保存', async function () {
-                const groupId = await factionalismManage.getRandomGroup()
-                await waterFull.saveBrief({
-                    groupId: groupId
-                });
+                // console.log(faction);
+                await waterFull.saveBrief({ groupID: faction.groupMain.groupID, groupName: faction.groupMain.groupName });
+                await faction.updateGroupForWaterFull(1, 1);
+                console.log(waterFull);
             });
             it('客户端贴子列表', async function () {
                 await waterFull.waterfallListAssert();
@@ -80,12 +80,11 @@ describe('圈子', async function () {
         });
         describe('删除帖子', async function () {
             before('删除', async function () {
-                await waterFull.deletePost();
+                await waterFull.deletePost(waterFull.postID);
+                await faction.updateGroupForWaterFull(-1, 0);
             });
             it('客户端贴子列表', async function () {
-                await waterFull.waterfallListAssert({
-                    del: true
-                });
+                await waterFull.waterfallListAssert({ del: true });
             });
         });
 
