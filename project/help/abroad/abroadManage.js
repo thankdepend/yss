@@ -9,27 +9,49 @@ const {
 /** 留学院校 */
 class Abroad {
     constructor() {
+        /** 留学院校主要信息 */
+        this.abroadSchooMain = new Object();
+        /** 学校id */
+        this.schoolID = '';
         /** 类别id */
         this.typeID = '';
     }
 
     /** 保存留学院校 */
-    async saveAbroadSchool(params) {
+    async saveAbroadSchool (params) {
         const res = await wish.saveAbroadSchool(params);
-        console.log('响应', res);
+        await this.updateAbroadSchool(params);
+        // console.log('响应', res);
+    }
+
+    /** 删除留学院校 */
+    async deleteAbroadSchool () {
+        const res = await wish.deleteAbroadSchool({
+            schoolID: this.schoolID,
+            ticket: PLAT_TICKET,
+        });
+        // console.log('删除', res);
+    }
+
+    /** 更新留学院校 */
+    async updateAbroadSchool () {
+        const abroadSchoolList = await this.getAbroadSchoolList();
+        this.abroadSchooMain = abroadSchoolList[0];
+        this.schoolID = abroadSchoolList[0].schoolID;
     }
 
     /** 获取留学院校列表 */
-    async getAbroadSchoolList() {
+    async getAbroadSchoolList () {
         const res = await wish.abroadSchoolList({
             ticket: PLAT_TICKET,
         });
-        console.log('打印列表', res);
+        // console.log('打印列表', res);
+        return res.result.datas.page.dataList;
     }
 
 
     /** 客户端查询留学院校列表 */
-    async getStudySchoolList() {
+    async getStudySchoolList () {
         const res = await wishApp.getStudySchoolList({
             data: {
                 m: '',
@@ -37,7 +59,7 @@ class Abroad {
             },
             ticket: TICKET
         })
-        console.log(res);
+        // console.log(res);
     }
 
 }
@@ -53,7 +75,7 @@ abroadManage.abroadMockjson = function (params) {
     const img = doc[caps.name].school[common.getRandomNum(0, doc[caps.name].school.length - 1)]
     let json = Object.assign({
         // mainPicture: `http://img.artstudent.cn/pr/2020-08-14/cdc87f67ac204f5785f9e906fe3bb10a.jpg,http://img.artstudent.cn/pr/2020-08-14/709ae5883c7a438d89a82d571f219c0f.jpg,/images/wish/noimages.png`,
-        mainPicture: `${doc[caps.name].school[common.getRandomNum(0, doc[caps.name].school.length - 1)]},${doc[caps.name].school[common.getRandomNum(0, doc[caps.name].school.length- 1)]},${doc[caps.name].school[common.getRandomNum(0, doc[caps.name].school.length- 1)]}`,
+        mainPicture: `${doc[caps.name].school[common.getRandomNum(0, doc[caps.name].school.length - 1)]},${doc[caps.name].school[common.getRandomNum(0, doc[caps.name].school.length - 1)]},${doc[caps.name].school[common.getRandomNum(0, doc[caps.name].school.length - 1)]}`,
         srviceTypeIDs: '',
         chinaSrviceTypeIDs: '',
         tagNames: '',

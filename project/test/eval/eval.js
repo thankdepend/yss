@@ -3,9 +3,7 @@ const teacherManage = require('../../help/eval/evalTeacherManage');
 const pubilcManage = require('../../help/public/pubilcManage');
 const orderManage = require('../../help/order/orderManage')
 const yssLogin = require('../../help/base/yssLogin');
-const {
-    common
-} = require('../../../lib/index');
+const { common } = require('../../../lib/index');
 
 describe('评画老师', async function () {
     let teacher;

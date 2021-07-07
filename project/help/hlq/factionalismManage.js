@@ -3,14 +3,10 @@ const hulaquan = require('../../../reqApi/platfrom/hulaquan');
 const {
     common
 } = require('../../../lib/index');
-const doc = require('../../data/doc.json');
-const caps = require('../../../data/caps');
+
 const {
     expect
 } = require('chai');
-const {
-    group
-} = require('yargs');
 
 /** 圈子 */
 class Faction {
@@ -19,8 +15,6 @@ class Faction {
         this.groupMain = new GroupMain();
         /** 圈子类型主要信息 */
         this.groupTypeMain = new GroupTypeMain()
-        /** 贴子主要信息 */
-        this.postMain = new PostMain();
         /** 圈子id */
         this.groupID = '';
         /** 圈子名称 */
@@ -29,8 +23,7 @@ class Faction {
         this.typeID = '';
         /** 圈子类型名字 */
         this.typeName = '';
-        /** 贴子id */
-        this.postID = '';
+
     }
 
     /** 保存圈子类型 */
@@ -189,6 +182,13 @@ class Faction {
         this.groupMain.dissolveFlag = 1;
     }
 
+    // 圈子更新-帖子
+    async updateGroupForWaterFull (postNum, userNum) {
+        this.groupMain.postNum += postNum;
+        this.groupMain.userNum += userNum;
+    }
+
+
     /** 查询圈子列表 */
     async getGroupList (params) {
         const res = await hulaquan.getGroupList(Object.assign({
@@ -343,152 +343,43 @@ class Faction {
         // console.log('查询圈子列表', res);
     }
 
-    /** 保存贴子-客户端 */
-    async saveBrief () {
-        const topList = await hulaquanApp.getWaterfallList({
-            data: {
-                p: {
-                    curPage: 1
-                },
-                m: '',
-            },
-            ticket: TICKET,
-
-        }).then(res => res.result.datas.topList);
-        const groupIDList = topList.map(obj => obj.groupID)
-        const randomGroupID = groupIDList[common.getRandomNum(0, groupIDList.length - 1)];
-
-        let randomImage = doc[caps.name].other[common.getRandomNum(0, doc[caps.name].other.length - 1)];
-
-        const res = await hulaquanApp.getPostAdd({
-            data: {
-                "p": {
-                    "postType": 1,
-                    "groupID": this.groupID,
-                    "attachmentJSON": randomImage,
-                    "location": "",
-                    "content": common.getRandomContent(6)
-                },
-                "m": ""
-            },
-            ticket: TICKET
-        });
-        await this.updateWaterFall(res.params.data.p);
-    }
-
-    /** 删除帖子 */
-    async deletePost () {
-        const delRes = await hulaquanApp.deletePost({
-            data: {
-                p: {
-                    postID: this.postID,
-                },
-                m: '',
-            },
-            ticket: TICKET,
-        });
-        await this.updateWaterFall();
-        // console.log('删除帖子', delRes);
-    }
-
-    /** 更新贴子信息 */
-    async updateWaterFall (params) {
-        if (!!!params) {
-            this.groupMain.postNum = 0;
-            return;
-        }
-        const res = await this.waterfallList();
-        // const findData = res.list.find(obj =>
-        //     obj.content == params.content
-        // );
-        const findData = res.list[0];
-        // console.log('findData', findData);
-        this.postMain.postID = findData.postID;
-        this.postID = findData.postID;
-        this.postMain = {
-            groupName: this.groupMain.groupName,
-            topFlag: 2,
-            fineFlag: 2,
-            createdUser: LOGINDATA.userId,
-            userExtendInfo: {
-                userID: HLQ_USERINFO.userID,
-                sex: HLQ_USERINFO.sex,
-                nickName: HLQ_USERINFO.nickName,
-                userFlag: HLQ_USERINFO.userFlag,
-                identifyFlag: HLQ_USERINFO.identifyFlag,
-                credentialsNum: HLQ_USERINFO.credentialsNum,
-                yearNum: HLQ_USERINFO.yearNum,
-                userStatus: HLQ_USERINFO.userStatus,
-                // "authFlag": 2,
-                // "simpleName": "浙江大学",
-                // "yearNumStr": "24级",
-                desUserId: HLQ_USERINFO.desUserId,
-                artTypeStr: HLQ_USERINFO.artTypeStr,
-            },
-            postStatisticalDO: {
-                praiseNum: 0,
-                browseNum: 0,
-                reviewNum: 0,
-                shareNum: 0,
-                collectNum: 0
-            },
-            colletion: false,
-            praise: false,
-            isDel: false,
-            showBrowseNumCache: 0,
-            fineFlagStr: '否'
-        }
-        common.update(this.postMain, params)
-        // 更新圈子
-        this.groupMain.postNum = 1;
-        this.groupMain.userNum = 1;
-    }
-
-    /** 查询贴子列表-客户端 */
-    async waterfallList () {
-        const res = await hulaquanApp.getWaterfallList({
-            data: {
-                p: {
-                    curPage: 1
-                },
-                m: '',
-            },
-            ticket: TICKET,
-
-        }).then(res => res.result.datas);
-        // console.log('查询贴子列表', res);
-        return res;
-    }
-
-    /** 查询贴子列表-客户端断言 */
-    async waterfallListAssert (del) {
-        if (del) {
-            const del = await this.waterfallList();
-            const delFind = del.list.find(obj => obj.postID == this.postID)
-            expect(delFind).to.be.undefined();
-        } else {
-            const waterFall = await this.waterfallList();
-            const actual = waterFall.list.find(obj => obj.postID == this.postID)
-            // console.log(this.postMain);
-            // 跳过认证标志、大学名、大学等级
-            common.isApproximatelyEqualAssert(this.postMain, actual, ['authFlag', 'simpleName', 'yearNumStr'])
-        }
-    }
-
-    /** 随机圈子id */
-    async _getRandomGroup () {
-        const groupList = await this.getGroupList().then(res => res.result.datas.page.dataList);
-        const groupIDList = groupList.map(obj => obj.groupID);
-
-        return groupIDList[common.getRandomNum(0, groupIDList.length - 1)];
-    }
 }
 
-// const factionalismManage = module.exports = {};
-module.exports = Faction;
-// factionalismManage.setupFactionalism = function () {
-//     return new Faction();
-// }
+const factionalismManage = module.exports = {};
+factionalismManage.setupFactionalism = function () {
+    return new Faction();
+}
+
+// 获取随机圈子
+factionalismManage.getRandomGroup = async function () {
+    const groupList = await hulaquan.getGroupList({
+        ticket: PLAT_TICKET
+    }).then(res => res.result.datas.page.dataList);
+    const groupIDList = groupList.map(obj => obj.groupID);
+
+    return groupIDList[common.getRandomNum(0, groupIDList.length - 1)];
+}
+
+// 获取圈子实例
+factionalismManage.getGroupInstantiation = async function (groupID) {
+    const groupDetail = await hulaquan.getGroupList({
+        ticket: PLAT_TICKET,
+        groupID: groupID,
+    }).then(res => res.result.datas.page.dataList[0]);
+    const typeDetail = await hulaquan.getgroupsTypeList({
+        typeID: groupDetail.typeID,
+        ticket: PLAT_TICKET,
+    });
+    const groupInstantiation = new Faction();
+    Object.assign(groupInstantiation.groupMain, groupDetail);
+    Object.assign(groupInstantiation.groupTypeMain, typeDetail)
+    groupInstantiation.groupID = groupDetail.groupID;
+    groupInstantiation.groupName = groupDetail.groupName;
+    groupInstantiation.typeID = groupDetail.typeID;
+    groupInstantiation.typeName = groupDetail.typeName;
+    return groupInstantiation;
+
+}
 
 class GroupTypeMain {
     constructor() {
@@ -524,9 +415,9 @@ class GroupMain {
         /** 停用标志 */
         this.stopFlag = '';
         /** 帖子数 */
-        this.postNum = '';
+        this.postNum = 0;
         /** 用户数 */
-        this.userNum = '';
+        this.userNum = 0;
         /** 图片 */
         this.iconURL = '';
         /** 创始人id */
@@ -590,39 +481,3 @@ class GroupMain {
     }
 }
 
-class PostMain {
-    constructor() {
-        /** 贴子id */
-        this.postID = '';
-        /** 圈子id */
-        this.groupID = '';
-        /** 圈子名 */
-        this.groupName = '';
-        /** 贴子内容 */
-        this.content = '';
-        /** 停用标志 */
-        this.topFlag = '';
-        /** 加精标志 */
-        this.fineFlag = '';
-        /** 创建人 */
-        this.createdUser = '';
-        /** 贴子类型 */
-        this.postType = '';
-        /** 地址 */
-        this.location = '';
-        /** 用户拓展信息 */
-        this.userExtendInfo = '';
-        /** 贴子统计数据 */
-        this.postStatisticalDO = '';
-        /** 是否收藏 */
-        this.colletion = '';
-        /** 是否点赞 */
-        this.praise = '';
-        /** 是否删除 */
-        this.isDel = '';
-        /** 浏览人数 */
-        this.showBrowseNumCache = '';
-        /** 是否收藏（字符串） */
-        this.fineFlagStr = '';
-    }
-}
