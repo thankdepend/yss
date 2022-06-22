@@ -15,7 +15,7 @@
         "pre": "mocha --recursive project/test --reporter mochawesome --env=pre"
     },
     "dependencies": {
-        "async": "^3.1.0",
+        "async": "^3.2.2",
         "chai": "^4.2.0",
         "chromedriver": "^86.0.0",
         "diff": "^3.5.0",
